@@ -1,0 +1,233 @@
+name: 'Kubernetes'
+
+on:
+  push:
+    branches: ['master']
+env:
+  REGISTRY: ghcr.io
+  SINGLE_SIGN_ON_IMAGE_NAME: ${{ github.repository }}-server
+  COMPOSE_INTERACTIVE_NO_CLI: 1
+  NX_DAEMON: false
+  NX_PARALLEL: 1
+  NX_SKIP_NX_CACHE: true
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+    steps:
+      - uses: actions/checkout@v4
+        if: ${{ !contains(github.event.head_commit.message, '[skip release]') }}
+      - run: yarn install
+        if: ${{ !contains(github.event.head_commit.message, '[skip release]') }}
+      - run: npm run nx -- run-many --target=semantic-release -p server client rest-sdk rest-sdk-angular --parallel=1 --excludeTaskDependencies=true --verbose
+        if: ${{ !contains(github.event.head_commit.message, '[skip release]') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.NESTJS_MOD_ACCESS_TOKEN_DOCKER }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Set root_version
+        id: root_version
+        run: |
+          git fetch
+          echo "root_version="$(npm pkg get version --workspaces=false | tr -d \") >> "$GITHUB_OUTPUT"
+      - name: Set server_version
+        id: server_version
+        run: |
+          git fetch
+          echo "server_version="$(cd ./apps/server && npm pkg get version --workspaces=false | tr -d \") >> "$GITHUB_OUTPUT"
+      - name: Set client_version
+        id: client_version
+        run: |
+          git fetch
+          echo "client_version="$(cd ./apps/client && npm pkg get version --workspaces=false | tr -d \") >> "$GITHUB_OUTPUT"
+    outputs:
+      root_version: ${{ steps.root_version.outputs.root_version }}
+      server_version: ${{ steps.server_version.outputs.server_version }}
+      client_version: ${{ steps.client_version.outputs.client_version }}
+
+  check-server-image:
+    runs-on: ubuntu-latest
+    needs: [release]
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check exists docker image
+        id: check-exists
+        run: |
+          export TOKEN=$(curl -u ${{ github.actor }}:${{ secrets.NESTJS_MOD_ACCESS_TOKEN_DOCKER }} https://${{ env.REGISTRY }}/token\?scope\="repository:${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}:pull" | jq -r .token)
+          curl --head --fail -H "Authorization: Bearer $TOKEN" https://${{ env.REGISTRY }}/v2/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}/manifests/${{ needs.release.outputs.server_version }}
+      - name: Store result of check exists docker image
+        id: store-check-exists
+        if: ${{ !contains(needs.check-exists.outputs.result, 'HTTP/2 404') }}
+        run: |
+          echo "conclusion=success" >> "$GITHUB_OUTPUT"
+    outputs:
+      result: ${{ steps.store-check-exists.outputs.conclusion }}
+
+  build-and-push-server-image:
+    runs-on: ubuntu-latest
+    needs: [release, check-server-image]
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        if: ${{ needs.check-server-image.outputs.result != 'success' || contains(github.event.head_commit.message, '[skip cache]') || contains(github.event.head_commit.message, '[skip server cache]') }}
+        uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        if: ${{ needs.check-server-image.outputs.result != 'success' || contains(github.event.head_commit.message, '[skip cache]') || contains(github.event.head_commit.message, '[skip server cache]') }}
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.NESTJS_MOD_ACCESS_TOKEN_DOCKER }}
+      - name: Build and push Docker image
+        if: ${{ needs.check-server-image.outputs.result != 'success' || contains(github.event.head_commit.message, '[skip cache]') || contains(github.event.head_commit.message, '[skip server cache]') }}
+        id: push
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          push: true
+          file: ./.docker/server.Dockerfile
+          build-args: BASE_SINGLE_SIGN_ON_IMAGE_TAG=${{ needs.release.outputs.root_version }}
+          tags: ${{ env.REGISTRY}}/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}:${{ needs.release.outputs.server_version }},${{ env.REGISTRY}}/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}:latest
+          cache-from: type=registry,ref=${{ env.REGISTRY}}/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}:${{ needs.release.outputs.server_version }}
+          cache-to: type=inline
+      - name: Generate artifact attestation
+        continue-on-error: true
+        if: ${{ needs.check-server-image.outputs.result != 'success' || contains(github.event.head_commit.message, '[skip cache]') || contains(github.event.head_commit.message, '[skip server cache]') }}
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
+  deploy:
+    environment: kubernetes
+    needs: [release, check-server-image, build-and-push-server-image]
+    runs-on: [self-hosted]
+    env:
+      ROOT_VERSION: ${{ needs.release.outputs.root_version }}
+      SERVER_VERSION: ${{ needs.release.outputs.server_version }}
+      CLIENT_VERSION: ${{ needs.release.outputs.client_version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # We must fetch at least the immediate parents so that if this is
+          # a pull request then we can checkout the head.
+          fetch-depth: 2
+
+      # WE DO NOT LAUNCH IT BECAUSE THE SERVER IS THE SAME AS IN THE REPOSITORY https://github.com/nestjs-mod/nestjs-mod-fullstack
+      # FROM WHICH THIS COMMAND WAS ALREADY LAUNCHED
+      #- name: Deploy infrastructure
+      #  if: ${{ needs.check-server-image.outputs.result != 'success' || contains(github.event.head_commit.message, '[skip cache]') || contains(github.event.head_commit.message, '[skip infrastructure]') }}
+      #  env:
+      #    SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_DATABASE: ${{ secrets.ROOT_POSTGRES_DATABASE }}
+      #    SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_PASSWORD: ${{ secrets.ROOT_POSTGRES_PASSWORD }}
+      #    SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_USERNAME: ${{ secrets.ROOT_POSTGRES_USER }}
+      #    SINGLE_SIGN_ON_WEBHOOK_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_NAME }}
+      #    SINGLE_SIGN_ON_WEBHOOK_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_PASSWORD }}
+      #    SINGLE_SIGN_ON_WEBHOOK_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_USERNAME }}
+      #    SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_NAME }}
+      #    SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_PASSWORD }}
+      #    SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_USERNAME }}
+      #    SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_NAME }}
+      #    SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_PASSWORD }}
+      #    SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_USERNAME }}
+      #    SINGLE_SIGN_ON_SSO_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_NAME }}
+      #    SINGLE_SIGN_ON_SSO_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_PASSWORD }}
+      #    SINGLE_SIGN_ON_SSO_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_USERNAME }}
+      #    SINGLE_SIGN_ON_SSO_ADMIN_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_SSO_ADMIN_PASSWORD }}
+      #    SINGLE_SIGN_ON_MINIO_MINIO_ROOT_USER: ${{ secrets.SINGLE_SIGN_ON_MINIO_MINIO_ROOT_USER }}
+      #    SINGLE_SIGN_ON_MINIO_MINIO_ROOT_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_MINIO_MINIO_ROOT_PASSWORD }}
+      #    SINGLE_SIGN_ON_REDIS_REDIS_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_REDIS_REDIS_PASSWORD }}
+      #  run: |
+      #    rm -rf ./.kubernetes/generated
+      #    . .kubernetes/set-env.sh && npx -y rucken copy-paste --find=templates --replace=generated --replace-plural=generated --path=./.kubernetes/templates --replace-envs=true
+      #    docker compose -f ./.kubernetes/generated/docker-compose-infra.yml --compatibility down || echo 'docker-compose-infra not started'
+      #    docker compose -f ./.kubernetes/generated/docker-compose-infra.yml --compatibility up -d
+
+      - name: Deploy applications
+        # if: ${{ needs.check-server-image.outputs.result != 'success' || contains(github.event.head_commit.message, '[skip cache]') || contains(github.event.head_commit.message, '[skip applications]') }}
+        env:
+          ROOT_VERSION: ${{ needs.release.outputs.root_version }}
+          SERVER_VERSION: ${{ needs.release.outputs.server_version }}
+          CLIENT_VERSION: ${{ needs.release.outputs.client_version }}
+          DOCKER_SERVER: ${{ env.REGISTRY }}
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.NESTJS_MOD_ACCESS_TOKEN_DOCKER }}
+          SINGLE_SIGN_ON_DOMAIN: ${{ secrets.SINGLE_SIGN_ON_DOMAIN }}
+          SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_DATABASE: ${{ secrets.ROOT_POSTGRES_DATABASE }}
+          SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_PASSWORD: ${{ secrets.ROOT_POSTGRES_PASSWORD }}
+          SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_USERNAME: ${{ secrets.ROOT_POSTGRES_USER }}
+          SINGLE_SIGN_ON_WEBHOOK_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_NAME }}
+          SINGLE_SIGN_ON_WEBHOOK_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_PASSWORD }}
+          SINGLE_SIGN_ON_WEBHOOK_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_USERNAME }}
+          SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_NAME }}
+          SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_PASSWORD }}
+          SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_USERNAME }}
+          SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_NAME }}
+          SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_PASSWORD }}
+          SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_USERNAME }}
+          SINGLE_SIGN_ON_SSO_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_NAME }}
+          SINGLE_SIGN_ON_SSO_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_PASSWORD }}
+          SINGLE_SIGN_ON_SSO_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_USERNAME }}
+          SINGLE_SIGN_ON_SSO_ADMIN_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_SSO_ADMIN_PASSWORD }}
+          SINGLE_SIGN_ON_MINIO_MINIO_ROOT_USER: ${{ secrets.SINGLE_SIGN_ON_MINIO_MINIO_ROOT_USER }}
+          SINGLE_SIGN_ON_MINIO_MINIO_ROOT_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_MINIO_MINIO_ROOT_PASSWORD }}
+          SINGLE_SIGN_ON_REDIS_REDIS_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_REDIS_REDIS_PASSWORD }}
+          SINGLE_SIGN_ON_SSO_GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.SINGLE_SIGN_ON_SSO_GOOGLE_OAUTH_CLIENT_ID }}
+          SINGLE_SIGN_ON_SSO_GOOGLE_OAUTH_CLIENT_SECRET_KEY: ${{ secrets.SINGLE_SIGN_ON_SSO_GOOGLE_OAUTH_CLIENT_SECRET_KEY }}
+          SINGLE_SIGN_ON_SSO_ADMIN_SECRET: ${{ secrets.SINGLE_SIGN_ON_SSO_ADMIN_SECRET }}
+        run: |
+          echo 'Start'
+          rm -rf ./.kubernetes/generated
+          . .kubernetes/set-env.sh && npx -y rucken copy-paste --find=templates --replace=generated --replace-plural=generated --path=./.kubernetes/templates --replace-envs=true
+          echo 'Check k8s'
+          sudo microk8s status --wait-ready | echo 'Skip error'
+          echo 'Start apply k8s'
+          chmod +x .kubernetes/generated/install.sh
+          .kubernetes/generated/install.sh > /dev/null 2>&1
+          echo 'End'
+
+  e2e-tests:
+    environment: kubernetes
+    runs-on: ubuntu-latest
+    needs: [release, deploy]
+    permissions:
+      contents: read
+      packages: read
+      id-token: write
+    env:
+      ROOT_VERSION: ${{ needs.release.outputs.root_version }}
+      SERVER_VERSION: ${{ needs.release.outputs.server_version }}
+      CLIENT_VERSION: ${{ needs.release.outputs.client_version }}
+    steps:
+      - name: Checkout repository
+        if: ${{ !contains(github.event.head_commit.message, '[skip e2e]') }}
+        uses: actions/checkout@v4
+      - name: Install deps
+        if: ${{ !contains(github.event.head_commit.message, '[skip e2e]') }}
+        run: |
+          yarn install && yarn playwright install chromium --with-deps && echo '' > .env
+      - name: Run E2E-tests
+        if: ${{ !contains(github.event.head_commit.message, '[skip e2e]') }}
+        env:
+          SINGLE_SIGN_ON_SSO_ADMIN_SECRET: ${{ secrets.SINGLE_SIGN_ON_SSO_ADMIN_SECRET }}
+          E2E_CLIENT_URL: 'https://${{ secrets.SINGLE_SIGN_ON_DOMAIN }}'
+          E2E_SERVER_URL: 'https://${{ secrets.SINGLE_SIGN_ON_DOMAIN }}'
+          SINGLE_SIGN_ON_MINIO_URL: 'https://files.${{ secrets.SINGLE_SIGN_ON_DOMAIN }}'
+        run: |
+          npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e2e-tests-videos
+          path: apps/client-e2e/src/video/

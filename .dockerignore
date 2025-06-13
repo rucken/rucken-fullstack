@@ -1,0 +1,13 @@
+node_modules
+tmp
+.git
+.angular
+.env
+.nx
+.gitignore
+*.md
+*.webm
+**/*.webm
+dist
+.husky
+.kubernetes

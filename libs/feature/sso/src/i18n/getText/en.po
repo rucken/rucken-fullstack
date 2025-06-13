@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"mime-version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "$constraint1 do not match to $property"
+msgstr "$constraint1 do not match to $property"
+
+msgid "Access token expired"
+msgstr "Access token expired"
+
+msgid "Activate email not processed"
+msgstr "Activate email not processed"
+
+msgid "Activate email processed"
+msgstr "Activate email processed"
+
+msgid "Email not verified"
+msgstr "Email not verified"
+
+msgid "Forbidden"
+msgstr "Forbidden"
+
+msgid "Invalid refresh session"
+msgstr "Invalid refresh session"
+
+msgid "Non-existent role specified"
+msgstr "Non-existent role specified"
+
+msgid "ok"
+msgstr "ok"
+
+msgid "Refresh token not provided"
+msgstr "Refresh token not provided"
+
+msgid "Session expired"
+msgstr "Session expired"
+
+msgid "Sso error"
+msgstr "Sso error"
+
+msgid "User is exists"
+msgstr "User is exists"
+
+msgid "User not found"
+msgstr "User not found"
+
+msgid "Wrong activate email code"
+msgstr "Wrong activate email code"
+
+msgid "Wrong old password"
+msgstr "Wrong old password"
+
+msgid "Wrong password"
+msgstr "Wrong password"
+
+msgid "Bad access token"
+msgstr "Bad access token"
+
+msgid "Your session has been blocked"
+msgstr "Your session has been blocked"
+
+msgid "Event that will fire after deletion1"
+msgstr "Event that will fire after deletion1"
+
+msgid "An event that fires after user information is updated."
+msgstr "An event that fires after user information is updated."
+
+msgid "An event that is triggered after a new user registers"
+msgstr "An event that is triggered after a new user registers"
+
+msgid "An event that is triggered after a user call forgot password method"
+msgstr "An event that is triggered after a user call forgot password method"
+
+msgid ""
+"An event that is triggered after a user calls to confirm a forgotten "
+"password change"
+msgstr ""
+"An event that is triggered after a user calls to confirm a forgotten "
+"password change"
+
+msgid "An event that is triggered after a user login"
+msgstr "An event that is triggered after a user login"
+
+msgid "An event that is triggered after a user logout"
+msgstr "An event that is triggered after a user logout"
+
+msgid "An event that is triggered after complete a new user registers"
+msgstr "An event that is triggered after complete a new user registers"
+
+msgid "Please navigate by a {{{link}}} to set new password"
+msgstr "Please navigate by a {{{link}}} to set new password"
+
+msgid "Please navigate by a {{{link}}} to verify your email"
+msgstr "Please navigate by a {{{link}}} to verify your email"
+
+msgid ""
+"Please navigate by a <a href=\"{{{link}}}\">{{{link}}}</a> to set new "
+"password"
+msgstr ""
+"Please navigate by a <a href=\"{{{link}}}\">{{{link}}}</a> to set new "
+"password"
+
+msgid ""
+"Please navigate by a <a href=\"{{{link}}}\">{{{link}}}</a> to verify your "
+"email"
+msgstr ""
+"Please navigate by a <a href=\"{{{link}}}\">{{{link}}}</a> to verify your "
+"email"
+
+msgid "Restore forgotten password link"
+msgstr "Restore forgotten password link"
+
+msgid "Verify your email"
+msgstr "Verify your email"
+
+msgid "Complete your registration using the invitation link"
+msgstr "Complete your registration using the invitation link"
+
+msgid "Please navigate by a {{{link}}} to complete your registration"
+msgstr "Please navigate by a {{{link}}} to complete your registration"
+
+msgid ""
+"Please navigate by a <a href=\"{{{link}}}\">{{{link}}}</a> to complete your "
+"registration"
+msgstr ""
+"Please navigate by a <a href=\"{{{link}}}\">{{{link}}}</a> to complete your "
+"registration"
+
+msgid "Verification code not found"
+msgstr "Verification code not found"
+
+msgid "Event that fires after user create"
+msgstr "Event that fires after user create"
+
+msgid "Event that fires after user delete"
+msgstr "Event that fires after user delete"
+
+msgid "Event that fires after user update"
+msgstr "Event that fires after user update"
+
+msgid "lang must have one of the values: {{values}}"
+msgstr "lang must have one of the values: {{values}}"

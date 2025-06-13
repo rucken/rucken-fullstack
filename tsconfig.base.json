@@ -1,0 +1,38 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "noImplicitOverride": true,
+    "strictPropertyInitialization": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "useDefineForClassFields": false,
+    "paths": {
+      "@nestjs-mod-sso/sso": ["libs/feature/sso/src/index.ts"],
+      "@nestjs-mod-sso/sso-afat": ["libs/feature/sso-afat/src/index.ts"],
+      "@nestjs-mod-sso/testing": ["libs/testing/src/index.ts"],
+      "@nestjs-mod/sso-rest-sdk": ["libs/sdk/sso-rest-sdk/src/index.ts"],
+      "@nestjs-mod/sso-rest-sdk-angular": [
+        "libs/sdk/sso-rest-sdk-angular/src/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

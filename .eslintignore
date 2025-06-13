@@ -1,0 +1,8 @@
+dist
+node_modules
+libs/feature/webhook/src/lib/generated/rest
+libs/feature/sso/src/lib/generated/rest
+libs/feature/notifications/src/lib/generated/rest
+libs/feature/two-factor/src/lib/generated/rest
+libs/sdk/sso-rest-sdk/src/lib/generated
+libs/sdk/sso-rest-sdk-angular/src/lib/generated

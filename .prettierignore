@@ -1,0 +1,8 @@
+# Add files here to ignore them from prettier formatting
+/dist
+/coverage
+/.nx/cache
+/.nx/workspace-data
+.angular
+/libs/sdk/sso-rest-sdk/src/lib/generated
+/libs/sdk/sso-rest-sdk-angular/src/lib/generated

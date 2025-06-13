@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: '%NAMESPACE%'
+  name: %NAMESPACE%-server
+  labels:
+    app: %NAMESPACE%-server
+spec:
+  selector:
+    app: %NAMESPACE%-server
+  ports:
+    - name: '%SINGLE_SIGN_ON_PORT%'
+      protocol: TCP
+      port: %SINGLE_SIGN_ON_PORT%
+      targetPort: %SINGLE_SIGN_ON_PORT%
+  type: ClusterIP
