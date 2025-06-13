@@ -9,7 +9,7 @@ import {
   SsoModule,
   SsoRequest,
   SsoRole,
-} from '@nestjs-mod-sso/sso';
+} from '@rucken/sso';
 import { getRequestFromExecutionContext } from '@nestjs-mod/common';
 import { searchIn } from '@nestjs-mod/misc';
 import { ExecutionContext } from '@nestjs/common';

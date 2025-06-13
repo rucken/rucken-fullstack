@@ -25,11 +25,11 @@
     "noImplicitAny": false,
     "useDefineForClassFields": false,
     "paths": {
-      "@nestjs-mod-sso/sso": ["libs/feature/sso/src/index.ts"],
-      "@nestjs-mod-sso/sso-afat": ["libs/feature/sso-afat/src/index.ts"],
-      "@nestjs-mod-sso/testing": ["libs/testing/src/index.ts"],
-      "@nestjs-mod/sso-rest-sdk": ["libs/sdk/sso-rest-sdk/src/index.ts"],
-      "@nestjs-mod/sso-rest-sdk-angular": [
+      "@rucken/sso": ["libs/feature/sso/src/index.ts"],
+      "@rucken/sso-afat": ["libs/feature/sso-afat/src/index.ts"],
+      "@rucken/testing": ["libs/testing/src/index.ts"],
+      "@rucken/sso-rest-sdk": ["libs/sdk/sso-rest-sdk/src/index.ts"],
+      "@rucken/sso-rest-sdk-angular": [
         "libs/sdk/sso-rest-sdk-angular/src/index.ts"
       ]
     }

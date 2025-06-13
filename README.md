@@ -17,7 +17,7 @@ Infrastructure is running using docker-compose, applications are launched in wat
 ### Init
 
 ```sh
-git clone git@github.com:nestjs-mod/nestjs-mod-sso.git
+git clone git@github.com:rucken/rucken-fullstack.git
 cd nestjs-mod-sso
 npm i
 cp ./example.env ./.env
@@ -52,7 +52,7 @@ Infrastructure is running using docker-compose, built applications are launched 
 ### Init
 
 ```sh
-git clone git@github.com:nestjs-mod/nestjs-mod-sso.git
+git clone git@github.com:rucken/rucken-fullstack.git
 cd nestjs-mod-sso
 npm i
 cp ./example.env ./.env
@@ -87,7 +87,7 @@ Infrastructure and applications built into Docker images are run using docker-co
 ### Init
 
 ```sh
-git clone git@github.com:nestjs-mod/nestjs-mod-sso.git
+git clone git@github.com:rucken/rucken-fullstack.git
 cd nestjs-mod-sso
 npm i
 cp ./example.env ./.env
@@ -122,7 +122,7 @@ Infrastructure is running on [Supabase](https://supabase.com/), applications are
 ### Init
 
 ```sh
-git clone git@github.com:nestjs-mod/nestjs-mod-sso.git
+git clone git@github.com:rucken/rucken-fullstack.git
 cd nestjs-mod-sso
 npm i
 cp ./example-supabase.env ./.env
@@ -143,9 +143,9 @@ cp ./example-supabase.env ./.env
    # https://supabase.com/dashboard/project/XXX/settings/api - API Settings - Project API Keys - anon public
    SUPABASE_ANON_KEY=empty_value
    # https://supabase.com/dashboard/project/gustcjgbrmmipkizqzso/settings/storage - S3 Access Keys - New access key - Access key ID
-   SINGLE_SIGN_ON_MINIO_ACCESS_KEY=empty_value
+   RUCKEN_MINIO_ACCESS_KEY=empty_value
    # https://supabase.com/dashboard/project/gustcjgbrmmipkizqzso/settings/storage - S3 Access Keys - New access key - Secret access key
-   SINGLE_SIGN_ON_MINIO_SECRET_KEY=empty_value
+   RUCKEN_MINIO_SECRET_KEY=empty_value
    ```
 
 5. Create and fill all need new env keys

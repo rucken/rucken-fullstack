@@ -1,5 +1,5 @@
 {
-  "name": "@nestjs-mod-sso/sso-afat",
+  "name": "@rucken/sso-afat",
   "version": "0.0.1",
   "peerDependencies": {
     "@nestjs-mod/afat": "1.2.0",
@@ -19,7 +19,7 @@
     "@nestjs-mod/misc": "1.4.2",
     "@fingerprintjs/fingerprintjs": "4.6.1",
     "date-fns": "^4.1.0",
-    "@nestjs-mod/sso-rest-sdk-angular": "1.8.0"
+    "@rucken/sso-rest-sdk-angular": "1.8.0"
   },
   "sideEffects": false,
   "i18n": [

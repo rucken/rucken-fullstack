@@ -2,10 +2,10 @@ name: 'Kubernetes'
 
 on:
   push:
-    branches: ['master']
+    branches: ['master_skip']
 env:
   REGISTRY: ghcr.io
-  SINGLE_SIGN_ON_IMAGE_NAME: ${{ github.repository }}-server
+  RUCKEN_IMAGE_NAME: ${{ github.repository }}-server
   COMPOSE_INTERACTIVE_NO_CLI: 1
   NX_DAEMON: false
   NX_PARALLEL: 1
@@ -58,8 +58,8 @@ jobs:
       - name: Check exists docker image
         id: check-exists
         run: |
-          export TOKEN=$(curl -u ${{ github.actor }}:${{ secrets.NESTJS_MOD_ACCESS_TOKEN_DOCKER }} https://${{ env.REGISTRY }}/token\?scope\="repository:${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}:pull" | jq -r .token)
-          curl --head --fail -H "Authorization: Bearer $TOKEN" https://${{ env.REGISTRY }}/v2/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}/manifests/${{ needs.release.outputs.server_version }}
+          export TOKEN=$(curl -u ${{ github.actor }}:${{ secrets.NESTJS_MOD_ACCESS_TOKEN_DOCKER }} https://${{ env.REGISTRY }}/token\?scope\="repository:${{ env.RUCKEN_IMAGE_NAME}}:pull" | jq -r .token)
+          curl --head --fail -H "Authorization: Bearer $TOKEN" https://${{ env.REGISTRY }}/v2/${{ env.RUCKEN_IMAGE_NAME}}/manifests/${{ needs.release.outputs.server_version }}
       - name: Store result of check exists docker image
         id: store-check-exists
         if: ${{ !contains(needs.check-exists.outputs.result, 'HTTP/2 404') }}
@@ -95,16 +95,16 @@ jobs:
           context: .
           push: true
           file: ./.docker/server.Dockerfile
-          build-args: BASE_SINGLE_SIGN_ON_IMAGE_TAG=${{ needs.release.outputs.root_version }}
-          tags: ${{ env.REGISTRY}}/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}:${{ needs.release.outputs.server_version }},${{ env.REGISTRY}}/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}:latest
-          cache-from: type=registry,ref=${{ env.REGISTRY}}/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}:${{ needs.release.outputs.server_version }}
+          build-args: BASE_RUCKEN_IMAGE_TAG=${{ needs.release.outputs.root_version }}
+          tags: ${{ env.REGISTRY}}/${{ env.RUCKEN_IMAGE_NAME}}:${{ needs.release.outputs.server_version }},${{ env.REGISTRY}}/${{ env.RUCKEN_IMAGE_NAME}}:latest
+          cache-from: type=registry,ref=${{ env.REGISTRY}}/${{ env.RUCKEN_IMAGE_NAME}}:${{ needs.release.outputs.server_version }}
           cache-to: type=inline
       - name: Generate artifact attestation
         continue-on-error: true
         if: ${{ needs.check-server-image.outputs.result != 'success' || contains(github.event.head_commit.message, '[skip cache]') || contains(github.event.head_commit.message, '[skip server cache]') }}
         uses: actions/attest-build-provenance@v1
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.SINGLE_SIGN_ON_IMAGE_NAME}}
+          subject-name: ${{ env.REGISTRY }}/${{ env.RUCKEN_IMAGE_NAME}}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
@@ -125,30 +125,30 @@ jobs:
           # a pull request then we can checkout the head.
           fetch-depth: 2
 
-      # WE DO NOT LAUNCH IT BECAUSE THE SERVER IS THE SAME AS IN THE REPOSITORY https://github.com/nestjs-mod/nestjs-mod-fullstack
+      # WE DO NOT LAUNCH IT BECAUSE THE SERVER IS THE SAME AS IN THE REPOSITORY https://github.com/rucken/rucken-fullstack
       # FROM WHICH THIS COMMAND WAS ALREADY LAUNCHED
       #- name: Deploy infrastructure
       #  if: ${{ needs.check-server-image.outputs.result != 'success' || contains(github.event.head_commit.message, '[skip cache]') || contains(github.event.head_commit.message, '[skip infrastructure]') }}
       #  env:
-      #    SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_DATABASE: ${{ secrets.ROOT_POSTGRES_DATABASE }}
-      #    SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_PASSWORD: ${{ secrets.ROOT_POSTGRES_PASSWORD }}
-      #    SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_USERNAME: ${{ secrets.ROOT_POSTGRES_USER }}
-      #    SINGLE_SIGN_ON_WEBHOOK_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_NAME }}
-      #    SINGLE_SIGN_ON_WEBHOOK_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_PASSWORD }}
-      #    SINGLE_SIGN_ON_WEBHOOK_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_USERNAME }}
-      #    SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_NAME }}
-      #    SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_PASSWORD }}
-      #    SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_USERNAME }}
-      #    SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_NAME }}
-      #    SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_PASSWORD }}
-      #    SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_USERNAME }}
-      #    SINGLE_SIGN_ON_SSO_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_NAME }}
-      #    SINGLE_SIGN_ON_SSO_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_PASSWORD }}
-      #    SINGLE_SIGN_ON_SSO_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_USERNAME }}
-      #    SINGLE_SIGN_ON_SSO_ADMIN_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_SSO_ADMIN_PASSWORD }}
-      #    SINGLE_SIGN_ON_MINIO_MINIO_ROOT_USER: ${{ secrets.SINGLE_SIGN_ON_MINIO_MINIO_ROOT_USER }}
-      #    SINGLE_SIGN_ON_MINIO_MINIO_ROOT_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_MINIO_MINIO_ROOT_PASSWORD }}
-      #    SINGLE_SIGN_ON_REDIS_REDIS_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_REDIS_REDIS_PASSWORD }}
+      #    RUCKEN_POSTGRE_SQL_POSTGRESQL_DATABASE: ${{ secrets.ROOT_POSTGRES_DATABASE }}
+      #    RUCKEN_POSTGRE_SQL_POSTGRESQL_PASSWORD: ${{ secrets.ROOT_POSTGRES_PASSWORD }}
+      #    RUCKEN_POSTGRE_SQL_POSTGRESQL_USERNAME: ${{ secrets.ROOT_POSTGRES_USER }}
+      #    RUCKEN_WEBHOOK_DATABASE_NAME: ${{ secrets.RUCKEN_WEBHOOK_DATABASE_NAME }}
+      #    RUCKEN_WEBHOOK_DATABASE_PASSWORD: ${{ secrets.RUCKEN_WEBHOOK_DATABASE_PASSWORD }}
+      #    RUCKEN_WEBHOOK_DATABASE_USERNAME: ${{ secrets.RUCKEN_WEBHOOK_DATABASE_USERNAME }}
+      #    RUCKEN_NOTIFICATIONS_DATABASE_NAME: ${{ secrets.RUCKEN_NOTIFICATIONS_DATABASE_NAME }}
+      #    RUCKEN_NOTIFICATIONS_DATABASE_PASSWORD: ${{ secrets.RUCKEN_NOTIFICATIONS_DATABASE_PASSWORD }}
+      #    RUCKEN_NOTIFICATIONS_DATABASE_USERNAME: ${{ secrets.RUCKEN_NOTIFICATIONS_DATABASE_USERNAME }}
+      #    RUCKEN_TWO_FACTOR_DATABASE_DATABASE_NAME: ${{ secrets.RUCKEN_TWO_FACTOR_DATABASE_NAME }}
+      #    RUCKEN_TWO_FACTOR_DATABASE_DATABASE_PASSWORD: ${{ secrets.RUCKEN_TWO_FACTOR_DATABASE_PASSWORD }}
+      #    RUCKEN_TWO_FACTOR_DATABASE_DATABASE_USERNAME: ${{ secrets.RUCKEN_TWO_FACTOR_DATABASE_USERNAME }}
+      #    RUCKEN_SSO_DATABASE_NAME: ${{ secrets.RUCKEN_SSO_DATABASE_NAME }}
+      #    RUCKEN_SSO_DATABASE_PASSWORD: ${{ secrets.RUCKEN_SSO_DATABASE_PASSWORD }}
+      #    RUCKEN_SSO_DATABASE_USERNAME: ${{ secrets.RUCKEN_SSO_DATABASE_USERNAME }}
+      #    RUCKEN_SSO_ADMIN_PASSWORD: ${{ secrets.RUCKEN_SSO_ADMIN_PASSWORD }}
+      #    RUCKEN_MINIO_MINIO_ROOT_USER: ${{ secrets.RUCKEN_MINIO_MINIO_ROOT_USER }}
+      #    RUCKEN_MINIO_MINIO_ROOT_PASSWORD: ${{ secrets.RUCKEN_MINIO_MINIO_ROOT_PASSWORD }}
+      #    RUCKEN_REDIS_REDIS_PASSWORD: ${{ secrets.RUCKEN_REDIS_REDIS_PASSWORD }}
       #  run: |
       #    rm -rf ./.kubernetes/generated
       #    . .kubernetes/set-env.sh && npx -y rucken copy-paste --find=templates --replace=generated --replace-plural=generated --path=./.kubernetes/templates --replace-envs=true
@@ -164,29 +164,29 @@ jobs:
           DOCKER_SERVER: ${{ env.REGISTRY }}
           DOCKER_USERNAME: ${{ github.actor }}
           DOCKER_PASSWORD: ${{ secrets.NESTJS_MOD_ACCESS_TOKEN_DOCKER }}
-          SINGLE_SIGN_ON_DOMAIN: ${{ secrets.SINGLE_SIGN_ON_DOMAIN }}
-          SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_DATABASE: ${{ secrets.ROOT_POSTGRES_DATABASE }}
-          SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_PASSWORD: ${{ secrets.ROOT_POSTGRES_PASSWORD }}
-          SINGLE_SIGN_ON_POSTGRE_SQL_POSTGRESQL_USERNAME: ${{ secrets.ROOT_POSTGRES_USER }}
-          SINGLE_SIGN_ON_WEBHOOK_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_NAME }}
-          SINGLE_SIGN_ON_WEBHOOK_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_PASSWORD }}
-          SINGLE_SIGN_ON_WEBHOOK_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_WEBHOOK_DATABASE_USERNAME }}
-          SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_NAME }}
-          SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_PASSWORD }}
-          SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_NOTIFICATIONS_DATABASE_USERNAME }}
-          SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_NAME }}
-          SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_PASSWORD }}
-          SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_TWO_FACTOR_DATABASE_USERNAME }}
-          SINGLE_SIGN_ON_SSO_DATABASE_NAME: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_NAME }}
-          SINGLE_SIGN_ON_SSO_DATABASE_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_PASSWORD }}
-          SINGLE_SIGN_ON_SSO_DATABASE_USERNAME: ${{ secrets.SINGLE_SIGN_ON_SSO_DATABASE_USERNAME }}
-          SINGLE_SIGN_ON_SSO_ADMIN_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_SSO_ADMIN_PASSWORD }}
-          SINGLE_SIGN_ON_MINIO_MINIO_ROOT_USER: ${{ secrets.SINGLE_SIGN_ON_MINIO_MINIO_ROOT_USER }}
-          SINGLE_SIGN_ON_MINIO_MINIO_ROOT_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_MINIO_MINIO_ROOT_PASSWORD }}
-          SINGLE_SIGN_ON_REDIS_REDIS_PASSWORD: ${{ secrets.SINGLE_SIGN_ON_REDIS_REDIS_PASSWORD }}
-          SINGLE_SIGN_ON_SSO_GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.SINGLE_SIGN_ON_SSO_GOOGLE_OAUTH_CLIENT_ID }}
-          SINGLE_SIGN_ON_SSO_GOOGLE_OAUTH_CLIENT_SECRET_KEY: ${{ secrets.SINGLE_SIGN_ON_SSO_GOOGLE_OAUTH_CLIENT_SECRET_KEY }}
-          SINGLE_SIGN_ON_SSO_ADMIN_SECRET: ${{ secrets.SINGLE_SIGN_ON_SSO_ADMIN_SECRET }}
+          RUCKEN_DOMAIN: ${{ secrets.RUCKEN_DOMAIN }}
+          RUCKEN_POSTGRE_SQL_POSTGRESQL_DATABASE: ${{ secrets.ROOT_POSTGRES_DATABASE }}
+          RUCKEN_POSTGRE_SQL_POSTGRESQL_PASSWORD: ${{ secrets.ROOT_POSTGRES_PASSWORD }}
+          RUCKEN_POSTGRE_SQL_POSTGRESQL_USERNAME: ${{ secrets.ROOT_POSTGRES_USER }}
+          RUCKEN_WEBHOOK_DATABASE_NAME: ${{ secrets.RUCKEN_WEBHOOK_DATABASE_NAME }}
+          RUCKEN_WEBHOOK_DATABASE_PASSWORD: ${{ secrets.RUCKEN_WEBHOOK_DATABASE_PASSWORD }}
+          RUCKEN_WEBHOOK_DATABASE_USERNAME: ${{ secrets.RUCKEN_WEBHOOK_DATABASE_USERNAME }}
+          RUCKEN_NOTIFICATIONS_DATABASE_NAME: ${{ secrets.RUCKEN_NOTIFICATIONS_DATABASE_NAME }}
+          RUCKEN_NOTIFICATIONS_DATABASE_PASSWORD: ${{ secrets.RUCKEN_NOTIFICATIONS_DATABASE_PASSWORD }}
+          RUCKEN_NOTIFICATIONS_DATABASE_USERNAME: ${{ secrets.RUCKEN_NOTIFICATIONS_DATABASE_USERNAME }}
+          RUCKEN_TWO_FACTOR_DATABASE_DATABASE_NAME: ${{ secrets.RUCKEN_TWO_FACTOR_DATABASE_NAME }}
+          RUCKEN_TWO_FACTOR_DATABASE_DATABASE_PASSWORD: ${{ secrets.RUCKEN_TWO_FACTOR_DATABASE_PASSWORD }}
+          RUCKEN_TWO_FACTOR_DATABASE_DATABASE_USERNAME: ${{ secrets.RUCKEN_TWO_FACTOR_DATABASE_USERNAME }}
+          RUCKEN_SSO_DATABASE_NAME: ${{ secrets.RUCKEN_SSO_DATABASE_NAME }}
+          RUCKEN_SSO_DATABASE_PASSWORD: ${{ secrets.RUCKEN_SSO_DATABASE_PASSWORD }}
+          RUCKEN_SSO_DATABASE_USERNAME: ${{ secrets.RUCKEN_SSO_DATABASE_USERNAME }}
+          RUCKEN_SSO_ADMIN_PASSWORD: ${{ secrets.RUCKEN_SSO_ADMIN_PASSWORD }}
+          RUCKEN_MINIO_MINIO_ROOT_USER: ${{ secrets.RUCKEN_MINIO_MINIO_ROOT_USER }}
+          RUCKEN_MINIO_MINIO_ROOT_PASSWORD: ${{ secrets.RUCKEN_MINIO_MINIO_ROOT_PASSWORD }}
+          RUCKEN_REDIS_REDIS_PASSWORD: ${{ secrets.RUCKEN_REDIS_REDIS_PASSWORD }}
+          RUCKEN_SSO_GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.RUCKEN_SSO_GOOGLE_OAUTH_CLIENT_ID }}
+          RUCKEN_SSO_GOOGLE_OAUTH_CLIENT_SECRET_KEY: ${{ secrets.RUCKEN_SSO_GOOGLE_OAUTH_CLIENT_SECRET_KEY }}
+          RUCKEN_SSO_ADMIN_SECRET: ${{ secrets.RUCKEN_SSO_ADMIN_SECRET }}
         run: |
           echo 'Start'
           rm -rf ./.kubernetes/generated
@@ -221,10 +221,10 @@ jobs:
       - name: Run E2E-tests
         if: ${{ !contains(github.event.head_commit.message, '[skip e2e]') }}
         env:
-          SINGLE_SIGN_ON_SSO_ADMIN_SECRET: ${{ secrets.SINGLE_SIGN_ON_SSO_ADMIN_SECRET }}
-          E2E_CLIENT_URL: 'https://${{ secrets.SINGLE_SIGN_ON_DOMAIN }}'
-          E2E_SERVER_URL: 'https://${{ secrets.SINGLE_SIGN_ON_DOMAIN }}'
-          SINGLE_SIGN_ON_MINIO_URL: 'https://files.${{ secrets.SINGLE_SIGN_ON_DOMAIN }}'
+          RUCKEN_SSO_ADMIN_SECRET: ${{ secrets.RUCKEN_SSO_ADMIN_SECRET }}
+          E2E_CLIENT_URL: 'https://${{ secrets.RUCKEN_DOMAIN }}'
+          E2E_SERVER_URL: 'https://${{ secrets.RUCKEN_DOMAIN }}'
+          RUCKEN_MINIO_URL: 'https://files.${{ secrets.RUCKEN_DOMAIN }}'
         run: |
           npm run test:e2e
       - uses: actions/upload-artifact@v4

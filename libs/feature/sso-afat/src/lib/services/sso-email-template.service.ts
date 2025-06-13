@@ -3,7 +3,7 @@ import { RequestMeta } from '@nestjs-mod/misc';
 import {
   SsoRestSdkAngularService,
   UpdateSsoEmailTemplateDtoInterface,
-} from '@nestjs-mod/sso-rest-sdk-angular';
+} from '@rucken/sso-rest-sdk-angular';
 import { map } from 'rxjs';
 import { SsoEmailTemplateMapperService } from './sso-email-template-mapper.service';
 

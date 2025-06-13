@@ -4,7 +4,7 @@ import {
   NestModuleCategory,
 } from '@nestjs-mod/common';
 
-import { SSO_FEATURE, SsoModule, SsoRequest } from '@nestjs-mod-sso/sso';
+import { SSO_FEATURE, SsoModule, SsoRequest } from '@rucken/sso';
 import { ValidationError, ValidationErrorEnum } from '@nestjs-mod/validation';
 import { PrismaModule } from '@nestjs-mod/prisma';
 import { APP_FILTER } from '@nestjs/core';
@@ -73,7 +73,7 @@ export const { AppModule } = createNestModule({
         },
       ],
     }),
-    ...(process.env.SINGLE_SIGN_ON_DISABLE_SERVE_STATIC
+    ...(process.env.RUCKEN_DISABLE_SERVE_STATIC
       ? []
       : [
           ServeStaticModule.forRoot({

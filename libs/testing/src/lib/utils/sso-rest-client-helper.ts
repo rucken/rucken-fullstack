@@ -7,7 +7,7 @@ import {
   SsoUserDto,
   TokensResponse,
   WebhookUser,
-} from '@nestjs-mod/sso-rest-sdk';
+} from '@rucken/sso-rest-sdk';
 import { WebhookRestSdkService } from '@nestjs-mod/webhook';
 import { Observable, finalize } from 'rxjs';
 import WebSocket from 'ws';
@@ -216,8 +216,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
               },
               {
                 headers: {
-                  'x-admin-secret':
-                    process.env['SINGLE_SIGN_ON_SSO_ADMIN_SECRET'],
+                  'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
                 },
               }
             );
@@ -254,8 +253,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
             undefined,
             {
               headers: {
-                'x-admin-secret':
-                  process.env['SINGLE_SIGN_ON_SSO_ADMIN_SECRET'],
+                'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
               },
             }
           );
@@ -269,7 +267,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
           },
           {
             headers: {
-              'x-admin-secret': process.env['SINGLE_SIGN_ON_SSO_ADMIN_SECRET'],
+              'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
             },
           }
         );

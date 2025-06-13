@@ -8,7 +8,7 @@ import {
   TranslocoService,
 } from '@jsverse/transloco';
 import { TranslocoDatePipe } from '@jsverse/transloco-locale';
-import { SsoRoleInterface } from '@nestjs-mod/sso-rest-sdk-angular';
+import { SsoRoleInterface } from '@rucken/sso-rest-sdk-angular';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { addHours } from 'date-fns';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -24,7 +24,7 @@ import {
   SsoService,
   TokensService,
   UserPipe,
-} from '@nestjs-mod-sso/sso-afat';
+} from '@rucken/sso-afat';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -40,7 +40,7 @@ import {
 import { APP_TITLE } from './app.constants';
 
 import { TIMEZONE_OFFSET } from '@nestjs-mod/misc';
-import { SsoRestSdkAngularService } from '@nestjs-mod/sso-rest-sdk-angular';
+import { SsoRestSdkAngularService } from '@rucken/sso-rest-sdk-angular';
 @UntilDestroy()
 @Component({
   imports: [

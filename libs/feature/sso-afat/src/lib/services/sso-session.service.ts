@@ -3,7 +3,7 @@ import { RequestMeta } from '@nestjs-mod/misc';
 import {
   SsoRestSdkAngularService,
   UpdateSsoRefreshSessionDtoInterface,
-} from '@nestjs-mod/sso-rest-sdk-angular';
+} from '@rucken/sso-rest-sdk-angular';
 import { map } from 'rxjs';
 import { SsoSessionMapperService } from './sso-session-mapper.service';
 

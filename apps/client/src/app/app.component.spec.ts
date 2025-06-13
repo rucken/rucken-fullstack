@@ -5,7 +5,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
 import { FilesRestSdkAngularModule, MINIO_URL } from '@nestjs-mod/files-afat';
-import { SsoRestSdkAngularModule } from '@nestjs-mod/sso-rest-sdk-angular';
+import { SsoRestSdkAngularModule } from '@rucken/sso-rest-sdk-angular';
 import { WebhookRestSdkAngularModule } from '@nestjs-mod/webhook-afat';
 import { minioURL, serverUrl } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -80,7 +80,7 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.logo')?.textContent).toContain(APP_TITLE);
   });
 
-  it(`should have as title 'Single Sign-On'`, () => {
+  it(`should have as title 'Full stack'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual(APP_TITLE);

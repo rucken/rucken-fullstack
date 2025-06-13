@@ -1,8 +1,8 @@
 {
-  "name": "@nestjs-mod/sso-rest-sdk",
-  "description": "NodeJS client for Single Sign-On on NestJS and Angular with webhooks and social authorization",
+  "name": "@rucken/sso-rest-sdk",
+  "description": "NodeJS client for Cross-platform full stack simple NestJS app with Angular",
   "keywords": [
-    "single-sign-n",
+    "rucken",
     "sso",
     "client",
     "nestjs"

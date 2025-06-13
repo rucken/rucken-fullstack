@@ -5,7 +5,7 @@ import {
   SsoRestSdkAngularService,
   SsoUserDtoInterface,
   TokensResponseInterface,
-} from '@nestjs-mod/sso-rest-sdk-angular';
+} from '@rucken/sso-rest-sdk-angular';
 import {
   FingerprintService,
   OAuthProvider,
@@ -22,7 +22,7 @@ import {
   SsoUser,
   SsoUserAndTokens,
   TokensService,
-} from '@nestjs-mod-sso/sso-afat';
+} from '@rucken/sso-afat';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { catchError, map, mergeMap, Observable, of } from 'rxjs';
 

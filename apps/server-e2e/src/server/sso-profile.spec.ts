@@ -1,5 +1,5 @@
-import { TokensResponse } from '@nestjs-mod/sso-rest-sdk';
-import { SsoRestClientHelper } from '@nestjs-mod-sso/testing';
+import { TokensResponse } from '@rucken/sso-rest-sdk';
+import { SsoRestClientHelper } from '@rucken/testing';
 
 describe('Sso profile (e2e)', () => {
   let user: SsoRestClientHelper<'strict'>;
@@ -12,12 +12,12 @@ describe('Sso profile (e2e)', () => {
   beforeAll(async () => {
     user = await new SsoRestClientHelper({
       headers: {
-        'x-skip-throttle': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },
     }).generateRandomUser();
     project = await new SsoRestClientHelper({
       headers: {
-        'x-skip-throttle': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },
     }).generateRandomUser();
   });
@@ -34,7 +34,7 @@ describe('Sso profile (e2e)', () => {
         },
         {
           headers: {
-            'x-admin-secret': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+            'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
           },
         }
       );
@@ -71,7 +71,7 @@ describe('Sso profile (e2e)', () => {
         undefined,
         {
           headers: {
-            'x-admin-secret': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+            'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
           },
         }
       );
@@ -86,7 +86,7 @@ describe('Sso profile (e2e)', () => {
         findManyProjectsResult.ssoProjects[0].id,
         {
           headers: {
-            'x-admin-secret': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+            'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
           },
         }
       );
@@ -102,7 +102,7 @@ describe('Sso profile (e2e)', () => {
         },
         {
           headers: {
-            'x-admin-secret': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+            'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
           },
         }
       );

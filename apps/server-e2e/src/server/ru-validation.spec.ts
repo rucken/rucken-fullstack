@@ -1,5 +1,5 @@
-import { SsoRole } from '@nestjs-mod/sso-rest-sdk';
-import { SsoRestClientHelper } from '@nestjs-mod-sso/testing';
+import { SsoRole } from '@rucken/sso-rest-sdk';
+import { SsoRestClientHelper } from '@rucken/testing';
 import { AxiosError } from 'axios';
 
 describe('Validation (ru)', () => {
@@ -8,13 +8,13 @@ describe('Validation (ru)', () => {
   const user1 = new SsoRestClientHelper({
     activeLang: 'ru',
     headers: {
-      'x-skip-throttle': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+      'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
     },
   });
   const admin = new SsoRestClientHelper({
     headers: {
-      'x-admin-secret': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
-      'x-skip-throttle': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+      'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
+      'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
     },
   });
 

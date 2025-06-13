@@ -1,4 +1,3 @@
-import { SSO_FEATURE, SSO_FOLDER, SsoPrismaSdk } from '@nestjs-mod-sso/sso';
 import {
   InfrastructureMarkdownReportGenerator,
   PROJECT_JSON_FILE,
@@ -11,16 +10,11 @@ import {
   DockerComposePostgreSQL,
   DockerComposeRedis,
 } from '@nestjs-mod/docker-compose';
-import {
-  NOTIFICATIONS_FEATURE,
-  NOTIFICATIONS_FOLDER,
-} from '@nestjs-mod/notifications';
 import { PgFlyway } from '@nestjs-mod/pg-flyway';
 import { ECOSYSTEM_CONFIG_FILE, Pm2 } from '@nestjs-mod/pm2';
 import { PRISMA_SCHEMA_FILE, PrismaModule } from '@nestjs-mod/prisma';
-import { TWO_FACTOR_FEATURE, TWO_FACTOR_FOLDER } from '@nestjs-mod/two-factor';
-import { WEBHOOK_FEATURE, WEBHOOK_FOLDER } from '@nestjs-mod/webhook';
 import { PrismaPg } from '@prisma/adapter-pg';
+import { SSO_FEATURE, SSO_FOLDER, SsoPrismaSdk } from '@rucken/sso';
 import { join } from 'path';
 import { appFolder, rootFolder } from './environments/environment';
 export const INFRASTRUCTURE_MODULE_IMPORTS = [

@@ -1,7 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { ActiveProjectPipe } from '@nestjs-mod-sso/sso-afat';
+import { ActiveProjectPipe } from '@rucken/sso-afat';
 import {
   WebhookGridComponent,
   WebhookLogGridComponent,

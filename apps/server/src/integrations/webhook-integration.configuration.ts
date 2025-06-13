@@ -1,12 +1,12 @@
+import { PrismaModule } from '@nestjs-mod/prisma';
+import { WEBHOOK_FEATURE, WebhookModule } from '@nestjs-mod/webhook';
 import {
   CheckSsoRole,
   SSO_FEATURE,
   SsoGuard,
   SsoModule,
   SsoRole,
-} from '@nestjs-mod-sso/sso';
-import { WEBHOOK_FEATURE, WebhookModule } from '@nestjs-mod/webhook';
-import { PrismaModule } from '@nestjs-mod/prisma';
+} from '@rucken/sso';
 import { TranslatesModule } from 'nestjs-translates';
 
 export function webhookModuleForRootAsyncOptions(): Parameters<

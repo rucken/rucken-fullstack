@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { marker } from '@jsverse/transloco-keys-manager/marker';
-import { SsoRoleInterface } from '@nestjs-mod/sso-rest-sdk-angular';
+import { SsoRoleInterface } from '@rucken/sso-rest-sdk-angular';
 import {
   CompleteSignUpOptions,
   OnActivateOptions,
@@ -11,7 +11,7 @@ import {
   SsoCompleteGuardService,
   SsoGuardData,
   SsoGuardService,
-} from '@nestjs-mod-sso/sso-afat';
+} from '@rucken/sso-afat';
 import { searchIn } from '@nestjs-mod/misc';
 import { CompleteForgotPasswordComponent } from './pages/complete-forgot-password/complete-forgot-password.component';
 import { CompleteInviteComponent } from './pages/complete-invite/complete-invite.component';

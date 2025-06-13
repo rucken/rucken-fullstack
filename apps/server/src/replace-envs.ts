@@ -12,9 +12,8 @@ export async function replaceEnvs() {
         writeFileSync(
           fullFilePath,
           content.replace(
-            new RegExp('___SINGLE_SIGN_ON_CLIENT_MINIO_URL___', 'g'),
-            process.env.SINGLE_SIGN_ON_CLIENT_MINIO_URL ||
-              'http://localhost:9000'
+            new RegExp('___RUCKEN_CLIENT_MINIO_URL___', 'g'),
+            process.env.RUCKEN_CLIENT_MINIO_URL || 'http://localhost:9000'
           )
         );
       }

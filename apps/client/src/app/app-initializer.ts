@@ -5,9 +5,9 @@ import {
   SsoActiveProjectService,
   SsoService,
   TokensService,
-} from '@nestjs-mod-sso/sso-afat';
+} from '@rucken/sso-afat';
 import { FilesRestSdkAngularService } from '@nestjs-mod/files-afat';
-import { SsoRestSdkAngularService } from '@nestjs-mod/sso-rest-sdk-angular';
+import { SsoRestSdkAngularService } from '@rucken/sso-rest-sdk-angular';
 import { WebhookRestSdkAngularService } from '@nestjs-mod/webhook-afat';
 import { catchError, merge, mergeMap, of, Subscription, tap } from 'rxjs';
 

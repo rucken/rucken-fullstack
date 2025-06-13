@@ -2,7 +2,7 @@ name: Deploy to Vercel
 
 on:
   push:
-    branches: ['master', 'vercel']
+    branches: ['master_skip', 'vercel_skip']
 
 jobs:
   build-and-deploy:

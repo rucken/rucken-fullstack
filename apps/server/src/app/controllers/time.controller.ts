@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { SsoGuard, UseSsoInterceptorsAndGuards } from '@nestjs-mod-sso/sso';
+import { SsoGuard, UseSsoInterceptorsAndGuards } from '@rucken/sso';
 import { ApiOkResponse } from '@nestjs/swagger';
 import {
   SubscribeMessage,

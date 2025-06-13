@@ -1,5 +1,5 @@
-import { SsoRestClientHelper } from '@nestjs-mod-sso/testing';
-import { TokensResponse } from '@nestjs-mod/sso-rest-sdk';
+import { SsoRestClientHelper } from '@rucken/testing';
+import { TokensResponse } from '@rucken/sso-rest-sdk';
 import { setTimeout } from 'node:timers/promises';
 
 describe('Sso forgot password with check notifications (e2e)', () => {
@@ -14,19 +14,19 @@ describe('Sso forgot password with check notifications (e2e)', () => {
   beforeAll(async () => {
     project = await new SsoRestClientHelper({
       headers: {
-        'x-skip-throttle': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },
     }).generateRandomUser();
     user = await new SsoRestClientHelper({
       headers: {
         'x-client-id': project.randomUser.id,
-        'x-skip-throttle': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },
     }).generateRandomUser();
     admin = new SsoRestClientHelper({
       headers: {
-        'x-admin-secret': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
-        'x-skip-throttle': process.env.SINGLE_SIGN_ON_SSO_ADMIN_SECRET,
+        'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },
     });
   });

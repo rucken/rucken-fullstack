@@ -32,7 +32,7 @@ test.describe('Validation with store lang in db (ru)', () => {
     });
     await page.evaluate(
       (minioURL) => localStorage.setItem('minioURL', minioURL),
-      get('SINGLE_SIGN_ON_MINIO_URL').required().asString()
+      get('RUCKEN_MINIO_URL').required().asString()
     );
   });
 
