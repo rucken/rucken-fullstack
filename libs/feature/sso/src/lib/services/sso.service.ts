@@ -9,7 +9,10 @@ import {
   SsoConfiguration,
   SsoSendNotificationOptions,
 } from '../sso.configuration';
-import { DEFAULT_EMAIL_TEMPLATE_BY_NAMES, SSO_FEATURE } from '../sso.constants';
+import {
+  DEFAULT_EMAIL_TEMPLATE_BY_NAMES,
+  RUCKEN_SSO_FEATURE,
+} from '../sso.constants';
 import { SsoStaticEnvironments } from '../sso.environments';
 import {
   CompleteForgotPasswordArgs,
@@ -29,7 +32,7 @@ export class SsoService {
   private logger = new Logger(SsoService.name);
 
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly ssoStaticEnvironments: SsoStaticEnvironments,
     private readonly ssoConfiguration: SsoConfiguration,

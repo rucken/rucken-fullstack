@@ -129,7 +129,7 @@ export async function createAndFillDatabases() {
       });
 
       // delay
-      await setTimeout(2000);
+      await setTimeout(700);
     }
   }
 }

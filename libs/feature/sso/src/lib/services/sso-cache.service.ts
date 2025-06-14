@@ -7,13 +7,13 @@ import {
   SsoRefreshSession,
   SsoUser,
 } from '../generated/prisma-client';
-import { SSO_FEATURE } from '../sso.constants';
+import { RUCKEN_SSO_FEATURE } from '../sso.constants';
 import { SsoStaticEnvironments } from '../sso.environments';
 
 @Injectable()
 export class SsoCacheService {
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly ssoStaticEnvironments: SsoStaticEnvironments,
     private readonly keyvService: KeyvService

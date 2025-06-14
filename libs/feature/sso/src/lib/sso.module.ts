@@ -34,7 +34,7 @@ import { SsoTokensService } from './services/sso-tokens.service';
 import { SsoUsersService } from './services/sso-users.service';
 import { SsoService } from './services/sso.service';
 import { SsoConfiguration, SsoStaticConfiguration } from './sso.configuration';
-import { SSO_FEATURE, SSO_MODULE } from './sso.constants';
+import { RUCKEN_SSO_FEATURE, RUCKEN_SSO_MODULE } from './sso.constants';
 import { SsoStaticEnvironments } from './sso.environments';
 import { SsoExceptionsFilter } from './sso.filter';
 import { SsoGuard } from './sso.guard';
@@ -44,32 +44,32 @@ import { SsoGoogleOAuthStrategy } from './strategies/google/sso-google-oauth.str
 import { SsoAsyncLocalStorageContext } from './types/sso-async-local-storage-data';
 import { SSO_WEBHOOK_EVENTS } from './types/sso-webhooks';
 
-export const { SsoModule } = createNestModule({
-  moduleName: SSO_MODULE,
+export const { RuckenSsoModule } = createNestModule({
+  moduleName: RUCKEN_SSO_MODULE,
   moduleCategory: NestModuleCategory.feature,
   staticEnvironmentsModel: SsoStaticEnvironments,
   staticConfigurationModel: SsoStaticConfiguration,
   configurationModel: SsoConfiguration,
   imports: [
-    KeyvModule.forFeature({ featureModuleName: SSO_FEATURE }),
+    KeyvModule.forFeature({ featureModuleName: RUCKEN_SSO_FEATURE }),
     PrismaModule.forFeature({
-      contextName: SSO_FEATURE,
-      featureModuleName: SSO_FEATURE,
+      contextName: RUCKEN_SSO_FEATURE,
+      featureModuleName: RUCKEN_SSO_FEATURE,
     }),
     PrismaToolsModule.forFeature({
-      featureModuleName: SSO_FEATURE,
+      featureModuleName: RUCKEN_SSO_FEATURE,
     }),
     WebhookModule.forFeature({
-      featureModuleName: SSO_FEATURE,
+      featureModuleName: RUCKEN_SSO_FEATURE,
       featureConfiguration: {
         events: SSO_WEBHOOK_EVENTS,
       },
     }),
     TranslatesModule,
     PrismaModule.forRoot({
-      contextName: SSO_FEATURE,
+      contextName: RUCKEN_SSO_FEATURE,
       staticConfiguration: {
-        featureName: SSO_FEATURE,
+        featureName: RUCKEN_SSO_FEATURE,
         provider: 'prisma-client',
         prismaClientFactory: async (options) => {
           const { url, ...otherOoptions } = options;
@@ -81,13 +81,13 @@ export const { SsoModule } = createNestModule({
     }),
   ],
   sharedImports: [
-    KeyvModule.forFeature({ featureModuleName: SSO_FEATURE }),
+    KeyvModule.forFeature({ featureModuleName: RUCKEN_SSO_FEATURE }),
     PrismaModule.forFeature({
-      contextName: SSO_FEATURE,
-      featureModuleName: SSO_FEATURE,
+      contextName: RUCKEN_SSO_FEATURE,
+      featureModuleName: RUCKEN_SSO_FEATURE,
     }),
     PrismaToolsModule.forFeature({
-      featureModuleName: SSO_FEATURE,
+      featureModuleName: RUCKEN_SSO_FEATURE,
     }),
     TranslatesModule,
   ],
@@ -139,11 +139,12 @@ export const { SsoModule } = createNestModule({
     if (!asyncModuleOptions) {
       asyncModuleOptions = {};
     }
-    const FomatterClass = getFeatureDotEnvPropertyNameFormatter(SSO_FEATURE);
+    const FomatterClass =
+      getFeatureDotEnvPropertyNameFormatter(RUCKEN_SSO_FEATURE);
     Object.assign(asyncModuleOptions, {
       environmentsOptions: {
         propertyNameFormatters: [new FomatterClass()],
-        name: SSO_FEATURE,
+        name: RUCKEN_SSO_FEATURE,
       },
     });
 

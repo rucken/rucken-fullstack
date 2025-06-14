@@ -6,7 +6,7 @@ import {
 import {
   CheckSsoRole,
   SsoGuard,
-  SsoModule,
+  RuckenSsoModule,
   SsoRequest,
   SsoRole,
 } from '@rucken/sso';
@@ -20,7 +20,7 @@ export function notificationsModuleForRootAsyncOptions(): Parameters<
 >[0] {
   return {
     imports: [
-      SsoModule.forFeature({
+      RuckenSsoModule.forFeature({
         featureModuleName: NOTIFICATIONS_FEATURE,
       }),
       TranslatesModule,

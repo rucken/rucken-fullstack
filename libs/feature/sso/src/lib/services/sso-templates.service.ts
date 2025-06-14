@@ -3,12 +3,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectPrismaClient } from '@nestjs-mod/prisma';
 import { TranslatesStorage } from 'nestjs-translates';
 import { PrismaClient } from '../generated/prisma-client';
-import { DEFAULT_EMAIL_TEMPLATES, SSO_FEATURE } from '../sso.constants';
+import { DEFAULT_EMAIL_TEMPLATES, RUCKEN_SSO_FEATURE } from '../sso.constants';
 
 @Injectable()
 export class SsoTemplatesService {
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly translatesStorage: TranslatesStorage
   ) {}

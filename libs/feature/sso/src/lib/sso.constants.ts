@@ -1,9 +1,9 @@
 import { getText } from 'nestjs-translates';
 import { OperationName } from './sso.configuration';
 
-export const SSO_FEATURE = 'sso';
-export const SSO_MODULE = 'SsoModule';
-export const SSO_FOLDER = 'libs/feature/sso';
+export const RUCKEN_SSO_FEATURE = 'sso';
+export const RUCKEN_SSO_MODULE = 'RuckenSsoModule';
+export const RUCKEN_SSO_FOLDER = 'libs/feature/sso';
 export const X_SKIP_THROTTLE = 'x-skip-throttle';
 
 export const DEFAULT_EMAIL_TEMPLATES = [

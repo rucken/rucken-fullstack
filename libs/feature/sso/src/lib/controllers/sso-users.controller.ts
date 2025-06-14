@@ -32,7 +32,7 @@ import { SsoEventsService } from '../services/sso-events.service';
 import { SsoPasswordService } from '../services/sso-password.service';
 import { SsoService } from '../services/sso.service';
 import { OperationName } from '../sso.configuration';
-import { SSO_FEATURE } from '../sso.constants';
+import { RUCKEN_SSO_FEATURE } from '../sso.constants';
 import { CurrentSsoRequest } from '../sso.decorators';
 import { SsoError } from '../sso.errors';
 import { FindManySsoUserArgs } from '../types/find-many-sso-user-args';
@@ -51,7 +51,7 @@ export class SsoUsersController {
   private readonly logger = new Logger(SsoUsersController.name);
 
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly prismaToolsService: PrismaToolsService,
     private readonly ssoPasswordService: SsoPasswordService,

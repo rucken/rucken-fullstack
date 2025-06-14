@@ -10,7 +10,7 @@ import {
   SsoRefreshSession,
   SsoUser,
 } from '../generated/prisma-client';
-import { SSO_FEATURE } from '../sso.constants';
+import { RUCKEN_SSO_FEATURE } from '../sso.constants';
 import { SsoStaticEnvironments } from '../sso.environments';
 import { SsoError, SsoErrorEnum } from '../sso.errors';
 import { SsoAccessTokenData } from '../types/sso-request';
@@ -23,7 +23,7 @@ export class SsoTokensService {
   constructor(
     private readonly ssoStaticEnvironments: SsoStaticEnvironments,
     private readonly jwtService: JwtService,
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly prismaToolsService: PrismaToolsService,
     private readonly ssoCacheService: SsoCacheService

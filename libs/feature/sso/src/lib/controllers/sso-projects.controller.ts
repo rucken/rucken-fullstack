@@ -33,7 +33,7 @@ import { UpdateSsoProjectDto } from '../generated/rest/dto/update-sso-project.dt
 import { Prisma, PrismaClient } from '../generated/prisma-client';
 import { SsoCacheService } from '../services/sso-cache.service';
 import { SsoTemplatesService } from '../services/sso-templates.service';
-import { SSO_FEATURE } from '../sso.constants';
+import { RUCKEN_SSO_FEATURE } from '../sso.constants';
 import { CheckSsoRole } from '../sso.decorators';
 import { SsoError } from '../sso.errors';
 import { FindManySsoProjectResponse } from '../types/find-many-sso-project-response';
@@ -48,7 +48,7 @@ import { SsoRole } from '../types/sso-role';
 @SkipTranslate()
 export class SsoProjectsController {
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly prismaToolsService: PrismaToolsService,
     private readonly translatesService: TranslatesService,

@@ -1,15 +1,3 @@
-import {
-  SSO_FEATURE,
-  SSO_MODULE,
-  SsoConfiguration,
-  SsoModule,
-  SsoRequest,
-  SsoRole,
-  SsoSendNotificationOptions,
-  SsoTwoFactorCodeGenerateOptions,
-  SsoTwoFactorCodeValidateOptions,
-  SsoUser,
-} from '@rucken/sso';
 import { getRequestFromExecutionContext } from '@nestjs-mod/common';
 import { FilesRequest, FilesRole } from '@nestjs-mod/files';
 import { searchIn } from '@nestjs-mod/misc';
@@ -27,6 +15,18 @@ import {
   WebhookUsersService,
 } from '@nestjs-mod/webhook';
 import { ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  RuckenSsoModule,
+  RUCKEN_SSO_FEATURE,
+  RUCKEN_SSO_MODULE,
+  SsoConfiguration,
+  SsoRequest,
+  SsoRole,
+  SsoSendNotificationOptions,
+  SsoTwoFactorCodeGenerateOptions,
+  SsoTwoFactorCodeValidateOptions,
+  SsoUser,
+} from '@rucken/sso';
 import { APP_FEATURE } from '../app/app.constants';
 
 @Injectable()
@@ -141,19 +141,19 @@ export class SsoIntegrationConfiguration implements SsoConfiguration {
 }
 
 export function ssoModuleForRootAsyncOptions(): Parameters<
-  typeof SsoModule.forRootAsync
+  typeof RuckenSsoModule.forRootAsync
 >[0] {
   return {
     imports: [
-      SsoModule.forFeature({
-        featureModuleName: SSO_MODULE,
+      RuckenSsoModule.forFeature({
+        featureModuleName: RUCKEN_SSO_MODULE,
       }),
       PrismaModule.forFeature({
-        contextName: SSO_FEATURE,
-        featureModuleName: SSO_MODULE,
+        contextName: RUCKEN_SSO_FEATURE,
+        featureModuleName: RUCKEN_SSO_MODULE,
       }),
       WebhookModule.forFeature({
-        featureModuleName: SSO_MODULE,
+        featureModuleName: RUCKEN_SSO_MODULE,
       }),
 
       TwoFactorModule.forFeature({ featureModuleName: APP_FEATURE }),

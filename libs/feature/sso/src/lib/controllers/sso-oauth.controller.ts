@@ -19,7 +19,7 @@ import { UserAgent } from '../decorators/user-agent.decorator';
 import { PrismaClient } from '../generated/prisma-client';
 import { SsoCookieService } from '../services/sso-cookie.service';
 import { SsoEventsService } from '../services/sso-events.service';
-import { SSO_FEATURE } from '../sso.constants';
+import { RUCKEN_SSO_FEATURE } from '../sso.constants';
 import { AllowEmptySsoUser, CurrentSsoRequest } from '../sso.decorators';
 import { SsoStaticEnvironments } from '../sso.environments';
 import { SsoError, SsoErrorEnum } from '../sso.errors';
@@ -36,7 +36,7 @@ export class SsoOAuthController {
   private readonly logger = new Logger(SsoOAuthController.name);
 
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly ssoCookieService: SsoCookieService,
     private readonly ssoEventsService: SsoEventsService,

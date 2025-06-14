@@ -25,7 +25,7 @@ import { SkipTranslate } from 'nestjs-translates';
 import { SsoEmailTemplateDto } from '../generated/rest/dto/sso-email-template.dto';
 import { UpdateSsoEmailTemplateDto } from '../generated/rest/dto/update-sso-email-template.dto';
 import { Prisma, PrismaClient } from '../generated/prisma-client';
-import { SSO_FEATURE } from '../sso.constants';
+import { RUCKEN_SSO_FEATURE } from '../sso.constants';
 import { CurrentSsoRequest } from '../sso.decorators';
 import { SsoError } from '../sso.errors';
 import { FindManySsoEmailTemplateResponse } from '../types/find-many-sso-email-template-response';
@@ -40,7 +40,7 @@ import { SsoRole } from '../types/sso-role';
 @SkipTranslate()
 export class SsoEmailTemplatesController {
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly prismaToolsService: PrismaToolsService
   ) {}

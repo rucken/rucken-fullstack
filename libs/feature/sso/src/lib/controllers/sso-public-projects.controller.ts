@@ -6,7 +6,7 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
 import { Prisma, PrismaClient } from '../generated/prisma-client';
-import { SSO_FEATURE } from '../sso.constants';
+import { RUCKEN_SSO_FEATURE } from '../sso.constants';
 import { AllowEmptySsoUser } from '../sso.decorators';
 import { FindManySsoPublicProjectResponse } from '../types/find-many-sso-public-project-response';
 
@@ -15,7 +15,7 @@ import { FindManySsoPublicProjectResponse } from '../types/find-many-sso-public-
 @Controller('/sso/public-projects')
 export class SsoPublicProjectsController {
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly prismaToolsService: PrismaToolsService
   ) {}

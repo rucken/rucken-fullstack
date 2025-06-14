@@ -31,7 +31,7 @@ import {
 import { WEBHOOK_EXTRA_MODELS, WebhookModule } from '@nestjs-mod/webhook';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { SSO_EXTRA_MODELS, SsoModule } from '@rucken/sso';
+import { SSO_EXTRA_MODELS, RuckenSsoModule } from '@rucken/sso';
 import cookieParser from 'cookie-parser';
 import { writeFileSync } from 'fs';
 import { join } from 'path';
@@ -140,7 +140,7 @@ bootstrapNestApplication({
         notificationsModuleForRootAsyncOptions()
       ),
       WebhookModule.forRootAsync(webhookModuleForRootAsyncOptions()),
-      SsoModule.forRootAsync(ssoModuleForRootAsyncOptions()),
+      RuckenSsoModule.forRootAsync(ssoModuleForRootAsyncOptions()),
       AppModule.forRoot(),
     ],
   },

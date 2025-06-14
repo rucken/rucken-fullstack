@@ -4,7 +4,7 @@ import {
   NOTIFICATIONS_FEATURE,
   NotificationsPrismaSdk,
 } from '@nestjs-mod/notifications';
-import { SSO_FEATURE, SsoPrismaSdk } from '@rucken/sso';
+import { RUCKEN_SSO_FEATURE, SsoPrismaSdk } from '@rucken/sso';
 import { WEBHOOK_FEATURE, WebhookPrismaSdk } from '@nestjs-mod/webhook';
 import { InjectPrismaClient, PrismaModule } from '@nestjs-mod/prisma';
 import {
@@ -69,7 +69,7 @@ export class TerminusHealthCheckIntegrationConfiguration
     private readonly prismaHealthIndicator: PrismaHealthIndicator,
     @InjectPrismaClient(WEBHOOK_FEATURE)
     private readonly webhookPrismaClient: WebhookPrismaSdk.PrismaClient,
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly ssoPrismaClient: SsoPrismaSdk.PrismaClient,
     @InjectPrismaClient(TWO_FACTOR_FEATURE)
     private readonly twoFactorPrismaClient: TwoFactorPrismaSdk.PrismaClient,
@@ -89,7 +89,7 @@ export function terminusHealthCheckModuleForRootAsyncOptions(): Parameters<
       }),
       PrismaModule.forFeature({
         featureModuleName: TERMINUS_MODULE_NAME,
-        contextName: SSO_FEATURE,
+        contextName: RUCKEN_SSO_FEATURE,
       }),
       PrismaModule.forFeature({
         featureModuleName: TERMINUS_MODULE_NAME,

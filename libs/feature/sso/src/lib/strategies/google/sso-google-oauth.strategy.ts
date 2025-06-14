@@ -18,7 +18,7 @@ import {
   SsoOAuthProviderSettings,
 } from '../../generated/prisma-client';
 import { SsoService } from '../../services/sso.service';
-import { SSO_FEATURE } from '../../sso.constants';
+import { RUCKEN_SSO_FEATURE } from '../../sso.constants';
 import { SsoStaticEnvironments } from '../../sso.environments';
 import { SsoRequest } from '../../types/sso-request';
 
@@ -37,7 +37,7 @@ export class SsoGoogleOAuthStrategy implements OnModuleInit {
   private readonly clientSecretKey = 'GOOGLE_OAUTH_CLIENT_SECRET_KEY';
 
   constructor(
-    @InjectPrismaClient(SSO_FEATURE)
+    @InjectPrismaClient(RUCKEN_SSO_FEATURE)
     private readonly prismaClient: PrismaClient,
     private readonly prismaToolsService: PrismaToolsService,
     private readonly ssoService: SsoService,
