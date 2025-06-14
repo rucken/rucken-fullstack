@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { marker } from '@jsverse/transloco-keys-manager/marker';
+import { searchIn } from '@nestjs-mod/misc';
 import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import {
   CompleteSignUpOptions,
@@ -12,103 +13,16 @@ import {
   SsoGuardData,
   SsoGuardService,
 } from '@rucken/sso-afat';
-import { searchIn } from '@nestjs-mod/misc';
-import { CompleteForgotPasswordComponent } from './pages/complete-forgot-password/complete-forgot-password.component';
-import { CompleteInviteComponent } from './pages/complete-invite/complete-invite.component';
-import { CompleteSignUpComponent } from './pages/complete-sign-up/complete-sign-up.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { ProjectsComponent } from './pages/projects/projects.component';
-import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { TemplatesComponent } from './pages/templates/templates.component';
-import { UsersComponent } from './pages/users/users.component';
-import { WebhooksComponent } from './pages/webhooks/webhooks.component';
+import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from '../engine-afat.constants';
+import { CompleteForgotPasswordComponent } from './complete-forgot-password/complete-forgot-password.component';
+import { CompleteInviteComponent } from './complete-invite/complete-invite.component';
+import { CompleteSignUpComponent } from './complete-sign-up/complete-sign-up.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
-export const appRoutes: Route[] = [
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full',
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    title: marker('Home'),
-  },
-  {
-    path: 'webhooks',
-    component: WebhooksComponent,
-    title: marker('Webhooks'),
-    canActivate: [SsoGuardService],
-    data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-        roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-        afterActivate: async (options: OnActivateOptions) => {
-          if (options.error) {
-            options.router.navigate(['/home']);
-            return false;
-          }
-          return true;
-        },
-      }),
-    },
-  },
-  {
-    path: 'templates',
-    title: marker('Templates'),
-    component: TemplatesComponent,
-    canActivate: [SsoGuardService],
-    data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-        roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-        afterActivate: async (options: OnActivateOptions) => {
-          if (options.error) {
-            options.router.navigate(['/home']);
-            return false;
-          }
-          return true;
-        },
-      }),
-    },
-  },
-  {
-    path: 'users',
-    component: UsersComponent,
-    title: marker('Users'),
-    canActivate: [SsoGuardService],
-    data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-        roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-        afterActivate: async (options: OnActivateOptions) => {
-          if (options.error) {
-            options.router.navigate(['/home']);
-            return false;
-          }
-          return true;
-        },
-      }),
-    },
-  },
-  {
-    path: 'projects',
-    component: ProjectsComponent,
-    title: marker('Projects'),
-    canActivate: [SsoGuardService],
-    data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-        roles: [SsoRoleInterface.admin],
-        afterActivate: async (options: OnActivateOptions) => {
-          if (options.error) {
-            options.router.navigate(['/home']);
-            return false;
-          }
-          return true;
-        },
-      }),
-    },
-  },
+export const pagesRoutes: Route[] = [
   {
     path: 'profile',
     component: ProfileComponent,
@@ -123,7 +37,7 @@ export const appRoutes: Route[] = [
         ],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
-            options.router.navigate(['/home']);
+            options.router.navigate([ROOT_PATH_MARKER]);
             return false;
           }
           return true;
@@ -141,7 +55,7 @@ export const appRoutes: Route[] = [
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
-            options.router.navigate(['/home']);
+            options.router.navigate([ROOT_PATH_MARKER]);
             return false;
           }
           return true;
@@ -159,7 +73,7 @@ export const appRoutes: Route[] = [
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
-            options.router.navigate(['/home']);
+            options.router.navigate([ROOT_PATH_MARKER]);
             return false;
           }
           return true;
@@ -203,9 +117,9 @@ export const appRoutes: Route[] = [
                   options.ssoService.profile$.value?.roles
                 )
               ) {
-                options.router.navigate(['/projects']);
+                options.router.navigate([SECOND_PATH_MARKER]);
               } else {
-                options.router.navigate(['/home']);
+                options.router.navigate([ROOT_PATH_MARKER]);
               }
             }
           } else {
@@ -252,9 +166,9 @@ export const appRoutes: Route[] = [
                   options.ssoService.profile$.value?.roles
                 )
               ) {
-                options.router.navigate(['/projects']);
+                options.router.navigate([SECOND_PATH_MARKER]);
               } else {
-                options.router.navigate(['/home']);
+                options.router.navigate([ROOT_PATH_MARKER]);
               }
             }
           } else {
@@ -275,7 +189,7 @@ export const appRoutes: Route[] = [
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
-            options.router.navigate(['/home']);
+            options.router.navigate([ROOT_PATH_MARKER]);
             return false;
           }
           return true;
@@ -293,7 +207,7 @@ export const appRoutes: Route[] = [
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
-            options.router.navigate(['/home']);
+            options.router.navigate([ROOT_PATH_MARKER]);
             return false;
           }
           return true;
@@ -314,7 +228,7 @@ export const appRoutes: Route[] = [
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
-            options.router.navigate(['/home']);
+            options.router.navigate([ROOT_PATH_MARKER]);
             return false;
           }
           return true;

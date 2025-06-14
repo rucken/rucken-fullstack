@@ -4,16 +4,21 @@
       {{ title | transloco }}
     </div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item routerLink="/home" transloco="Home"></li>
-
-      @if
-      ([SsoRoleInterface.manager,SsoRoleInterface.admin]|checkUserRoles|async) {
-      <li nz-menu-item routerLink="/webhooks" transloco="Webhooks"></li>
-      <li nz-menu-item routerLink="/templates" transloco="Templates"></li>
-      <li nz-menu-item routerLink="/users" transloco="Users"></li>
-      } @if ([SsoRoleInterface.admin]|checkUserRoles|async) {
-      <li nz-menu-item routerLink="/projects" transloco="Projects"></li>
-      } @if
+      @for (navigation of navigations$|async; track $index) { @if
+      (navigation.link){
+      <li
+        nz-menu-item
+        [routerLink]="navigation.link"
+        [transloco]="navigation.title"
+      ></li>
+      } @if (navigation.href){
+      <a nz-menu-item [href]="navigation.href" target="__blank">
+        @if (navigation.icon){
+        <nz-icon [nzType]="navigation.icon" nzTheme="outline" />
+        }
+        {{ navigation.title | transloco }}
+      </a>
+      } } @if
       ([SsoRoleInterface.user,SsoRoleInterface.manager,SsoRoleInterface.admin]|checkUserRoles|async)
       {
       <ng-template #iconRef>
@@ -54,14 +59,6 @@
         transloco="Sign-in"
       ></li>
       }
-      <a
-        nz-menu-item
-        href="https://github.com/rucken/rucken-fullstack"
-        target="__blank"
-      >
-        <nz-icon nzType="github" nzTheme="outline" />
-        {{ 'Source code' | transloco }}
-      </a>
       <li
         nz-submenu
         [nzTitle]="lang$ | async | transloco"

@@ -31,6 +31,8 @@
       ],
       "@rucken/sso": ["libs/feature/sso/src/index.ts"],
       "@rucken/sso-afat": ["libs/feature/sso-afat/src/index.ts"],
+      "@rucken/engine": ["libs/feature/engine/src/index.ts"],
+      "@rucken/engine-afat": ["libs/feature/engine-afat/src/index.ts"],
       "@rucken/testing": ["libs/testing/src/index.ts"]
     }
   },

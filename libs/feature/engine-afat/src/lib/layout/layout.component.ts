@@ -1,5 +1,10 @@
 import { AsyncPipe, NgFor, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import {
   LangDefinition,
@@ -8,8 +13,8 @@ import {
   TranslocoService,
 } from '@jsverse/transloco';
 import { TranslocoDatePipe } from '@jsverse/transloco-locale';
-import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import { addHours } from 'date-fns';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -20,6 +25,7 @@ import {
   CheckUserRolesPipe,
   SsoActiveLangService,
   SsoActiveProjectService,
+  SsoGuardService,
   SsoProjectModel,
   SsoService,
   TokensService,
@@ -30,17 +36,27 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import {
   BehaviorSubject,
+  from,
   map,
   merge,
   mergeMap,
   Observable,
+  of,
   switchMap,
+  take,
   tap,
+  toArray,
 } from 'rxjs';
-import { APP_TITLE } from './app.constants';
 
 import { TIMEZONE_OFFSET } from '@nestjs-mod/misc';
 import { RuckenRestSdkAngularService } from '@rucken/rucken-rest-sdk-angular';
+import {
+  RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN,
+  RuckenAfatEngineConfiguration,
+} from '../engine-afat.configuration';
+import { ROOT_PATH_MARKER } from '../engine-afat.constants';
+import { LayoutPartNavigation } from './layout.configuration';
+
 @UntilDestroy()
 @Component({
   imports: [
@@ -59,11 +75,11 @@ import { RuckenRestSdkAngularService } from '@rucken/rucken-rest-sdk-angular';
     UserPipe,
     NzAvatarModule,
   ],
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+  selector: 'layout',
+  templateUrl: './layout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class LayoutComponent implements OnInit {
   title!: string;
   serverTime$ = new BehaviorSubject<Date>(new Date());
   lang$ = new BehaviorSubject<string>('');
@@ -72,8 +88,11 @@ export class AppComponent implements OnInit {
 
   publicProjects$?: Observable<SsoProjectModel[] | undefined>;
   activePublicProject$?: Observable<SsoProjectModel | undefined>;
+  navigations$ = new BehaviorSubject<LayoutPartNavigation[]>([]);
 
   constructor(
+    @Inject(RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN)
+    private readonly ruckenAfatEngineConfiguration: RuckenAfatEngineConfiguration,
     private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
     private readonly ssoService: SsoService,
     private readonly router: Router,
@@ -82,10 +101,38 @@ export class AppComponent implements OnInit {
     private readonly ssoActiveLangService: SsoActiveLangService,
     private readonly ssoActiveProjectService: SsoActiveProjectService,
     private readonly titleService: Title,
-    private readonly filesService: FilesService
+    private readonly filesService: FilesService,
+    private readonly authGuardService: SsoGuardService
   ) {
-    this.title = this.translocoService.translate(APP_TITLE);
+    this.title = this.translocoService.translate(
+      ruckenAfatEngineConfiguration.layoutConfiguration.title
+    );
     this.titleService.setTitle(this.title);
+  }
+
+  private setNavigations() {
+    const navigations =
+      this.ruckenAfatEngineConfiguration.layoutConfiguration.parts.map(
+        (part) => part.navigation
+      );
+
+    return from(navigations).pipe(
+      mergeMap((navigation) =>
+        this.authGuardService
+          .checkUserRoles(navigation.roles)
+          .pipe(
+            map((result) => (result || !navigation.roles ? navigation : null))
+          )
+      ),
+      take(navigations.length),
+      toArray(),
+      tap(console.log),
+      tap((navigations) =>
+        this.navigations$.next(
+          navigations.filter(Boolean) as LayoutPartNavigation[]
+        )
+      )
+    );
   }
 
   ngOnInit() {
@@ -96,6 +143,13 @@ export class AppComponent implements OnInit {
     this.subscribeToLangChanges();
 
     this.fillServerTime().pipe(untilDestroyed(this)).subscribe();
+
+    merge(of(true), this.ssoService.profile$)
+      .pipe(
+        mergeMap(() => this.setNavigations()),
+        untilDestroyed(this)
+      )
+      .subscribe();
   }
 
   getFullFilePath(value: string) {
@@ -145,7 +199,7 @@ export class AppComponent implements OnInit {
     this.ssoService
       .signOut()
       .pipe(
-        tap(() => this.router.navigate(['/home'])),
+        tap(() => this.router.navigate([ROOT_PATH_MARKER])),
         untilDestroyed(this)
       )
       .subscribe();

@@ -1,7 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
+import { LayoutComponent } from '@rucken/engine-afat';
 import { config } from './app/app.config.server';
 
-const bootstrap = () => bootstrapApplication(AppComponent, config);
+const bootstrap = () => bootstrapApplication(LayoutComponent, config);
 
 export default bootstrap;
