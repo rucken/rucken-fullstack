@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LangDefinition, TranslocoService } from '@jsverse/transloco';
 import { TIMEZONE_OFFSET } from '@nestjs-mod/misc';
-import { SsoEmailTemplateDtoInterface } from '@rucken/sso-rest-sdk-angular';
+import { SsoEmailTemplateDtoInterface } from '@rucken/rucken-rest-sdk-angular';
 import { addHours } from 'date-fns';
 
 export interface SsoEmailTemplateModel

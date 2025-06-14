@@ -1,7 +1,7 @@
 import { HttpParameterCodec } from '@angular/common/http';
 import { Param } from './param';
 
-export interface SsoRestClientConfigurationParameters {
+export interface RuckenRestClientConfigurationParameters {
     /**
      *  @deprecated Since 5.0. Use credentials instead
      */
@@ -34,7 +34,7 @@ export interface SsoRestClientConfigurationParameters {
     credentials?: {[ key: string ]: string | (() => string | undefined)};
 }
 
-export class SsoRestClientConfiguration {
+export class RuckenRestClientConfiguration {
     /**
      *  @deprecated Since 5.0. Use credentials instead
      */
@@ -66,7 +66,7 @@ export class SsoRestClientConfiguration {
      */
     credentials: {[ key: string ]: string | (() => string | undefined)};
 
-    constructor(configurationParameters: SsoRestClientConfigurationParameters = {}) {
+    constructor(configurationParameters: RuckenRestClientConfigurationParameters = {}) {
         this.apiKeys = configurationParameters.apiKeys;
         this.username = configurationParameters.username;
         this.password = configurationParameters.password;
@@ -99,7 +99,7 @@ export class SsoRestClientConfiguration {
 
     /**
      * Select the correct content-type to use for a request.
-     * Uses {@link SsoRestClientConfiguration#isJsonMime} to determine the correct content-type.
+     * Uses {@link RuckenRestClientConfiguration#isJsonMime} to determine the correct content-type.
      * If no content type is found return the first found type if the contentTypes is not empty
      * @param contentTypes - the array of content types that are available for selection
      * @returns the selected content-type or <code>undefined</code> if no selection could be made.
@@ -118,7 +118,7 @@ export class SsoRestClientConfiguration {
 
     /**
      * Select the correct accept content-type to use for a request.
-     * Uses {@link SsoRestClientConfiguration#isJsonMime} to determine the correct accept content-type.
+     * Uses {@link RuckenRestClientConfiguration#isJsonMime} to determine the correct accept content-type.
      * If no content type is found return the first found type if the contentTypes is not empty
      * @param accepts - the array of content types that are available for selection.
      * @returns the selected content-type or <code>undefined</code> if no selection could be made.

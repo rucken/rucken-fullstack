@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { SsoRoleInterface } from '@rucken/sso-rest-sdk-angular';
+import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import { SsoService, SsoSignUpFormComponent } from '@rucken/sso-afat';
 import { searchIn } from '@nestjs-mod/misc';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';

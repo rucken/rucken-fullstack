@@ -1,16 +1,16 @@
-import { SsoRole } from '@rucken/sso-rest-sdk';
-import { SsoRestClientHelper } from '@rucken/testing';
+import { SsoRole } from '@rucken/rucken-rest-sdk';
+import { RuckenRestClientHelper } from '@rucken/testing';
 import { AxiosError } from 'axios';
 
 describe('Validation', () => {
   jest.setTimeout(60000);
 
-  const user1 = new SsoRestClientHelper({
+  const user1 = new RuckenRestClientHelper({
     headers: {
       'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
     },
   });
-  const admin = new SsoRestClientHelper({
+  const admin = new RuckenRestClientHelper({
     headers: {
       'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
       'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,

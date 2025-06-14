@@ -4,25 +4,25 @@ import {
   TokensResponse,
   ValidationError,
   ValidationErrorEnum,
-} from '@rucken/sso-rest-sdk';
-import { getErrorData, SsoRestClientHelper } from '@rucken/testing';
+} from '@rucken/rucken-rest-sdk';
+import { getErrorData, RuckenRestClientHelper } from '@rucken/testing';
 import { randomUUID } from 'node:crypto';
 
 describe('Sso (e2e)', () => {
-  let user: SsoRestClientHelper<'strict'>;
-  let project: SsoRestClientHelper<'strict'>;
+  let user: RuckenRestClientHelper<'strict'>;
+  let project: RuckenRestClientHelper<'strict'>;
 
   let userTokens: TokensResponse;
 
   jest.setTimeout(5 * 60 * 1000);
 
   beforeAll(async () => {
-    user = await new SsoRestClientHelper({
+    user = await new RuckenRestClientHelper({
       headers: {
         'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },
     }).generateRandomUser();
-    project = await new SsoRestClientHelper({
+    project = await new RuckenRestClientHelper({
       headers: {
         'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },

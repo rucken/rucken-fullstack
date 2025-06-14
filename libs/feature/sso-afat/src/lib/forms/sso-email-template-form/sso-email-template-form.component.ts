@@ -15,7 +15,7 @@ import {
   UntypedFormGroup,
 } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
-import { ValidationErrorMetadataInterface } from '@rucken/sso-rest-sdk-angular';
+import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';

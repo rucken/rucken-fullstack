@@ -1,5 +1,5 @@
 {
-  "name": "@rucken/sso-rest-sdk-angular",
+  "name": "@rucken/rucken-rest-sdk-angular",
   "description": "Browser client for Cross-platform full stack simple NestJS app with Angular",
   "keywords": [
     "rucken",

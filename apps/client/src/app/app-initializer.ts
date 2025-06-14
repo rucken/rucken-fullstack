@@ -7,7 +7,7 @@ import {
   TokensService,
 } from '@rucken/sso-afat';
 import { FilesRestSdkAngularService } from '@nestjs-mod/files-afat';
-import { SsoRestSdkAngularService } from '@rucken/sso-rest-sdk-angular';
+import { RuckenRestSdkAngularService } from '@rucken/rucken-rest-sdk-angular';
 import { WebhookRestSdkAngularService } from '@nestjs-mod/webhook-afat';
 import { catchError, merge, mergeMap, of, Subscription, tap } from 'rxjs';
 
@@ -21,7 +21,7 @@ export class AppInitializer {
     private readonly tokensService: TokensService,
     private readonly ssoActiveLangService: SsoActiveLangService,
     private readonly ssoActiveProjectService: SsoActiveProjectService,
-    private readonly ssoRestSdkAngularService: SsoRestSdkAngularService,
+    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
     private readonly webhookRestSdkAngularService: WebhookRestSdkAngularService,
     private readonly filesRestSdkAngularService: FilesRestSdkAngularService
   ) {}
@@ -56,7 +56,7 @@ export class AppInitializer {
   private updateHeaders() {
     const authorizationHeaders = this.ssoService.getAuthorizationHeaders();
     if (authorizationHeaders) {
-      this.ssoRestSdkAngularService.updateHeaders(authorizationHeaders);
+      this.ruckenRestSdkAngularService.updateHeaders(authorizationHeaders);
       this.webhookRestSdkAngularService.updateHeaders(authorizationHeaders);
       this.filesRestSdkAngularService.updateHeaders(authorizationHeaders);
     }

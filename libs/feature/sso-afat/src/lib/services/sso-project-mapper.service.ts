@@ -4,7 +4,7 @@ import { TIMEZONE_OFFSET } from '@nestjs-mod/misc';
 import {
   SsoProjectDtoInterface,
   SsoPublicProjectDtoInterface,
-} from '@rucken/sso-rest-sdk-angular';
+} from '@rucken/rucken-rest-sdk-angular';
 import { addHours } from 'date-fns';
 
 export interface SsoProjectModel

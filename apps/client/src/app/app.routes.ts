@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { marker } from '@jsverse/transloco-keys-manager/marker';
-import { SsoRoleInterface } from '@rucken/sso-rest-sdk-angular';
+import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import {
   CompleteSignUpOptions,
   OnActivateOptions,

@@ -6,10 +6,10 @@ import {
 } from '@jsverse/transloco-locale';
 import { ActiveLangService } from '@nestjs-mod/afat';
 import {
-  SsoRestSdkAngularService,
+  RuckenRestSdkAngularService,
   SsoErrorEnumInterface,
   SsoErrorInterface,
-} from '@rucken/sso-rest-sdk-angular';
+} from '@rucken/rucken-rest-sdk-angular';
 import { catchError, map, mergeMap, of, tap, throwError } from 'rxjs';
 import { TokensService } from './tokens.service';
 
@@ -19,7 +19,7 @@ const AUTH_ACTIVE_GUEST_LANG_LOCAL_STORAGE_KEY = 'activeGuestLang';
 @Injectable({ providedIn: 'root' })
 export class SsoActiveLangService {
   constructor(
-    private readonly ssoRestSdkAngularService: SsoRestSdkAngularService,
+    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
     private readonly translocoService: TranslocoService,
     @Inject(TRANSLOCO_LOCALE_LANG_MAPPING)
     readonly langToLocaleMapping: LangToLocaleMapping,
@@ -50,7 +50,7 @@ export class SsoActiveLangService {
       return this.localGetActiveLang();
     }
 
-    return this.ssoRestSdkAngularService
+    return this.ruckenRestSdkAngularService
       .getSsoApi()
       .ssoControllerProfile()
       .pipe(
@@ -91,7 +91,7 @@ export class SsoActiveLangService {
       return this.localSetActiveLang(lang, loadDictionaries);
     }
 
-    return this.ssoRestSdkAngularService
+    return this.ruckenRestSdkAngularService
       .getSsoApi()
       .ssoControllerUpdateProfile({ lang })
       .pipe(

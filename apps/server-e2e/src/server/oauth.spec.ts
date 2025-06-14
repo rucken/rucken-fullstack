@@ -1,11 +1,11 @@
-import { SsoRestClientHelper } from '@rucken/testing';
+import { RuckenRestClientHelper } from '@rucken/testing';
 describe('OAuth (e2e)', () => {
   jest.setTimeout(60000);
 
-  let user: SsoRestClientHelper<'strict'>;
+  let user: RuckenRestClientHelper<'strict'>;
 
   beforeAll(async () => {
-    user = await new SsoRestClientHelper({
+    user = await new RuckenRestClientHelper({
       headers: {
         'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },

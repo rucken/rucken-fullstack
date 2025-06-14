@@ -77,21 +77,21 @@ import { UpdateSsoUserDtoInterface } from '../model/update-sso-user-dto.interfac
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { SsoRestClientConfiguration }                                     from '../configuration';
+import { RuckenRestClientConfiguration }                                     from '../configuration';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class SsoSsoRestService {
+export class SsoRuckenRestService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
-    public configuration = new SsoRestClientConfiguration();
+    public configuration = new RuckenRestClientConfiguration();
     public encoder: HttpParameterCodec;
 
-    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string|string[], @Optional() configuration: SsoRestClientConfiguration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string|string[], @Optional() configuration: RuckenRestClientConfiguration) {
         if (configuration) {
             this.configuration = configuration;
         }

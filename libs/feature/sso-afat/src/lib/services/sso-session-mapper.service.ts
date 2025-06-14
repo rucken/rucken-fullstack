@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TIMEZONE_OFFSET, safeParseJson } from '@nestjs-mod/misc';
-import { SsoRefreshSessionDtoInterface } from '@rucken/sso-rest-sdk-angular';
+import { SsoRefreshSessionDtoInterface } from '@rucken/rucken-rest-sdk-angular';
 import { addHours, format } from 'date-fns';
 
 export interface SsoSessionModel

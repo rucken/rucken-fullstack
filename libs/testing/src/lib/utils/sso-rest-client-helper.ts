@@ -2,12 +2,12 @@ import { FilesRestSdkService } from '@nestjs-mod/files';
 import { NotificationsRestSdkService } from '@nestjs-mod/notifications';
 import {
   SsoProject,
-  SsoRestSdkService,
+  RuckenRestSdkService,
   SsoRole,
   SsoUserDto,
   TokensResponse,
   WebhookUser,
-} from '@rucken/sso-rest-sdk';
+} from '@rucken/rucken-rest-sdk';
 import { WebhookRestSdkService } from '@nestjs-mod/webhook';
 import { Observable, finalize } from 'rxjs';
 import WebSocket from 'ws';
@@ -17,7 +17,9 @@ import {
 } from './generate-random-user';
 import { getUrls } from './get-urls';
 
-export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
+export class RuckenRestClientHelper<
+  T extends 'strict' | 'no_strict' = 'strict'
+> {
   ssoTokensResponse?: TokensResponse;
 
   private webhookProfile?: WebhookUser;
@@ -27,10 +29,10 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
     ? GenerateRandomUserResult
     : GenerateRandomUserResult | undefined;
 
-  private projectHelper?: SsoRestClientHelper<'strict'>;
+  private projectHelper?: RuckenRestClientHelper<'strict'>;
   private project?: SsoProject;
 
-  private ssoRestSdkService!: SsoRestSdkService;
+  private ruckenRestSdkService!: RuckenRestSdkService;
   private webhookRestSdkService!: WebhookRestSdkService;
   private filesRestSdkService!: FilesRestSdkService;
   private notificationsRestSdkService!: NotificationsRestSdkService;
@@ -52,7 +54,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
   }
 
   private createApiClients() {
-    this.ssoRestSdkService = new SsoRestSdkService({
+    this.ruckenRestSdkService = new RuckenRestSdkService({
       ...this.options,
       serverUrl: this.getServerUrl(),
     });
@@ -70,7 +72,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
     });
 
     if (!this.options?.skipCreateProjectHelper) {
-      this.projectHelper = new SsoRestClientHelper({
+      this.projectHelper = new RuckenRestClientHelper({
         ...(this.options?.headers ? { headers: this.options.headers } : {}),
         skipCreateProjectHelper: true,
       });
@@ -82,11 +84,11 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
   }
 
   getSsoApi() {
-    return this.ssoRestSdkService.getSsoApi();
+    return this.ruckenRestSdkService.getSsoApi();
   }
 
   getTimeApi() {
-    return this.ssoRestSdkService.getTimeApi();
+    return this.ruckenRestSdkService.getTimeApi();
   }
 
   getWebhookApi() {
@@ -164,7 +166,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
   }
 
   async setRoles(userId: string, roles: SsoRole[]) {
-    await this.ssoRestSdkService
+    await this.ruckenRestSdkService
       .getSsoApi()
       .ssoUsersControllerUpdateOne(userId, {
         roles: roles.map((r) => r.toLowerCase()).join(','),
@@ -205,7 +207,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
     if (this.projectHelper) {
       if (!this.project) {
         const { data: createOneResult } =
-          await this.projectHelper.ssoRestSdkService
+          await this.projectHelper.ruckenRestSdkService
             .getSsoApi()
             .ssoProjectsControllerCreateOne(
               {
@@ -223,7 +225,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
         this.project = createOneResult;
       }
 
-      const { data: signUpResult } = await this.ssoRestSdkService
+      const { data: signUpResult } = await this.ruckenRestSdkService
         .getSsoApi()
         .ssoControllerSignUp(
           {
@@ -243,7 +245,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
       this.ssoTokensResponse = signUpResult;
 
       const { data: findManyResult } =
-        await this.projectHelper.ssoRestSdkService
+        await this.projectHelper.ruckenRestSdkService
           .getSsoApi()
           .ssoUsersControllerFindMany(
             undefined,
@@ -258,7 +260,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
             }
           );
 
-      await this.projectHelper.ssoRestSdkService
+      await this.projectHelper.ruckenRestSdkService
         .getSsoApi()
         .ssoUsersControllerUpdateOne(
           findManyResult.ssoUsers[0].id,
@@ -295,7 +297,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
     };
 
     if (this.projectHelper) {
-      const { data: loginResult } = await this.ssoRestSdkService
+      const { data: loginResult } = await this.ruckenRestSdkService
         .getSsoApi()
         .ssoControllerSignIn({
           email: loginOptions.email,
@@ -322,13 +324,13 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
     ).data;
 
     this.ssoProfile = (
-      await this.ssoRestSdkService.getSsoApi().ssoControllerProfile()
+      await this.ruckenRestSdkService.getSsoApi().ssoControllerProfile()
     ).data;
   }
 
   async logout() {
     if (this.projectHelper) {
-      await this.ssoRestSdkService.getSsoApi().ssoControllerSignOut({
+      await this.ruckenRestSdkService.getSsoApi().ssoControllerSignOut({
         refreshToken: this.getRefreshToken(),
       });
       this.ssoTokensResponse = undefined;
@@ -347,7 +349,7 @@ export class SsoRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
   }
 
   private setAuthorizationHeadersFromAuthorizationTokens() {
-    this.ssoRestSdkService.updateHeaders(this.getAuthorizationHeaders());
+    this.ruckenRestSdkService.updateHeaders(this.getAuthorizationHeaders());
     this.webhookRestSdkService.updateHeaders(this.getAuthorizationHeaders());
     this.filesRestSdkService.updateHeaders(this.getAuthorizationHeaders());
     this.notificationsRestSdkService.updateHeaders(

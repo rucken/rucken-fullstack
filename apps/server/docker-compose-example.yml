@@ -1,101 +1,101 @@
 # Do not modify this file, it is generated using the DockerCompose module included with NestJS-mod.
-version: "3"
+version: '3'
 services:
   rucken-postgre-sql:
-    image: "bitnami/postgresql:15.5.0"
-    container_name: "rucken-postgre-sql"
+    image: 'bitnami/postgresql:15.5.0'
+    container_name: 'rucken-postgre-sql'
     volumes:
-      - "rucken-postgre-sql-volume:/bitnami/postgresql"
+      - 'rucken-postgre-sql-volume:/bitnami/postgresql'
     ports:
-      - "5432:5432"
+      - '5432:5432'
     networks:
-      - "rucken-network"
+      - 'rucken-network'
     healthcheck:
       test:
-        - "CMD-SHELL"
-        - "pg_isready -U postgres"
-      interval: "5s"
-      timeout: "5s"
+        - 'CMD-SHELL'
+        - 'pg_isready -U postgres'
+      interval: '5s'
+      timeout: '5s'
       retries: 5
     tty: true
-    restart: "always"
+    restart: 'always'
     environment:
-      POSTGRESQL_USERNAME: ""
-      POSTGRESQL_PASSWORD: ""
-      POSTGRESQL_DATABASE: ""
+      POSTGRESQL_USERNAME: ''
+      POSTGRESQL_PASSWORD: ''
+      POSTGRESQL_DATABASE: ''
   rucken-redis:
-    image: "bitnami/redis:7.4.1"
-    container_name: "rucken-redis"
+    image: 'bitnami/redis:7.4.1'
+    container_name: 'rucken-redis'
     volumes:
-      - "rucken-redis-volume:/bitnami/redis/data"
+      - 'rucken-redis-volume:/bitnami/redis/data'
     ports:
-      - "6379:6379"
+      - '6379:6379'
     networks:
-      - "rucken-network"
+      - 'rucken-network'
     environment:
-      REDIS_DATABASE: ""
-      REDIS_PASSWORD: ""
-      REDIS_DISABLE_COMMANDS: ""
-      REDIS_IO_THREADS: ""
-      REDIS_IO_THREADS_DO_READS: ""
+      REDIS_DATABASE: ''
+      REDIS_PASSWORD: ''
+      REDIS_DISABLE_COMMANDS: ''
+      REDIS_IO_THREADS: ''
+      REDIS_IO_THREADS_DO_READS: ''
     healthcheck:
       test:
-        - "CMD-SHELL"
-        - "redis-cli --no-auth-warning -a $$REDIS_PASSWORD ping | grep PONG"
-      interval: "5s"
-      timeout: "5s"
+        - 'CMD-SHELL'
+        - 'redis-cli --no-auth-warning -a $$REDIS_PASSWORD ping | grep PONG'
+      interval: '5s'
+      timeout: '5s'
       retries: 5
     tty: true
-    restart: "always"
+    restart: 'always'
   rucken-minio:
-    image: "bitnami/minio:2024.11.7"
-    container_name: "rucken-minio"
+    image: 'bitnami/minio:2024.11.7'
+    container_name: 'rucken-minio'
     volumes:
-      - "rucken-minio-volume:/bitnami/minio/data"
+      - 'rucken-minio-volume:/bitnami/minio/data'
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - '9000:9000'
+      - '9001:9001'
     networks:
-      - "rucken-network"
+      - 'rucken-network'
     environment:
-      MINIO_ROOT_USER: ""
-      MINIO_ROOT_PASSWORD: ""
+      MINIO_ROOT_USER: ''
+      MINIO_ROOT_PASSWORD: ''
     healthcheck:
       test:
-        - "CMD-SHELL"
-        - "mc"
-        - "ready"
-        - "local"
-      interval: "5s"
-      timeout: "5s"
+        - 'CMD-SHELL'
+        - 'mc'
+        - 'ready'
+        - 'local'
+      interval: '5s'
+      timeout: '5s'
       retries: 5
     tty: true
-    restart: "always"
+    restart: 'always'
   rucken-maildev:
-    image: "maildev/maildev:2.2.1"
-    container_name: "rucken-maildev"
+    image: 'maildev/maildev:2.2.1'
+    container_name: 'rucken-maildev'
     ports:
-      - "1025:1025"
-      - "1080:1080"
+      - '1025:1025'
+      - '1080:1080'
     networks:
-      - "rucken-network"
+      - 'rucken-network'
     environment:
-      MAILDEV_SMTP_PORT: ""
-      MAILDEV_WEB_PORT: ""
+      MAILDEV_SMTP_PORT: ''
+      MAILDEV_WEB_PORT: ''
     healthcheck:
-      test: "wget -O - http://localhost:${MAILDEV_WEB_PORT}${MAILDEV_BASE_PATHNAME}/healthz || exit 1"
-      interval: "10s"
-      timeout: "5s"
+      test: 'wget -O - http://localhost:${MAILDEV_WEB_PORT}${MAILDEV_BASE_PATHNAME}/healthz || exit 1'
+      interval: '10s'
+      timeout: '5s'
       retries: 5
     tty: true
-    restart: "always"
+    restart: 'always'
 networks:
   rucken-network:
-    driver: "bridge"
+    driver: 'bridge'
 volumes:
   rucken-postgre-sql-volume:
-    name: "rucken-postgre-sql-volume"
+    name: 'rucken-postgre-sql-volume'
   rucken-redis-volume:
-    name: "rucken-redis-volume"
+    name: 'rucken-redis-volume'
   rucken-minio-volume:
-    name: "rucken-minio-volume"
+    name: 'rucken-minio-volume'

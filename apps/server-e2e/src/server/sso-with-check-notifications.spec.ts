@@ -1,28 +1,28 @@
-import { TokensResponse } from '@rucken/sso-rest-sdk';
-import { SsoRestClientHelper } from '@rucken/testing';
+import { TokensResponse } from '@rucken/rucken-rest-sdk';
+import { RuckenRestClientHelper } from '@rucken/testing';
 
 describe('Sso with check notifications (e2e)', () => {
-  let user: SsoRestClientHelper<'strict'>;
-  let admin: SsoRestClientHelper<'strict'>;
-  let project: SsoRestClientHelper<'strict'>;
+  let user: RuckenRestClientHelper<'strict'>;
+  let admin: RuckenRestClientHelper<'strict'>;
+  let project: RuckenRestClientHelper<'strict'>;
 
   let userTokens: TokensResponse;
 
   jest.setTimeout(5 * 60 * 1000);
 
   beforeAll(async () => {
-    project = await new SsoRestClientHelper({
+    project = await new RuckenRestClientHelper({
       headers: {
         'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },
     }).generateRandomUser();
-    user = await new SsoRestClientHelper({
+    user = await new RuckenRestClientHelper({
       headers: {
         'x-client-id': project.randomUser.id,
         'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
       },
     }).generateRandomUser();
-    admin = new SsoRestClientHelper({
+    admin = new RuckenRestClientHelper({
       headers: {
         'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
         'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,

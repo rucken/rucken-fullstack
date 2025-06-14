@@ -1,5 +1,5 @@
 {
-  "name": "@rucken/sso-rest-sdk",
+  "name": "@rucken/rucken-rest-sdk",
   "description": "NodeJS client for Cross-platform full stack simple NestJS app with Angular",
   "keywords": [
     "rucken",

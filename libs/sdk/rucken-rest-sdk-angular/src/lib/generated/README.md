@@ -59,12 +59,12 @@ In your Angular project:
 
 ```typescript
 // without configuring providers
-import { SsoRestClientApiModule } from '';
+import { RuckenRestClientApiModule } from '';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
-        SsoRestClientApiModule,
+        RuckenRestClientApiModule,
         // make sure to import the HttpClientModule in the AppModule only,
         // see https://github.com/angular/angular/issues/20575
         HttpClientModule
@@ -78,17 +78,17 @@ export class AppModule {}
 
 ```typescript
 // configuring providers
-import { SsoRestClientApiModule, SsoRestClientConfiguration, SsoRestClientConfigurationParameters } from '';
+import { RuckenRestClientApiModule, RuckenRestClientConfiguration, RuckenRestClientConfigurationParameters } from '';
 
-export function apiConfigFactory (): SsoRestClientConfiguration {
-  const params: SsoRestClientConfigurationParameters = {
+export function apiConfigFactory (): RuckenRestClientConfiguration {
+  const params: RuckenRestClientConfigurationParameters = {
     // set configuration parameters here.
   }
-  return new SsoRestClientConfiguration(params);
+  return new RuckenRestClientConfiguration(params);
 }
 
 @NgModule({
-    imports: [ SsoRestClientApiModule.forRoot(apiConfigFactory) ],
+    imports: [ RuckenRestClientApiModule.forRoot(apiConfigFactory) ],
     declarations: [ AppComponent ],
     providers: [],
     bootstrap: [ AppComponent ]
@@ -98,15 +98,15 @@ export class AppModule {}
 
 ```typescript
 // configuring providers with an authentication service that manages your access tokens
-import { SsoRestClientApiModule, SsoRestClientConfiguration } from '';
+import { RuckenRestClientApiModule, RuckenRestClientConfiguration } from '';
 
 @NgModule({
-    imports: [ SsoRestClientApiModule ],
+    imports: [ RuckenRestClientApiModule ],
     declarations: [ AppComponent ],
     providers: [
       {
-        provide: SsoRestClientConfiguration,
-        useFactory: (authService: AuthService) => new SsoRestClientConfiguration(
+        provide: RuckenRestClientConfiguration,
+        useFactory: (authService: AuthService) => new RuckenRestClientConfiguration(
           {
             basePath: environment.apiUrl,
             accessToken: authService.getAccessToken.bind(authService)
@@ -129,23 +129,23 @@ export class AppComponent {
 }
 ```
 
-Note: The SsoRestClientApiModule is restricted to being instantiated once app wide.
+Note: The RuckenRestClientApiModule is restricted to being instantiated once app wide.
 This is to ensure that all services are treated as singletons.
 
-### Using multiple OpenAPI files / APIs / SsoRestClientApiModules
+### Using multiple OpenAPI files / APIs / RuckenRestClientApiModules
 
-In order to use multiple `SsoRestClientApiModules` generated from different OpenAPI files,
+In order to use multiple `RuckenRestClientApiModules` generated from different OpenAPI files,
 you can create an alias name when importing the modules
 in order to avoid naming conflicts:
 
 ```typescript
-import { SsoRestClientApiModule } from 'my-api-path';
-import { SsoRestClientApiModule as OtherApiModule } from 'my-other-api-path';
+import { RuckenRestClientApiModule } from 'my-api-path';
+import { RuckenRestClientApiModule as OtherApiModule } from 'my-other-api-path';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
-    SsoRestClientApiModule,
+    RuckenRestClientApiModule,
     OtherApiModule,
     // make sure to import the HttpClientModule in the AppModule only,
     // see https://github.com/angular/angular/issues/20575

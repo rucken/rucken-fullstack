@@ -1,0 +1,13 @@
+export * from './files-rest.service';
+import { FilesRuckenRestService } from './files-rest.service';
+export * from './notifications-rest.service';
+import { NotificationsRuckenRestService } from './notifications-rest.service';
+export * from './sso-rest.service';
+import { SsoRuckenRestService } from './sso-rest.service';
+export * from './terminus-health-check-rest.service';
+import { TerminusHealthCheckRuckenRestService } from './terminus-health-check-rest.service';
+export * from './time-rest.service';
+import { TimeRuckenRestService } from './time-rest.service';
+export * from './webhook-rest.service';
+import { WebhookRuckenRestService } from './webhook-rest.service';
+export const APIS = [FilesRuckenRestService, NotificationsRuckenRestService, SsoRuckenRestService, TerminusHealthCheckRuckenRestService, TimeRuckenRestService, WebhookRuckenRestService];

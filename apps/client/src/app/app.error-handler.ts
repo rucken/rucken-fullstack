@@ -1,6 +1,6 @@
 import { ErrorHandler, Injectable } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { WebhookErrorInterface } from '@rucken/sso-rest-sdk-angular';
+import { WebhookErrorInterface } from '@rucken/rucken-rest-sdk-angular';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable()

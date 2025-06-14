@@ -7,9 +7,7 @@
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "target": "node",
@@ -73,9 +71,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/server/jest.config.ts"
       }
@@ -83,9 +79,7 @@
     "start": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "node dist/apps/server/main.js"
-        ],
+        "commands": ["node dist/apps/server/main.js"],
         "parallel": false
       }
     },
@@ -95,8 +89,8 @@
         "commands": [
           "./node_modules/.bin/rucken make-ts-list",
           "export NESTJS_MODE=infrastructure && ./node_modules/.bin/nx serve server --watch=false --inspect=false --skip-nx-cache=true",
-          "rm -rf ./libs/sdk/sso-rest-sdk-angular/src/lib/generated && mkdir -p ./libs/sdk/sso-rest-sdk-angular/src/lib/generated && ./node_modules/.bin/openapi-generator-cli generate -i ./app-swagger.json -g typescript-angular -o ./libs/sdk/sso-rest-sdk-angular/src/lib/generated --skip-validate-spec --additional-properties=apiModulePrefix=SsoRestClient,configurationPrefix=SsoRestClient,fileNaming=kebab-case,modelFileSuffix=.interface,modelSuffix=Interface,enumNameSuffix=Type,enumPropertyNaming=original,serviceFileSuffix=-rest.service,serviceSuffix=SsoRestService",
-          "rm -rf ./libs/sdk/sso-rest-sdk/src/lib/generated && mkdir -p ./libs/sdk/sso-rest-sdk/src/lib/generated && ./node_modules/.bin/openapi-generator-cli generate -i ./app-swagger.json -g typescript-axios -o ./libs/sdk/sso-rest-sdk/src/lib/generated"
+          "rm -rf ./libs/sdk/rucken-rest-sdk-angular/src/lib/generated && mkdir -p ./libs/sdk/rucken-rest-sdk-angular/src/lib/generated && ./node_modules/.bin/openapi-generator-cli generate -i ./app-swagger.json -g typescript-angular -o ./libs/sdk/rucken-rest-sdk-angular/src/lib/generated --skip-validate-spec --additional-properties=apiModulePrefix=RuckenRestClient,configurationPrefix=RuckenRestClient,fileNaming=kebab-case,modelFileSuffix=.interface,modelSuffix=Interface,enumNameSuffix=Type,enumPropertyNaming=original,serviceFileSuffix=-rest.service,serviceSuffix=RuckenRestService",
+          "rm -rf ./libs/sdk/rucken-rest-sdk/src/lib/generated && mkdir -p ./libs/sdk/rucken-rest-sdk/src/lib/generated && ./node_modules/.bin/openapi-generator-cli generate -i ./app-swagger.json -g typescript-axios -o ./libs/sdk/rucken-rest-sdk/src/lib/generated"
         ],
         "parallel": false,
         "envFile": "./.env",

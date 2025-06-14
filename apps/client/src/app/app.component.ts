@@ -8,7 +8,7 @@ import {
   TranslocoService,
 } from '@jsverse/transloco';
 import { TranslocoDatePipe } from '@jsverse/transloco-locale';
-import { SsoRoleInterface } from '@rucken/sso-rest-sdk-angular';
+import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { addHours } from 'date-fns';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -40,7 +40,7 @@ import {
 import { APP_TITLE } from './app.constants';
 
 import { TIMEZONE_OFFSET } from '@nestjs-mod/misc';
-import { SsoRestSdkAngularService } from '@rucken/sso-rest-sdk-angular';
+import { RuckenRestSdkAngularService } from '@rucken/rucken-rest-sdk-angular';
 @UntilDestroy()
 @Component({
   imports: [
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
   activePublicProject$?: Observable<SsoProjectModel | undefined>;
 
   constructor(
-    private readonly ssoRestSdkAngularService: SsoRestSdkAngularService,
+    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
     private readonly ssoService: SsoService,
     private readonly router: Router,
     private readonly translocoService: TranslocoService,
@@ -171,12 +171,12 @@ export class AppComponent implements OnInit {
 
   private fillServerTime() {
     return merge(
-      this.ssoRestSdkAngularService.getTimeApi().timeControllerTime(),
+      this.ruckenRestSdkAngularService.getTimeApi().timeControllerTime(),
       this.tokensService
         .getStream()
         .pipe(
           switchMap((token) =>
-            this.ssoRestSdkAngularService.webSocket<string>({
+            this.ruckenRestSdkAngularService.webSocket<string>({
               path: token?.access_token
                 ? `/ws/time?token=${token?.access_token}`
                 : '/ws/time',

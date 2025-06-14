@@ -1,13 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import { Observable, finalize } from 'rxjs';
 
-import { FilesRestSdkService } from '@nestjs-mod/files';
-import { NotificationsRestSdkService } from '@nestjs-mod/notifications';
-import { WebhookRestSdkService } from '@nestjs-mod/webhook';
 import WebSocket from 'ws';
 import { Configuration, SsoApi, TimeApi } from './generated';
 
-export class SsoRestSdkService {
+export class RuckenRestSdkService {
   private ssoApi?: SsoApi;
   private timeApi?: TimeApi;
 

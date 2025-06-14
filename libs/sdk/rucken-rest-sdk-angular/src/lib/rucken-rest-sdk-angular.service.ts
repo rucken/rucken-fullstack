@@ -2,39 +2,39 @@ import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, finalize } from 'rxjs';
 import {
-  SsoRestClientConfiguration,
-  SsoSsoRestService,
-  TimeSsoRestService,
+  RuckenRestClientConfiguration,
+  SsoRuckenRestService,
+  TimeRuckenRestService,
 } from './generated';
 
 @Injectable({ providedIn: 'root' })
-export class SsoRestSdkAngularService {
+export class RuckenRestSdkAngularService {
   constructor(
-    private readonly ssoRestClientConfiguration: SsoRestClientConfiguration,
-    private readonly timeSsoRestService: TimeSsoRestService,
-    private readonly ssoSsoRestService: SsoSsoRestService
+    private readonly ruckenRestClientConfiguration: RuckenRestClientConfiguration,
+    private readonly timeRuckenRestService: TimeRuckenRestService,
+    private readonly ssoRuckenRestService: SsoRuckenRestService
   ) {
-    timeSsoRestService.configuration.withCredentials = true;
-    ssoSsoRestService.configuration.withCredentials = true;
+    timeRuckenRestService.configuration.withCredentials = true;
+    ssoRuckenRestService.configuration.withCredentials = true;
   }
 
   getTimeApi() {
-    if (!this.timeSsoRestService) {
+    if (!this.timeRuckenRestService) {
       throw new Error('timeRestService not set');
     }
-    return this.timeSsoRestService;
+    return this.timeRuckenRestService;
   }
 
   getSsoApi() {
-    if (!this.ssoSsoRestService) {
+    if (!this.ssoRuckenRestService) {
       throw new Error('ssoApi not set');
     }
-    return this.ssoSsoRestService;
+    return this.ssoRuckenRestService;
   }
 
   updateHeaders(headers: Record<string, string>) {
-    this.timeSsoRestService.defaultHeaders = new HttpHeaders(headers);
-    this.ssoSsoRestService.defaultHeaders = new HttpHeaders(headers);
+    this.timeRuckenRestService.defaultHeaders = new HttpHeaders(headers);
+    this.ssoRuckenRestService.defaultHeaders = new HttpHeaders(headers);
   }
 
   webSocket<T>({
@@ -48,7 +48,7 @@ export class SsoRestSdkAngularService {
     options?: any;
   }) {
     const wss = new WebSocket(
-      (this.ssoRestClientConfiguration.basePath || '')
+      (this.ruckenRestClientConfiguration.basePath || '')
         .replace('/api', '')
         .replace('http', 'ws') + path,
       options

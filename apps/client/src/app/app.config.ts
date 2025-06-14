@@ -22,7 +22,7 @@ import {
   FilesRestSdkAngularModule,
   MINIO_URL,
 } from '@nestjs-mod/files-afat';
-import { SsoRestSdkAngularModule } from '@rucken/sso-rest-sdk-angular';
+import { RuckenRestSdkAngularModule } from '@rucken/rucken-rest-sdk-angular';
 import { WebhookRestSdkAngularModule } from '@nestjs-mod/webhook-afat';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyNgZorroAntdModule } from '@ngx-formly/ng-zorro-antd';
@@ -51,7 +51,7 @@ export const ssoAppConfig = ({
       provideNzI18n(en_US),
       importProvidersFrom(
         BrowserAnimationsModule,
-        SsoRestSdkAngularModule.forRoot({
+        RuckenRestSdkAngularModule.forRoot({
           basePath: serverUrl,
         }),
         FilesRestSdkAngularModule.forRoot({

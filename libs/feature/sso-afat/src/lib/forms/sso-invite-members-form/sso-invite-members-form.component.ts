@@ -18,7 +18,7 @@ import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import {
   SsoUserScalarFieldEnumInterface,
   ValidationErrorMetadataInterface,
-} from '@rucken/sso-rest-sdk-angular';
+} from '@rucken/rucken-rest-sdk-angular';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
