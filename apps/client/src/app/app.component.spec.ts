@@ -80,7 +80,7 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.logo')?.textContent).toContain(APP_TITLE);
   });
 
-  it(`should have as title 'Full stack'`, () => {
+  it(`should have as title 'Rucken'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual(APP_TITLE);

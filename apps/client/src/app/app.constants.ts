@@ -1,3 +1,3 @@
 import { marker } from '@jsverse/transloco-keys-manager/marker';
 
-export const APP_TITLE = marker('Full stack');
+export const APP_TITLE = marker('Rucken');

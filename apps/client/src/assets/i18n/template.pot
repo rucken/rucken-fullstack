@@ -99,8 +99,8 @@ msgstr "Сomplete forgot password"
 msgid "Complete OAuth sign up"
 msgstr "Complete OAuth sign up"
 
-msgid "Full stack"
-msgstr "Full stack"
+msgid "Rucken"
+msgstr "Rucken"
 
 msgid "en"
 msgstr "EN"
