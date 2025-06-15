@@ -105,28 +105,22 @@ export class LayoutComponent implements OnInit {
     private readonly authGuardService: SsoGuardService
   ) {
     this.title = this.translocoService.translate(
-      ruckenAfatEngineConfiguration.layoutConfiguration.title
+      ruckenAfatEngineConfiguration.layout.title
     );
     this.titleService.setTitle(this.title);
   }
 
   private setNavigations() {
-    const navigations =
-      this.ruckenAfatEngineConfiguration.layoutConfiguration.parts.map(
-        (part) => part.navigation
-      );
-
-    return from(navigations).pipe(
-      mergeMap((navigation) =>
+    return from(this.ruckenAfatEngineConfiguration.layout.parts).pipe(
+      mergeMap((part) =>
         this.authGuardService
-          .checkUserRoles(navigation.roles)
+          .checkUserRoles(part.roles)
           .pipe(
-            map((result) => (result || !navigation.roles ? navigation : null))
+            map((result) => (result || !part.roles ? part.navigation : null))
           )
       ),
-      take(navigations.length),
+      take(this.ruckenAfatEngineConfiguration.layout.parts.length),
       toArray(),
-      tap(console.log),
       tap((navigations) =>
         this.navigations$.next(
           navigations.filter(Boolean) as LayoutPartNavigation[]

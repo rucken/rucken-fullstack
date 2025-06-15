@@ -25,17 +25,12 @@ import {
 import { WebhookRestSdkAngularModule } from '@nestjs-mod/webhook-afat';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyNgZorroAntdModule } from '@ngx-formly/ng-zorro-antd';
-import { ROOT_PATH_MARKER, RuckenAfatEngineModule } from '@rucken/engine-afat';
+import { provideRuckenAfatEngine } from '@rucken/engine-afat';
 import {
   RuckenRestSdkAngularModule,
+  SsoProjectScalarFieldEnumInterface,
   SsoRoleInterface,
 } from '@rucken/rucken-rest-sdk-angular';
-import {
-  OnActivateOptions,
-  SSO_GUARD_DATA_ROUTE_KEY,
-  SsoGuardData,
-  SsoGuardService,
-} from '@rucken/sso-afat';
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { serverUrl } from '../environments/environment';
@@ -63,134 +58,111 @@ export const ssoAppConfig = ({
       provideZoneChangeDetection({ eventCoalescing: true }),
       provideHttpClient(),
       provideNzI18n(en_US),
+      provideRuckenAfatEngine(() => ({
+        layout: {
+          title: APP_TITLE,
+          parts: [
+            {
+              root: true,
+              navigation: {
+                link: '/home',
+                title: marker('Home'),
+              },
+              route: {
+                path: 'home',
+                component: HomeComponent,
+              },
+            },
+            {
+              navigation: {
+                link: '/home1',
+                title: 'Home1',
+              },
+              crud: {
+                dynamicCrudGrid: {
+                  modals: {
+                    create: { title: marker('sso-project.create-modal.title') },
+                    delete: { title: marker('sso-project.delete-modal.title') },
+                    update: { title: marker('sso-project.update-modal.title') },
+                  },
+                  columns: [
+                    {
+                      name: SsoProjectScalarFieldEnumInterface.id,
+                      title: marker('sso-project.grid.columns.id'),
+                    },
+                    {
+                      name: SsoProjectScalarFieldEnumInterface.name,
+                      title: marker('sso-project.grid.columns.name'),
+                    },
+                    {
+                      name: SsoProjectScalarFieldEnumInterface.clientId,
+                      title: marker('sso-project.grid.columns.client-id'),
+                    },
+                    {
+                      name: SsoProjectScalarFieldEnumInterface.clientSecret,
+                      title: marker('sso-project.grid.columns.client-secret'),
+                    },
+                    {
+                      name: SsoProjectScalarFieldEnumInterface.public,
+                      title: marker('sso-project.grid.columns.public'),
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+              navigation: {
+                link: '/webhooks',
+                title: marker('Webhooks'),
+              },
+              route: {
+                component: WebhooksComponent,
+              },
+            },
+            {
+              roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+              navigation: {
+                link: '/templates',
+                title: marker('Templates'),
+              },
+              route: {
+                component: TemplatesComponent,
+              },
+            },
+            {
+              roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+              navigation: {
+                link: '/users',
+                title: marker('Users'),
+              },
+              route: {
+                component: UsersComponent,
+              },
+            },
+            {
+              roles: [SsoRoleInterface.admin],
+              second: true,
+              navigation: {
+                link: '/projects',
+                title: marker('Projects'),
+              },
+              route: {
+                component: ProjectsComponent,
+              },
+            },
+            {
+              navigation: {
+                href: 'https://github.com/rucken/rucken-fullstack',
+                icon: 'github',
+                title: marker('Source code'),
+              },
+            },
+          ],
+        },
+      })),
       importProvidersFrom(
         BrowserAnimationsModule,
-        RuckenAfatEngineModule.forRoot({
-          layoutConfiguration: {
-            title: APP_TITLE,
-            parts: [
-              {
-                root: true,
-                navigation: {
-                  link: '/home',
-                  title: marker('Home'),
-                },
-                route: {
-                  path: 'home',
-                  component: HomeComponent,
-                },
-              },
-              {
-                navigation: {
-                  link: '/webhooks',
-                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                  title: marker('Webhooks'),
-                },
-                route: {
-                  path: 'webhooks',
-                  component: WebhooksComponent,
-                  title: marker('Webhooks'),
-                  canActivate: [SsoGuardService],
-                  data: {
-                    [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-                      roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                      afterActivate: async (options: OnActivateOptions) => {
-                        if (options.error) {
-                          options.router.navigate([ROOT_PATH_MARKER]);
-                          return false;
-                        }
-                        return true;
-                      },
-                    }),
-                  },
-                },
-              },
-              {
-                navigation: {
-                  link: '/templates',
-                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                  title: marker('Templates'),
-                },
-                route: {
-                  path: 'templates',
-                  title: marker('Templates'),
-                  component: TemplatesComponent,
-                  canActivate: [SsoGuardService],
-                  data: {
-                    [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-                      roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                      afterActivate: async (options: OnActivateOptions) => {
-                        if (options.error) {
-                          options.router.navigate([ROOT_PATH_MARKER]);
-                          return false;
-                        }
-                        return true;
-                      },
-                    }),
-                  },
-                },
-              },
-              {
-                navigation: {
-                  link: '/users',
-                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                  title: marker('Users'),
-                },
-                route: {
-                  path: 'users',
-                  component: UsersComponent,
-                  title: marker('Users'),
-                  canActivate: [SsoGuardService],
-                  data: {
-                    [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-                      roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                      afterActivate: async (options: OnActivateOptions) => {
-                        if (options.error) {
-                          options.router.navigate([ROOT_PATH_MARKER]);
-                          return false;
-                        }
-                        return true;
-                      },
-                    }),
-                  },
-                },
-              },
-              {
-                second: true,
-                navigation: {
-                  link: '/projects',
-                  roles: [SsoRoleInterface.admin],
-                  title: marker('Projects'),
-                },
-                route: {
-                  path: 'projects',
-                  component: ProjectsComponent,
-                  title: marker('Projects'),
-                  canActivate: [SsoGuardService],
-                  data: {
-                    [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-                      roles: [SsoRoleInterface.admin],
-                      afterActivate: async (options: OnActivateOptions) => {
-                        if (options.error) {
-                          options.router.navigate([ROOT_PATH_MARKER]);
-                          return false;
-                        }
-                        return true;
-                      },
-                    }),
-                  },
-                },
-              },
-              {
-                navigation: {
-                  href: 'https://github.com/rucken/rucken-fullstack',
-                  icon: 'github',
-                  title: marker('Source code'),
-                },
-              },
-            ],
-          },
-        }),
         RuckenRestSdkAngularModule.forRoot({
           basePath: serverUrl,
         }),
