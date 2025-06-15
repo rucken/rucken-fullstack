@@ -29,20 +29,10 @@ export class EngineError<T = unknown> extends Error {
   @ApiPropertyOptional({ type: Object })
   metadata?: T;
 
-  constructor(
-    message?: string | EngineErrorEnum,
-    code?: EngineErrorEnum,
-    metadata?: T
-  ) {
-    const messageAsCode = Boolean(
-      message &&
-        Object.values(EngineErrorEnum).includes(message as EngineErrorEnum)
-    );
+  constructor(message?: string | EngineErrorEnum, code?: EngineErrorEnum, metadata?: T) {
+    const messageAsCode = Boolean(message && Object.values(EngineErrorEnum).includes(message as EngineErrorEnum));
     const preparedCode = messageAsCode ? (message as EngineErrorEnum) : code;
-    const preparedMessage =
-      messageAsCode && preparedCode
-        ? ENGINE_ERROR_ENUM_TITLES[preparedCode]
-        : message;
+    const preparedMessage = messageAsCode && preparedCode ? ENGINE_ERROR_ENUM_TITLES[preparedCode] : message;
 
     code = preparedCode || EngineErrorEnum.COMMON;
     message = preparedMessage || ENGINE_ERROR_ENUM_TITLES[code];

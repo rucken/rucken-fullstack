@@ -16,18 +16,12 @@ import {
 import { FILES_EXTRA_MODELS, FilesModule } from '@nestjs-mod/files';
 import { KeyvModule } from '@nestjs-mod/keyv';
 import { MinioModule } from '@nestjs-mod/minio';
-import {
-  NOTIFICATIONS_EXTRA_MODELS,
-  NotificationsModule,
-} from '@nestjs-mod/notifications';
+import { NOTIFICATIONS_EXTRA_MODELS, NotificationsModule } from '@nestjs-mod/notifications';
 import { NestjsPinoLoggerModule } from '@nestjs-mod/pino';
 import { PrismaToolsModule } from '@nestjs-mod/prisma-tools';
 import { TerminusHealthCheckModule } from '@nestjs-mod/terminus';
 import { TwoFactorModule } from '@nestjs-mod/two-factor';
-import {
-  VALIDATION_EXTRA_MODELS,
-  ValidationModule,
-} from '@nestjs-mod/validation';
+import { VALIDATION_EXTRA_MODELS, ValidationModule } from '@nestjs-mod/validation';
 import { WEBHOOK_EXTRA_MODELS, WebhookModule } from '@nestjs-mod/webhook';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -37,10 +31,7 @@ import { writeFileSync } from 'fs';
 import { join } from 'path';
 import { createClient } from 'redis';
 import { AppModule } from './app/app.module';
-import {
-  createAndFillDatabases,
-  fillAllNeedDatabaseEnvsFromOneMain,
-} from './create-and-fill-databases';
+import { createAndFillDatabases, fillAllNeedDatabaseEnvsFromOneMain } from './create-and-fill-databases';
 import { appFolder, rootFolder } from './environments/environment';
 import { filesModuleForRootAsyncOptions } from './integrations/minio-files-integration.configuration';
 import { notificationsModuleForRootAsyncOptions } from './integrations/notifications-integration.configuration';
@@ -79,28 +70,21 @@ bootstrapNestApplication({
               options.app.use(cookieParser());
 
               const swaggerConf = new DocumentBuilder().addBearerAuth().build();
-              const document = SwaggerModule.createDocument(
-                options.app,
-                swaggerConf,
-                {
-                  extraModels: [
-                    ...FILES_EXTRA_MODELS,
-                    ...NOTIFICATIONS_EXTRA_MODELS,
-                    ...SSO_EXTRA_MODELS,
-                    ...VALIDATION_EXTRA_MODELS,
-                    ...WEBHOOK_EXTRA_MODELS,
-                  ],
-                }
-              );
+              const document = SwaggerModule.createDocument(options.app, swaggerConf, {
+                extraModels: [
+                  ...FILES_EXTRA_MODELS,
+                  ...NOTIFICATIONS_EXTRA_MODELS,
+                  ...SSO_EXTRA_MODELS,
+                  ...VALIDATION_EXTRA_MODELS,
+                  ...WEBHOOK_EXTRA_MODELS,
+                ],
+              });
               SwaggerModule.setup('swagger', options.app, document);
 
               options.app.useWebSocketAdapter(new WsAdapter(options.app));
 
               if (isInfrastructureMode()) {
-                writeFileSync(
-                  join(rootFolder, 'app-swagger.json'),
-                  JSON.stringify(document)
-                );
+                writeFileSync(join(rootFolder, 'app-swagger.json'), JSON.stringify(document));
               } else {
                 await replaceEnvs();
                 await createAndFillDatabases();
@@ -112,17 +96,13 @@ bootstrapNestApplication({
     ],
     feature: [
       NestjsPinoLoggerModule.forRoot(),
-      TerminusHealthCheckModule.forRootAsync(
-        terminusHealthCheckModuleForRootAsyncOptions()
-      ),
+      TerminusHealthCheckModule.forRootAsync(terminusHealthCheckModuleForRootAsyncOptions()),
       PrismaToolsModule.forRoot(),
       // redis cache
       KeyvModule.forRoot({
         staticConfiguration: {
           storeFactoryByEnvironmentUrl: (uri) => {
-            return isInfrastructureMode()
-              ? undefined
-              : [new KeyvRedis(createClient({ url: uri }))];
+            return isInfrastructureMode() ? undefined : [new KeyvRedis(createClient({ url: uri }))];
           },
         },
       }),
@@ -136,9 +116,7 @@ bootstrapNestApplication({
       ValidationModule.forRoot({ staticEnvironments: { usePipes: false } }),
       FilesModule.forRootAsync(filesModuleForRootAsyncOptions()),
       TwoFactorModule.forRoot(),
-      NotificationsModule.forRootAsync(
-        notificationsModuleForRootAsyncOptions()
-      ),
+      NotificationsModule.forRootAsync(notificationsModuleForRootAsyncOptions()),
       WebhookModule.forRootAsync(webhookModuleForRootAsyncOptions()),
       RuckenSsoModule.forRootAsync(ssoModuleForRootAsyncOptions()),
       AppModule.forRoot(),

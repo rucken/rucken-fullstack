@@ -1,17 +1,7 @@
 import { AsyncPipe, NgFor, NgForOf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import {
-  LangDefinition,
-  TranslocoDirective,
-  TranslocoPipe,
-  TranslocoService,
-} from '@jsverse/transloco';
+import { LangDefinition, TranslocoDirective, TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { TranslocoDatePipe } from '@jsverse/transloco-locale';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
@@ -34,26 +24,11 @@ import {
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import {
-  BehaviorSubject,
-  from,
-  map,
-  merge,
-  mergeMap,
-  Observable,
-  of,
-  switchMap,
-  take,
-  tap,
-  toArray,
-} from 'rxjs';
+import { BehaviorSubject, from, map, merge, mergeMap, Observable, of, switchMap, take, tap, toArray } from 'rxjs';
 
 import { TIMEZONE_OFFSET } from '@nestjs-mod/misc';
 import { RuckenRestSdkAngularService } from '@rucken/rucken-rest-sdk-angular';
-import {
-  RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN,
-  RuckenAfatEngineConfiguration,
-} from '../engine-afat.configuration';
+import { RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN, RuckenAfatEngineConfiguration } from '../engine-afat.configuration';
 import { ROOT_PATH_MARKER } from '../engine-afat.constants';
 import { LayoutPartNavigation } from './layout.configuration';
 
@@ -102,11 +77,9 @@ export class LayoutComponent implements OnInit {
     private readonly ssoActiveProjectService: SsoActiveProjectService,
     private readonly titleService: Title,
     private readonly filesService: FilesService,
-    private readonly authGuardService: SsoGuardService
+    private readonly authGuardService: SsoGuardService,
   ) {
-    this.title = this.translocoService.translate(
-      ruckenAfatEngineConfiguration.layout.title
-    );
+    this.title = this.translocoService.translate(ruckenAfatEngineConfiguration.layout.title);
     this.titleService.setTitle(this.title);
   }
 
@@ -115,19 +88,11 @@ export class LayoutComponent implements OnInit {
       mergeMap((part) =>
         this.authGuardService
           .checkUserRoles(part.roles)
-          .pipe(
-            map((result) =>
-              (result || !part.roles) && !part.hidden ? part.navigation : null
-            )
-          )
+          .pipe(map((result) => ((result || !part.roles) && !part.hidden ? part.navigation : null))),
       ),
       take(this.ruckenAfatEngineConfiguration.layout.parts.length),
       toArray(),
-      tap((navigations) =>
-        this.navigations$.next(
-          navigations.filter(Boolean) as LayoutPartNavigation[]
-        )
-      )
+      tap((navigations) => this.navigations$.next(navigations.filter(Boolean) as LayoutPartNavigation[])),
     );
   }
 
@@ -143,17 +108,13 @@ export class LayoutComponent implements OnInit {
     merge(of(true), this.ssoService.profile$)
       .pipe(
         mergeMap(() => this.setNavigations()),
-        untilDestroyed(this)
+        untilDestroyed(this),
       )
       .subscribe();
   }
 
   getFullFilePath(value: string) {
-    return (
-      (!value.toLowerCase().startsWith('http')
-        ? this.filesService.getMinioURL()
-        : '') + value
-    );
+    return (!value.toLowerCase().startsWith('http') ? this.filesService.getMinioURL() : '') + value;
   }
 
   setActivePublicProject(activePublicProject?: SsoProjectModel) {
@@ -161,10 +122,8 @@ export class LayoutComponent implements OnInit {
   }
 
   private loadAvailablePublicProjects() {
-    this.publicProjects$ =
-      this.ssoActiveProjectService.publicProjects$.asObservable();
-    this.activePublicProject$ =
-      this.ssoActiveProjectService.activePublicProject$.asObservable();
+    this.publicProjects$ = this.ssoActiveProjectService.publicProjects$.asObservable();
+    this.activePublicProject$ = this.ssoActiveProjectService.activePublicProject$.asObservable();
 
     this.ssoActiveProjectService.loadAvailablePublicProjects();
   }
@@ -179,16 +138,13 @@ export class LayoutComponent implements OnInit {
           }
           return this.ssoActiveLangService.refreshActiveLang();
         }),
-        untilDestroyed(this)
+        untilDestroyed(this),
       )
       .subscribe();
   }
 
   setActiveLang(lang: string) {
-    this.ssoActiveLangService
-      .setActiveLang(lang)
-      .pipe(untilDestroyed(this))
-      .subscribe();
+    this.ssoActiveLangService.setActiveLang(lang).pipe(untilDestroyed(this)).subscribe();
   }
 
   signOut() {
@@ -196,15 +152,13 @@ export class LayoutComponent implements OnInit {
       .signOut()
       .pipe(
         tap(() => this.router.navigate([ROOT_PATH_MARKER])),
-        untilDestroyed(this)
+        untilDestroyed(this),
       )
       .subscribe();
   }
 
   private loadAvailableLangs() {
-    this.availableLangs$.next(
-      this.translocoService.getAvailableLangs() as LangDefinition[]
-    );
+    this.availableLangs$.next(this.translocoService.getAvailableLangs() as LangDefinition[]);
   }
 
   private subscribeToLangChanges() {
@@ -214,7 +168,7 @@ export class LayoutComponent implements OnInit {
           this.lang$.next(lang);
           this.ssoActiveProjectService.loadAvailablePublicProjects();
         }),
-        untilDestroyed(this)
+        untilDestroyed(this),
       )
       .subscribe();
   }
@@ -227,20 +181,12 @@ export class LayoutComponent implements OnInit {
         .pipe(
           switchMap((token) =>
             this.ruckenRestSdkAngularService.webSocket<string>({
-              path: token?.access_token
-                ? `/ws/time?token=${token?.access_token}`
-                : '/ws/time',
+              path: token?.access_token ? `/ws/time?token=${token?.access_token}` : '/ws/time',
               eventName: 'ChangeTimeStream',
-            })
-          )
+            }),
+          ),
         )
-        .pipe(map((result) => result.data))
-    ).pipe(
-      tap((result) =>
-        this.serverTime$.next(
-          addHours(new Date(result as string), TIMEZONE_OFFSET)
-        )
-      )
-    );
+        .pipe(map((result) => result.data)),
+    ).pipe(tap((result) => this.serverTime$.next(addHours(new Date(result as string), TIMEZONE_OFFSET))));
   }
 }

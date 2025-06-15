@@ -17,9 +17,10 @@
     "@jsverse/transloco-keys-manager": "^6.0.0",
     "@jsverse/transloco-locale": "^7.0.1",
     "@nestjs-mod/misc": "1.4.2",
-    "@fingerprintjs/fingerprintjs": "4.6.1",
     "date-fns": "^4.1.0",
-    "@rucken/rucken-rest-sdk-angular": "1.9.0"
+    "@rucken/rucken-rest-sdk-angular": "1.9.0",
+    "@rucken/sso-afat": "0.0.1",
+    "@angular/platform-browser": "19.0.5"
   },
   "sideEffects": false,
   "i18n": [

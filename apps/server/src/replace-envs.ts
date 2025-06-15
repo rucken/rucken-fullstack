@@ -13,8 +13,8 @@ export async function replaceEnvs() {
           fullFilePath,
           content.replace(
             new RegExp('___RUCKEN_CLIENT_MINIO_URL___', 'g'),
-            process.env.RUCKEN_CLIENT_MINIO_URL || 'http://localhost:9000'
-          )
+            process.env.RUCKEN_CLIENT_MINIO_URL || 'http://localhost:9000',
+          ),
         );
       }
     }

@@ -9,17 +9,9 @@ import {
   Optional,
   Output,
 } from '@angular/core';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  UntypedFormGroup,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {
-  TranslocoDirective,
-  TranslocoPipe,
-  TranslocoService,
-} from '@jsverse/transloco';
+import { TranslocoDirective, TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
@@ -33,11 +25,7 @@ import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, catchError, of, tap } from 'rxjs';
 import { SsoSignInFormService } from '../../services/auth-sign-in-form.service';
 import { SsoService } from '../../services/auth.service';
-import {
-  OAuthProvider,
-  SsoLoginInput,
-  SsoUserAndTokens,
-} from '../../services/auth.types';
+import { OAuthProvider, SsoLoginInput, SsoUserAndTokens } from '../../services/auth.types';
 @UntilDestroy()
 @Component({
   imports: [
@@ -84,7 +72,7 @@ export class SsoSignInFormComponent implements OnInit {
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
     private readonly authSignInFormService: SsoSignInFormService,
-    private readonly validationService: ValidationService
+    private readonly validationService: ValidationService,
   ) {}
 
   ngOnInit(): void {
@@ -97,7 +85,7 @@ export class SsoSignInFormComponent implements OnInit {
         untilDestroyed(this),
         tap(() => {
           this.formlyFields$.next(this.formlyFields$.value);
-        })
+        }),
       )
       .subscribe();
 
@@ -108,12 +96,8 @@ export class SsoSignInFormComponent implements OnInit {
     this.authService
       .getOAuthProviders()
       .pipe(
-        tap((oAuthProviders) =>
-          this.oAuthProviders$.next(
-            oAuthProviders.length === 0 ? null : oAuthProviders
-          )
-        ),
-        untilDestroyed(this)
+        tap((oAuthProviders) => this.oAuthProviders$.next(oAuthProviders.length === 0 ? null : oAuthProviders)),
+        untilDestroyed(this),
       )
       .subscribe();
   }
@@ -131,41 +115,28 @@ export class SsoSignInFormComponent implements OnInit {
           tap((result) => {
             if (result.tokens) {
               this.afterSignIn.next(result);
-              this.nzMessageService.success(
-                this.translocoService.translate('Success')
-              );
+              this.nzMessageService.success(this.translocoService.translate('Success'));
             }
           }),
           catchError((err) =>
-            this.validationService.catchAndProcessServerError(err, (options) =>
-              this.setFormlyFields(options)
-            )
+            this.validationService.catchAndProcessServerError(err, (options) => this.setFormlyFields(options)),
           ),
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           catchError((err: any) => {
             console.error(err);
-            this.nzMessageService.error(
-              this.translocoService.translate(err.error?.message || err.message)
-            );
+            this.nzMessageService.error(this.translocoService.translate(err.error?.message || err.message));
             return of(null);
           }),
-          untilDestroyed(this)
+          untilDestroyed(this),
         )
         .subscribe();
     } else {
       console.log(this.form.controls);
-      this.nzMessageService.warning(
-        this.translocoService.translate('Validation errors')
-      );
+      this.nzMessageService.warning(this.translocoService.translate('Validation errors'));
     }
   }
 
-  private setFormlyFields(options?: {
-    data?: SsoLoginInput;
-    errors?: ValidationErrorMetadataInterface[];
-  }) {
-    this.formlyFields$.next(
-      this.authSignInFormService.getFormlyFields(options)
-    );
+  private setFormlyFields(options?: { data?: SsoLoginInput; errors?: ValidationErrorMetadataInterface[] }) {
+    this.formlyFields$.next(this.authSignInFormService.getFormlyFields(options));
   }
 }

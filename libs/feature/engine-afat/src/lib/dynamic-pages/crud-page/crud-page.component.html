@@ -1,16 +1,16 @@
-@if (crudConfiguration$ | async; as crudConfiguration){
-<nz-breadcrumb>
-  <nz-breadcrumb-item
-    [transloco]="crudConfiguration.title"
-  ></nz-breadcrumb-item>
-</nz-breadcrumb>
-<nz-row class="inner-content">
-  <dynamic-crud-grid
-    nz-col
-    [nzSpan]="24"
-    [configuration]="crudConfiguration.grid()"
-    [crudConfiguration]="crudConfiguration"
-  >
-  </dynamic-crud-grid>
-</nz-row>
+@if (crudConfiguration$ | async; as crudConfiguration) {
+  <nz-breadcrumb>
+    <nz-breadcrumb-item
+      [transloco]="crudConfiguration.title"
+    ></nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <nz-row class="inner-content">
+    <dynamic-crud-grid
+      nz-col
+      [nzSpan]="24"
+      [configuration]="crudConfiguration.grid()"
+      [crudConfiguration]="crudConfiguration"
+    >
+    </dynamic-crud-grid>
+  </nz-row>
 }

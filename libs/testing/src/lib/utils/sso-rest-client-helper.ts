@@ -11,23 +11,16 @@ import {
 import { WebhookRestSdkService } from '@nestjs-mod/webhook';
 import { Observable, finalize } from 'rxjs';
 import WebSocket from 'ws';
-import {
-  GenerateRandomUserResult,
-  generateRandomUser,
-} from './generate-random-user';
+import { GenerateRandomUserResult, generateRandomUser } from './generate-random-user';
 import { getUrls } from './get-urls';
 
-export class RuckenRestClientHelper<
-  T extends 'strict' | 'no_strict' = 'strict'
-> {
+export class RuckenRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'> {
   ssoTokensResponse?: TokensResponse;
 
   private webhookProfile?: WebhookUser;
   private ssoProfile?: SsoUserDto;
 
-  randomUser: T extends 'strict'
-    ? GenerateRandomUserResult
-    : GenerateRandomUserResult | undefined;
+  randomUser: T extends 'strict' ? GenerateRandomUserResult : GenerateRandomUserResult | undefined;
 
   private projectHelper?: RuckenRestClientHelper<'strict'>;
   private project?: SsoProject;
@@ -45,7 +38,7 @@ export class RuckenRestClientHelper<
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       headers?: any;
       skipCreateProjectHelper?: boolean;
-    }
+    },
   ) {
     this.randomUser = options?.randomUser as GenerateRandomUserResult;
 
@@ -111,26 +104,15 @@ export class RuckenRestClientHelper<
     return this.ssoProfile;
   }
 
-  webSocket<T>({
-    path,
-    eventName,
-    options,
-  }: {
-    path: string;
-    eventName: string;
-    options?: WebSocket.ClientOptions;
-  }) {
+  webSocket<T>({ path, eventName, options }: { path: string; eventName: string; options?: WebSocket.ClientOptions }) {
     const headers = {
       ...(options?.headers || {}),
       ...this.getAuthorizationHeaders(),
     };
-    const wss = new WebSocket(
-      this.getServerUrl().replace('/api', '').replace('http', 'ws') + path,
-      {
-        ...(options || {}),
-        headers,
-      }
-    );
+    const wss = new WebSocket(this.getServerUrl().replace('/api', '').replace('http', 'ws') + path, {
+      ...(options || {}),
+      headers,
+    });
     return new Observable<{ data: T; event: string }>((observer) => {
       wss.on('open', () => {
         wss.on('message', (data) => {
@@ -146,7 +128,7 @@ export class RuckenRestClientHelper<
           JSON.stringify({
             event: eventName,
             data: true,
-          })
+          }),
         );
       });
     }).pipe(
@@ -154,7 +136,7 @@ export class RuckenRestClientHelper<
         if (wss?.readyState == WebSocket.OPEN) {
           wss.close();
         }
-      })
+      }),
     );
   }
 
@@ -166,18 +148,14 @@ export class RuckenRestClientHelper<
   }
 
   async setRoles(userId: string, roles: SsoRole[]) {
-    await this.ruckenRestSdkService
-      .getSsoApi()
-      .ssoUsersControllerUpdateOne(userId, {
-        roles: roles.map((r) => r.toLowerCase()).join(','),
-      });
+    await this.ruckenRestSdkService.getSsoApi().ssoUsersControllerUpdateOne(userId, {
+      roles: roles.map((r) => r.toLowerCase()).join(','),
+    });
 
     return this;
   }
 
-  async createAndLoginAsUser(
-    options?: Pick<GenerateRandomUserResult, 'email' | 'password'>
-  ) {
+  async createAndLoginAsUser(options?: Pick<GenerateRandomUserResult, 'email' | 'password'>) {
     await this.generateRandomUser(options);
     await this.reg();
     await this.login(options);
@@ -185,9 +163,7 @@ export class RuckenRestClientHelper<
     return this;
   }
 
-  async generateRandomUser(
-    options?: Pick<GenerateRandomUserResult, 'email' | 'password'> | undefined
-  ) {
+  async generateRandomUser(options?: Pick<GenerateRandomUserResult, 'email' | 'password'> | undefined) {
     if (!this.randomUser || options) {
       this.randomUser = await generateRandomUser(undefined, options);
     }
@@ -206,73 +182,60 @@ export class RuckenRestClientHelper<
 
     if (this.projectHelper) {
       if (!this.project) {
-        const { data: createOneResult } =
-          await this.projectHelper.ruckenRestSdkService
-            .getSsoApi()
-            .ssoProjectsControllerCreateOne(
-              {
-                public: false,
-                name: this.projectHelper.randomUser.uniqId,
-                clientId: this.projectHelper.randomUser.id,
-                clientSecret: this.projectHelper.randomUser.password,
-              },
-              {
-                headers: {
-                  'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
-                },
-              }
-            );
-        this.project = createOneResult;
-      }
-
-      const { data: signUpResult } = await this.ruckenRestSdkService
-        .getSsoApi()
-        .ssoControllerSignUp(
-          {
-            username: this.randomUser.username,
-            email: this.randomUser.email,
-            password: this.randomUser.password,
-            confirmPassword: this.randomUser.password,
-            fingerprint: this.randomUser.id,
-          },
-          {
-            headers: {
-              'x-client-id': this.project.clientId,
-            },
-          }
-        );
-
-      this.ssoTokensResponse = signUpResult;
-
-      const { data: findManyResult } =
-        await this.projectHelper.ruckenRestSdkService
+        const { data: createOneResult } = await this.projectHelper.ruckenRestSdkService
           .getSsoApi()
-          .ssoUsersControllerFindMany(
-            undefined,
-            undefined,
-            this.randomUser.email,
-            undefined,
-            undefined,
+          .ssoProjectsControllerCreateOne(
+            {
+              public: false,
+              name: this.projectHelper.randomUser.uniqId,
+              clientId: this.projectHelper.randomUser.id,
+              clientSecret: this.projectHelper.randomUser.password,
+            },
             {
               headers: {
                 'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
               },
-            }
-          );
-
-      await this.projectHelper.ruckenRestSdkService
-        .getSsoApi()
-        .ssoUsersControllerUpdateOne(
-          findManyResult.ssoUsers[0].id,
-          {
-            emailVerifiedAt: new Date().toISOString(),
-          },
-          {
-            headers: {
-              'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
             },
-          }
-        );
+          );
+        this.project = createOneResult;
+      }
+
+      const { data: signUpResult } = await this.ruckenRestSdkService.getSsoApi().ssoControllerSignUp(
+        {
+          username: this.randomUser.username,
+          email: this.randomUser.email,
+          password: this.randomUser.password,
+          confirmPassword: this.randomUser.password,
+          fingerprint: this.randomUser.id,
+        },
+        {
+          headers: {
+            'x-client-id': this.project.clientId,
+          },
+        },
+      );
+
+      this.ssoTokensResponse = signUpResult;
+
+      const { data: findManyResult } = await this.projectHelper.ruckenRestSdkService
+        .getSsoApi()
+        .ssoUsersControllerFindMany(undefined, undefined, this.randomUser.email, undefined, undefined, {
+          headers: {
+            'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
+          },
+        });
+
+      await this.projectHelper.ruckenRestSdkService.getSsoApi().ssoUsersControllerUpdateOne(
+        findManyResult.ssoUsers[0].id,
+        {
+          emailVerifiedAt: new Date().toISOString(),
+        },
+        {
+          headers: {
+            'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
+          },
+        },
+      );
     }
 
     this.setAuthorizationHeadersFromAuthorizationTokens();
@@ -282,11 +245,7 @@ export class RuckenRestClientHelper<
     return this;
   }
 
-  async login(
-    options?: Partial<
-      Pick<GenerateRandomUserResult, 'id' | 'email' | 'password'>
-    >
-  ) {
+  async login(options?: Partial<Pick<GenerateRandomUserResult, 'id' | 'email' | 'password'>>) {
     if (!this.randomUser) {
       this.randomUser = await generateRandomUser();
     }
@@ -297,13 +256,11 @@ export class RuckenRestClientHelper<
     };
 
     if (this.projectHelper) {
-      const { data: loginResult } = await this.ruckenRestSdkService
-        .getSsoApi()
-        .ssoControllerSignIn({
-          email: loginOptions.email,
-          fingerprint: loginOptions.id,
-          password: loginOptions.password,
-        });
+      const { data: loginResult } = await this.ruckenRestSdkService.getSsoApi().ssoControllerSignIn({
+        email: loginOptions.email,
+        fingerprint: loginOptions.id,
+        password: loginOptions.password,
+      });
 
       this.ssoTokensResponse = loginResult;
 
@@ -317,15 +274,9 @@ export class RuckenRestClientHelper<
   }
 
   private async loadProfile() {
-    this.webhookProfile = (
-      await this.webhookRestSdkService
-        .getWebhookApi()
-        .webhookControllerProfile()
-    ).data;
+    this.webhookProfile = (await this.webhookRestSdkService.getWebhookApi().webhookControllerProfile()).data;
 
-    this.ssoProfile = (
-      await this.ruckenRestSdkService.getSsoApi().ssoControllerProfile()
-    ).data;
+    this.ssoProfile = (await this.ruckenRestSdkService.getSsoApi().ssoControllerProfile()).data;
   }
 
   async logout() {
@@ -352,9 +303,7 @@ export class RuckenRestClientHelper<
     this.ruckenRestSdkService.updateHeaders(this.getAuthorizationHeaders());
     this.webhookRestSdkService.updateHeaders(this.getAuthorizationHeaders());
     this.filesRestSdkService.updateHeaders(this.getAuthorizationHeaders());
-    this.notificationsRestSdkService.updateHeaders(
-      this.getAuthorizationHeaders()
-    );
+    this.notificationsRestSdkService.updateHeaders(this.getAuthorizationHeaders());
   }
 
   getAuthorizationHeaders() {
@@ -367,9 +316,7 @@ export class RuckenRestClientHelper<
           }
         : {}),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-      ...(this.options?.activeLang
-        ? { ['Accept-Language']: this.options?.activeLang }
-        : {}),
+      ...(this.options?.activeLang ? { ['Accept-Language']: this.options?.activeLang } : {}),
     };
   }
 

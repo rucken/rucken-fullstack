@@ -11,7 +11,7 @@ import { SsoSignupInput } from './auth.types';
 export class SsoSignUpFormService {
   constructor(
     protected readonly translocoService: TranslocoService,
-    protected readonly validationService: ValidationService
+    protected readonly validationService: ValidationService,
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,9 +28,7 @@ export class SsoSignUpFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(
-              `sso.sign-up-form.fields.email`
-            ),
+            label: this.translocoService.translate(`sso.sign-up-form.fields.email`),
             placeholder: 'email',
             required: true,
           },
@@ -42,9 +40,7 @@ export class SsoSignUpFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(
-              `sso.sign-up-form.fields.password`
-            ),
+            label: this.translocoService.translate(`sso.sign-up-form.fields.password`),
             placeholder: 'password',
             required: true,
             type: 'password',
@@ -57,16 +53,14 @@ export class SsoSignUpFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(
-              `sso.sign-up-form.fields.confirm-password`
-            ),
+            label: this.translocoService.translate(`sso.sign-up-form.fields.confirm-password`),
             placeholder: 'confirmPassword',
             required: true,
             type: 'password',
           },
         },
       ],
-      options?.errors || []
+      options?.errors || [],
     );
   }
 }

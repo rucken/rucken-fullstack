@@ -13,12 +13,7 @@ export interface SsoEmailTemplateModel
   extends Partial<
     Omit<
       SsoEmailTemplateDtoInterface,
-      | 'subjectLocale'
-      | 'textLocale'
-      | 'htmlLocale'
-      | 'projectId'
-      | 'createdAt'
-      | 'updatedAt'
+      'subjectLocale' | 'textLocale' | 'htmlLocale' | 'projectId' | 'createdAt' | 'updatedAt'
     >
   > {
   createdAt?: Date | null;
@@ -29,7 +24,7 @@ export interface SsoEmailTemplateModel
 export class SsoEmailTemplateService {
   constructor(
     private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
-    protected readonly translocoService: TranslocoService
+    protected readonly translocoService: TranslocoService,
   ) {}
 
   findOne(id: string) {
@@ -39,13 +34,7 @@ export class SsoEmailTemplateService {
       .pipe(map((t) => this.toModel(t)));
   }
 
-  findMany({
-    filters,
-    meta,
-  }: {
-    filters: Record<string, string>;
-    meta?: RequestMeta;
-  }) {
+  findMany({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) {
     return this.ruckenRestSdkAngularService
       .getSsoApi()
       .ssoEmailTemplatesControllerFindMany(
@@ -56,13 +45,13 @@ export class SsoEmailTemplateService {
           ? Object.entries(meta?.sort)
               .map(([key, value]) => `${key}:${value}`)
               .join(',')
-          : undefined
+          : undefined,
       )
       .pipe(
         map(({ meta, ssoEmailTemplates }) => ({
           meta,
           items: ssoEmailTemplates.map((t) => this.toModel(t)),
-        }))
+        })),
       );
   }
 
@@ -78,26 +67,22 @@ export class SsoEmailTemplateService {
   toModel(item?: SsoEmailTemplateDtoInterface): SsoEmailTemplateModel {
     return {
       ...item,
-      createdAt: item?.createdAt
-        ? addHours(new Date(item.createdAt), TIMEZONE_OFFSET)
-        : null,
-      updatedAt: item?.updatedAt
-        ? addHours(new Date(item.updatedAt), TIMEZONE_OFFSET)
-        : null,
+      createdAt: item?.createdAt ? addHours(new Date(item.createdAt), TIMEZONE_OFFSET) : null,
+      updatedAt: item?.updatedAt ? addHours(new Date(item.updatedAt), TIMEZONE_OFFSET) : null,
       ...Object.fromEntries(
         this.getAvailableLangs().map((a) => {
           return [`subject_${a.id}`, item?.subjectLocale?.[a.id] || ''];
-        })
+        }),
       ),
       ...Object.fromEntries(
         this.getAvailableLangs().map((a) => {
           return [`html_${a.id}`, item?.htmlLocale?.[a.id] || ''];
-        })
+        }),
       ),
       ...Object.fromEntries(
         this.getAvailableLangs().map((a) => {
           return [`text_${a.id}`, item?.textLocale?.[a.id] || ''];
-        })
+        }),
       ),
     };
   }
@@ -111,17 +96,17 @@ export class SsoEmailTemplateService {
       subjectLocale: Object.fromEntries(
         this.getAvailableLangs().map((a) => {
           return [a.id, data[`subject_${a.id}`] || ''];
-        })
+        }),
       ),
       htmlLocale: Object.fromEntries(
         this.getAvailableLangs().map((a) => {
           return [a.id, data[`html_${a.id}`] || ''];
-        })
+        }),
       ),
       textLocale: Object.fromEntries(
         this.getAvailableLangs().map((a) => {
           return [a.id, data[`text_${a.id}`] || ''];
-        })
+        }),
       ),
     };
   }

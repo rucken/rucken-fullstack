@@ -9,18 +9,12 @@ export const X_CLIENT_ID_HEADER_NAME = 'x-client-id';
 @UntilDestroy()
 @Injectable({ providedIn: 'root' })
 export class SsoActiveProjectService {
-  publicProjects$ = new BehaviorSubject<SsoProjectModel[] | undefined>(
-    undefined
-  );
+  publicProjects$ = new BehaviorSubject<SsoProjectModel[] | undefined>(undefined);
 
-  activePublicProject$ = new BehaviorSubject<SsoProjectModel | undefined>(
-    undefined
-  );
+  activePublicProject$ = new BehaviorSubject<SsoProjectModel | undefined>(undefined);
 
   getAuthorizationHeaders(): Record<string, string> {
-    const clientId = localStorage.getItem(
-      SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY
-    );
+    const clientId = localStorage.getItem(SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY);
     if (clientId) {
       return {
         [X_CLIENT_ID_HEADER_NAME as string]: clientId,
@@ -33,10 +27,7 @@ export class SsoActiveProjectService {
 
   setActivePublicProject(activePublicProject?: SsoProjectModel) {
     if (activePublicProject?.clientId) {
-      localStorage.setItem(
-        SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY,
-        activePublicProject.clientId
-      );
+      localStorage.setItem(SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY, activePublicProject.clientId);
     } else {
       localStorage.removeItem(SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY);
     }
@@ -48,18 +39,13 @@ export class SsoActiveProjectService {
       .findManyPublic({ filters: {} })
       .pipe(
         tap((projects) => {
-          this.publicProjects$.next(
-            projects.items.length > 1 ? projects.items : undefined
-          );
+          this.publicProjects$.next(projects.items.length > 1 ? projects.items : undefined);
           this.setActivePublicProject(
-            projects.items.find(
-              (p) =>
-                p.clientId ===
-                localStorage.getItem(SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY)
-            ) || projects.items[0]
+            projects.items.find((p) => p.clientId === localStorage.getItem(SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY)) ||
+              projects.items[0],
           );
         }),
-        untilDestroyed(this)
+        untilDestroyed(this),
       )
       .subscribe();
   }

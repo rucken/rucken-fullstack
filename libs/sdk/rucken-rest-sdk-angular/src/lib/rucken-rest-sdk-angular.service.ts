@@ -1,18 +1,14 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, finalize } from 'rxjs';
-import {
-  RuckenRestClientConfiguration,
-  SsoRuckenRestService,
-  TimeRuckenRestService,
-} from './generated';
+import { RuckenRestClientConfiguration, SsoRuckenRestService, TimeRuckenRestService } from './generated';
 
 @Injectable({ providedIn: 'root' })
 export class RuckenRestSdkAngularService {
   constructor(
     private readonly ruckenRestClientConfiguration: RuckenRestClientConfiguration,
     private readonly timeRuckenRestService: TimeRuckenRestService,
-    private readonly ssoRuckenRestService: SsoRuckenRestService
+    private readonly ssoRuckenRestService: SsoRuckenRestService,
   ) {
     timeRuckenRestService.configuration.withCredentials = true;
     ssoRuckenRestService.configuration.withCredentials = true;
@@ -48,10 +44,8 @@ export class RuckenRestSdkAngularService {
     options?: any;
   }) {
     const wss = new WebSocket(
-      (this.ruckenRestClientConfiguration.basePath || '')
-        .replace('/api', '')
-        .replace('http', 'ws') + path,
-      options
+      (this.ruckenRestClientConfiguration.basePath || '').replace('/api', '').replace('http', 'ws') + path,
+      options,
     );
     return new Observable<{ data: T; event: string }>((observer) => {
       wss.addEventListener('open', () => {
@@ -68,7 +62,7 @@ export class RuckenRestSdkAngularService {
           JSON.stringify({
             event: eventName,
             data: true,
-          })
+          }),
         );
       });
     }).pipe(
@@ -76,7 +70,7 @@ export class RuckenRestSdkAngularService {
         if (wss?.readyState == WebSocket.OPEN) {
           wss.close();
         }
-      })
+      }),
     );
   }
 }

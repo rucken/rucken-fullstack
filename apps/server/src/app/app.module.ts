@@ -1,8 +1,4 @@
-import {
-  createNestModule,
-  getRequestFromExecutionContext,
-  NestModuleCategory,
-} from '@nestjs-mod/common';
+import { createNestModule, getRequestFromExecutionContext, NestModuleCategory } from '@nestjs-mod/common';
 
 import { PrismaModule } from '@nestjs-mod/prisma';
 import { ValidationError, ValidationErrorEnum } from '@nestjs-mod/validation';
@@ -50,11 +46,7 @@ export const { AppModule } = createNestModule({
         },
         exceptionFactory: (errors) => {
           console.log(errors);
-          return new ValidationError(
-            ValidationErrorEnum.COMMON,
-            undefined,
-            errors
-          );
+          return new ValidationError(ValidationErrorEnum.COMMON, undefined, errors);
         },
       },
       usePipes: true,
@@ -81,8 +73,5 @@ export const { AppModule } = createNestModule({
         ]),
   ],
   controllers: [TimeController],
-  providers: [
-    TimeController,
-    { provide: APP_FILTER, useClass: AppExceptionsFilter },
-  ],
+  providers: [TimeController, { provide: APP_FILTER, useClass: AppExceptionsFilter }],
 });

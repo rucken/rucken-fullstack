@@ -53,23 +53,15 @@ parsedEnvs.RUCKEN_DISABLE_SERVE_STATIC = 'true';
 parsedEnvs.RUCKEN_PORT = '3000';
 
 // check real process envs
-parsedEnvs.RUCKEN_SSO_ADMIN_EMAIL =
-  process.env.RUCKEN_SSO_ADMIN_EMAIL || 'rucken@site15.ru';
-parsedEnvs.RUCKEN_SSO_ADMIN_PASSWORD =
-  process.env.RUCKEN_SSO_ADMIN_PASSWORD || 'SbxcbII7RUvCOe9TDXnKhfRrLJW5cGDA';
-parsedEnvs.RUCKEN_SSO_ADMIN_USERNAME =
-  process.env.RUCKEN_SSO_ADMIN_USERNAME || 'admin';
-parsedEnvs.RUCKEN_SSO_SERVER_URL =
-  process.env.RUCKEN_SSO_SERVER_URL || 'http://localhost:3000';
-parsedEnvs.RUCKEN_SSO_CLIENT_URL =
-  process.env.RUCKEN_SSO_CLIENT_URL || 'http://localhost:4200';
-parsedEnvs.RUCKEN_SSO_ADMIN_SECRET =
-  process.env.RUCKEN_SSO_ADMIN_SECRET || 'VfKSfPPljhHBXCEohnitursmgDxfAyiD';
+parsedEnvs.RUCKEN_SSO_ADMIN_EMAIL = process.env.RUCKEN_SSO_ADMIN_EMAIL || 'rucken@site15.ru';
+parsedEnvs.RUCKEN_SSO_ADMIN_PASSWORD = process.env.RUCKEN_SSO_ADMIN_PASSWORD || 'SbxcbII7RUvCOe9TDXnKhfRrLJW5cGDA';
+parsedEnvs.RUCKEN_SSO_ADMIN_USERNAME = process.env.RUCKEN_SSO_ADMIN_USERNAME || 'admin';
+parsedEnvs.RUCKEN_SSO_SERVER_URL = process.env.RUCKEN_SSO_SERVER_URL || 'http://localhost:3000';
+parsedEnvs.RUCKEN_SSO_CLIENT_URL = process.env.RUCKEN_SSO_CLIENT_URL || 'http://localhost:4200';
+parsedEnvs.RUCKEN_SSO_ADMIN_SECRET = process.env.RUCKEN_SSO_ADMIN_SECRET || 'VfKSfPPljhHBXCEohnitursmgDxfAyiD';
 
-parsedEnvs.E2E_CLIENT_URL =
-  parsedEnvs.E2E_CLIENT_URL || 'http://localhost:4200';
-parsedEnvs.E2E_SERVER_URL =
-  parsedEnvs.E2E_SERVER_URL || 'http://localhost:3000';
+parsedEnvs.E2E_CLIENT_URL = parsedEnvs.E2E_CLIENT_URL || 'http://localhost:4200';
+parsedEnvs.E2E_SERVER_URL = parsedEnvs.E2E_SERVER_URL || 'http://localhost:3000';
 
 parsedEnvs.RUCKEN_SSO_DEFAULT_PROJECT =
   process.env.RUCKEN_SSO_DEFAULT_PROJECT ||
@@ -83,7 +75,7 @@ export const minioURL =
 export const supabaseURL = 'https://${supabaseName}.supabase.co';
 export const supabaseKey =
   '${supabaseAnonKey}';
-`
+`,
 );
 writeFileSync(
   join(__dirname, 'apps/client/src/environments/environment.supabase.ts'),
@@ -93,7 +85,7 @@ export const minioURL =
 export const supabaseURL = 'https://${supabaseName}.supabase.co';
 export const supabaseKey =
   '${supabaseAnonKey}';
-`
+`,
 );
 
 const envContent = Object.entries(parsedEnvs)
@@ -105,13 +97,7 @@ const envContent = Object.entries(parsedEnvs)
     if (value !== undefined && value !== null && !isNaN(+value)) {
       return `${key}=${value}`;
     }
-    if (
-      value &&
-      (value.includes('*') ||
-        value.includes('!') ||
-        value.includes('$') ||
-        value.includes(' '))
-    ) {
+    if (value && (value.includes('*') || value.includes('!') || value.includes('$') || value.includes(' '))) {
       if (value.includes("'")) {
         return `${key}='${value.split("'").join("\\'")}'`;
       }

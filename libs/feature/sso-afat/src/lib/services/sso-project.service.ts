@@ -12,9 +12,7 @@ import { addHours } from 'date-fns';
 import { map } from 'rxjs';
 
 export interface SsoProjectModel
-  extends Partial<
-    Omit<SsoProjectDtoInterface, 'createdAt' | 'updatedAt' | 'nameLocale'>
-  > {
+  extends Partial<Omit<SsoProjectDtoInterface, 'createdAt' | 'updatedAt' | 'nameLocale'>> {
   createdAt?: Date | null;
   updatedAt?: Date | null;
 }
@@ -23,7 +21,7 @@ export interface SsoProjectModel
 export class SsoProjectService {
   constructor(
     private readonly translocoService: TranslocoService,
-    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService
+    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
   ) {}
 
   findOne(id: string) {
@@ -33,13 +31,7 @@ export class SsoProjectService {
       .pipe(map((p) => this.toModel(p)));
   }
 
-  findManyPublic({
-    filters,
-    meta,
-  }: {
-    filters: Record<string, string>;
-    meta?: RequestMeta;
-  }) {
+  findManyPublic({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) {
     return this.ruckenRestSdkAngularService
       .getSsoApi()
       .ssoPublicProjectsControllerFindMany(
@@ -50,23 +42,17 @@ export class SsoProjectService {
           ? Object.entries(meta?.sort)
               .map(([key, value]) => `${key}:${value}`)
               .join(',')
-          : undefined
+          : undefined,
       )
       .pipe(
         map(({ meta, ssoPublicProjects }) => ({
           meta,
           items: ssoPublicProjects.map((p) => this.toModel(p)),
-        }))
+        })),
       );
   }
 
-  findMany({
-    filters,
-    meta,
-  }: {
-    filters: Record<string, string>;
-    meta?: RequestMeta;
-  }) {
+  findMany({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) {
     return this.ruckenRestSdkAngularService
       .getSsoApi()
       .ssoProjectsControllerFindMany(
@@ -77,13 +63,13 @@ export class SsoProjectService {
           ? Object.entries(meta?.sort)
               .map(([key, value]) => `${key}:${value}`)
               .join(',')
-          : undefined
+          : undefined,
       )
       .pipe(
         map(({ meta, ssoProjects }) => ({
           meta,
           items: ssoProjects.map((p) => this.toModel(p)),
-        }))
+        })),
       );
   }
 
@@ -95,9 +81,7 @@ export class SsoProjectService {
   }
 
   deleteOne(id: string) {
-    return this.ruckenRestSdkAngularService
-      .getSsoApi()
-      .ssoProjectsControllerDeleteOne(id);
+    return this.ruckenRestSdkAngularService.getSsoApi().ssoProjectsControllerDeleteOne(id);
   }
 
   createOne(data: CreateSsoProjectDtoInterface) {
@@ -109,21 +93,15 @@ export class SsoProjectService {
 
   //
 
-  toModel(
-    item?: SsoPublicProjectDtoInterface | SsoProjectDtoInterface
-  ): SsoProjectModel {
+  toModel(item?: SsoPublicProjectDtoInterface | SsoProjectDtoInterface): SsoProjectModel {
     return {
       ...item,
-      createdAt: item?.createdAt
-        ? addHours(new Date(item.createdAt), TIMEZONE_OFFSET)
-        : null,
-      updatedAt: item?.updatedAt
-        ? addHours(new Date(item.updatedAt), TIMEZONE_OFFSET)
-        : null,
+      createdAt: item?.createdAt ? addHours(new Date(item.createdAt), TIMEZONE_OFFSET) : null,
+      updatedAt: item?.updatedAt ? addHours(new Date(item.updatedAt), TIMEZONE_OFFSET) : null,
       ...Object.fromEntries(
         this.getAvailableLangs().map((a) => {
           return [`name_${a.id}`, item?.nameLocale?.[a.id] || ''];
-        })
+        }),
       ),
     };
   }
@@ -137,7 +115,7 @@ export class SsoProjectService {
       nameLocale: Object.fromEntries(
         this.getAvailableLangs().map((a) => {
           return [a.id, data[`name_${a.id}`] || ''];
-        })
+        }),
       ),
     };
   }
@@ -145,11 +123,8 @@ export class SsoProjectService {
   //
 
   private getAvailableLangs() {
-    return (
-      this.translocoService.getAvailableLangs() as LangDefinition[]
-    ).filter(
-      (availableLang) =>
-        availableLang.id !== this.translocoService.getDefaultLang()
+    return (this.translocoService.getAvailableLangs() as LangDefinition[]).filter(
+      (availableLang) => availableLang.id !== this.translocoService.getDefaultLang(),
     );
   }
 }

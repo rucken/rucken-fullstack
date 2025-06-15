@@ -9,11 +9,7 @@ import {
   Optional,
   Output,
 } from '@angular/core';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  UntypedFormGroup,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -24,19 +20,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
-import {
-  BehaviorSubject,
-  catchError,
-  mergeMap,
-  of,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, catchError, mergeMap, of, tap, throwError } from 'rxjs';
 import { SsoSessionFormService } from '../../services/sso-session-form.service';
-import {
-  SsoSessionModel,
-  SsoSessionService,
-} from '../../services/sso-session.service';
+import { SsoSessionModel, SsoSessionService } from '../../services/sso-session.service';
 
 @UntilDestroy()
 @Component({
@@ -82,7 +68,7 @@ export class SsoSessionFormComponent implements OnInit {
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
     private readonly ssoSessionFormService: SsoSessionFormService,
-    private readonly validationService: ValidationService
+    private readonly validationService: ValidationService,
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +79,7 @@ export class SsoSessionFormComponent implements OnInit {
         untilDestroyed(this),
         tap(() => {
           this.formlyFields$.next(this.formlyFields$.value);
-        })
+        }),
       )
       .subscribe();
 
@@ -103,9 +89,9 @@ export class SsoSessionFormComponent implements OnInit {
           tap((result) =>
             this.afterFind.next({
               ...result,
-            })
+            }),
           ),
-          untilDestroyed(this)
+          untilDestroyed(this),
         )
         .subscribe();
     } else {
@@ -124,15 +110,13 @@ export class SsoSessionFormComponent implements OnInit {
         .pipe(
           tap((result) => {
             if (result) {
-              this.nzMessageService.success(
-                this.translocoService.translate('Success')
-              );
+              this.nzMessageService.success(this.translocoService.translate('Success'));
               this.afterUpdate.next({
                 ...result,
               });
             }
           }),
-          untilDestroyed(this)
+          untilDestroyed(this),
         )
         .subscribe();
     }
@@ -140,39 +124,29 @@ export class SsoSessionFormComponent implements OnInit {
 
   updateOne() {
     if (!this.id) {
-      return throwError(
-        () => new Error(this.translocoService.translate('id not set'))
-      );
+      return throwError(() => new Error(this.translocoService.translate('id not set')));
     }
     return this.ssoSessionService
       .updateOne(this.id, this.form.value)
       .pipe(
         catchError((err) =>
-          this.validationService.catchAndProcessServerError(err, (options) =>
-            this.setFormlyFields(options)
-          )
-        )
+          this.validationService.catchAndProcessServerError(err, (options) => this.setFormlyFields(options)),
+        ),
       );
   }
 
   findOne() {
     if (!this.id) {
-      return throwError(
-        () => new Error(this.translocoService.translate('id not set'))
-      );
+      return throwError(() => new Error(this.translocoService.translate('id not set')));
     }
     return this.ssoSessionService.findOne(this.id).pipe(
       tap((result) => {
         this.setFieldsAndModel(result);
-      })
+      }),
     );
   }
 
-  private setFormlyFields(options?: {
-    errors?: ValidationErrorMetadataInterface[];
-  }) {
-    this.formlyFields$.next(
-      this.ssoSessionFormService.getFormlyFields(options)
-    );
+  private setFormlyFields(options?: { errors?: ValidationErrorMetadataInterface[] }) {
+    this.formlyFields$.next(this.ssoSessionFormService.getFormlyFields(options));
   }
 }

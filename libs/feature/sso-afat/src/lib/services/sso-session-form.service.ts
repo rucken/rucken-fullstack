@@ -14,7 +14,7 @@ import {
 export class SsoSessionFormService {
   constructor(
     protected readonly translocoService: TranslocoService,
-    protected readonly validationService: ValidationService
+    protected readonly validationService: ValidationService,
   ) {}
 
   getFormlyFields(options?: {
@@ -31,9 +31,7 @@ export class SsoSessionFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(
-              `sso-session.form.fields.enabled`
-            ),
+            label: this.translocoService.translate(`sso-session.form.fields.enabled`),
             placeholder: 'enabled',
             required: true,
           },
@@ -46,9 +44,7 @@ export class SsoSessionFormService {
           },
           props: {
             type: 'number',
-            label: this.translocoService.translate(
-              `sso-session.form.fields.expires-at`
-            ),
+            label: this.translocoService.translate(`sso-session.form.fields.expires-at`),
             placeholder: 'expiresAt',
             required: false,
           },
@@ -60,9 +56,7 @@ export class SsoSessionFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(
-              `sso-session.form.fields.fingerprint`
-            ),
+            label: this.translocoService.translate(`sso-session.form.fields.fingerprint`),
             placeholder: 'fingerprint',
             required: false,
           },
@@ -74,9 +68,7 @@ export class SsoSessionFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(
-              `sso-session.form.fields.user-agent`
-            ),
+            label: this.translocoService.translate(`sso-session.form.fields.user-agent`),
             placeholder: 'userAgent',
             required: false,
           },
@@ -88,9 +80,7 @@ export class SsoSessionFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(
-              `sso-session.form.fields.user-data`
-            ),
+            label: this.translocoService.translate(`sso-session.form.fields.user-data`),
             placeholder: 'userData',
             required: false,
           },
@@ -102,15 +92,13 @@ export class SsoSessionFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(
-              `sso-session.form.fields.user-ip`
-            ),
+            label: this.translocoService.translate(`sso-session.form.fields.user-ip`),
             placeholder: 'userIp',
             required: false,
           },
         },
       ],
-      options?.errors || []
+      options?.errors || [],
     );
   }
 }
