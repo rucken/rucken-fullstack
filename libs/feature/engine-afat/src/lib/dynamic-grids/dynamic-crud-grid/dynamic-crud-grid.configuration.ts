@@ -1,15 +1,33 @@
+import { DynamicCrudGridComponent } from './dynamic-crud-grid.component';
+
 export type DynamicCrudGridColumn = {
   name: string;
   title: string;
   isDate?: boolean;
+  isFile?: boolean;
 };
 
 export type DynamicCrudGridConfiguration = {
   title?: string;
   columns: DynamicCrudGridColumn[];
-  modals: {
-    create?: { title: string; width?: string };
-    update?: { title: string; width?: string };
-    delete?: { title: string; width?: string };
+  actions: {
+    create?: {
+      buttonTitle?: string;
+      title: string;
+      width?: string;
+      showModal?: (grid: DynamicCrudGridComponent) => void;
+    };
+    update?: {
+      buttonTitle?: string;
+      title: string;
+      width?: string;
+      showModal?: (grid: DynamicCrudGridComponent, id: string) => void;
+    };
+    delete?: {
+      buttonTitle?: string;
+      title: string;
+      width?: string;
+      showModal?: (grid: DynamicCrudGridComponent, id: string) => void;
+    };
   };
 };

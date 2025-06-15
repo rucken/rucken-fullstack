@@ -58,14 +58,14 @@ export class SsoUsersController {
     private readonly ssoCacheService: SsoCacheService,
     private readonly ssoService: SsoService,
     private readonly webhookService: WebhookService,
-    private readonly ssoEventsService: SsoEventsService
+    private readonly ssoEventsService: SsoEventsService,
   ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManySsoUserResponse })
   async findMany(
     @CurrentSsoRequest() ssoRequest: SsoRequest,
-    @Query() args: FindManySsoUserArgs
+    @Query() args: FindManySsoUserArgs,
   ) {
     const { take, skip, curPage, perPage } =
       this.prismaToolsService.getFirstSkipFromCurPerPage({
@@ -89,7 +89,7 @@ export class SsoUsersController {
               }
             : {}),
         }),
-        {}
+        {},
       );
 
     const result = await this.prismaClient.$transaction(async (prisma) => {
@@ -171,7 +171,7 @@ export class SsoUsersController {
   async updateOne(
     @CurrentSsoRequest() ssoRequest: SsoRequest,
     @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() args: UpdateSsoUserDto
+    @Body() args: UpdateSsoUserDto,
   ) {
     const projectId = searchIn(SsoRole.admin, ssoRequest.ssoUser?.roles)
       ? undefined
@@ -182,7 +182,7 @@ export class SsoUsersController {
         ...(args.password
           ? {
               password: await this.ssoPasswordService.createPasswordHash(
-                args.password
+                args.password,
               ),
             }
           : {}),
@@ -203,7 +203,7 @@ export class SsoUsersController {
   @ApiOkResponse({ type: StatusResponse })
   async sendInvitationLinks(
     @CurrentSsoRequest() ssoRequest: SsoRequest,
-    @Body() args: SendInvitationLinksArgs
+    @Body() args: SendInvitationLinksArgs,
   ) {
     const emails = args.emails.split(',').map((e) => e.trim());
     for (const email of emails) {
@@ -240,7 +240,7 @@ export class SsoUsersController {
   @ApiOkResponse({ type: SsoUserDto })
   async findOne(
     @CurrentSsoRequest() ssoRequest: SsoRequest,
-    @Param('id', new ParseUUIDPipe()) id: string
+    @Param('id', new ParseUUIDPipe()) id: string,
   ) {
     const projectId = searchIn(SsoRole.admin, ssoRequest.ssoUser?.roles)
       ? undefined

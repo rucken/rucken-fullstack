@@ -1,14 +1,16 @@
 <div class="table-operations" nz-row nzJustify="space-between">
   <div nz-col nzSpan="8">
-    @if (configuration.title){
-    {{ configuration.title | transloco }}
-    } @if (configuration.modals.create){
-    <button
-      nz-button
-      nzType="primary"
-      (click)="showCreateOrUpdateModal()"
-      transloco="Create new"
-    ></button>
+    @if (configuration.title) {
+      {{ configuration.title | transloco }}
+    }
+    @if (configuration.actions.create) {
+      <button nz-button nzType="primary" (click)="showCreateOrUpdateModal()">
+        {{
+          configuration.actions.create.buttonTitle
+            ? (configuration.actions.create.buttonTitle | transloco)
+            : ('Create new' | transloco)
+        }}
+      </button>
     }
   </div>
   <div nz-col nzSpan="8">
@@ -32,74 +34,103 @@
     </ng-template>
   </div>
 </div>
-@if ((meta$ | async); as meta){
-<nz-table
-  #basicTable
-  [nzBordered]="true"
-  [nzOuterBordered]="true"
-  nzShowPagination
-  nzShowSizeChanger
-  [nzFrontPagination]="false"
-  [nzPageSizeOptions]="[1, 5, 10, 20, 30, 40]"
-  [nzPageIndex]="meta.curPage"
-  [nzPageSize]="meta.perPage"
-  [nzTotal]="meta.totalResults || 0"
-  (nzQueryParams)="
-    loadMany({
-      queryParams: $event
-    })
-  "
-  [nzData]="(items$ | async) || []"
->
-  @if (columns$|async; as columns){
-  <thead>
-    <tr>
-      @for (column of columns; track $index) {
-      <th
-        [nzColumnKey]="column.name"
-        [nzSortFn]="true"
-        [nzSortOrder]="meta.sort[column.name] | nzTableSortOrderDetector"
-        [transloco]="column.title"
-      ></th>
+@if (meta$ | async; as meta) {
+  <nz-table
+    #basicTable
+    [nzBordered]="true"
+    [nzOuterBordered]="true"
+    nzShowPagination
+    nzShowSizeChanger
+    [nzFrontPagination]="false"
+    [nzPageSizeOptions]="[1, 5, 10, 20, 30, 40]"
+    [nzPageIndex]="meta.curPage"
+    [nzPageSize]="meta.perPage"
+    [nzTotal]="meta.totalResults || 0"
+    (nzQueryParams)="
+      loadMany({
+        queryParams: $event,
+      })
+    "
+    [nzData]="(items$ | async) || []"
+  >
+    @if (columns$ | async; as columns) {
+      <thead>
+        <tr>
+          @for (column of columns; track $index) {
+            <th
+              [nzColumnKey]="column.name"
+              [nzSortFn]="true"
+              [nzSortOrder]="meta.sort[column.name] | nzTableSortOrderDetector"
+              [transloco]="column.title"
+            ></th>
+          }
+          <th transloco="Action"></th>
+        </tr>
+      </thead>
+      @if (selectedIds$ | async; as selectedIds) {
+        <tbody>
+          @for (data of basicTable.data; track $index) {
+            <tr
+              (click)="
+                selectedIds$.next(
+                  !data.id || selectedIds[0] === data.id ? [] : [data.id]
+                )
+              "
+              [class.selected]="selectedIds[0] === data.id"
+            >
+              @for (column of columns; track $index) {
+                @if (column.isDate) {
+                  <td>
+                    {{
+                      data[column.name]
+                        | translocoDate
+                          : { dateStyle: 'medium', timeStyle: 'medium' }
+                    }}
+                  </td>
+                } @else {
+                  @if (column.isFile && data[column.name]) {
+                    <td>
+                      <img
+                        style="max-height: 40px; max-height: 40px"
+                        [src]="(minioURL$ | async) + data[column.name]"
+                      />
+                    </td>
+                  } @else {
+                    <td>
+                      {{ data[column.name] }}
+                    </td>
+                  }
+                }
+              }
+              <td>
+                @if (configuration.actions.update) {
+                  <a (click)="showCreateOrUpdateModal(data.id)">
+                    {{
+                      configuration.actions.update.buttonTitle
+                        ? (configuration.actions.update.buttonTitle | transloco)
+                        : ('Edit' | transloco)
+                    }}
+                  </a>
+                }
+                @if (
+                  configuration.actions.update && configuration.actions.delete
+                ) {
+                  <nz-divider nzType="vertical"></nz-divider>
+                }
+                @if (configuration.actions.delete) {
+                  <a (click)="showDeleteModal(data.id)">
+                    {{
+                      configuration.actions.delete.buttonTitle
+                        ? (configuration.actions.delete.buttonTitle | transloco)
+                        : ('Delete' | transloco)
+                    }}
+                  </a>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
       }
-      <th transloco="Action"></th>
-    </tr>
-  </thead>
-  @if (selectedIds$ | async; as selectedIds) {
-  <tbody>
-    @for (data of basicTable.data; track $index) {
-    <tr
-      (click)="
-        selectedIds$.next(
-          !data.id || selectedIds[0] === data.id ? [] : [data.id]
-        )
-      "
-      [class.selected]="selectedIds[0] === data.id"
-    >
-      @for (column of columns; track $index) { @if (column.isDate) {
-      <td>
-        {{
-          data[column.name]
-            | translocoDate : { dateStyle: 'medium', timeStyle: 'medium' }
-        }}
-      </td>
-      } @else{
-      <td>
-        {{ data[column.name] }}
-      </td>
-      } }
-      <td>
-        @if (configuration.modals.update){
-        <a (click)="showCreateOrUpdateModal(data.id)" transloco="Edit"></a>
-        } @if (configuration.modals.update && configuration.modals.delete){
-        <nz-divider nzType="vertical"></nz-divider>
-        } @if (configuration.modals.delete){
-        <a (click)="showDeleteModal(data.id)" transloco="Delete"></a>
-        }
-      </td>
-    </tr>
     }
-  </tbody>
-  } }
-</nz-table>
+  </nz-table>
 }

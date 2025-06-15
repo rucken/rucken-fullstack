@@ -16,7 +16,6 @@ import {
 } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { ValidationService } from '@nestjs-mod/afat';
-import { FilesService } from '@nestjs-mod/files-afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
@@ -25,15 +24,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
-import {
-  BehaviorSubject,
-  catchError,
-  map,
-  mergeMap,
-  of,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { SsoUserFormService } from '../../services/sso-user-form.service';
 import { SsoUserModel, SsoUserService } from '../../services/sso-user.service';
 
@@ -82,7 +73,6 @@ export class SsoUserFormComponent implements OnInit {
     private readonly translocoService: TranslocoService,
     private readonly ssoUserFormService: SsoUserFormService,
     private readonly validationService: ValidationService,
-    private readonly filesService: FilesService
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +83,7 @@ export class SsoUserFormComponent implements OnInit {
         untilDestroyed(this),
         tap(() => {
           this.formlyFields$.next(this.formlyFields$.value);
-        })
+        }),
       )
       .subscribe();
 
@@ -103,9 +93,9 @@ export class SsoUserFormComponent implements OnInit {
           tap((result) =>
             this.afterFind.next({
               ...(result as SsoUserModel),
-            })
+            }),
           ),
-          untilDestroyed(this)
+          untilDestroyed(this),
         )
         .subscribe();
     } else {
@@ -125,14 +115,14 @@ export class SsoUserFormComponent implements OnInit {
           tap((result) => {
             if (result) {
               this.nzMessageService.success(
-                this.translocoService.translate('Success')
+                this.translocoService.translate('Success'),
               );
               this.afterUpdate.next({
                 ...result,
               });
             }
           }),
-          untilDestroyed(this)
+          untilDestroyed(this),
         )
         .subscribe();
     }
@@ -141,53 +131,30 @@ export class SsoUserFormComponent implements OnInit {
   updateOne() {
     if (!this.id) {
       return throwError(
-        () => new Error(this.translocoService.translate('id not set'))
+        () => new Error(this.translocoService.translate('id not set')),
       );
     }
-    const data = this.ssoUserService.toJson(this.form.value);
-    const oldData = data;
-    return (
-      data.picture
-        ? this.filesService.getPresignedUrlAndUploadFile(data.picture)
-        : of('')
-    ).pipe(
-      mergeMap((picture) =>
-        !this.id
-          ? throwError(
-              () => new Error(this.translocoService.translate('id not set'))
-            )
-          : this.ssoUserService.updateOne(this.id, { ...data, picture })
-      ),
-      mergeMap((newData) => {
-        if (
-          oldData.picture &&
-          typeof oldData.picture === 'string' &&
-          newData.picture !== oldData.picture
-        ) {
-          return this.filesService
-            .deleteFile(oldData.picture)
-            .pipe(map(() => newData));
-        }
-        return of(newData);
-      }),
-      catchError((err) =>
-        this.validationService.catchAndProcessServerError(err, (options) =>
-          this.setFormlyFields(options)
-        )
-      )
-    );
+    return this.ssoUserService
+      .updateOne(this.id, this.form.value)
+      .pipe(
+        catchError((err) =>
+          this.validationService.catchAndProcessServerError(err, (options) =>
+            this.setFormlyFields(options),
+          ),
+        ),
+      );
   }
 
   findOne() {
     if (!this.id) {
       return throwError(
-        () => new Error(this.translocoService.translate('id not set'))
+        () => new Error(this.translocoService.translate('id not set')),
       );
     }
     return this.ssoUserService.findOne(this.id).pipe(
       tap((result) => {
         this.setFieldsAndModel(result);
-      })
+      }),
     );
   }
 

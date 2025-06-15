@@ -5,8 +5,8 @@ export * from './lib/dynamic-forms/dynamic-crud-form/dynamic-crud-form.component
 export * from './lib/dynamic-forms/dynamic-crud-form/dynamic-crud-form.configuration';
 export * from './lib/dynamic-grids/dynamic-crud-grid/dynamic-crud-grid.component';
 export * from './lib/dynamic-grids/dynamic-crud-grid/dynamic-crud-grid.configuration';
-export * from './lib/dynamic-pages/crud/crud.component';
-export * from './lib/dynamic-pages/crud/crud.configuration';
+export * from './lib/dynamic-pages/crud-page/crud-page.component';
+export * from './lib/dynamic-pages/crud-page/crud-page.configuration';
 export * from './lib/layout/layout.component';
 export * from './lib/layout/layout.configuration';
 export * from './lib/pages/pages.routes';

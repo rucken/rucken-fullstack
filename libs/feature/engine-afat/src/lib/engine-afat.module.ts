@@ -1,24 +1,23 @@
 import { NgModule, Provider } from '@angular/core';
 import { provideRouter, Route } from '@angular/router';
-import { CrudComponent } from './dynamic-pages/crud/crud.component';
+import {
+  OnActivateOptions,
+  SSO_GUARD_DATA_ROUTE_KEY,
+  SsoGuardData,
+  SsoGuardService,
+} from '@rucken/sso-afat';
+import { CrudComponent } from './dynamic-pages/crud-page/crud-page.component';
+import { CrudConfiguration } from './dynamic-pages/crud-page/crud-page.configuration';
 import {
   RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN,
   RuckenAfatEngineConfiguration,
 } from './engine-afat.configuration';
 import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from './engine-afat.constants';
 import { pagesRoutes } from './pages/pages.routes';
-import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
-import {
-  SsoGuardService,
-  SSO_GUARD_DATA_ROUTE_KEY,
-  SsoGuardData,
-  OnActivateOptions,
-} from '@rucken/sso-afat';
-import { CrudConfiguration } from './dynamic-pages/crud/crud.configuration';
 
 export function provideRuckenAfatEngine(
   useFactory: (...deps: any[]) => RuckenAfatEngineConfiguration,
-  deps?: any[]
+  deps?: any[],
 ) {
   let configuration = useFactory(...(deps || []));
   return [
@@ -66,7 +65,7 @@ export function provideRuckenAfatEngine(
             title: part.route?.title || part.navigation.title,
             ...(part.crud
               ? {
-                  component: CrudComponent,
+                  component: part.crud.component || CrudComponent,
                 }
               : {}),
             path: part.route?.path

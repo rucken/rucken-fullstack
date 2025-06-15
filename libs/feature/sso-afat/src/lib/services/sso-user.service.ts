@@ -3,19 +3,20 @@ import { RequestMeta } from '@nestjs-mod/misc';
 import {
   RuckenRestSdkAngularService,
   SendInvitationLinksArgsInterface,
-  UpdateSsoUserDtoInterface,
 } from '@rucken/rucken-rest-sdk-angular';
-import { map } from 'rxjs';
+import { map, mergeMap, of } from 'rxjs';
 
 import { TIMEZONE_OFFSET, safeParseJson } from '@nestjs-mod/misc';
 import { SsoUserDtoInterface } from '@rucken/rucken-rest-sdk-angular';
 
+import { FilesService } from '@nestjs-mod/files-afat';
 import { addHours, format } from 'date-fns';
 
 export interface SsoUserModel
   extends Partial<
     Omit<
       SsoUserDtoInterface,
+      | 'revokedAt'
       | 'emailVerifiedAt'
       | 'phoneVerifiedAt'
       | 'birthdate'
@@ -27,6 +28,7 @@ export interface SsoUserModel
   > {
   roles: string[];
   appData?: string | null;
+  revokedAt?: Date | null;
   emailVerifiedAt?: Date | null;
   phoneVerifiedAt?: Date | null;
   birthdate?: Date | null;
@@ -37,7 +39,8 @@ export interface SsoUserModel
 @Injectable({ providedIn: 'root' })
 export class SsoUserService {
   constructor(
-    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService
+    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
+    private readonly filesService: FilesService,
   ) {}
 
   findOne(id: string) {
@@ -65,21 +68,42 @@ export class SsoUserService {
               .map(([key, value]) => `${key}:${value}`)
               .join(',')
           : undefined,
-        filters['projectId']
+        filters['projectId'],
       )
       .pipe(
         map(({ meta, ssoUsers }) => ({
           meta,
           items: ssoUsers.map((p) => this.toModel(p)),
-        }))
+        })),
       );
   }
 
-  updateOne(id: string, data: UpdateSsoUserDtoInterface) {
-    return this.ruckenRestSdkAngularService
-      .getSsoApi()
-      .ssoUsersControllerUpdateOne(id, data)
-      .pipe(map((p) => this.toModel(p)));
+  updateOne(id: string, data: SsoUserModel) {
+    const oldData = data;
+    return (
+      data.picture
+        ? this.filesService.getPresignedUrlAndUploadFile(data.picture)
+        : of('')
+    ).pipe(
+      mergeMap((picture) =>
+        this.ruckenRestSdkAngularService
+          .getSsoApi()
+          .ssoUsersControllerUpdateOne(id, this.toJson({ ...data, picture })),
+      ),
+      mergeMap((newData) => {
+        if (
+          oldData.picture &&
+          typeof oldData.picture === 'string' &&
+          newData.picture !== oldData.picture
+        ) {
+          return this.filesService
+            .deleteFile(oldData.picture)
+            .pipe(map(() => newData));
+        }
+        return of(newData);
+      }),
+      map((p) => this.toModel(p)),
+    );
   }
 
   sendInvitationLinks(data: SendInvitationLinksArgsInterface) {
@@ -95,6 +119,9 @@ export class SsoUserService {
       ...item,
       roles: item?.roles ? item.roles.split(',') : [],
       appData: item?.appData ? JSON.stringify(item.appData) : '',
+      revokedAt: item?.revokedAt
+        ? addHours(new Date(item.revokedAt), TIMEZONE_OFFSET)
+        : null,
       emailVerifiedAt: item?.emailVerifiedAt
         ? addHours(new Date(item.emailVerifiedAt), TIMEZONE_OFFSET)
         : null,
@@ -116,6 +143,9 @@ export class SsoUserService {
   toForm(model: SsoUserModel) {
     return {
       ...model,
+      revokedAt: model.revokedAt
+        ? format(model.revokedAt, 'yyyy-MM-dd HH:mm:ss')
+        : null,
       emailVerifiedAt: model.emailVerifiedAt
         ? format(model.emailVerifiedAt, 'yyyy-MM-dd HH:mm:ss')
         : null,

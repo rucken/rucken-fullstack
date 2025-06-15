@@ -7,11 +7,11 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { Observable } from 'rxjs';
 import { DynamicCrudGridComponent } from '../../dynamic-grids/dynamic-crud-grid/dynamic-crud-grid.component';
-import { CrudConfiguration } from './crud.configuration';
+import { CrudConfiguration } from './crud-page.configuration';
 
 @Component({
-  selector: 'crud',
-  templateUrl: './crud.component.html',
+  selector: 'crud-page',
+  templateUrl: './crud-page.component.html',
   imports: [
     NzBreadCrumbModule,
     NzGridModule,

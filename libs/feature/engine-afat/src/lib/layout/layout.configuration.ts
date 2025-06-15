@@ -1,7 +1,6 @@
-import { Type } from '@angular/core';
-import { Route, UrlTree } from '@angular/router';
+import { Route } from '@angular/router';
 import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
-import { CrudConfiguration } from '../dynamic-pages/crud/crud.configuration';
+import { CrudConfiguration } from '../dynamic-pages/crud-page/crud-page.configuration';
 
 export type LayoutPartNavigation =
   | {
