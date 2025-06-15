@@ -5,14 +5,14 @@
     </div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
       @for (navigation of navigations$|async; track $index) { @if
-      (navigation.link){
+      (navigation['link']){
       <li
         nz-menu-item
-        [routerLink]="navigation.link"
+        [routerLink]="navigation['link']"
         [transloco]="navigation.title"
       ></li>
-      } @if (navigation.href){
-      <a nz-menu-item [href]="navigation.href" target="__blank">
+      } @if (navigation['href']){
+      <a nz-menu-item [href]="navigation['href']" target="__blank">
         @if (navigation.icon){
         <nz-icon [nzType]="navigation.icon" nzTheme="outline" />
         }

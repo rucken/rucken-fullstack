@@ -40,6 +40,8 @@ import {
   getQueryMetaByParams,
 } from '@nestjs-mod/afat';
 import { RequestMeta, getQueryMeta } from '@nestjs-mod/misc';
+import { DynamicCrudFormComponent } from '../../dynamic-forms/dynamic-crud-form/dynamic-crud-form.component';
+import { CrudConfiguration } from '../../dynamic-pages/crud/crud.configuration';
 import {
   DynamicCrudGridColumn,
   DynamicCrudGridConfiguration,
@@ -75,6 +77,9 @@ export class DynamicCrudGridComponent<
 > implements OnInit
 {
   @Input({ required: true })
+  crudConfiguration!: CrudConfiguration;
+
+  @Input({ required: true })
   configuration!: DynamicCrudGridConfiguration;
 
   @Input()
@@ -94,7 +99,6 @@ export class DynamicCrudGridComponent<
   private filters?: Record<string, string>;
 
   constructor(
-    // private readonly ssoProjectService: SsoProjectService,
     private readonly nzModalService: NzModalService,
     private readonly viewContainerRef: ViewContainerRef,
     private readonly translocoService: TranslocoService
@@ -117,7 +121,7 @@ export class DynamicCrudGridComponent<
       )
       .subscribe();
 
-    this.loadMany();
+    this.loadMany({ force: true });
   }
 
   loadMany(args?: {
@@ -126,6 +130,7 @@ export class DynamicCrudGridComponent<
     queryParams?: NzTableQueryParams;
     force?: boolean;
   }) {
+    console.log({ args });
     let meta = { meta: {}, ...(args || {}) }.meta as RequestMeta;
     const { queryParams, filters } = { filters: {}, ...(args || {}) };
 
@@ -152,36 +157,44 @@ export class DynamicCrudGridComponent<
       return;
     }
 
-    // this.ssoProjectService
-    //   .findMany({ filters, meta })
-    //   .pipe(
-    //     tap((result) => {
-    //       this.items$.next(result.ssoProjects);
-    //       this.meta$.next({ ...result.meta, ...meta });
-    //       this.filters = filters;
-    //       this.selectedIds$.next([]);
-    //     }),
-    //     untilDestroyed(this)
-    //   )
-    //   .subscribe();
+    this.crudConfiguration
+      .handlers()
+      .findMany?.({ filters, meta })
+      .pipe(
+        tap((result) => {
+          this.items$.next(result.items as DynamicCrudModel[]);
+          this.meta$.next({ ...result.meta, ...meta });
+          this.filters = filters;
+          this.selectedIds$.next([]);
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe();
   }
 
   showCreateOrUpdateModal(id?: string): void {
-    /*const modal = this.nzModalService.create<
-      SsoProjectFormComponent,
-      SsoProjectFormComponent
+    const modal = this.nzModalService.create<
+      DynamicCrudFormComponent<DynamicCrudModel>,
+      DynamicCrudFormComponent<DynamicCrudModel>
     >({
       nzTitle: id
-        ? this.translocoService.translate('sso-project.update-modal.title', {
-            id,
-          })
-        : this.translocoService.translate('sso-project.create-modal.title'),
-      nzContent: SsoProjectFormComponent,
+        ? this.translocoService.translate(
+            this.configuration.modals.update.title,
+            {
+              id,
+            }
+          )
+        : this.translocoService.translate(
+            this.configuration.modals.create.title
+          ),
+      nzContent: DynamicCrudFormComponent,
       nzViewContainerRef: this.viewContainerRef,
       nzData: {
+        crudConfiguration: this.crudConfiguration,
+        configuration: this.crudConfiguration.form(),
         hideButtons: true,
         id,
-      } as SsoProjectFormComponent,
+      } as DynamicCrudFormComponent<DynamicCrudModel>,
       nzFooter: [
         {
           label: this.translocoService.translate('Cancel'),
@@ -219,16 +232,16 @@ export class DynamicCrudGridComponent<
           type: 'primary',
         },
       ],
-    });*/
+    });
   }
 
   showDeleteModal(id?: string) {
-    /*if (!id) {
+    if (!id) {
       return;
     }
     this.nzModalService.confirm({
       nzTitle: this.translocoService.translate(
-        `sso-project.delete-modal.title`,
+        this.configuration.modals.delete.title,
         {
           id,
         }
@@ -236,8 +249,9 @@ export class DynamicCrudGridComponent<
       nzOkText: this.translocoService.translate('Yes'),
       nzCancelText: this.translocoService.translate('No'),
       nzOnOk: () => {
-        this.ssoProjectService
-          .deleteOne(id)
+        this.crudConfiguration
+          .handlers()
+          .deleteOne?.(id)
           .pipe(
             tap(() => {
               this.loadMany({ force: true });
@@ -246,6 +260,6 @@ export class DynamicCrudGridComponent<
           )
           .subscribe();
       },
-    });*/
+    });
   }
 }

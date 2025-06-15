@@ -72,7 +72,7 @@ export class SsoProjectService {
       .pipe(
         map(({ meta, ssoProjects }) => ({
           meta,
-          ssoProjects: ssoProjects.map((p) =>
+          items: ssoProjects.map((p) =>
             this.ssoProjectMapperService.toModel(p)
           ),
         }))

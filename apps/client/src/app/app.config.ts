@@ -13,7 +13,11 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TitleStrategy } from '@angular/router';
 import { GithubFill } from '@ant-design/icons-angular/icons';
-import { provideTransloco } from '@jsverse/transloco';
+import {
+  LangDefinition,
+  provideTransloco,
+  TranslocoService,
+} from '@jsverse/transloco';
 import { marker } from '@jsverse/transloco-keys-manager/marker';
 import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { COMMON_FORMLY_FIELDS } from '@nestjs-mod/afat';
@@ -27,10 +31,13 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyNgZorroAntdModule } from '@ngx-formly/ng-zorro-antd';
 import { provideRuckenAfatEngine } from '@rucken/engine-afat';
 import {
+  CreateSsoProjectDtoInterface,
   RuckenRestSdkAngularModule,
   SsoProjectScalarFieldEnumInterface,
   SsoRoleInterface,
+  UpdateSsoProjectDtoInterface,
 } from '@rucken/rucken-rest-sdk-angular';
+import { SsoProjectService } from '@rucken/sso-afat';
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { serverUrl } from '../environments/environment';
@@ -58,109 +65,217 @@ export const ssoAppConfig = ({
       provideZoneChangeDetection({ eventCoalescing: true }),
       provideHttpClient(),
       provideNzI18n(en_US),
-      provideRuckenAfatEngine(() => ({
-        layout: {
-          title: APP_TITLE,
-          parts: [
-            {
-              root: true,
-              navigation: {
-                link: '/home',
-                title: marker('Home'),
-              },
-              route: {
-                path: 'home',
-                component: HomeComponent,
-              },
-            },
-            {
-              navigation: {
-                link: '/home1',
-                title: 'Home1',
-              },
-              crud: {
-                dynamicCrudGrid: {
-                  modals: {
-                    create: { title: marker('sso-project.create-modal.title') },
-                    delete: { title: marker('sso-project.delete-modal.title') },
-                    update: { title: marker('sso-project.update-modal.title') },
-                  },
-                  columns: [
-                    {
-                      name: SsoProjectScalarFieldEnumInterface.id,
-                      title: marker('sso-project.grid.columns.id'),
-                    },
-                    {
-                      name: SsoProjectScalarFieldEnumInterface.name,
-                      title: marker('sso-project.grid.columns.name'),
-                    },
-                    {
-                      name: SsoProjectScalarFieldEnumInterface.clientId,
-                      title: marker('sso-project.grid.columns.client-id'),
-                    },
-                    {
-                      name: SsoProjectScalarFieldEnumInterface.clientSecret,
-                      title: marker('sso-project.grid.columns.client-secret'),
-                    },
-                    {
-                      name: SsoProjectScalarFieldEnumInterface.public,
-                      title: marker('sso-project.grid.columns.public'),
-                    },
-                  ],
+      provideRuckenAfatEngine(
+        (
+          translocoService: TranslocoService,
+          ssoProjectService: SsoProjectService
+        ) => ({
+          layout: {
+            title: APP_TITLE,
+            parts: [
+              {
+                root: true,
+                navigation: {
+                  link: '/home',
+                  title: marker('Home'),
+                },
+                route: {
+                  path: 'home',
+                  component: HomeComponent,
                 },
               },
-            },
-            {
-              roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-              navigation: {
-                link: '/webhooks',
-                title: marker('Webhooks'),
+              {
+                navigation: {
+                  link: '/home1',
+                  title: 'Home1',
+                },
+                crud: {
+                  handlers: () => ({
+                    createOne: (data) => {
+                      return ssoProjectService.createOne(
+                        data as CreateSsoProjectDtoInterface
+                      );
+                    },
+                    updateOne: (id, data) => {
+                      return ssoProjectService.updateOne(
+                        id,
+                        data as UpdateSsoProjectDtoInterface
+                      );
+                    },
+                    findOne: (id) => {
+                      return ssoProjectService.findOne(id);
+                    },
+                    deleteOne(id) {
+                      return ssoProjectService.deleteOne(id);
+                    },
+                    findMany({ filters, meta }) {
+                      return ssoProjectService.findMany({ filters, meta });
+                    },
+                  }),
+                  form: () => ({
+                    inputs: [
+                      ...(
+                        translocoService.getAvailableLangs() as LangDefinition[]
+                      ).map((a) => ({
+                        key:
+                          a.id === translocoService.getDefaultLang()
+                            ? 'name'
+                            : `name_${a.id}`,
+                        type: 'textarea',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-project.form.fields.name-locale`,
+                            // id, label
+                            {
+                              locale: a.id,
+                              label: translocoService.translate(a.label),
+                            }
+                          ),
+                          placeholder:
+                            a.id === translocoService.getDefaultLang()
+                              ? 'name'
+                              : `name ${a.id}`,
+                          required: a.id === translocoService.getDefaultLang(),
+                        },
+                      })),
+                      {
+                        key: SsoProjectScalarFieldEnumInterface.clientId,
+                        type: 'input',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-project.form.fields.client-id`
+                          ),
+                          placeholder: 'clientId',
+                          required: true,
+                        },
+                      },
+                      {
+                        key: SsoProjectScalarFieldEnumInterface.clientSecret,
+                        type: 'input',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-project.form.fields.client-secret`
+                          ),
+                          placeholder: 'clientSecret',
+                          required: true,
+                        },
+                      },
+                      {
+                        key: SsoProjectScalarFieldEnumInterface.public,
+                        type: 'checkbox',
+                        validation: {
+                          show: true,
+                        },
+                        defaultValue: false,
+                        props: {
+                          label: translocoService.translate(
+                            `sso-project.form.fields.public`
+                          ),
+                          placeholder: 'public',
+                          required: true,
+                        },
+                      },
+                    ],
+                  }),
+                  grid: () => ({
+                    modals: {
+                      create: {
+                        title: marker('sso-project.create-modal.title'),
+                      },
+                      delete: {
+                        title: marker('sso-project.delete-modal.title'),
+                      },
+                      update: {
+                        title: marker('sso-project.update-modal.title'),
+                      },
+                    },
+                    columns: [
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.id,
+                        title: marker('sso-project.grid.columns.id'),
+                      },
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.name,
+                        title: marker('sso-project.grid.columns.name'),
+                      },
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.clientId,
+                        title: marker('sso-project.grid.columns.client-id'),
+                      },
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.clientSecret,
+                        title: marker('sso-project.grid.columns.client-secret'),
+                      },
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.public,
+                        title: marker('sso-project.grid.columns.public'),
+                      },
+                    ],
+                  }),
+                },
               },
-              route: {
-                component: WebhooksComponent,
+              {
+                roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+                navigation: {
+                  link: '/webhooks',
+                  title: marker('Webhooks'),
+                },
+                route: {
+                  component: WebhooksComponent,
+                },
               },
-            },
-            {
-              roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-              navigation: {
-                link: '/templates',
-                title: marker('Templates'),
+              {
+                roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+                navigation: {
+                  link: '/templates',
+                  title: marker('Templates'),
+                },
+                route: {
+                  component: TemplatesComponent,
+                },
               },
-              route: {
-                component: TemplatesComponent,
+              {
+                roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+                navigation: {
+                  link: '/users',
+                  title: marker('Users'),
+                },
+                route: {
+                  component: UsersComponent,
+                },
               },
-            },
-            {
-              roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-              navigation: {
-                link: '/users',
-                title: marker('Users'),
+              {
+                roles: [SsoRoleInterface.admin],
+                second: true,
+                navigation: {
+                  link: '/projects',
+                  title: marker('Projects'),
+                },
+                route: {
+                  component: ProjectsComponent,
+                },
               },
-              route: {
-                component: UsersComponent,
+              {
+                navigation: {
+                  href: 'https://github.com/rucken/rucken-fullstack',
+                  icon: 'github',
+                  title: marker('Source code'),
+                },
               },
-            },
-            {
-              roles: [SsoRoleInterface.admin],
-              second: true,
-              navigation: {
-                link: '/projects',
-                title: marker('Projects'),
-              },
-              route: {
-                component: ProjectsComponent,
-              },
-            },
-            {
-              navigation: {
-                href: 'https://github.com/rucken/rucken-fullstack',
-                icon: 'github',
-                title: marker('Source code'),
-              },
-            },
-          ],
-        },
-      })),
+            ],
+          },
+        }),
+        [TranslocoService, SsoProjectService]
+      ),
       importProvidersFrom(
         BrowserAnimationsModule,
         RuckenRestSdkAngularModule.forRoot({

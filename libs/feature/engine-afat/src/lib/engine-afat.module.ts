@@ -14,63 +14,81 @@ import {
   SsoGuardData,
   OnActivateOptions,
 } from '@rucken/sso-afat';
+import { CrudConfiguration } from './dynamic-pages/crud/crud.configuration';
 
 export function provideRuckenAfatEngine(
   useFactory: (...deps: any[]) => RuckenAfatEngineConfiguration,
   deps?: any[]
 ) {
-  const configuration = useFactory(...(deps || []));
+  let configuration = useFactory(...(deps || []));
   return [
     {
       provide: RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN,
-      useValue: configuration,
+      useFactory: (...deps) => {
+        const result = useFactory(...deps);
+        configuration = result;
+        return result;
+      },
+      deps,
     } as Provider,
     provideRouter([
       {
         path: '',
         redirectTo:
-          configuration.layout?.parts.find((p) => p.root)?.navigation.link ||
-          '/home',
+          configuration.layout?.parts.find((p) => p.root)?.navigation?.[
+            'link'
+          ] || '/home',
         pathMatch: 'full',
       },
       {
         path: ROOT_PATH_MARKER.slice(1),
         redirectTo:
-          configuration.layout?.parts.find((p) => p.root)?.navigation.link ||
-          '/home',
+          configuration.layout?.parts.find((p) => p.root)?.navigation?.[
+            'link'
+          ] || '/home',
         pathMatch: 'full',
       },
       {
         path: SECOND_PATH_MARKER.slice(1),
         redirectTo:
-          configuration.layout?.parts.find((p) => p.second)?.navigation.link ||
-          '/home',
+          configuration.layout?.parts.find((p) => p.second)?.navigation?.[
+            'link'
+          ] || '/home',
         pathMatch: 'full',
       },
       ...pagesRoutes,
       ...((configuration.layout?.parts
-        .filter((p) => p.route || p.crud)
-        .map((p) => ({
-          ...p.route,
-          title: p.route?.title || p.navigation.title,
-          ...(p.crud
+        .map((part, index) => ({ part, index }))
+        .filter(({ part }) => part.route || part.crud)
+        .map(({ part, index }) => ({
+          ...part.route,
+          title: part.route?.title || part.navigation.title,
+          ...(part.crud
             ? {
                 component: CrudComponent,
                 data: {
-                  ...p.crud,
-                  title: p.crud.title || p.route?.title || p.navigation.title,
-                },
+                  title:
+                    part.crud.title ||
+                    part.route?.title ||
+                    part.navigation.title,
+                  handlers: () =>
+                    configuration.layout.parts[index].crud?.handlers(),
+                  form: () => configuration.layout.parts[index].crud?.form(),
+                  grid: () => configuration.layout.parts[index].crud?.grid(),
+                } as CrudConfiguration,
               }
             : {}),
-          path: p.route?.path ? p.route?.path : p.navigation.link?.slice(1),
-          ...(p.roles?.length
+          path: part.route?.path
+            ? part.route?.path
+            : part.navigation?.['link']?.slice(1),
+          ...(part.roles?.length
             ? {
-                canActivate: p.route?.canActivate || [SsoGuardService],
+                canActivate: part.route?.canActivate || [SsoGuardService],
                 data: {
                   [SSO_GUARD_DATA_ROUTE_KEY]:
-                    p.route?.data?.[SSO_GUARD_DATA_ROUTE_KEY] ||
+                    part.route?.data?.[SSO_GUARD_DATA_ROUTE_KEY] ||
                     new SsoGuardData({
-                      roles: p.roles,
+                      roles: part.roles,
                       afterActivate: async (options: OnActivateOptions) => {
                         if (options.error) {
                           options.router.navigate([ROOT_PATH_MARKER]);

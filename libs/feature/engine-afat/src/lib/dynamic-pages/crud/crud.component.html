@@ -8,7 +8,8 @@
   <dynamic-crud-grid
     nz-col
     [nzSpan]="24"
-    [configuration]="crudConfiguration.dynamicCrudGrid"
+    [configuration]="crudConfiguration.grid()"
+    [crudConfiguration]="crudConfiguration"
   >
   </dynamic-crud-grid>
 </nz-row>

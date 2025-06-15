@@ -167,7 +167,7 @@ export class SsoProjectGridComponent implements OnInit {
       .findMany({ filters, meta })
       .pipe(
         tap((result) => {
-          this.items$.next(result.ssoProjects);
+          this.items$.next(result.items);
           this.meta$.next({ ...result.meta, ...meta });
           this.filters = filters;
           this.selectedIds$.next([]);
