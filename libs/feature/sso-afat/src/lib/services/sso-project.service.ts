@@ -1,24 +1,36 @@
 import { Injectable } from '@angular/core';
-import { RequestMeta } from '@nestjs-mod/misc';
+import { LangDefinition, TranslocoService } from '@jsverse/transloco';
+import { RequestMeta, TIMEZONE_OFFSET } from '@nestjs-mod/misc';
 import {
   CreateSsoProjectDtoInterface,
   RuckenRestSdkAngularService,
+  SsoProjectDtoInterface,
+  SsoPublicProjectDtoInterface,
   UpdateSsoProjectDtoInterface,
 } from '@rucken/rucken-rest-sdk-angular';
+import { addHours } from 'date-fns';
 import { map } from 'rxjs';
-import { SsoProjectMapperService } from './sso-project-mapper.service';
+
+export interface SsoProjectModel
+  extends Partial<
+    Omit<SsoProjectDtoInterface, 'createdAt' | 'updatedAt' | 'nameLocale'>
+  > {
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
+}
+
 @Injectable({ providedIn: 'root' })
 export class SsoProjectService {
   constructor(
-    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
-    private readonly ssoProjectMapperService: SsoProjectMapperService
+    private readonly translocoService: TranslocoService,
+    private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService
   ) {}
 
   findOne(id: string) {
     return this.ruckenRestSdkAngularService
       .getSsoApi()
       .ssoProjectsControllerFindOne(id)
-      .pipe(map((p) => this.ssoProjectMapperService.toModel(p)));
+      .pipe(map((p) => this.toModel(p)));
   }
 
   findManyPublic({
@@ -43,9 +55,7 @@ export class SsoProjectService {
       .pipe(
         map(({ meta, ssoPublicProjects }) => ({
           meta,
-          ssoPublicProjects: ssoPublicProjects.map((p) =>
-            this.ssoProjectMapperService.toPublicModel(p)
-          ),
+          items: ssoPublicProjects.map((p) => this.toModel(p)),
         }))
       );
   }
@@ -72,9 +82,7 @@ export class SsoProjectService {
       .pipe(
         map(({ meta, ssoProjects }) => ({
           meta,
-          items: ssoProjects.map((p) =>
-            this.ssoProjectMapperService.toModel(p)
-          ),
+          items: ssoProjects.map((p) => this.toModel(p)),
         }))
       );
   }
@@ -82,8 +90,8 @@ export class SsoProjectService {
   updateOne(id: string, data: UpdateSsoProjectDtoInterface) {
     return this.ruckenRestSdkAngularService
       .getSsoApi()
-      .ssoProjectsControllerUpdateOne(id, data)
-      .pipe(map((p) => this.ssoProjectMapperService.toModel(p)));
+      .ssoProjectsControllerUpdateOne(id, this.toJson(data))
+      .pipe(map((p) => this.toModel(p)));
   }
 
   deleteOne(id: string) {
@@ -95,7 +103,53 @@ export class SsoProjectService {
   createOne(data: CreateSsoProjectDtoInterface) {
     return this.ruckenRestSdkAngularService
       .getSsoApi()
-      .ssoProjectsControllerCreateOne(data)
-      .pipe(map((p) => this.ssoProjectMapperService.toModel(p)));
+      .ssoProjectsControllerCreateOne(this.toJson(data))
+      .pipe(map((p) => this.toModel(p)));
+  }
+
+  //
+
+  toModel(
+    item?: SsoPublicProjectDtoInterface | SsoProjectDtoInterface
+  ): SsoProjectModel {
+    return {
+      ...item,
+      createdAt: item?.createdAt
+        ? addHours(new Date(item.createdAt), TIMEZONE_OFFSET)
+        : null,
+      updatedAt: item?.updatedAt
+        ? addHours(new Date(item.updatedAt), TIMEZONE_OFFSET)
+        : null,
+      ...Object.fromEntries(
+        this.getAvailableLangs().map((a) => {
+          return [`name_${a.id}`, item?.nameLocale?.[a.id] || ''];
+        })
+      ),
+    };
+  }
+
+  toJson(data: SsoProjectModel) {
+    return {
+      public: data.public === true,
+      name: data.name || '',
+      clientId: data.clientId || '',
+      clientSecret: data.clientSecret || '',
+      nameLocale: Object.fromEntries(
+        this.getAvailableLangs().map((a) => {
+          return [a.id, data[`name_${a.id}`] || ''];
+        })
+      ),
+    };
+  }
+
+  //
+
+  private getAvailableLangs() {
+    return (
+      this.translocoService.getAvailableLangs() as LangDefinition[]
+    ).filter(
+      (availableLang) =>
+        availableLang.id !== this.translocoService.getDefaultLang()
+    );
   }
 }

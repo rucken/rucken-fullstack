@@ -91,10 +91,21 @@ export class SsoProjectService {
       if (project) {
         req.ssoProject = project;
       } else {
-        throw new SsoError('Project not found');
+        if (this.ssoStaticEnvironments.defaultProject?.clientId) {
+          req.ssoClientId = this.ssoStaticEnvironments.defaultProject?.clientId;
+          const project = await this.ssoCacheService.getCachedProject(
+            req.ssoClientId
+          );
+          if (project) {
+            req.ssoProject = project;
+          }
+        }
       }
     }
-    return req.ssoProject;
+    if (req.ssoProject) {
+      return req.ssoProject;
+    }
+    throw new SsoError('Project not found');
   }
 
   private getClientSecretFromRequest(req: SsoRequest) {

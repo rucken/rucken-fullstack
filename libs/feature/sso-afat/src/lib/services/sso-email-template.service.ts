@@ -43,7 +43,7 @@ export class SsoEmailTemplateService {
       .pipe(
         map(({ meta, ssoEmailTemplates }) => ({
           meta,
-          ssoEmailTemplates: ssoEmailTemplates.map((t) =>
+          items: ssoEmailTemplates.map((t) =>
             this.ssoEmailTemplateMapperService.toModel(t)
           ),
         }))

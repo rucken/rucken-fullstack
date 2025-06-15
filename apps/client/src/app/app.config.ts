@@ -48,7 +48,6 @@ import { AppErrorHandler } from './app.error-handler';
 import { provideSsoConfiguration } from './integrations/sso.configuration';
 import { TranslocoHttpLoader } from './integrations/transloco-http.loader';
 import { HomeComponent } from './pages/home/home.component';
-import { ProjectsComponent } from './pages/projects/projects.component';
 import { TemplatesComponent } from './pages/templates/templates.component';
 import { UsersComponent } from './pages/users/users.component';
 import { WebhooksComponent } from './pages/webhooks/webhooks.component';
@@ -260,8 +259,138 @@ export const ssoAppConfig = ({
                   link: '/projects',
                   title: marker('Projects'),
                 },
-                route: {
-                  component: ProjectsComponent,
+                crud: {
+                  handlers: () => ({
+                    createOne: (data) => {
+                      return ssoProjectService.createOne(
+                        data as CreateSsoProjectDtoInterface
+                      );
+                    },
+                    updateOne: (id, data) => {
+                      return ssoProjectService.updateOne(
+                        id,
+                        data as UpdateSsoProjectDtoInterface
+                      );
+                    },
+                    findOne: (id) => {
+                      return ssoProjectService.findOne(id);
+                    },
+                    deleteOne(id) {
+                      return ssoProjectService.deleteOne(id);
+                    },
+                    findMany({ filters, meta }) {
+                      return ssoProjectService.findMany({ filters, meta });
+                    },
+                  }),
+                  form: () => ({
+                    inputs: [
+                      ...(
+                        translocoService.getAvailableLangs() as LangDefinition[]
+                      ).map((a) => ({
+                        key:
+                          a.id === translocoService.getDefaultLang()
+                            ? 'name'
+                            : `name_${a.id}`,
+                        type: 'textarea',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-project.form.fields.name-locale`,
+                            // id, label
+                            {
+                              locale: a.id,
+                              label: translocoService.translate(a.label),
+                            }
+                          ),
+                          placeholder:
+                            a.id === translocoService.getDefaultLang()
+                              ? 'name'
+                              : `name ${a.id}`,
+                          required: a.id === translocoService.getDefaultLang(),
+                        },
+                      })),
+                      {
+                        key: SsoProjectScalarFieldEnumInterface.clientId,
+                        type: 'input',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-project.form.fields.client-id`
+                          ),
+                          placeholder: 'clientId',
+                          required: true,
+                        },
+                      },
+                      {
+                        key: SsoProjectScalarFieldEnumInterface.clientSecret,
+                        type: 'input',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-project.form.fields.client-secret`
+                          ),
+                          placeholder: 'clientSecret',
+                          required: true,
+                        },
+                      },
+                      {
+                        key: SsoProjectScalarFieldEnumInterface.public,
+                        type: 'checkbox',
+                        validation: {
+                          show: true,
+                        },
+                        defaultValue: false,
+                        props: {
+                          label: translocoService.translate(
+                            `sso-project.form.fields.public`
+                          ),
+                          placeholder: 'public',
+                          required: true,
+                        },
+                      },
+                    ],
+                  }),
+                  grid: () => ({
+                    modals: {
+                      create: {
+                        title: marker('sso-project.create-modal.title'),
+                      },
+                      delete: {
+                        title: marker('sso-project.delete-modal.title'),
+                      },
+                      update: {
+                        title: marker('sso-project.update-modal.title'),
+                      },
+                    },
+                    columns: [
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.id,
+                        title: marker('sso-project.grid.columns.id'),
+                      },
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.name,
+                        title: marker('sso-project.grid.columns.name'),
+                      },
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.clientId,
+                        title: marker('sso-project.grid.columns.client-id'),
+                      },
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.clientSecret,
+                        title: marker('sso-project.grid.columns.client-secret'),
+                      },
+                      {
+                        name: SsoProjectScalarFieldEnumInterface.public,
+                        title: marker('sso-project.grid.columns.public'),
+                      },
+                    ],
+                  }),
                 },
               },
               {

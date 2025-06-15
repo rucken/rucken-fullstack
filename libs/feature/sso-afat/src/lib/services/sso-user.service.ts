@@ -45,7 +45,7 @@ export class SsoUserService {
       .pipe(
         map(({ meta, ssoUsers }) => ({
           meta,
-          ssoUsers: ssoUsers.map((p) => this.ssoUserMapperService.toModel(p)),
+          items: ssoUsers.map((p) => this.ssoUserMapperService.toModel(p)),
         }))
       );
   }

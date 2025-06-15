@@ -196,7 +196,7 @@ export class SsoSessionGridComponent implements OnInit, OnChanges {
         .findMany({ filters, meta })
         .pipe(
           tap((result) => {
-            this.items$.next(result.ssoRefreshSessions);
+            this.items$.next(result.items);
             this.meta$.next({ ...result.meta, ...meta });
             this.filters = filters;
             this.selectedIds$.next([]);

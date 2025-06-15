@@ -60,47 +60,56 @@ export function provideRuckenAfatEngine(
       ...((configuration.layout?.parts
         .map((part, index) => ({ part, index }))
         .filter(({ part }) => part.route || part.crud)
-        .map(({ part, index }) => ({
-          ...part.route,
-          title: part.route?.title || part.navigation.title,
-          ...(part.crud
-            ? {
-                component: CrudComponent,
-                data: {
-                  title:
-                    part.crud.title ||
-                    part.route?.title ||
-                    part.navigation.title,
-                  handlers: () =>
-                    configuration.layout.parts[index].crud?.handlers(),
-                  form: () => configuration.layout.parts[index].crud?.form(),
-                  grid: () => configuration.layout.parts[index].crud?.grid(),
-                } as CrudConfiguration,
-              }
-            : {}),
-          path: part.route?.path
-            ? part.route?.path
-            : part.navigation?.['link']?.slice(1),
-          ...(part.roles?.length
-            ? {
-                canActivate: part.route?.canActivate || [SsoGuardService],
-                data: {
-                  [SSO_GUARD_DATA_ROUTE_KEY]:
-                    part.route?.data?.[SSO_GUARD_DATA_ROUTE_KEY] ||
-                    new SsoGuardData({
-                      roles: part.roles,
-                      afterActivate: async (options: OnActivateOptions) => {
-                        if (options.error) {
-                          options.router.navigate([ROOT_PATH_MARKER]);
-                          return false;
-                        }
-                        return true;
-                      },
-                    }),
-                },
-              }
-            : {}),
-        }))
+        .map(({ part, index }) => {
+          return {
+            ...part.route,
+            title: part.route?.title || part.navigation.title,
+            ...(part.crud
+              ? {
+                  component: CrudComponent,
+                }
+              : {}),
+            path: part.route?.path
+              ? part.route?.path
+              : part.navigation?.['link']?.slice(1),
+            ...(part.roles?.length
+              ? {
+                  canActivate: part.route?.canActivate || [SsoGuardService],
+                }
+              : {}),
+            data: {
+              ...(part.route?.data || {}),
+              ...(part.crud
+                ? ({
+                    title:
+                      part.crud.title ||
+                      part.route?.title ||
+                      part.navigation.title,
+                    handlers: () =>
+                      configuration.layout.parts[index].crud?.handlers(),
+                    form: () => configuration.layout.parts[index].crud?.form(),
+                    grid: () => configuration.layout.parts[index].crud?.grid(),
+                  } as CrudConfiguration)
+                : {}),
+              ...(part.roles?.length
+                ? {
+                    [SSO_GUARD_DATA_ROUTE_KEY]:
+                      part.route?.data?.[SSO_GUARD_DATA_ROUTE_KEY] ||
+                      new SsoGuardData({
+                        roles: part.roles,
+                        afterActivate: async (options: OnActivateOptions) => {
+                          if (options.error) {
+                            options.router.navigate([ROOT_PATH_MARKER]);
+                            return false;
+                          }
+                          return true;
+                        },
+                      }),
+                  }
+                : {}),
+            },
+          };
+        })
         .filter(Boolean) as Route[]) || []),
     ]),
   ];

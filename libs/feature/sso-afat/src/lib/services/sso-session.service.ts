@@ -44,7 +44,7 @@ export class SsoSessionService {
       .pipe(
         map(({ meta, ssoRefreshSessions }) => ({
           meta,
-          ssoRefreshSessions: ssoRefreshSessions.map((t) =>
+          items: ssoRefreshSessions.map((t) =>
             this.ssoSessionMapperService.toModel(t)
           ),
         }))

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BehaviorSubject, tap } from 'rxjs';
-import { SsoProjectModel } from './sso-project-mapper.service';
-import { SsoProjectService } from './sso-project.service';
+import { SsoProjectModel, SsoProjectService } from './sso-project.service';
 
 export const SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY = 'activeUserClientId';
 export const X_CLIENT_ID_HEADER_NAME = 'x-client-id';
@@ -50,16 +49,14 @@ export class SsoActiveProjectService {
       .pipe(
         tap((projects) => {
           this.publicProjects$.next(
-            projects.ssoPublicProjects.length > 1
-              ? projects.ssoPublicProjects
-              : undefined
+            projects.items.length > 1 ? projects.items : undefined
           );
           this.setActivePublicProject(
-            projects.ssoPublicProjects.find(
+            projects.items.find(
               (p) =>
                 p.clientId ===
                 localStorage.getItem(SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY)
-            ) || projects.ssoPublicProjects[0]
+            ) || projects.items[0]
           );
         }),
         untilDestroyed(this)
