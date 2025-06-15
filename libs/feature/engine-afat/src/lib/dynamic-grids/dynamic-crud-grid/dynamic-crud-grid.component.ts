@@ -177,18 +177,25 @@ export class DynamicCrudGridComponent<
       DynamicCrudFormComponent<DynamicCrudModel>,
       DynamicCrudFormComponent<DynamicCrudModel>
     >({
-      nzTitle: id
-        ? this.translocoService.translate(
-            this.configuration.modals.update.title,
-            {
-              id,
-            }
-          )
-        : this.translocoService.translate(
-            this.configuration.modals.create.title
-          ),
+      nzTitle:
+        id && this.configuration.modals.update
+          ? this.translocoService.translate(
+              this.configuration.modals.update.title,
+              {
+                id,
+              }
+            )
+          : this.configuration.modals.create
+          ? this.translocoService.translate(
+              this.configuration.modals.create.title
+            )
+          : '',
       nzContent: DynamicCrudFormComponent,
       nzViewContainerRef: this.viewContainerRef,
+      nzWidth:
+        this.configuration.modals.update?.width ||
+        this.configuration.modals.create?.width ||
+        undefined,
       nzData: {
         crudConfiguration: this.crudConfiguration,
         configuration: this.crudConfiguration.form(),
@@ -236,7 +243,7 @@ export class DynamicCrudGridComponent<
   }
 
   showDeleteModal(id?: string) {
-    if (!id) {
+    if (!id || !this.configuration.modals.delete) {
       return;
     }
     this.nzModalService.confirm({
@@ -246,6 +253,7 @@ export class DynamicCrudGridComponent<
           id,
         }
       ),
+      nzWidth: this.configuration.modals.delete?.width || undefined,
       nzOkText: this.translocoService.translate('Yes'),
       nzCancelText: this.translocoService.translate('No'),
       nzOnOk: () => {

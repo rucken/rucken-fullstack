@@ -33,11 +33,13 @@ import { provideRuckenAfatEngine } from '@rucken/engine-afat';
 import {
   CreateSsoProjectDtoInterface,
   RuckenRestSdkAngularModule,
+  SsoEmailTemplateScalarFieldEnumInterface,
   SsoProjectScalarFieldEnumInterface,
   SsoRoleInterface,
+  UpdateSsoEmailTemplateDtoInterface,
   UpdateSsoProjectDtoInterface,
 } from '@rucken/rucken-rest-sdk-angular';
-import { SsoProjectService } from '@rucken/sso-afat';
+import { SsoEmailTemplateService, SsoProjectService } from '@rucken/sso-afat';
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { serverUrl } from '../environments/environment';
@@ -48,7 +50,6 @@ import { AppErrorHandler } from './app.error-handler';
 import { provideSsoConfiguration } from './integrations/sso.configuration';
 import { TranslocoHttpLoader } from './integrations/transloco-http.loader';
 import { HomeComponent } from './pages/home/home.component';
-import { TemplatesComponent } from './pages/templates/templates.component';
 import { UsersComponent } from './pages/users/users.component';
 import { WebhooksComponent } from './pages/webhooks/webhooks.component';
 
@@ -67,7 +68,8 @@ export const ssoAppConfig = ({
       provideRuckenAfatEngine(
         (
           translocoService: TranslocoService,
-          ssoProjectService: SsoProjectService
+          ssoProjectService: SsoProjectService,
+          ssoEmailTemplateService: SsoEmailTemplateService
         ) => ({
           layout: {
             title: APP_TITLE,
@@ -84,50 +86,57 @@ export const ssoAppConfig = ({
                 },
               },
               {
-                hidden: true,
                 navigation: {
                   link: '/home1',
                   title: 'Home1',
                 },
                 crud: {
                   handlers: () => ({
-                    createOne: (data) => {
-                      return ssoProjectService.createOne(
-                        data as CreateSsoProjectDtoInterface
-                      );
-                    },
                     updateOne: (id, data) => {
-                      return ssoProjectService.updateOne(
+                      return ssoEmailTemplateService.updateOne(
                         id,
-                        data as UpdateSsoProjectDtoInterface
+                        data as UpdateSsoEmailTemplateDtoInterface
                       );
                     },
                     findOne: (id) => {
-                      return ssoProjectService.findOne(id);
-                    },
-                    deleteOne(id) {
-                      return ssoProjectService.deleteOne(id);
+                      return ssoEmailTemplateService.findOne(id);
                     },
                     findMany({ filters, meta }) {
-                      return ssoProjectService.findMany({ filters, meta });
+                      return ssoEmailTemplateService.findMany({
+                        filters,
+                        meta,
+                      });
                     },
                   }),
                   form: () => ({
                     inputs: [
-                      ...(
-                        translocoService.getAvailableLangs() as LangDefinition[]
-                      ).map((a) => ({
+                      {
+                        key: SsoEmailTemplateScalarFieldEnumInterface.operationName,
+                        type: 'input',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          readonly: true,
+                          disabled: true,
+                          label: translocoService.translate(
+                            `sso-email-template.form.fields.operation-name`
+                          ),
+                          placeholder: 'operationName',
+                        },
+                      },
+                      ...translocoService.getAvailableLangs().map((a) => ({
                         key:
                           a.id === translocoService.getDefaultLang()
-                            ? 'name'
-                            : `name_${a.id}`,
+                            ? 'subject'
+                            : `subject_${a.id}`,
                         type: 'textarea',
                         validation: {
                           show: true,
                         },
                         props: {
                           label: translocoService.translate(
-                            `sso-project.form.fields.name-locale`,
+                            `sso-email-template.form.fields.subject-locale`,
                             // id, label
                             {
                               locale: a.id,
@@ -136,88 +145,91 @@ export const ssoAppConfig = ({
                           ),
                           placeholder:
                             a.id === translocoService.getDefaultLang()
-                              ? 'name'
-                              : `name ${a.id}`,
+                              ? 'subject'
+                              : `subject ${a.id}`,
                           required: a.id === translocoService.getDefaultLang(),
                         },
                       })),
-                      {
-                        key: SsoProjectScalarFieldEnumInterface.clientId,
-                        type: 'input',
+                      ...translocoService.getAvailableLangs().map((a) => ({
+                        key:
+                          a.id === translocoService.getDefaultLang()
+                            ? 'html'
+                            : `html_${a.id}`,
+                        type: 'textarea',
                         validation: {
                           show: true,
                         },
                         props: {
                           label: translocoService.translate(
-                            `sso-project.form.fields.client-id`
+                            `sso-email-template.form.fields.html-locale`,
+                            // id, label
+                            {
+                              locale: a.id,
+                              label: translocoService.translate(a.label),
+                            }
                           ),
-                          placeholder: 'clientId',
-                          required: true,
+                          placeholder:
+                            a.id === translocoService.getDefaultLang()
+                              ? 'html'
+                              : `html ${a.id}`,
+                          required: a.id === translocoService.getDefaultLang(),
                         },
-                      },
-                      {
-                        key: SsoProjectScalarFieldEnumInterface.clientSecret,
-                        type: 'input',
+                      })),
+                      ...translocoService.getAvailableLangs().map((a) => ({
+                        key:
+                          a.id === translocoService.getDefaultLang()
+                            ? 'text'
+                            : `text_${a.id}`,
+                        type: 'textarea',
                         validation: {
                           show: true,
                         },
                         props: {
                           label: translocoService.translate(
-                            `sso-project.form.fields.client-secret`
+                            `sso-email-template.form.fields.text-locale`,
+                            // id, label
+                            {
+                              locale: a.id,
+                              label: translocoService.translate(a.label),
+                            }
                           ),
-                          placeholder: 'clientSecret',
-                          required: true,
+                          placeholder:
+                            a.id === translocoService.getDefaultLang()
+                              ? 'text'
+                              : `text ${a.id}`,
+                          required: a.id === translocoService.getDefaultLang(),
                         },
-                      },
-                      {
-                        key: SsoProjectScalarFieldEnumInterface.public,
-                        type: 'checkbox',
-                        validation: {
-                          show: true,
-                        },
-                        defaultValue: false,
-                        props: {
-                          label: translocoService.translate(
-                            `sso-project.form.fields.public`
-                          ),
-                          placeholder: 'public',
-                          required: true,
-                        },
-                      },
+                      })),
                     ],
                   }),
                   grid: () => ({
+                    title: marker('Email templates'),
                     modals: {
-                      create: {
-                        title: marker('sso-project.create-modal.title'),
-                      },
-                      delete: {
-                        title: marker('sso-project.delete-modal.title'),
-                      },
                       update: {
-                        title: marker('sso-project.update-modal.title'),
+                        title: marker('sso-email-template.update-modal.title'),
+                        width: '700px',
                       },
                     },
                     columns: [
                       {
-                        name: SsoProjectScalarFieldEnumInterface.id,
-                        title: marker('sso-project.grid.columns.id'),
+                        name: SsoEmailTemplateScalarFieldEnumInterface.id,
+                        title: marker('sso-email-template.grid.columns.id'),
                       },
                       {
-                        name: SsoProjectScalarFieldEnumInterface.name,
-                        title: marker('sso-project.grid.columns.name'),
+                        name: SsoEmailTemplateScalarFieldEnumInterface.operationName,
+                        title: marker(
+                          'sso-email-template.grid.columns.operation-name'
+                        ),
                       },
                       {
-                        name: SsoProjectScalarFieldEnumInterface.clientId,
-                        title: marker('sso-project.grid.columns.client-id'),
+                        name: SsoEmailTemplateScalarFieldEnumInterface.subject,
+                        title: marker(
+                          'sso-email-template.grid.columns.subject'
+                        ),
                       },
                       {
-                        name: SsoProjectScalarFieldEnumInterface.clientSecret,
-                        title: marker('sso-project.grid.columns.client-secret'),
-                      },
-                      {
-                        name: SsoProjectScalarFieldEnumInterface.public,
-                        title: marker('sso-project.grid.columns.public'),
+                        name: SsoEmailTemplateScalarFieldEnumInterface.text,
+                        title: marker('sso-email-template.grid.columns.text'),
                       },
                     ],
                   }),
@@ -239,8 +251,149 @@ export const ssoAppConfig = ({
                   link: '/templates',
                   title: marker('Templates'),
                 },
-                route: {
-                  component: TemplatesComponent,
+                crud: {
+                  handlers: () => ({
+                    updateOne: (id, data) => {
+                      return ssoEmailTemplateService.updateOne(
+                        id,
+                        data as UpdateSsoEmailTemplateDtoInterface
+                      );
+                    },
+                    findOne: (id) => {
+                      return ssoEmailTemplateService.findOne(id);
+                    },
+                    findMany({ filters, meta }) {
+                      return ssoEmailTemplateService.findMany({
+                        filters,
+                        meta,
+                      });
+                    },
+                  }),
+                  form: () => ({
+                    inputs: [
+                      {
+                        key: SsoEmailTemplateScalarFieldEnumInterface.operationName,
+                        type: 'input',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          readonly: true,
+                          disabled: true,
+                          label: translocoService.translate(
+                            `sso-email-template.form.fields.operation-name`
+                          ),
+                          placeholder: 'operationName',
+                        },
+                      },
+                      ...translocoService.getAvailableLangs().map((a) => ({
+                        key:
+                          a.id === translocoService.getDefaultLang()
+                            ? 'subject'
+                            : `subject_${a.id}`,
+                        type: 'textarea',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-email-template.form.fields.subject-locale`,
+                            // id, label
+                            {
+                              locale: a.id,
+                              label: translocoService.translate(a.label),
+                            }
+                          ),
+                          placeholder:
+                            a.id === translocoService.getDefaultLang()
+                              ? 'subject'
+                              : `subject ${a.id}`,
+                          required: a.id === translocoService.getDefaultLang(),
+                        },
+                      })),
+                      ...translocoService.getAvailableLangs().map((a) => ({
+                        key:
+                          a.id === translocoService.getDefaultLang()
+                            ? 'html'
+                            : `html_${a.id}`,
+                        type: 'textarea',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-email-template.form.fields.html-locale`,
+                            // id, label
+                            {
+                              locale: a.id,
+                              label: translocoService.translate(a.label),
+                            }
+                          ),
+                          placeholder:
+                            a.id === translocoService.getDefaultLang()
+                              ? 'html'
+                              : `html ${a.id}`,
+                          required: a.id === translocoService.getDefaultLang(),
+                        },
+                      })),
+                      ...translocoService.getAvailableLangs().map((a) => ({
+                        key:
+                          a.id === translocoService.getDefaultLang()
+                            ? 'text'
+                            : `text_${a.id}`,
+                        type: 'textarea',
+                        validation: {
+                          show: true,
+                        },
+                        props: {
+                          label: translocoService.translate(
+                            `sso-email-template.form.fields.text-locale`,
+                            // id, label
+                            {
+                              locale: a.id,
+                              label: translocoService.translate(a.label),
+                            }
+                          ),
+                          placeholder:
+                            a.id === translocoService.getDefaultLang()
+                              ? 'text'
+                              : `text ${a.id}`,
+                          required: a.id === translocoService.getDefaultLang(),
+                        },
+                      })),
+                    ],
+                  }),
+                  grid: () => ({
+                    title: marker('Email templates'),
+                    modals: {
+                      update: {
+                        title: marker('sso-email-template.update-modal.title'),
+                        width: '700px',
+                      },
+                    },
+                    columns: [
+                      {
+                        name: SsoEmailTemplateScalarFieldEnumInterface.id,
+                        title: marker('sso-email-template.grid.columns.id'),
+                      },
+                      {
+                        name: SsoEmailTemplateScalarFieldEnumInterface.operationName,
+                        title: marker(
+                          'sso-email-template.grid.columns.operation-name'
+                        ),
+                      },
+                      {
+                        name: SsoEmailTemplateScalarFieldEnumInterface.subject,
+                        title: marker(
+                          'sso-email-template.grid.columns.subject'
+                        ),
+                      },
+                      {
+                        name: SsoEmailTemplateScalarFieldEnumInterface.text,
+                        title: marker('sso-email-template.grid.columns.text'),
+                      },
+                    ],
+                  }),
                 },
               },
               {
@@ -404,7 +557,7 @@ export const ssoAppConfig = ({
             ],
           },
         }),
-        [TranslocoService, SsoProjectService]
+        [TranslocoService, SsoProjectService, SsoEmailTemplateService]
       ),
       importProvidersFrom(
         BrowserAnimationsModule,

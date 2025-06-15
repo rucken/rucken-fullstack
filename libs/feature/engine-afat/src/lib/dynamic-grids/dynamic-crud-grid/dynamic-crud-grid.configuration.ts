@@ -5,10 +5,11 @@ export type DynamicCrudGridColumn = {
 };
 
 export type DynamicCrudGridConfiguration = {
+  title?: string;
   columns: DynamicCrudGridColumn[];
   modals: {
-    create: { title: string };
-    update: { title: string };
-    delete: { title: string };
+    create?: { title: string; width?: string };
+    update?: { title: string; width?: string };
+    delete?: { title: string; width?: string };
   };
 };

@@ -1,11 +1,15 @@
 <div class="table-operations" nz-row nzJustify="space-between">
   <div nz-col nzSpan="8">
+    @if (configuration.title){
+    {{ configuration.title | transloco }}
+    } @if (configuration.modals.create){
     <button
       nz-button
       nzType="primary"
       (click)="showCreateOrUpdateModal()"
       transloco="Create new"
     ></button>
+    }
   </div>
   <div nz-col nzSpan="8">
     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
@@ -85,9 +89,13 @@
       </td>
       } }
       <td>
+        @if (configuration.modals.update){
         <a (click)="showCreateOrUpdateModal(data.id)" transloco="Edit"></a>
+        } @if (configuration.modals.update && configuration.modals.delete){
         <nz-divider nzType="vertical"></nz-divider>
+        } @if (configuration.modals.delete){
         <a (click)="showDeleteModal(data.id)" transloco="Delete"></a>
+        }
       </td>
     </tr>
     }
