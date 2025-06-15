@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SsoEmailTemplateScalarFieldEnumInterface } from '@rucken/rucken-rest-sdk-angular';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { SsoEmailTemplateScalarFieldEnumInterface } from '@rucken/rucken-rest-sdk-angular';
 import isEqual from 'lodash/fp/isEqual';
 import omit from 'lodash/fp/omit';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -43,8 +43,10 @@ import {
 } from '@nestjs-mod/afat';
 import { RequestMeta, getQueryMeta } from '@nestjs-mod/misc';
 import { SsoEmailTemplateFormComponent } from '../../forms/sso-email-template-form/sso-email-template-form.component';
-import { SsoEmailTemplateModel } from '../../services/sso-email-template-mapper.service';
-import { SsoEmailTemplateService } from '../../services/sso-email-template.service';
+import {
+  SsoEmailTemplateModel,
+  SsoEmailTemplateService,
+} from '../../services/sso-email-template.service';
 
 @UntilDestroy()
 @Component({

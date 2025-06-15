@@ -45,8 +45,10 @@ import {
 import { RequestMeta, getQueryMeta } from '@nestjs-mod/misc';
 import { SsoRefreshSessionScalarFieldEnumInterface } from '@rucken/rucken-rest-sdk-angular';
 import { SsoSessionFormComponent } from '../../forms/sso-session-form/sso-session-form.component';
-import { SsoSessionModel } from '../../services/sso-session-mapper.service';
-import { SsoSessionService } from '../../services/sso-session.service';
+import {
+  SsoSessionModel,
+  SsoSessionService,
+} from '../../services/sso-session.service';
 
 @UntilDestroy()
 @Component({

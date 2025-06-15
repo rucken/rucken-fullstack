@@ -15,29 +15,21 @@ import {
   UntypedFormGroup,
 } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
-import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
-import {
-  BehaviorSubject,
-  catchError,
-  mergeMap,
-  of,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { SsoEmailTemplateFormService } from '../../services/sso-email-template-form.service';
 import {
-  SsoEmailTemplateMapperService,
   SsoEmailTemplateModel,
-} from '../../services/sso-email-template-mapper.service';
-import { SsoEmailTemplateService } from '../../services/sso-email-template.service';
+  SsoEmailTemplateService,
+} from '../../services/sso-email-template.service';
 
 @UntilDestroy()
 @Component({
@@ -83,7 +75,6 @@ export class SsoEmailTemplateFormComponent implements OnInit {
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
     private readonly ssoEmailTemplateFormService: SsoEmailTemplateFormService,
-    private readonly ssoEmailTemplateMapperService: SsoEmailTemplateMapperService,
     private readonly validationService: ValidationService
   ) {}
 
@@ -99,26 +90,20 @@ export class SsoEmailTemplateFormComponent implements OnInit {
       )
       .subscribe();
 
-    this.ssoEmailTemplateFormService
-      .init()
-      .pipe(
-        mergeMap(() => {
-          if (this.id) {
-            return this.findOne().pipe(
-              tap((result) =>
-                this.afterFind.next({
-                  ...result,
-                })
-              )
-            );
-          } else {
-            this.setFieldsAndModel();
-          }
-          return of(true);
-        }),
-        untilDestroyed(this)
-      )
-      .subscribe();
+    if (this.id) {
+      this.findOne()
+        .pipe(
+          tap((result) =>
+            this.afterFind.next({
+              ...result,
+            })
+          ),
+          untilDestroyed(this)
+        )
+        .subscribe();
+    } else {
+      this.setFieldsAndModel();
+    }
   }
 
   setFieldsAndModel(model?: Partial<object>) {
@@ -153,10 +138,7 @@ export class SsoEmailTemplateFormComponent implements OnInit {
       );
     }
     return this.ssoEmailTemplateService
-      .updateOne(
-        this.id,
-        this.ssoEmailTemplateMapperService.toJson(this.form.value)
-      )
+      .updateOne(this.id, this.form.value)
       .pipe(
         catchError((err) =>
           this.validationService.catchAndProcessServerError(err, (options) =>
@@ -174,9 +156,7 @@ export class SsoEmailTemplateFormComponent implements OnInit {
     }
     return this.ssoEmailTemplateService.findOne(this.id).pipe(
       tap((result) => {
-        this.setFieldsAndModel(
-          this.ssoEmailTemplateMapperService.toForm(result)
-        );
+        this.setFieldsAndModel(result);
       })
     );
   }

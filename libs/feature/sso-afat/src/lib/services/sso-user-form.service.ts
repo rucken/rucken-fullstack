@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { ValidationService } from '@nestjs-mod/afat';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import {
   RuckenRestSdkAngularService,
   SsoUserScalarFieldEnumInterface,
   UpdateSsoUserDtoInterface,
   ValidationErrorMetadataInterface,
 } from '@rucken/rucken-rest-sdk-angular';
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { map, of } from 'rxjs';
 
 @UntilDestroy()
@@ -21,10 +21,6 @@ export class SsoUserFormService {
     protected readonly validationService: ValidationService,
     protected readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService
   ) {}
-
-  init() {
-    return of(true);
-  }
 
   getRoles() {
     if (this.cachedRoles) {

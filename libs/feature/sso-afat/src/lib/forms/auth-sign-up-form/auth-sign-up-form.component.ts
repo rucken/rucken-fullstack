@@ -16,10 +16,10 @@ import {
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
-import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -27,7 +27,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, catchError, of, tap } from 'rxjs';
 import { SsoSignUpFormService } from '../../services/auth-sign-up-form.service';
-import { SsoSignUpMapperService } from '../../services/auth-sign-up-mapper.service';
 import { SsoService } from '../../services/auth.service';
 import { SsoSignupInput, SsoUserAndTokens } from '../../services/auth.types';
 
@@ -74,7 +73,6 @@ export class SsoSignUpFormComponent implements OnInit {
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
     private readonly authSignUpFormService: SsoSignUpFormService,
-    private readonly authSignUpMapperService: SsoSignUpMapperService,
     private readonly validationService: ValidationService
   ) {}
 
@@ -96,16 +94,14 @@ export class SsoSignUpFormComponent implements OnInit {
   setFieldsAndModel(
     data: SsoSignupInput = { password: '', confirmPassword: '' }
   ) {
-    const model = this.authSignUpMapperService.toModel(data);
-    this.setFormlyFields({ data: model });
-    this.formlyModel$.next(model);
+    this.setFormlyFields({ data });
+    this.formlyModel$.next(data);
   }
 
   submitForm(): void {
     if (this.form.valid) {
-      const value = this.authSignUpMapperService.toJson(this.form.value);
       this.authService
-        .signUp({ ...value })
+        .signUp({ ...this.form.value })
         .pipe(
           tap((result) => {
             if (result.tokens) {

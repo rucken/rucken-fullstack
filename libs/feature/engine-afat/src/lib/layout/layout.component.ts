@@ -116,7 +116,9 @@ export class LayoutComponent implements OnInit {
         this.authGuardService
           .checkUserRoles(part.roles)
           .pipe(
-            map((result) => (result || !part.roles ? part.navigation : null))
+            map((result) =>
+              (result || !part.roles) && !part.hidden ? part.navigation : null
+            )
           )
       ),
       take(this.ruckenAfatEngineConfiguration.layout.parts.length),

@@ -22,6 +22,7 @@ export type LayoutPart = {
   navigation: LayoutPartNavigation;
   route?: Route;
   crud?: CrudConfiguration;
+  hidden?: boolean;
 };
 
 export type LayoutConfiguration = {

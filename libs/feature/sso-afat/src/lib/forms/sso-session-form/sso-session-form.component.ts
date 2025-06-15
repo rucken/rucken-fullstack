@@ -15,10 +15,10 @@ import {
   UntypedFormGroup,
 } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
-import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -34,10 +34,9 @@ import {
 } from 'rxjs';
 import { SsoSessionFormService } from '../../services/sso-session-form.service';
 import {
-  SsoSessionMapperService,
   SsoSessionModel,
-} from '../../services/sso-session-mapper.service';
-import { SsoSessionService } from '../../services/sso-session.service';
+  SsoSessionService,
+} from '../../services/sso-session.service';
 
 @UntilDestroy()
 @Component({
@@ -83,7 +82,6 @@ export class SsoSessionFormComponent implements OnInit {
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
     private readonly ssoSessionFormService: SsoSessionFormService,
-    private readonly ssoSessionMapperService: SsoSessionMapperService,
     private readonly validationService: ValidationService
   ) {}
 
@@ -99,26 +97,20 @@ export class SsoSessionFormComponent implements OnInit {
       )
       .subscribe();
 
-    this.ssoSessionFormService
-      .init()
-      .pipe(
-        mergeMap(() => {
-          if (this.id) {
-            return this.findOne().pipe(
-              tap((result) =>
-                this.afterFind.next({
-                  ...result,
-                })
-              )
-            );
-          } else {
-            this.setFieldsAndModel();
-          }
-          return of(true);
-        }),
-        untilDestroyed(this)
-      )
-      .subscribe();
+    if (this.id) {
+      this.findOne()
+        .pipe(
+          tap((result) =>
+            this.afterFind.next({
+              ...result,
+            })
+          ),
+          untilDestroyed(this)
+        )
+        .subscribe();
+    } else {
+      this.setFieldsAndModel();
+    }
   }
 
   setFieldsAndModel(model?: Partial<object>) {
@@ -153,7 +145,7 @@ export class SsoSessionFormComponent implements OnInit {
       );
     }
     return this.ssoSessionService
-      .updateOne(this.id, this.ssoSessionMapperService.toJson(this.form.value))
+      .updateOne(this.id, this.form.value)
       .pipe(
         catchError((err) =>
           this.validationService.catchAndProcessServerError(err, (options) =>
@@ -171,7 +163,7 @@ export class SsoSessionFormComponent implements OnInit {
     }
     return this.ssoSessionService.findOne(this.id).pipe(
       tap((result) => {
-        this.setFieldsAndModel(this.ssoSessionMapperService.toForm(result));
+        this.setFieldsAndModel(result);
       })
     );
   }

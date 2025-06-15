@@ -20,10 +20,10 @@ import {
   TranslocoPipe,
   TranslocoService,
 } from '@jsverse/transloco';
-import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -32,14 +32,12 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, catchError, of, tap } from 'rxjs';
 import { SsoSignInFormService } from '../../services/auth-sign-in-form.service';
-import { SsoSignInMapperService } from '../../services/auth-sign-in-mapper.service';
 import { SsoService } from '../../services/auth.service';
 import {
+  OAuthProvider,
   SsoLoginInput,
   SsoUserAndTokens,
-  OAuthProvider,
 } from '../../services/auth.types';
-import { SsoActiveProjectService } from '../../services/sso-active-project.service';
 @UntilDestroy()
 @Component({
   imports: [
@@ -86,7 +84,6 @@ export class SsoSignInFormComponent implements OnInit {
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
     private readonly authSignInFormService: SsoSignInFormService,
-    private readonly authSignInMapperService: SsoSignInMapperService,
     private readonly validationService: ValidationService
   ) {}
 
@@ -122,16 +119,14 @@ export class SsoSignInFormComponent implements OnInit {
   }
 
   setFieldsAndModel(data: SsoLoginInput = { password: '' }) {
-    const model = this.authSignInMapperService.toModel(data);
-    this.setFormlyFields({ data: model });
-    this.formlyModel$.next(model);
+    this.setFormlyFields({ data });
+    this.formlyModel$.next(data);
   }
 
   submitForm(): void {
     if (this.form.valid) {
-      const value = this.authSignInMapperService.toJson(this.form.value);
       this.authService
-        .signIn(value)
+        .signIn(this.form.value)
         .pipe(
           tap((result) => {
             if (result.tokens) {

@@ -10,8 +10,8 @@ import {
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FilesService } from '@nestjs-mod/files-afat';
-import { SsoUserScalarFieldEnumInterface } from '@rucken/rucken-rest-sdk-angular';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { SsoUserScalarFieldEnumInterface } from '@rucken/rucken-rest-sdk-angular';
 import isEqual from 'lodash/fp/isEqual';
 import omit from 'lodash/fp/omit';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -47,8 +47,7 @@ import {
 import { RequestMeta, getQueryMeta } from '@nestjs-mod/misc';
 import { SsoInviteMembersFormComponent } from '../../forms/sso-invite-members-form/sso-invite-members-form.component';
 import { SsoUserFormComponent } from '../../forms/sso-user-form/sso-user-form.component';
-import { SsoUserModel } from '../../services/sso-user-mapper.service';
-import { SsoUserService } from '../../services/sso-user.service';
+import { SsoUserModel, SsoUserService } from '../../services/sso-user.service';
 
 @UntilDestroy()
 @Component({

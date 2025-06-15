@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
+import { ValidationService } from '@nestjs-mod/afat';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import {
   SsoRefreshSessionScalarFieldEnumInterface,
   UpdateSsoRefreshSessionDtoInterface,
   ValidationErrorMetadataInterface,
 } from '@rucken/rucken-rest-sdk-angular';
-import { ValidationService } from '@nestjs-mod/afat';
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { FormlyFieldConfig } from '@ngx-formly/core';
-import { of } from 'rxjs';
 
 @UntilDestroy()
 @Injectable({ providedIn: 'root' })
@@ -17,10 +16,6 @@ export class SsoSessionFormService {
     protected readonly translocoService: TranslocoService,
     protected readonly validationService: ValidationService
   ) {}
-
-  init() {
-    return of(true);
-  }
 
   getFormlyFields(options?: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

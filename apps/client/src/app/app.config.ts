@@ -84,6 +84,7 @@ export const ssoAppConfig = ({
                 },
               },
               {
+                hidden: true,
                 navigation: {
                   link: '/home1',
                   title: 'Home1',
