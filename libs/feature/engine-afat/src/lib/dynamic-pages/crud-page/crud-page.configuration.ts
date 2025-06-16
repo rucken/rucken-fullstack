@@ -14,13 +14,7 @@ export type CrudConfiguration = {
     updateOne?: (id: string, data: unknown) => Observable<unknown>;
     deleteOne?: (id: string) => Observable<unknown>;
     findOne?: (id: string) => Observable<unknown>;
-    findMany?: ({
-      filters,
-      meta,
-    }: {
-      filters: Record<string, string>;
-      meta?: RequestMeta;
-    }) => Observable<{
+    findMany?: ({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) => Observable<{
       meta: {
         curPage?: number;
         perPage?: number;

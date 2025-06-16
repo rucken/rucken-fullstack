@@ -1562,10 +1562,7 @@ export interface SsoUserDelegate<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['SsoUser'];
-    meta: { name: 'SsoUser' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SsoUser']; meta: { name: 'SsoUser' } };
   /**
    * Find zero or one SsoUser that matches the filter.
    * @param {SsoUserFindUniqueArgs} args - Arguments to find a SsoUser

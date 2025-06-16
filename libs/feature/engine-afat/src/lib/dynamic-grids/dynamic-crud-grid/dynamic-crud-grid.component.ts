@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-  ViewContainerRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -20,33 +14,16 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableModule, NzTableQueryParams } from 'ng-zorro-antd/table';
-import {
-  BehaviorSubject,
-  Observable,
-  debounceTime,
-  distinctUntilChanged,
-  merge,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, Observable, debounceTime, distinctUntilChanged, merge, tap } from 'rxjs';
 
-import {
-  TranslocoDirective,
-  TranslocoPipe,
-  TranslocoService,
-} from '@jsverse/transloco';
+import { TranslocoDirective, TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { TranslocoDatePipe } from '@jsverse/transloco-locale';
-import {
-  NzTableSortOrderDetectorPipe,
-  getQueryMetaByParams,
-} from '@nestjs-mod/afat';
+import { NzTableSortOrderDetectorPipe, getQueryMetaByParams } from '@nestjs-mod/afat';
 import { FilesService } from '@nestjs-mod/files-afat';
 import { RequestMeta, getQueryMeta } from '@nestjs-mod/misc';
 import { DynamicCrudFormComponent } from '../../dynamic-forms/dynamic-crud-form/dynamic-crud-form.component';
 import { CrudConfiguration } from '../../dynamic-pages/crud-page/crud-page.configuration';
-import {
-  DynamicCrudGridColumn,
-  DynamicCrudGridConfiguration,
-} from './dynamic-crud-grid.configuration';
+import { DynamicCrudGridColumn, DynamicCrudGridConfiguration } from './dynamic-crud-grid.configuration';
 
 @UntilDestroy()
 @Component({
@@ -73,10 +50,7 @@ import {
   templateUrl: './dynamic-crud-grid.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DynamicCrudGridComponent<
-  DynamicCrudModel extends { id: string } = { id: string },
-> implements OnInit
-{
+export class DynamicCrudGridComponent<DynamicCrudModel extends { id: string } = { id: string }> implements OnInit {
   @Input({ required: true })
   crudConfiguration!: CrudConfiguration;
 
@@ -114,10 +88,7 @@ export class DynamicCrudGridComponent<
     this.columns$.next(this.configuration.columns);
 
     merge(
-      this.searchField.valueChanges.pipe(
-        debounceTime(700),
-        distinctUntilChanged(),
-      ),
+      this.searchField.valueChanges.pipe(debounceTime(700), distinctUntilChanged()),
       ...(this.forceLoadStream ? this.forceLoadStream : []),
     )
       .pipe(
@@ -179,17 +150,12 @@ export class DynamicCrudGridComponent<
 
   showCreateOrUpdateModal(id?: string): void {
     if (!id && this.configuration.actions.create?.showModal) {
-      this.configuration.actions.create.showModal(
-        this as unknown as DynamicCrudGridComponent,
-      );
+      this.configuration.actions.create.showModal(this as unknown as DynamicCrudGridComponent);
       return;
     }
 
     if (id && this.configuration.actions.update?.showModal) {
-      this.configuration.actions.update.showModal(
-        this as unknown as DynamicCrudGridComponent,
-        id,
-      );
+      this.configuration.actions.update.showModal(this as unknown as DynamicCrudGridComponent, id);
       return;
     }
 
@@ -199,25 +165,17 @@ export class DynamicCrudGridComponent<
     >({
       nzTitle:
         id && this.configuration.actions.update
-          ? this.translocoService.translate(
-              this.configuration.actions.update.title,
-              {
-                id,
-              },
-            )
+          ? this.translocoService.translate(this.configuration.actions.update.title, {
+              id,
+            })
           : this.configuration.actions.create
-            ? this.translocoService.translate(
-                this.configuration.actions.create.title,
-              )
+            ? this.translocoService.translate(this.configuration.actions.create.title)
             : '',
       nzContent: DynamicCrudFormComponent,
       nzViewContainerRef: this.viewContainerRef,
-      ...(this.configuration.actions.update?.width ||
-      this.configuration.actions.create?.width
+      ...(this.configuration.actions.update?.width || this.configuration.actions.create?.width
         ? {
-            nzWidth:
-              this.configuration.actions.update?.width ||
-              this.configuration.actions.create?.width,
+            nzWidth: this.configuration.actions.update?.width || this.configuration.actions.create?.width,
           }
         : {}),
       nzData: {
@@ -234,9 +192,7 @@ export class DynamicCrudGridComponent<
           },
         },
         {
-          label: id
-            ? this.translocoService.translate('Save')
-            : this.translocoService.translate('Create'),
+          label: id ? this.translocoService.translate('Save') : this.translocoService.translate('Create'),
           onClick: () => {
             modal.componentInstance?.afterUpdate
               .pipe(
@@ -272,23 +228,15 @@ export class DynamicCrudGridComponent<
     }
 
     if (this.configuration.actions.delete.showModal) {
-      this.configuration.actions.delete.showModal(
-        this as unknown as DynamicCrudGridComponent,
-        id,
-      );
+      this.configuration.actions.delete.showModal(this as unknown as DynamicCrudGridComponent, id);
       return;
     }
 
     this.nzModalService.confirm({
-      nzTitle: this.translocoService.translate(
-        this.configuration.actions.delete.title,
-        {
-          id,
-        },
-      ),
-      ...(this.configuration.actions.delete?.width
-        ? { nzWidth: this.configuration.actions.delete?.width }
-        : {}),
+      nzTitle: this.translocoService.translate(this.configuration.actions.delete.title, {
+        id,
+      }),
+      ...(this.configuration.actions.delete?.width ? { nzWidth: this.configuration.actions.delete?.width } : {}),
       nzOkText: this.translocoService.translate('Yes'),
       nzCancelText: this.translocoService.translate('No'),
       nzOnOk: () => {

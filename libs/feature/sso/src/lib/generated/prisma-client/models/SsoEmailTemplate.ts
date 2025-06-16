@@ -813,10 +813,7 @@ export interface SsoEmailTemplateDelegate<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['SsoEmailTemplate'];
-    meta: { name: 'SsoEmailTemplate' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SsoEmailTemplate']; meta: { name: 'SsoEmailTemplate' } };
   /**
    * Find zero or one SsoEmailTemplate that matches the filter.
    * @param {SsoEmailTemplateFindUniqueArgs} args - Arguments to find a SsoEmailTemplate

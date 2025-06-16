@@ -1,24 +1,13 @@
 import { NgModule, Provider } from '@angular/core';
 import { provideRouter, Route } from '@angular/router';
-import {
-  OnActivateOptions,
-  SSO_GUARD_DATA_ROUTE_KEY,
-  SsoGuardData,
-  SsoGuardService,
-} from '@rucken/sso-afat';
+import { OnActivateOptions, SSO_GUARD_DATA_ROUTE_KEY, SsoGuardData, SsoGuardService } from '@rucken/sso-afat';
 import { CrudComponent } from './dynamic-pages/crud-page/crud-page.component';
 import { CrudConfiguration } from './dynamic-pages/crud-page/crud-page.configuration';
-import {
-  RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN,
-  RuckenAfatEngineConfiguration,
-} from './engine-afat.configuration';
+import { RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN, RuckenAfatEngineConfiguration } from './engine-afat.configuration';
 import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from './engine-afat.constants';
 import { pagesRoutes } from './pages/pages.routes';
 
-export function provideRuckenAfatEngine(
-  useFactory: (...deps: any[]) => RuckenAfatEngineConfiguration,
-  deps?: any[],
-) {
+export function provideRuckenAfatEngine(useFactory: (...deps: any[]) => RuckenAfatEngineConfiguration, deps?: any[]) {
   let configuration = useFactory(...(deps || []));
   return [
     {
@@ -33,26 +22,17 @@ export function provideRuckenAfatEngine(
     provideRouter([
       {
         path: '',
-        redirectTo:
-          configuration.layout?.parts.find((p) => p.root)?.navigation?.[
-            'link'
-          ] || '/home',
+        redirectTo: configuration.layout?.parts.find((p) => p.root)?.navigation?.['link'] || '/home',
         pathMatch: 'full',
       },
       {
         path: ROOT_PATH_MARKER.slice(1),
-        redirectTo:
-          configuration.layout?.parts.find((p) => p.root)?.navigation?.[
-            'link'
-          ] || '/home',
+        redirectTo: configuration.layout?.parts.find((p) => p.root)?.navigation?.['link'] || '/home',
         pathMatch: 'full',
       },
       {
         path: SECOND_PATH_MARKER.slice(1),
-        redirectTo:
-          configuration.layout?.parts.find((p) => p.second)?.navigation?.[
-            'link'
-          ] || '/home',
+        redirectTo: configuration.layout?.parts.find((p) => p.second)?.navigation?.['link'] || '/home',
         pathMatch: 'full',
       },
       ...pagesRoutes,
@@ -68,9 +48,7 @@ export function provideRuckenAfatEngine(
                   component: part.crud.component || CrudComponent,
                 }
               : {}),
-            path: part.route?.path
-              ? part.route?.path
-              : part.navigation?.['link']?.slice(1),
+            path: part.route?.path ? part.route?.path : part.navigation?.['link']?.slice(1),
             ...(part.roles?.length
               ? {
                   canActivate: part.route?.canActivate || [SsoGuardService],
@@ -80,12 +58,8 @@ export function provideRuckenAfatEngine(
               ...(part.route?.data || {}),
               ...(part.crud
                 ? ({
-                    title:
-                      part.crud.title ||
-                      part.route?.title ||
-                      part.navigation.title,
-                    handlers: () =>
-                      configuration.layout.parts[index].crud?.handlers(),
+                    title: part.crud.title || part.route?.title || part.navigation.title,
+                    handlers: () => configuration.layout.parts[index].crud?.handlers(),
                     form: () => configuration.layout.parts[index].crud?.form(),
                     grid: () => configuration.layout.parts[index].crud?.grid(),
                   } as CrudConfiguration)

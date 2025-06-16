@@ -1447,10 +1447,7 @@ export interface SsoOAuthTokenDelegate<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['SsoOAuthToken'];
-    meta: { name: 'SsoOAuthToken' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SsoOAuthToken']; meta: { name: 'SsoOAuthToken' } };
   /**
    * Find zero or one SsoOAuthToken that matches the filter.
    * @param {SsoOAuthTokenFindUniqueArgs} args - Arguments to find a SsoOAuthToken

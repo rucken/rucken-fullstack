@@ -9,11 +9,7 @@ import {
   Optional,
   Output,
 } from '@angular/core';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  UntypedFormGroup,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -44,10 +40,7 @@ import { DynamicCrudFormConfiguration } from './dynamic-crud-form.configuration'
   templateUrl: './dynamic-crud-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DynamicCrudFormComponent<
-  DynamicCrudModel extends { id: string } = { id: string },
-> implements OnInit
-{
+export class DynamicCrudFormComponent<DynamicCrudModel extends { id: string } = { id: string }> implements OnInit {
   @Input()
   id?: string;
 
@@ -122,9 +115,7 @@ export class DynamicCrudFormComponent<
         .pipe(
           tap((result) => {
             if (result) {
-              this.nzMessageService.success(
-                this.translocoService.translate('Success'),
-              );
+              this.nzMessageService.success(this.translocoService.translate('Success'));
               this.afterUpdate.next({
                 ...(result as DynamicCrudModel),
               });
@@ -138,9 +129,7 @@ export class DynamicCrudFormComponent<
         .pipe(
           tap((result) => {
             if (result) {
-              this.nzMessageService.success(
-                this.translocoService.translate('Success'),
-              );
+              this.nzMessageService.success(this.translocoService.translate('Success'));
               this.afterCreate.next({
                 ...(result as DynamicCrudModel),
               });
@@ -159,36 +148,28 @@ export class DynamicCrudFormComponent<
       .createOne?.(this.form.value)
       .pipe(
         catchError((err) =>
-          this.validationService.catchAndProcessServerError(err, (options) =>
-            this.setFormlyFields(options),
-          ),
+          this.validationService.catchAndProcessServerError(err, (options) => this.setFormlyFields(options)),
         ),
       );
   }
 
   updateOne() {
     if (!this.id) {
-      return throwError(
-        () => new Error(this.translocoService.translate('id not set')),
-      );
+      return throwError(() => new Error(this.translocoService.translate('id not set')));
     }
     return this.crudConfiguration
       .handlers()
       .updateOne?.(this.id, this.form.value)
       .pipe(
         catchError((err) =>
-          this.validationService.catchAndProcessServerError(err, (options) =>
-            this.setFormlyFields(options),
-          ),
+          this.validationService.catchAndProcessServerError(err, (options) => this.setFormlyFields(options)),
         ),
       );
   }
 
   findOne() {
     if (!this.id) {
-      return throwError(
-        () => new Error(this.translocoService.translate('id not set')),
-      );
+      return throwError(() => new Error(this.translocoService.translate('id not set')));
     }
     return this.crudConfiguration
       .handlers()
@@ -200,14 +181,9 @@ export class DynamicCrudFormComponent<
       );
   }
 
-  private setFormlyFields(options?: {
-    errors?: ValidationErrorMetadataInterface[];
-  }) {
+  private setFormlyFields(options?: { errors?: ValidationErrorMetadataInterface[] }) {
     this.formlyFields$.next(
-      this.validationService.appendServerErrorsAsValidatorsToFields(
-        this.configuration.inputs,
-        options?.errors || [],
-      ),
+      this.validationService.appendServerErrorsAsValidatorsToFields(this.configuration.inputs, options?.errors || []),
     );
   }
 }

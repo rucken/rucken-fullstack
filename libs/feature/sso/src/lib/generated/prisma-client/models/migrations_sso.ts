@@ -604,10 +604,7 @@ export interface migrations_ssoDelegate<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['migrations_sso'];
-    meta: { name: 'migrations_sso' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['migrations_sso']; meta: { name: 'migrations_sso' } };
   /**
    * Find zero or one Migrations_sso that matches the filter.
    * @param {migrations_ssoFindUniqueArgs} args - Arguments to find a Migrations_sso

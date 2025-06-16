@@ -1,8 +1,4 @@
-import {
-  createNestModule,
-  getFeatureDotEnvPropertyNameFormatter,
-  NestModuleCategory,
-} from '@nestjs-mod/common';
+import { createNestModule, getFeatureDotEnvPropertyNameFormatter, NestModuleCategory } from '@nestjs-mod/common';
 import { KeyvModule } from '@nestjs-mod/keyv';
 import { PrismaModule } from '@nestjs-mod/prisma';
 import { PrismaToolsModule } from '@nestjs-mod/prisma-tools';
@@ -117,9 +113,7 @@ export const { RuckenSsoModule } = createNestModule({
     ...(asyncModuleOptions.staticEnvironments.useInterceptors
       ? [{ provide: APP_INTERCEPTOR, useClass: SsoTimezoneInterceptor }]
       : []),
-    ...(asyncModuleOptions.staticEnvironments.usePipes
-      ? [{ provide: APP_PIPE, useClass: SsoTimezonePipe }]
-      : []),
+    ...(asyncModuleOptions.staticEnvironments.usePipes ? [{ provide: APP_PIPE, useClass: SsoTimezonePipe }] : []),
   ],
   sharedProviders: [
     SsoService,
@@ -139,8 +133,7 @@ export const { RuckenSsoModule } = createNestModule({
     if (!asyncModuleOptions) {
       asyncModuleOptions = {};
     }
-    const FomatterClass =
-      getFeatureDotEnvPropertyNameFormatter(RUCKEN_SSO_FEATURE);
+    const FomatterClass = getFeatureDotEnvPropertyNameFormatter(RUCKEN_SSO_FEATURE);
     Object.assign(asyncModuleOptions, {
       environmentsOptions: {
         propertyNameFormatters: [new FomatterClass()],

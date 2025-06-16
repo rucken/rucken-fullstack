@@ -1037,10 +1037,7 @@ export interface SsoProjectDelegate<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['SsoProject'];
-    meta: { name: 'SsoProject' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SsoProject']; meta: { name: 'SsoProject' } };
   /**
    * Find zero or one SsoProject that matches the filter.
    * @param {SsoProjectFindUniqueArgs} args - Arguments to find a SsoProject

@@ -625,10 +625,7 @@ export interface SsoOAuthProviderDelegate<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['SsoOAuthProvider'];
-    meta: { name: 'SsoOAuthProvider' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SsoOAuthProvider']; meta: { name: 'SsoOAuthProvider' } };
   /**
    * Find zero or one SsoOAuthProvider that matches the filter.
    * @param {SsoOAuthProviderFindUniqueArgs} args - Arguments to find a SsoOAuthProvider

@@ -9,11 +9,7 @@ import {
   Optional,
   Output,
 } from '@angular/core';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  UntypedFormGroup,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -114,9 +110,7 @@ export class SsoUserFormComponent implements OnInit {
         .pipe(
           tap((result) => {
             if (result) {
-              this.nzMessageService.success(
-                this.translocoService.translate('Success'),
-              );
+              this.nzMessageService.success(this.translocoService.translate('Success'));
               this.afterUpdate.next({
                 ...result,
               });
@@ -130,26 +124,20 @@ export class SsoUserFormComponent implements OnInit {
 
   updateOne() {
     if (!this.id) {
-      return throwError(
-        () => new Error(this.translocoService.translate('id not set')),
-      );
+      return throwError(() => new Error(this.translocoService.translate('id not set')));
     }
     return this.ssoUserService
       .updateOne(this.id, this.form.value)
       .pipe(
         catchError((err) =>
-          this.validationService.catchAndProcessServerError(err, (options) =>
-            this.setFormlyFields(options),
-          ),
+          this.validationService.catchAndProcessServerError(err, (options) => this.setFormlyFields(options)),
         ),
       );
   }
 
   findOne() {
     if (!this.id) {
-      return throwError(
-        () => new Error(this.translocoService.translate('id not set')),
-      );
+      return throwError(() => new Error(this.translocoService.translate('id not set')));
     }
     return this.ssoUserService.findOne(this.id).pipe(
       tap((result) => {
@@ -158,9 +146,7 @@ export class SsoUserFormComponent implements OnInit {
     );
   }
 
-  private setFormlyFields(options?: {
-    errors?: ValidationErrorMetadataInterface[];
-  }) {
+  private setFormlyFields(options?: { errors?: ValidationErrorMetadataInterface[] }) {
     this.formlyFields$.next(this.ssoUserFormService.getFormlyFields(options));
   }
 }

@@ -1084,10 +1084,7 @@ export interface SsoRefreshSessionDelegate<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['SsoRefreshSession'];
-    meta: { name: 'SsoRefreshSession' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SsoRefreshSession']; meta: { name: 'SsoRefreshSession' } };
   /**
    * Find zero or one SsoRefreshSession that matches the filter.
    * @param {SsoRefreshSessionFindUniqueArgs} args - Arguments to find a SsoRefreshSession

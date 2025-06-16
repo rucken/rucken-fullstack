@@ -13,27 +13,16 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TitleStrategy } from '@angular/router';
 import { GithubFill } from '@ant-design/icons-angular/icons';
-import {
-  LangDefinition,
-  provideTransloco,
-  TranslocoService,
-} from '@jsverse/transloco';
+import { LangDefinition, provideTransloco, TranslocoService } from '@jsverse/transloco';
 import { marker } from '@jsverse/transloco-keys-manager/marker';
 import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { COMMON_FORMLY_FIELDS } from '@nestjs-mod/afat';
-import {
-  FILES_FORMLY_FIELDS,
-  FilesRestSdkAngularModule,
-  MINIO_URL,
-} from '@nestjs-mod/files-afat';
+import { FILES_FORMLY_FIELDS, FilesRestSdkAngularModule, MINIO_URL } from '@nestjs-mod/files-afat';
 import { WebhookRestSdkAngularModule } from '@nestjs-mod/webhook-afat';
 import { untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyNgZorroAntdModule } from '@ngx-formly/ng-zorro-antd';
-import {
-  DynamicCrudGridComponent,
-  provideRuckenAfatEngine,
-} from '@rucken/engine-afat';
+import { DynamicCrudGridComponent, provideRuckenAfatEngine } from '@rucken/engine-afat';
 import {
   CreateSsoProjectDtoInterface,
   RuckenRestSdkAngularModule,
@@ -66,11 +55,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { UsersComponent } from './pages/users/users.component';
 import { WebhooksComponent } from './pages/webhooks/webhooks.component';
 
-export const ssoAppConfig = ({
-  minioURL,
-}: {
-  minioURL: string;
-}): ApplicationConfig => {
+export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationConfig => {
   return {
     providers: [
       provideNzIcons([GithubFill]),
@@ -124,10 +109,7 @@ export const ssoAppConfig = ({
                   crud: {
                     handlers: () => ({
                       updateOne: (id, data) => {
-                        return ssoUserService.updateOne(
-                          id,
-                          data as SsoUserModel,
-                        );
+                        return ssoUserService.updateOne(id, data as SsoUserModel);
                       },
                       findOne: (id) => {
                         return ssoUserService.findOne(id);
@@ -148,9 +130,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.app-data`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.app-data`),
                             placeholder: 'appData',
                             required: false,
                           },
@@ -162,9 +142,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.birthdate`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.birthdate`),
                             placeholder: 'birthdate',
                             required: false,
                           },
@@ -176,9 +154,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.email`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.email`),
                             placeholder: 'email',
                             required: true,
                           },
@@ -190,9 +166,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.email-verified-at`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.email-verified-at`),
                             placeholder: 'emailVerifiedAt',
                             required: false,
                           },
@@ -204,9 +178,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.firstname`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.firstname`),
                             placeholder: 'firstname',
                             required: false,
                           },
@@ -218,9 +190,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.gender`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.gender`),
                             placeholder: 'gender',
                             required: false,
                             options: [
@@ -242,9 +212,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.lastname`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.lastname`),
                             placeholder: 'lastname',
                             required: false,
                           },
@@ -256,9 +224,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.phone`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.phone`),
                             placeholder: 'phone',
                             required: false,
                           },
@@ -270,9 +236,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.phone-verified-at`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.phone-verified-at`),
                             placeholder: 'phoneVerifiedAt',
                             required: false,
                           },
@@ -284,9 +248,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.picture`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.picture`),
                             placeholder: 'picture',
                             required: false,
                           },
@@ -298,9 +260,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.revoked-at`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.revoked-at`),
                             placeholder: 'revokedAt',
                             required: false,
                           },
@@ -312,9 +272,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.roles`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.roles`),
                             placeholder: 'roles',
                             required: false,
                             multiple: true,
@@ -335,9 +293,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-user.form.fields.username`,
-                            ),
+                            label: translocoService.translate(`sso-user.form.fields.username`),
                             placeholder: 'username',
                             required: false,
                           },
@@ -354,9 +310,7 @@ export const ssoAppConfig = ({
                               SsoInviteMembersFormComponent,
                               SsoInviteMembersFormComponent
                             >({
-                              nzTitle: translocoService.translate(
-                                'sso-user.invite-members-modal.title',
-                              ),
+                              nzTitle: translocoService.translate('sso-user.invite-members-modal.title'),
                               nzContent: SsoInviteMembersFormComponent,
                               nzViewContainerRef: grid.viewContainerRef,
                               nzData: {
@@ -370,9 +324,7 @@ export const ssoAppConfig = ({
                                   },
                                 },
                                 {
-                                  label: translocoService.translate(
-                                    'Send invitation links',
-                                  ),
+                                  label: translocoService.translate('Send invitation links'),
                                   onClick: () => {
                                     modal.componentInstance?.afterSendInvitationLinks
                                       .pipe(
@@ -453,10 +405,7 @@ export const ssoAppConfig = ({
                   crud: {
                     handlers: () => ({
                       updateOne: (id, data) => {
-                        return ssoEmailTemplateService.updateOne(
-                          id,
-                          data as UpdateSsoEmailTemplateDtoInterface,
-                        );
+                        return ssoEmailTemplateService.updateOne(id, data as UpdateSsoEmailTemplateDtoInterface);
                       },
                       findOne: (id) => {
                         return ssoEmailTemplateService.findOne(id);
@@ -479,17 +428,12 @@ export const ssoAppConfig = ({
                           props: {
                             readonly: true,
                             disabled: true,
-                            label: translocoService.translate(
-                              `sso-email-template.form.fields.operation-name`,
-                            ),
+                            label: translocoService.translate(`sso-email-template.form.fields.operation-name`),
                             placeholder: 'operationName',
                           },
                         },
                         ...translocoService.getAvailableLangs().map((a) => ({
-                          key:
-                            a.id === translocoService.getDefaultLang()
-                              ? 'subject'
-                              : `subject_${a.id}`,
+                          key: a.id === translocoService.getDefaultLang() ? 'subject' : `subject_${a.id}`,
                           type: 'textarea',
                           validation: {
                             show: true,
@@ -503,19 +447,12 @@ export const ssoAppConfig = ({
                                 label: translocoService.translate(a.label),
                               },
                             ),
-                            placeholder:
-                              a.id === translocoService.getDefaultLang()
-                                ? 'subject'
-                                : `subject ${a.id}`,
-                            required:
-                              a.id === translocoService.getDefaultLang(),
+                            placeholder: a.id === translocoService.getDefaultLang() ? 'subject' : `subject ${a.id}`,
+                            required: a.id === translocoService.getDefaultLang(),
                           },
                         })),
                         ...translocoService.getAvailableLangs().map((a) => ({
-                          key:
-                            a.id === translocoService.getDefaultLang()
-                              ? 'html'
-                              : `html_${a.id}`,
+                          key: a.id === translocoService.getDefaultLang() ? 'html' : `html_${a.id}`,
                           type: 'textarea',
                           validation: {
                             show: true,
@@ -529,19 +466,12 @@ export const ssoAppConfig = ({
                                 label: translocoService.translate(a.label),
                               },
                             ),
-                            placeholder:
-                              a.id === translocoService.getDefaultLang()
-                                ? 'html'
-                                : `html ${a.id}`,
-                            required:
-                              a.id === translocoService.getDefaultLang(),
+                            placeholder: a.id === translocoService.getDefaultLang() ? 'html' : `html ${a.id}`,
+                            required: a.id === translocoService.getDefaultLang(),
                           },
                         })),
                         ...translocoService.getAvailableLangs().map((a) => ({
-                          key:
-                            a.id === translocoService.getDefaultLang()
-                              ? 'text'
-                              : `text_${a.id}`,
+                          key: a.id === translocoService.getDefaultLang() ? 'text' : `text_${a.id}`,
                           type: 'textarea',
                           validation: {
                             show: true,
@@ -555,12 +485,8 @@ export const ssoAppConfig = ({
                                 label: translocoService.translate(a.label),
                               },
                             ),
-                            placeholder:
-                              a.id === translocoService.getDefaultLang()
-                                ? 'text'
-                                : `text ${a.id}`,
-                            required:
-                              a.id === translocoService.getDefaultLang(),
+                            placeholder: a.id === translocoService.getDefaultLang() ? 'text' : `text ${a.id}`,
+                            required: a.id === translocoService.getDefaultLang(),
                           },
                         })),
                       ],
@@ -569,9 +495,7 @@ export const ssoAppConfig = ({
                       title: marker('Email templates'),
                       actions: {
                         update: {
-                          title: marker(
-                            'sso-email-template.update-modal.title',
-                          ),
+                          title: marker('sso-email-template.update-modal.title'),
                           width: '700px',
                         },
                       },
@@ -582,15 +506,11 @@ export const ssoAppConfig = ({
                         },
                         {
                           name: SsoEmailTemplateScalarFieldEnumInterface.operationName,
-                          title: marker(
-                            'sso-email-template.grid.columns.operation-name',
-                          ),
+                          title: marker('sso-email-template.grid.columns.operation-name'),
                         },
                         {
                           name: SsoEmailTemplateScalarFieldEnumInterface.subject,
-                          title: marker(
-                            'sso-email-template.grid.columns.subject',
-                          ),
+                          title: marker('sso-email-template.grid.columns.subject'),
                         },
                         {
                           name: SsoEmailTemplateScalarFieldEnumInterface.text,
@@ -620,15 +540,10 @@ export const ssoAppConfig = ({
                   crud: {
                     handlers: () => ({
                       createOne: (data) => {
-                        return ssoProjectService.createOne(
-                          data as CreateSsoProjectDtoInterface,
-                        );
+                        return ssoProjectService.createOne(data as CreateSsoProjectDtoInterface);
                       },
                       updateOne: (id, data) => {
-                        return ssoProjectService.updateOne(
-                          id,
-                          data as UpdateSsoProjectDtoInterface,
-                        );
+                        return ssoProjectService.updateOne(id, data as UpdateSsoProjectDtoInterface);
                       },
                       findOne: (id) => {
                         return ssoProjectService.findOne(id);
@@ -642,13 +557,8 @@ export const ssoAppConfig = ({
                     }),
                     form: () => ({
                       inputs: [
-                        ...(
-                          translocoService.getAvailableLangs() as LangDefinition[]
-                        ).map((a) => ({
-                          key:
-                            a.id === translocoService.getDefaultLang()
-                              ? 'name'
-                              : `name_${a.id}`,
+                        ...(translocoService.getAvailableLangs() as LangDefinition[]).map((a) => ({
+                          key: a.id === translocoService.getDefaultLang() ? 'name' : `name_${a.id}`,
                           type: 'textarea',
                           validation: {
                             show: true,
@@ -662,12 +572,8 @@ export const ssoAppConfig = ({
                                 label: translocoService.translate(a.label),
                               },
                             ),
-                            placeholder:
-                              a.id === translocoService.getDefaultLang()
-                                ? 'name'
-                                : `name ${a.id}`,
-                            required:
-                              a.id === translocoService.getDefaultLang(),
+                            placeholder: a.id === translocoService.getDefaultLang() ? 'name' : `name ${a.id}`,
+                            required: a.id === translocoService.getDefaultLang(),
                           },
                         })),
                         {
@@ -677,9 +583,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-project.form.fields.client-id`,
-                            ),
+                            label: translocoService.translate(`sso-project.form.fields.client-id`),
                             placeholder: 'clientId',
                             required: true,
                           },
@@ -691,9 +595,7 @@ export const ssoAppConfig = ({
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-project.form.fields.client-secret`,
-                            ),
+                            label: translocoService.translate(`sso-project.form.fields.client-secret`),
                             placeholder: 'clientSecret',
                             required: true,
                           },
@@ -706,9 +608,7 @@ export const ssoAppConfig = ({
                           },
                           defaultValue: false,
                           props: {
-                            label: translocoService.translate(
-                              `sso-project.form.fields.public`,
-                            ),
+                            label: translocoService.translate(`sso-project.form.fields.public`),
                             placeholder: 'public',
                             required: true,
                           },
@@ -742,9 +642,7 @@ export const ssoAppConfig = ({
                         },
                         {
                           name: SsoProjectScalarFieldEnumInterface.clientSecret,
-                          title: marker(
-                            'sso-project.grid.columns.client-secret',
-                          ),
+                          title: marker('sso-project.grid.columns.client-secret'),
                         },
                         {
                           name: SsoProjectScalarFieldEnumInterface.public,
@@ -765,13 +663,7 @@ export const ssoAppConfig = ({
             },
           };
         },
-        [
-          TranslocoService,
-          SsoProjectService,
-          SsoEmailTemplateService,
-          RuckenRestSdkAngularService,
-          SsoUserService,
-        ],
+        [TranslocoService, SsoProjectService, SsoEmailTemplateService, RuckenRestSdkAngularService, SsoUserService],
       ),
       importProvidersFrom(
         BrowserAnimationsModule,

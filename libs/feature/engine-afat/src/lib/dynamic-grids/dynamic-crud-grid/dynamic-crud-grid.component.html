@@ -15,20 +15,10 @@
   </div>
   <div nz-col nzSpan="8">
     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-      <input
-        type="text"
-        [formControl]="searchField"
-        nz-input
-        [placeholder]="'input search text' | transloco"
-      />
+      <input type="text" [formControl]="searchField" nz-input [placeholder]="'input search text' | transloco" />
     </nz-input-group>
     <ng-template #suffixIconButton>
-      <button
-        (click)="loadMany({ force: true })"
-        nz-button
-        nzType="primary"
-        nzSearch
-      >
+      <button (click)="loadMany({ force: true })" nz-button nzType="primary" nzSearch>
         <span nz-icon nzType="search"></span>
       </button>
     </ng-template>
@@ -71,29 +61,18 @@
         <tbody>
           @for (data of basicTable.data; track $index) {
             <tr
-              (click)="
-                selectedIds$.next(
-                  !data.id || selectedIds[0] === data.id ? [] : [data.id]
-                )
-              "
+              (click)="selectedIds$.next(!data.id || selectedIds[0] === data.id ? [] : [data.id])"
               [class.selected]="selectedIds[0] === data.id"
             >
               @for (column of columns; track $index) {
                 @if (column.isDate) {
                   <td>
-                    {{
-                      data[column.name]
-                        | translocoDate
-                          : { dateStyle: 'medium', timeStyle: 'medium' }
-                    }}
+                    {{ data[column.name] | translocoDate: { dateStyle: 'medium', timeStyle: 'medium' } }}
                   </td>
                 } @else {
                   @if (column.isFile && data[column.name]) {
                     <td>
-                      <img
-                        style="max-height: 40px; max-height: 40px"
-                        [src]="(minioURL$ | async) + data[column.name]"
-                      />
+                      <img style="max-height: 40px; max-height: 40px" [src]="(minioURL$ | async) + data[column.name]" />
                     </td>
                   } @else {
                     <td>
@@ -112,9 +91,7 @@
                     }}
                   </a>
                 }
-                @if (
-                  configuration.actions.update && configuration.actions.delete
-                ) {
+                @if (configuration.actions.update && configuration.actions.delete) {
                   <nz-divider nzType="vertical"></nz-divider>
                 }
                 @if (configuration.actions.delete) {

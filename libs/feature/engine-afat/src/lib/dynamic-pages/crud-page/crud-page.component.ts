@@ -12,19 +12,11 @@ import { CrudConfiguration } from './crud-page.configuration';
 @Component({
   selector: 'crud-page',
   templateUrl: './crud-page.component.html',
-  imports: [
-    NzBreadCrumbModule,
-    NzGridModule,
-    NzLayoutModule,
-    TranslocoDirective,
-    AsyncPipe,
-    DynamicCrudGridComponent,
-  ],
+  imports: [NzBreadCrumbModule, NzGridModule, NzLayoutModule, TranslocoDirective, AsyncPipe, DynamicCrudGridComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CrudComponent {
-  crudConfiguration$ = this.activatedRoute
-    .data as Observable<CrudConfiguration>;
+  crudConfiguration$ = this.activatedRoute.data as Observable<CrudConfiguration>;
 
   constructor(private readonly activatedRoute: ActivatedRoute) {}
 }

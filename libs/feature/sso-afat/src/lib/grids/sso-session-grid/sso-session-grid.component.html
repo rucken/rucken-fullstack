@@ -1,23 +1,11 @@
 <div class="table-operations" nz-row nzJustify="space-between">
-  <div nz-col nzSpan="8">
-    {{ 'Sessions for user #{{userId}}' | transloco:{userId} }}
-  </div>
+  <div nz-col nzSpan="8">{{ 'Sessions for user #{{userId}}' | transloco:{userId} }}</div>
   <div nz-col nzSpan="8">
     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-      <input
-        type="text"
-        [formControl]="searchField"
-        nz-input
-        [placeholder]="'input search text' | transloco"
-      />
+      <input type="text" [formControl]="searchField" nz-input [placeholder]="'input search text' | transloco" />
     </nz-input-group>
     <ng-template #suffixIconButton>
-      <button
-        (click)="loadMany({ force: true })"
-        nz-button
-        nzType="primary"
-        nzSearch
-      >
+      <button (click)="loadMany({ force: true })" nz-button nzType="primary" nzSearch>
         <span nz-icon nzType="search"></span>
       </button>
     </ng-template>
@@ -59,11 +47,7 @@
       <tbody>
         @for (data of basicTable.data; track $index) {
           <tr
-            (click)="
-              selectedIds$.next(
-                !data.id || selectedIds[0] === data.id ? [] : [data.id]
-              )
-            "
+            (click)="selectedIds$.next(!data.id || selectedIds[0] === data.id ? [] : [data.id])"
             [class.selected]="selectedIds[0] === data.id"
           >
             @for (key of keys; track $index) {
@@ -76,11 +60,7 @@
                 ].includes(key)
               ) {
                 <td>
-                  {{
-                    +data[key]
-                      | translocoDate
-                        : { dateStyle: 'medium', timeStyle: 'medium' }
-                  }}
+                  {{ +data[key] | translocoDate: { dateStyle: 'medium', timeStyle: 'medium' } }}
                 </td>
               } @else {
                 <td>
@@ -89,10 +69,7 @@
               }
             }
             <td>
-              <a
-                (click)="showCreateOrUpdateModal(data.id)"
-                transloco="Edit"
-              ></a>
+              <a (click)="showCreateOrUpdateModal(data.id)" transloco="Edit"></a>
             </td>
           </tr>
         }

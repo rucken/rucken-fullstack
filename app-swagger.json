@@ -72,12 +72,7 @@
                     },
                     "error": {
                       "type": "object",
-                      "example": {
-                        "redis": {
-                          "status": "down",
-                          "message": "Could not connect"
-                        }
-                      },
+                      "example": { "redis": { "status": "down", "message": "Could not connect" } },
                       "additionalProperties": {
                         "type": "object",
                         "required": ["status"],
@@ -90,10 +85,7 @@
                       "type": "object",
                       "example": {
                         "database": { "status": "up" },
-                        "redis": {
-                          "status": "down",
-                          "message": "Could not connect"
-                        }
+                        "redis": { "status": "down", "message": "Could not connect" }
                       },
                       "additionalProperties": {
                         "type": "object",
@@ -114,22 +106,11 @@
     "/api/files/get-presigned-url": {
       "get": {
         "operationId": "FilesController_getPresignedUrl",
-        "parameters": [
-          {
-            "name": "ext",
-            "required": true,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "ext", "required": true, "in": "query", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/FilesPresignedUrls" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FilesPresignedUrls" } } }
           }
         },
         "tags": ["Files"]
@@ -138,22 +119,11 @@
     "/api/files/delete-file": {
       "post": {
         "operationId": "FilesController_deleteFile",
-        "parameters": [
-          {
-            "name": "downloadUrl",
-            "required": true,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "downloadUrl", "required": true, "in": "query", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/StatusResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/StatusResponse" } } }
           }
         },
         "tags": ["Files"]
@@ -163,40 +133,16 @@
       "get": {
         "operationId": "NotificationsController_findMany",
         "parameters": [
-          {
-            "name": "curPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "perPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "searchText",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sort",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManyNotificationResponse"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManyNotificationResponse" } }
             }
           },
           "400": {
@@ -219,34 +165,17 @@
     "/api/notifications/{id}": {
       "put": {
         "operationId": "NotificationsController_updateOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateNotificationsEventDto"
-              }
-            }
+            "application/json": { "schema": { "$ref": "#/components/schemas/UpdateNotificationsEventDto" } }
           }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NotificationsEventDto"
-                }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/NotificationsEventDto" } } }
           },
           "400": {
             "description": "",
@@ -266,24 +195,11 @@
       },
       "get": {
         "operationId": "NotificationsController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NotificationsEventDto"
-                }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/NotificationsEventDto" } } }
           },
           "400": {
             "description": "",
@@ -306,46 +222,17 @@
       "get": {
         "operationId": "WebhookLogsController_findManyLogs",
         "parameters": [
-          {
-            "name": "curPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "perPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "searchText",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sort",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "webhookId",
-            "required": true,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "webhookId", "required": true, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManyWebhookLogResponse"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManyWebhookLogResponse" } }
             }
           },
           "400": {
@@ -368,22 +255,11 @@
     "/api/webhook/logs/{id}": {
       "delete": {
         "operationId": "WebhookLogsController_deleteOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/StatusResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/StatusResponse" } } }
           },
           "400": {
             "description": "",
@@ -403,22 +279,11 @@
       },
       "get": {
         "operationId": "WebhookLogsController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/WebhookLog" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/WebhookLog" } } }
           },
           "400": {
             "description": "",
@@ -444,11 +309,7 @@
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/WebhookUser" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/WebhookUser" } } }
           },
           "400": {
             "description": "",
@@ -476,10 +337,7 @@
             "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": { "$ref": "#/components/schemas/WebhookEvent" }
-                }
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/WebhookEvent" } }
               }
             }
           },
@@ -504,41 +362,15 @@
       "get": {
         "operationId": "WebhookController_findMany",
         "parameters": [
-          {
-            "name": "curPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "perPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "searchText",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sort",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManyWebhookResponse"
-                }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FindManyWebhookResponse" } } }
           },
           "400": {
             "description": "",
@@ -561,20 +393,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/CreateWebhookDto" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateWebhookDto" } } }
         },
         "responses": {
           "201": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Webhook" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Webhook" } } }
           },
           "400": {
             "description": "",
@@ -599,21 +423,13 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/CreateWebhookDto" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateWebhookDto" } } }
         },
         "responses": {
           "201": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WebhookTestRequestResponse"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/WebhookTestRequestResponse" } }
             }
           },
           "400": {
@@ -636,30 +452,15 @@
     "/api/webhook/{id}": {
       "put": {
         "operationId": "WebhookController_updateOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/UpdateWebhookDto" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateWebhookDto" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Webhook" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Webhook" } } }
           },
           "400": {
             "description": "",
@@ -679,22 +480,11 @@
       },
       "delete": {
         "operationId": "WebhookController_deleteOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/StatusResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/StatusResponse" } } }
           },
           "400": {
             "description": "",
@@ -714,22 +504,11 @@
       },
       "get": {
         "operationId": "WebhookController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Webhook" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Webhook" } } }
           },
           "400": {
             "description": "",
@@ -754,20 +533,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/SignInArgs" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SignInArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/TokensResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokensResponse" } } }
           },
           "400": {
             "description": "",
@@ -792,20 +563,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/SignUpArgs" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SignUpArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/TokensResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokensResponse" } } }
           },
           "400": {
             "description": "",
@@ -830,20 +593,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/CompleteSignUpArgs" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CompleteSignUpArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/TokensResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokensResponse" } } }
           },
           "400": {
             "description": "",
@@ -868,20 +623,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/SignOutArgs" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SignOutArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/StatusResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/StatusResponse" } } }
           },
           "400": {
             "description": "",
@@ -906,20 +653,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/ForgotPasswordArgs" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ForgotPasswordArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/StatusResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/StatusResponse" } } }
           },
           "400": {
             "description": "",
@@ -944,22 +683,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CompleteForgotPasswordArgs"
-              }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CompleteForgotPasswordArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/TokensResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokensResponse" } } }
           },
           "400": {
             "description": "",
@@ -984,20 +713,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/RefreshTokensResponse" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RefreshTokensResponse" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/TokensResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokensResponse" } } }
           },
           "400": {
             "description": "",
@@ -1023,11 +744,7 @@
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoUserDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoUserDto" } } }
           },
           "400": {
             "description": "",
@@ -1050,20 +767,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/UpdateProfileArgs" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateProfileArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoUserDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoUserDto" } } }
           },
           "400": {
             "description": "",
@@ -1086,47 +795,16 @@
       "get": {
         "operationId": "SsoUsersController_findMany",
         "parameters": [
-          {
-            "name": "curPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "perPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "searchText",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sort",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "projectId",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "projectId", "required": false, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManySsoUserResponse"
-                }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoUserResponse" } } }
           },
           "400": {
             "description": "",
@@ -1148,30 +826,15 @@
     "/api/sso/users/{id}": {
       "put": {
         "operationId": "SsoUsersController_updateOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/UpdateSsoUserDto" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateSsoUserDto" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoUserDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoUserDto" } } }
           },
           "400": {
             "description": "",
@@ -1191,22 +854,11 @@
       },
       "get": {
         "operationId": "SsoUsersController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoUserDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoUserDto" } } }
           },
           "400": {
             "description": "",
@@ -1231,22 +883,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendInvitationLinksArgs"
-              }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SendInvitationLinksArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/StatusResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/StatusResponse" } } }
           },
           "400": {
             "description": "",
@@ -1269,40 +911,16 @@
       "get": {
         "operationId": "SsoProjectsController_findMany",
         "parameters": [
-          {
-            "name": "curPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "perPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "searchText",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sort",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManySsoProjectResponse"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoProjectResponse" } }
             }
           },
           "400": {
@@ -1326,20 +944,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/CreateSsoProjectDto" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateSsoProjectDto" } } }
         },
         "responses": {
           "201": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoProjectDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoProjectDto" } } }
           },
           "400": {
             "description": "",
@@ -1361,30 +971,15 @@
     "/api/sso/projects/{id}": {
       "put": {
         "operationId": "SsoProjectsController_updateOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/UpdateSsoProjectDto" }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateSsoProjectDto" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoProjectDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoProjectDto" } } }
           },
           "400": {
             "description": "",
@@ -1404,22 +999,11 @@
       },
       "delete": {
         "operationId": "SsoProjectsController_deleteOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/StatusResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/StatusResponse" } } }
           },
           "400": {
             "description": "",
@@ -1439,22 +1023,11 @@
       },
       "get": {
         "operationId": "SsoProjectsController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoProjectDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoProjectDto" } } }
           },
           "400": {
             "description": "",
@@ -1477,46 +1050,17 @@
       "get": {
         "operationId": "SsoRefreshSessionsController_findMany",
         "parameters": [
-          {
-            "name": "curPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "perPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "searchText",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sort",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "userId",
-            "required": true,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "userId", "required": true, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManySsoRefreshSessionResponse"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoRefreshSessionResponse" } }
             }
           },
           "400": {
@@ -1539,34 +1083,15 @@
     "/api/sso/sessions/{id}": {
       "put": {
         "operationId": "SsoRefreshSessionsController_updateOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSsoRefreshSessionDto"
-              }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateSsoRefreshSessionDto" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SsoRefreshSessionDto"
-                }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoRefreshSessionDto" } } }
           },
           "400": {
             "description": "",
@@ -1586,24 +1111,11 @@
       },
       "get": {
         "operationId": "SsoRefreshSessionsController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SsoRefreshSessionDto"
-                }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoRefreshSessionDto" } } }
           },
           "400": {
             "description": "",
@@ -1629,13 +1141,7 @@
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManySsoRoleResponse"
-                }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoRoleResponse" } } }
           }
         },
         "tags": ["Sso"]
@@ -1645,40 +1151,16 @@
       "get": {
         "operationId": "SsoPublicProjectsController_findMany",
         "parameters": [
-          {
-            "name": "curPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "perPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "searchText",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sort",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManySsoPublicProjectResponse"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoPublicProjectResponse" } }
             }
           }
         },
@@ -1689,40 +1171,16 @@
       "get": {
         "operationId": "SsoEmailTemplatesController_findMany",
         "parameters": [
-          {
-            "name": "curPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "perPage",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "number" }
-          },
-          {
-            "name": "searchText",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sort",
-            "required": false,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FindManySsoEmailTemplateResponse"
-                }
-              }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoEmailTemplateResponse" } }
             }
           },
           "400": {
@@ -1745,32 +1203,15 @@
     "/api/sso/email-templates/{id}": {
       "put": {
         "operationId": "SsoEmailTemplatesController_updateOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSsoEmailTemplateDto"
-              }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateSsoEmailTemplateDto" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoEmailTemplateDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoEmailTemplateDto" } } }
           },
           "400": {
             "description": "",
@@ -1790,22 +1231,11 @@
       },
       "get": {
         "operationId": "SsoEmailTemplatesController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/SsoEmailTemplateDto" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoEmailTemplateDto" } } }
           },
           "400": {
             "description": "",
@@ -1833,10 +1263,7 @@
             "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": { "$ref": "#/components/schemas/OAuthProvider" }
-                }
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/OAuthProvider" } }
               }
             }
           }
@@ -1850,22 +1277,12 @@
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SsoOAuthVerificationArgs"
-              }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoOAuthVerificationArgs" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/TokensResponse" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokensResponse" } } }
           }
         },
         "tags": ["Sso"]
@@ -1875,18 +1292,8 @@
       "get": {
         "operationId": "SsoGoogleOAuthController_googleAuth",
         "parameters": [
-          {
-            "name": "redirect_uri",
-            "required": true,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "client_id",
-            "required": true,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "redirect_uri", "required": true, "in": "query", "schema": { "type": "string" } },
+          { "name": "client_id", "required": true, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": { "200": { "description": "" } },
         "tags": ["Sso"]
@@ -1896,18 +1303,8 @@
       "get": {
         "operationId": "SsoGoogleOAuthController_googleAuthRedirect",
         "parameters": [
-          {
-            "name": "redirect_uri",
-            "required": true,
-            "in": "query",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "client_id",
-            "required": true,
-            "in": "query",
-            "schema": { "type": "string" }
-          }
+          { "name": "redirect_uri", "required": true, "in": "query", "schema": { "type": "string" } },
+          { "name": "client_id", "required": true, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": { "200": { "description": "" } },
         "tags": ["Sso"]
@@ -1920,11 +1317,7 @@
         "responses": {
           "200": {
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Date" }
-              }
-            }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Date" } } }
           }
         },
         "tags": ["Time"]
@@ -1935,16 +1328,11 @@
   "tags": [],
   "servers": [],
   "components": {
-    "securitySchemes": {
-      "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" }
-    },
+    "securitySchemes": { "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" } },
     "schemas": {
       "FilesPresignedUrls": {
         "type": "object",
-        "properties": {
-          "downloadUrl": { "type": "string" },
-          "uploadUrl": { "type": "string" }
-        },
+        "properties": { "downloadUrl": { "type": "string" }, "uploadUrl": { "type": "string" } },
         "required": ["downloadUrl", "uploadUrl"]
       },
       "StatusResponse": {
@@ -1969,13 +1357,7 @@
             "items": { "$ref": "#/components/schemas/NotificationsEvent" }
           }
         },
-        "required": [
-          "id",
-          "externalTenantId",
-          "externalUserId",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["id", "externalTenantId", "externalUserId", "createdAt", "updatedAt"]
       },
       "NotificationsEvent": {
         "type": "object",
@@ -2037,10 +1419,7 @@
       "FindManyNotificationResponse": {
         "type": "object",
         "properties": {
-          "notifications": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/NotificationsEvent" }
-          },
+          "notifications": { "type": "array", "items": { "$ref": "#/components/schemas/NotificationsEvent" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
         "required": ["notifications", "meta"]
@@ -2099,10 +1478,7 @@
           "updatedAt"
         ]
       },
-      "WebhookStatus": {
-        "type": "string",
-        "enum": ["Pending", "Process", "Success", "Error", "Timeout"]
-      },
+      "WebhookStatus": { "type": "string", "enum": ["Pending", "Process", "Success", "Error", "Timeout"] },
       "WebhookRole": { "type": "string", "enum": ["Admin", "User"] },
       "WebhookUser": {
         "type": "object",
@@ -2110,9 +1486,7 @@
           "id": { "type": "string" },
           "externalTenantId": { "type": "string" },
           "externalUserId": { "type": "string" },
-          "userRole": {
-            "allOf": [{ "$ref": "#/components/schemas/WebhookRole" }]
-          },
+          "userRole": { "allOf": [{ "$ref": "#/components/schemas/WebhookRole" }] },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
           "Webhook_Webhook_createdByToWebhookUser": {
@@ -2124,14 +1498,7 @@
             "items": { "$ref": "#/components/schemas/Webhook" }
           }
         },
-        "required": [
-          "id",
-          "externalTenantId",
-          "externalUserId",
-          "userRole",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["id", "externalTenantId", "externalUserId", "userRole", "createdAt", "updatedAt"]
       },
       "Webhook": {
         "type": "object",
@@ -2141,31 +1508,16 @@
           "endpoint": { "type": "string" },
           "enabled": { "type": "boolean" },
           "headers": { "type": "object", "nullable": true },
-          "requestTimeout": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
+          "requestTimeout": { "type": "integer", "format": "int32", "nullable": true },
           "externalTenantId": { "type": "string" },
           "createdBy": { "type": "string" },
           "updatedBy": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "workUntilDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "WebhookUser_Webhook_createdByToWebhookUser": {
-            "$ref": "#/components/schemas/WebhookUser"
-          },
-          "WebhookUser_Webhook_updatedByToWebhookUser": {
-            "$ref": "#/components/schemas/WebhookUser"
-          },
-          "WebhookLog": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/WebhookLog" }
-          }
+          "workUntilDate": { "type": "string", "format": "date-time", "nullable": true },
+          "WebhookUser_Webhook_createdByToWebhookUser": { "$ref": "#/components/schemas/WebhookUser" },
+          "WebhookUser_Webhook_updatedByToWebhookUser": { "$ref": "#/components/schemas/WebhookUser" },
+          "WebhookLog": { "type": "array", "items": { "$ref": "#/components/schemas/WebhookLog" } }
         },
         "required": [
           "id",
@@ -2189,9 +1541,7 @@
           "request": { "type": "object" },
           "responseStatus": { "type": "string" },
           "response": { "type": "object", "nullable": true },
-          "webhookStatus": {
-            "allOf": [{ "$ref": "#/components/schemas/WebhookStatus" }]
-          },
+          "webhookStatus": { "allOf": [{ "$ref": "#/components/schemas/WebhookStatus" }] },
           "webhookId": { "type": "string" },
           "externalTenantId": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
@@ -2213,10 +1563,7 @@
       "FindManyWebhookLogResponse": {
         "type": "object",
         "properties": {
-          "webhookLogs": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/WebhookLog" }
-          },
+          "webhookLogs": { "type": "array", "items": { "$ref": "#/components/schemas/WebhookLog" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
         "required": ["webhookLogs", "meta"]
@@ -2233,10 +1580,7 @@
       "FindManyWebhookResponse": {
         "type": "object",
         "properties": {
-          "webhooks": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/Webhook" }
-          },
+          "webhooks": { "type": "array", "items": { "$ref": "#/components/schemas/Webhook" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
         "required": ["webhooks", "meta"]
@@ -2248,16 +1592,8 @@
           "endpoint": { "type": "string" },
           "enabled": { "type": "boolean" },
           "headers": { "type": "object", "nullable": true },
-          "requestTimeout": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "workUntilDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
+          "requestTimeout": { "type": "integer", "format": "int32", "nullable": true },
+          "workUntilDate": { "type": "string", "format": "date-time", "nullable": true }
         },
         "required": ["eventName", "endpoint", "enabled"]
       },
@@ -2267,9 +1603,7 @@
           "request": { "type": "object" },
           "responseStatus": { "type": "string" },
           "response": { "type": "object", "nullable": true },
-          "webhookStatus": {
-            "allOf": [{ "$ref": "#/components/schemas/WebhookStatus" }]
-          }
+          "webhookStatus": { "allOf": [{ "$ref": "#/components/schemas/WebhookStatus" }] }
         },
         "required": ["request", "responseStatus", "response", "webhookStatus"]
       },
@@ -2280,16 +1614,8 @@
           "endpoint": { "type": "string" },
           "enabled": { "type": "boolean" },
           "headers": { "type": "object", "nullable": true },
-          "requestTimeout": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "workUntilDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
+          "requestTimeout": { "type": "integer", "format": "int32", "nullable": true },
+          "workUntilDate": { "type": "string", "format": "date-time", "nullable": true }
         }
       },
       "SignInArgs": {
@@ -2337,11 +1663,7 @@
           "id": { "type": "string" },
           "userAgent": { "type": "string", "nullable": true },
           "userIp": { "type": "string", "nullable": true },
-          "expiresAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "expiresAt": { "type": "string", "format": "date-time", "nullable": true },
           "userData": { "type": "object", "nullable": true },
           "enabled": { "type": "boolean" },
           "userId": { "type": "string" },
@@ -2375,33 +1697,15 @@
           "public": { "type": "boolean" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoEmailTemplate": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoEmailTemplate" }
-          },
+          "SsoEmailTemplate": { "type": "array", "items": { "$ref": "#/components/schemas/SsoEmailTemplate" } },
           "SsoOAuthToken_SsoOAuthToken_projectIdToSsoOAuthProvider": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SsoOAuthToken" }
           },
-          "SsoRefreshSession": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoRefreshSession" }
-          },
-          "SsoUser": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoUser" }
-          }
+          "SsoRefreshSession": { "type": "array", "items": { "$ref": "#/components/schemas/SsoRefreshSession" } },
+          "SsoUser": { "type": "array", "items": { "$ref": "#/components/schemas/SsoUser" } }
         },
-        "required": [
-          "id",
-          "name",
-          "nameLocale",
-          "clientId",
-          "clientSecret",
-          "public",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["id", "name", "nameLocale", "clientId", "clientSecret", "public", "createdAt", "updatedAt"]
       },
       "SsoOAuthProviderSettings": {
         "type": "object",
@@ -2412,18 +1716,9 @@
           "providerId": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoOAuthProvider": {
-            "$ref": "#/components/schemas/SsoOAuthProvider"
-          }
+          "SsoOAuthProvider": { "$ref": "#/components/schemas/SsoOAuthProvider" }
         },
-        "required": [
-          "id",
-          "name",
-          "value",
-          "providerId",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["id", "name", "value", "providerId", "createdAt", "updatedAt"]
       },
       "SsoOAuthProvider": {
         "type": "object",
@@ -2436,10 +1731,7 @@
             "type": "array",
             "items": { "$ref": "#/components/schemas/SsoOAuthProviderSettings" }
           },
-          "SsoOAuthToken": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoOAuthToken" }
-          }
+          "SsoOAuthToken": { "type": "array", "items": { "$ref": "#/components/schemas/SsoOAuthToken" } }
         },
         "required": ["id", "name", "createdAt", "updatedAt"]
       },
@@ -2448,11 +1740,7 @@
         "properties": {
           "id": { "type": "string" },
           "grantedAt": { "type": "string", "format": "date-time" },
-          "expiresAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "expiresAt": { "type": "string", "format": "date-time", "nullable": true },
           "tokenType": { "type": "string", "nullable": true },
           "scope": { "type": "string", "nullable": true },
           "verificationCode": { "type": "string", "nullable": true },
@@ -2463,12 +1751,8 @@
           "providerUserData": { "type": "object", "nullable": true },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoOAuthProvider_SsoOAuthToken_projectIdToSsoOAuthProvider": {
-            "$ref": "#/components/schemas/SsoProject"
-          },
-          "SsoOAuthProvider": {
-            "$ref": "#/components/schemas/SsoOAuthProvider"
-          },
+          "SsoOAuthProvider_SsoOAuthToken_projectIdToSsoOAuthProvider": { "$ref": "#/components/schemas/SsoProject" },
+          "SsoOAuthProvider": { "$ref": "#/components/schemas/SsoOAuthProvider" },
           "SsoUser": { "$ref": "#/components/schemas/SsoUser" }
         },
         "required": [
@@ -2498,41 +1782,19 @@
           "firstname": { "type": "string", "nullable": true },
           "lastname": { "type": "string", "nullable": true },
           "gender": { "type": "string", "nullable": true },
-          "birthdate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "birthdate": { "type": "string", "format": "date-time", "nullable": true },
           "picture": { "type": "string", "nullable": true },
           "appData": { "type": "object", "nullable": true },
-          "revokedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "emailVerifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "phoneVerifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "revokedAt": { "type": "string", "format": "date-time", "nullable": true },
+          "emailVerifiedAt": { "type": "string", "format": "date-time", "nullable": true },
+          "phoneVerifiedAt": { "type": "string", "format": "date-time", "nullable": true },
           "timezone": { "type": "number", "format": "float", "nullable": true },
           "lang": { "type": "string", "nullable": true },
           "projectId": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoOAuthToken": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoOAuthToken" }
-          },
-          "SsoRefreshSession": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoRefreshSession" }
-          },
+          "SsoOAuthToken": { "type": "array", "items": { "$ref": "#/components/schemas/SsoOAuthToken" } },
+          "SsoRefreshSession": { "type": "array", "items": { "$ref": "#/components/schemas/SsoRefreshSession" } },
           "SsoProject": { "$ref": "#/components/schemas/SsoProject" }
         },
         "required": [
@@ -2580,22 +1842,13 @@
       },
       "CompleteSignUpArgs": {
         "type": "object",
-        "properties": {
-          "fingerprint": { "type": "string" },
-          "code": { "type": "string" }
-        },
+        "properties": { "fingerprint": { "type": "string" }, "code": { "type": "string" } },
         "required": ["fingerprint", "code"]
       },
-      "SignOutArgs": {
-        "type": "object",
-        "properties": { "refreshToken": { "type": "string" } }
-      },
+      "SignOutArgs": { "type": "object", "properties": { "refreshToken": { "type": "string" } } },
       "ForgotPasswordArgs": {
         "type": "object",
-        "properties": {
-          "email": { "type": "string" },
-          "redirectUri": { "type": "string" }
-        },
+        "properties": { "email": { "type": "string" }, "redirectUri": { "type": "string" } },
         "required": ["email"]
       },
       "CompleteForgotPasswordArgs": {
@@ -2610,10 +1863,7 @@
       },
       "RefreshTokensResponse": {
         "type": "object",
-        "properties": {
-          "fingerprint": { "type": "string" },
-          "refreshToken": { "type": "string" }
-        },
+        "properties": { "fingerprint": { "type": "string" }, "refreshToken": { "type": "string" } },
         "required": ["fingerprint"]
       },
       "SsoUserDto": {
@@ -2627,28 +1877,12 @@
           "firstname": { "type": "string", "nullable": true },
           "lastname": { "type": "string", "nullable": true },
           "gender": { "type": "string", "nullable": true },
-          "birthdate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "birthdate": { "type": "string", "format": "date-time", "nullable": true },
           "picture": { "type": "string", "nullable": true },
           "appData": { "type": "object", "nullable": true },
-          "revokedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "emailVerifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "phoneVerifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "revokedAt": { "type": "string", "format": "date-time", "nullable": true },
+          "emailVerifiedAt": { "type": "string", "format": "date-time", "nullable": true },
+          "phoneVerifiedAt": { "type": "string", "format": "date-time", "nullable": true },
           "timezone": { "type": "number", "format": "float", "nullable": true },
           "lang": { "type": "string", "nullable": true },
           "createdAt": { "type": "string", "format": "date-time" },
@@ -2681,11 +1915,7 @@
           "firstname": { "type": "string", "nullable": true },
           "lastname": { "type": "string", "nullable": true },
           "gender": { "type": "string", "nullable": true },
-          "birthdate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "birthdate": { "type": "string", "format": "date-time", "nullable": true },
           "picture": { "type": "string", "nullable": true },
           "timezone": { "type": "number", "format": "float", "nullable": true },
           "lang": { "type": "string", "nullable": true },
@@ -2697,10 +1927,7 @@
       "FindManySsoUserResponse": {
         "type": "object",
         "properties": {
-          "ssoUsers": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoUserDto" }
-          },
+          "ssoUsers": { "type": "array", "items": { "$ref": "#/components/schemas/SsoUserDto" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
         "required": ["ssoUsers", "meta"]
@@ -2716,28 +1943,12 @@
           "firstname": { "type": "string", "nullable": true },
           "lastname": { "type": "string", "nullable": true },
           "gender": { "type": "string", "nullable": true },
-          "birthdate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "birthdate": { "type": "string", "format": "date-time", "nullable": true },
           "picture": { "type": "string", "nullable": true },
           "appData": { "type": "object", "nullable": true },
-          "revokedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "emailVerifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "phoneVerifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "revokedAt": { "type": "string", "format": "date-time", "nullable": true },
+          "emailVerifiedAt": { "type": "string", "format": "date-time", "nullable": true },
+          "phoneVerifiedAt": { "type": "string", "format": "date-time", "nullable": true },
           "timezone": { "type": "number", "format": "float", "nullable": true },
           "lang": { "type": "string", "nullable": true }
         }
@@ -2759,24 +1970,12 @@
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" }
         },
-        "required": [
-          "id",
-          "name",
-          "nameLocale",
-          "clientId",
-          "clientSecret",
-          "public",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["id", "name", "nameLocale", "clientId", "clientSecret", "public", "createdAt", "updatedAt"]
       },
       "FindManySsoProjectResponse": {
         "type": "object",
         "properties": {
-          "ssoProjects": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoProjectDto" }
-          },
+          "ssoProjects": { "type": "array", "items": { "$ref": "#/components/schemas/SsoProjectDto" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
         "required": ["ssoProjects", "meta"]
@@ -2808,34 +2007,18 @@
           "id": { "type": "string" },
           "userAgent": { "type": "string", "nullable": true },
           "userIp": { "type": "string", "nullable": true },
-          "expiresAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "expiresAt": { "type": "string", "format": "date-time", "nullable": true },
           "userData": { "type": "object", "nullable": true },
           "enabled": { "type": "boolean" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" }
         },
-        "required": [
-          "id",
-          "userAgent",
-          "userIp",
-          "expiresAt",
-          "userData",
-          "enabled",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["id", "userAgent", "userIp", "expiresAt", "userData", "enabled", "createdAt", "updatedAt"]
       },
       "FindManySsoRefreshSessionResponse": {
         "type": "object",
         "properties": {
-          "ssoRefreshSessions": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoRefreshSessionDto" }
-          },
+          "ssoRefreshSessions": { "type": "array", "items": { "$ref": "#/components/schemas/SsoRefreshSessionDto" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
         "required": ["ssoRefreshSessions", "meta"]
@@ -2847,11 +2030,7 @@
           "userAgent": { "type": "string", "nullable": true },
           "fingerprint": { "type": "string", "nullable": true },
           "userIp": { "type": "string", "nullable": true },
-          "expiresAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
+          "expiresAt": { "type": "string", "format": "date-time", "nullable": true },
           "userData": { "type": "object", "nullable": true },
           "enabled": { "type": "boolean" }
         }
@@ -2859,24 +2038,11 @@
       "FindManySsoRoleResponse": {
         "type": "object",
         "properties": {
-          "userAvailableRoles": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "userDefaultRoles": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "adminDefaultRoles": {
-            "type": "array",
-            "items": { "type": "string" }
-          }
+          "userAvailableRoles": { "type": "array", "items": { "type": "string" } },
+          "userDefaultRoles": { "type": "array", "items": { "type": "string" } },
+          "adminDefaultRoles": { "type": "array", "items": { "type": "string" } }
         },
-        "required": [
-          "userAvailableRoles",
-          "userDefaultRoles",
-          "adminDefaultRoles"
-        ]
+        "required": ["userAvailableRoles", "userDefaultRoles", "adminDefaultRoles"]
       },
       "SsoPublicProjectDto": {
         "type": "object",
@@ -2888,22 +2054,12 @@
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" }
         },
-        "required": [
-          "id",
-          "name",
-          "nameLocale",
-          "clientId",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["id", "name", "nameLocale", "clientId", "createdAt", "updatedAt"]
       },
       "FindManySsoPublicProjectResponse": {
         "type": "object",
         "properties": {
-          "ssoPublicProjects": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoPublicProjectDto" }
-          },
+          "ssoPublicProjects": { "type": "array", "items": { "$ref": "#/components/schemas/SsoPublicProjectDto" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
         "required": ["ssoPublicProjects", "meta"]
@@ -2938,10 +2094,7 @@
       "FindManySsoEmailTemplateResponse": {
         "type": "object",
         "properties": {
-          "ssoEmailTemplates": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoEmailTemplateDto" }
-          },
+          "ssoEmailTemplates": { "type": "array", "items": { "$ref": "#/components/schemas/SsoEmailTemplateDto" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
         "required": ["ssoEmailTemplates", "meta"]
@@ -2971,17 +2124,11 @@
       },
       "SsoOAuthVerificationArgs": {
         "type": "object",
-        "properties": {
-          "verificationCode": { "type": "string" },
-          "fingerprint": { "type": "string" }
-        },
+        "properties": { "verificationCode": { "type": "string" }, "fingerprint": { "type": "string" } },
         "required": ["verificationCode", "fingerprint"]
       },
       "Date": { "type": "object", "properties": {} },
-      "FilesErrorEnum": {
-        "type": "string",
-        "enum": ["FILES-000", "FILES-001"]
-      },
+      "FilesErrorEnum": { "type": "string", "enum": ["FILES-000", "FILES-001"] },
       "FilesError": {
         "type": "object",
         "properties": {
@@ -2990,29 +2137,18 @@
             "description": "Files error (FILES-000), Forbidden (FILES-001)",
             "example": "Files error"
           },
-          "code": {
-            "example": "FILES-000",
-            "allOf": [{ "$ref": "#/components/schemas/FilesErrorEnum" }]
-          },
+          "code": { "example": "FILES-000", "allOf": [{ "$ref": "#/components/schemas/FilesErrorEnum" }] },
           "metadata": { "type": "object" }
         },
         "required": ["message", "code"]
       },
       "NotificationsErrorEnum": {
         "type": "string",
-        "enum": [
-          "NOTIFICATIONS-000",
-          "NOTIFICATIONS-001",
-          "NOTIFICATIONS-002",
-          "NOTIFICATIONS-003"
-        ]
+        "enum": ["NOTIFICATIONS-000", "NOTIFICATIONS-001", "NOTIFICATIONS-002", "NOTIFICATIONS-003"]
       },
       "NotificationsErrorMetadataConstraint": {
         "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "description": { "type": "string" }
-        },
+        "properties": { "name": { "type": "string" }, "description": { "type": "string" } },
         "required": ["name", "description"]
       },
       "NotificationsErrorMetadata": {
@@ -3021,16 +2157,9 @@
           "property": { "type": "string" },
           "constraints": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NotificationsErrorMetadataConstraint"
-            }
+            "items": { "$ref": "#/components/schemas/NotificationsErrorMetadataConstraint" }
           },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NotificationsErrorMetadata"
-            }
-          }
+          "children": { "type": "array", "items": { "$ref": "#/components/schemas/NotificationsErrorMetadata" } }
         },
         "required": ["property", "constraints"]
       },
@@ -3046,24 +2175,13 @@
             "example": "NOTIFICATIONS-000",
             "allOf": [{ "$ref": "#/components/schemas/NotificationsErrorEnum" }]
           },
-          "metadata": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NotificationsErrorMetadata"
-            }
-          }
+          "metadata": { "type": "array", "items": { "$ref": "#/components/schemas/NotificationsErrorMetadata" } }
         },
         "required": ["message", "code"]
       },
       "NotificationsUserScalarFieldEnum": {
         "type": "string",
-        "enum": [
-          "id",
-          "externalTenantId",
-          "externalUserId",
-          "createdAt",
-          "updatedAt"
-        ]
+        "enum": ["id", "externalTenantId", "externalUserId", "createdAt", "updatedAt"]
       },
       "NotificationsEventScalarFieldEnum": {
         "type": "string",
@@ -3090,20 +2208,8 @@
       "NotificationsEntities": {
         "type": "object",
         "properties": {
-          "NotificationsUser": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/NotificationsUserScalarFieldEnum"
-              }
-            ]
-          },
-          "NotificationsEvent": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/NotificationsEventScalarFieldEnum"
-              }
-            ]
-          }
+          "NotificationsUser": { "allOf": [{ "$ref": "#/components/schemas/NotificationsUserScalarFieldEnum" }] },
+          "NotificationsEvent": { "allOf": [{ "$ref": "#/components/schemas/NotificationsEventScalarFieldEnum" }] }
         },
         "required": ["NotificationsUser", "NotificationsEvent"]
       },
@@ -3139,26 +2245,14 @@
             "description": "Sso error (SSO-000), User not found (SSO-001), Wrong password (SSO-002), User is exists (SSO-003), Wrong activate email code (SSO-004), Activate email not processed (SSO-005), Activate email processed (SSO-006), Refresh token not provided (SSO-007), Session expired (SSO-008), Invalid refresh session (SSO-009), Access token expired (SSO-010), User is exists (SSO-011), Email not verified (SSO-012), Forbidden (SSO-013), Wrong old password (SSO-014), Non-existent role specified (SSO-015), Bad access token (SSO-016), Your session has been blocked (SSO-017), Verification code not found (SSO-018)",
             "example": "Sso error"
           },
-          "code": {
-            "example": "SSO-000",
-            "allOf": [{ "$ref": "#/components/schemas/SsoErrorEnum" }]
-          },
+          "code": { "example": "SSO-000", "allOf": [{ "$ref": "#/components/schemas/SsoErrorEnum" }] },
           "metadata": { "type": "object" }
         },
         "required": ["message", "code"]
       },
       "SsoProjectScalarFieldEnum": {
         "type": "string",
-        "enum": [
-          "id",
-          "name",
-          "nameLocale",
-          "clientId",
-          "clientSecret",
-          "public",
-          "createdAt",
-          "updatedAt"
-        ]
+        "enum": ["id", "name", "nameLocale", "clientId", "clientSecret", "public", "createdAt", "updatedAt"]
       },
       "SsoUserScalarFieldEnum": {
         "type": "string",
@@ -3218,10 +2312,7 @@
           "updatedAt"
         ]
       },
-      "SsoOAuthProviderScalarFieldEnum": {
-        "type": "string",
-        "enum": ["id", "name", "createdAt", "updatedAt"]
-      },
+      "SsoOAuthProviderScalarFieldEnum": { "type": "string", "enum": ["id", "name", "createdAt", "updatedAt"] },
       "SsoOAuthProviderSettingsScalarFieldEnum": {
         "type": "string",
         "enum": ["id", "name", "value", "providerId", "createdAt", "updatedAt"]
@@ -3250,43 +2341,15 @@
       "SsoEntities": {
         "type": "object",
         "properties": {
-          "SsoProject": {
-            "allOf": [
-              { "$ref": "#/components/schemas/SsoProjectScalarFieldEnum" }
-            ]
-          },
-          "SsoUser": {
-            "allOf": [{ "$ref": "#/components/schemas/SsoUserScalarFieldEnum" }]
-          },
-          "SsoRefreshSession": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SsoRefreshSessionScalarFieldEnum"
-              }
-            ]
-          },
-          "SsoEmailTemplate": {
-            "allOf": [
-              { "$ref": "#/components/schemas/SsoEmailTemplateScalarFieldEnum" }
-            ]
-          },
-          "SsoOAuthProvider": {
-            "allOf": [
-              { "$ref": "#/components/schemas/SsoOAuthProviderScalarFieldEnum" }
-            ]
-          },
+          "SsoProject": { "allOf": [{ "$ref": "#/components/schemas/SsoProjectScalarFieldEnum" }] },
+          "SsoUser": { "allOf": [{ "$ref": "#/components/schemas/SsoUserScalarFieldEnum" }] },
+          "SsoRefreshSession": { "allOf": [{ "$ref": "#/components/schemas/SsoRefreshSessionScalarFieldEnum" }] },
+          "SsoEmailTemplate": { "allOf": [{ "$ref": "#/components/schemas/SsoEmailTemplateScalarFieldEnum" }] },
+          "SsoOAuthProvider": { "allOf": [{ "$ref": "#/components/schemas/SsoOAuthProviderScalarFieldEnum" }] },
           "SsoOAuthProviderSettings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SsoOAuthProviderSettingsScalarFieldEnum"
-              }
-            ]
+            "allOf": [{ "$ref": "#/components/schemas/SsoOAuthProviderSettingsScalarFieldEnum" }]
           },
-          "SsoOAuthToken": {
-            "allOf": [
-              { "$ref": "#/components/schemas/SsoOAuthTokenScalarFieldEnum" }
-            ]
-          },
+          "SsoOAuthToken": { "allOf": [{ "$ref": "#/components/schemas/SsoOAuthTokenScalarFieldEnum" }] },
           "role": { "allOf": [{ "$ref": "#/components/schemas/SsoRole" }] }
         },
         "required": [
@@ -3303,10 +2366,7 @@
       "ValidationErrorEnum": { "type": "string", "enum": ["VALIDATION-000"] },
       "ValidationErrorMetadataConstraint": {
         "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "description": { "type": "string" }
-        },
+        "properties": { "name": { "type": "string" }, "description": { "type": "string" } },
         "required": ["name", "description"]
       },
       "ValidationErrorMetadata": {
@@ -3315,14 +2375,9 @@
           "property": { "type": "string" },
           "constraints": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ValidationErrorMetadataConstraint"
-            }
+            "items": { "$ref": "#/components/schemas/ValidationErrorMetadataConstraint" }
           },
-          "children": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/ValidationErrorMetadata" }
-          }
+          "children": { "type": "array", "items": { "$ref": "#/components/schemas/ValidationErrorMetadata" } }
         },
         "required": ["property", "constraints"]
       },
@@ -3334,27 +2389,14 @@
             "description": "Validation error (VALIDATION-000)",
             "example": "Validation error"
           },
-          "code": {
-            "example": "VALIDATION-000",
-            "allOf": [{ "$ref": "#/components/schemas/ValidationErrorEnum" }]
-          },
-          "metadata": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/ValidationErrorMetadata" }
-          }
+          "code": { "example": "VALIDATION-000", "allOf": [{ "$ref": "#/components/schemas/ValidationErrorEnum" }] },
+          "metadata": { "type": "array", "items": { "$ref": "#/components/schemas/ValidationErrorMetadata" } }
         },
         "required": ["message", "code"]
       },
       "WebhookErrorEnum": {
         "type": "string",
-        "enum": [
-          "WEBHOOK-000",
-          "WEBHOOK-001",
-          "WEBHOOK-002",
-          "WEBHOOK-003",
-          "WEBHOOK-004",
-          "WEBHOOK-005"
-        ]
+        "enum": ["WEBHOOK-000", "WEBHOOK-001", "WEBHOOK-002", "WEBHOOK-003", "WEBHOOK-004", "WEBHOOK-005"]
       },
       "WebhookError": {
         "type": "object",
@@ -3364,10 +2406,7 @@
             "description": "Webhook error (WEBHOOK-000), Tenant ID not set (WEBHOOK-003), User ID not set (WEBHOOK-002), Forbidden (WEBHOOK-001), User not found (WEBHOOK-004), Event not found (WEBHOOK-005)",
             "example": "Webhook error"
           },
-          "code": {
-            "example": "WEBHOOK-000",
-            "allOf": [{ "$ref": "#/components/schemas/WebhookErrorEnum" }]
-          },
+          "code": { "example": "WEBHOOK-000", "allOf": [{ "$ref": "#/components/schemas/WebhookErrorEnum" }] },
           "metadata": { "type": "object" }
         },
         "required": ["message", "code"]
@@ -3405,31 +2444,14 @@
       },
       "WebhookUserScalarFieldEnum": {
         "type": "string",
-        "enum": [
-          "id",
-          "externalTenantId",
-          "externalUserId",
-          "userRole",
-          "createdAt",
-          "updatedAt"
-        ]
+        "enum": ["id", "externalTenantId", "externalUserId", "userRole", "createdAt", "updatedAt"]
       },
       "WebhookEntities": {
         "type": "object",
         "properties": {
-          "Webhook": {
-            "allOf": [{ "$ref": "#/components/schemas/WebhookScalarFieldEnum" }]
-          },
-          "WebhookLog": {
-            "allOf": [
-              { "$ref": "#/components/schemas/WebhookLogScalarFieldEnum" }
-            ]
-          },
-          "WebhookUser": {
-            "allOf": [
-              { "$ref": "#/components/schemas/WebhookUserScalarFieldEnum" }
-            ]
-          }
+          "Webhook": { "allOf": [{ "$ref": "#/components/schemas/WebhookScalarFieldEnum" }] },
+          "WebhookLog": { "allOf": [{ "$ref": "#/components/schemas/WebhookLogScalarFieldEnum" }] },
+          "WebhookUser": { "allOf": [{ "$ref": "#/components/schemas/WebhookUserScalarFieldEnum" }] }
         },
         "required": ["Webhook", "WebhookLog", "WebhookUser"]
       }
