@@ -21,10 +21,11 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
-import { BehaviorSubject, catchError, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, distinctUntilChanged, of, tap } from 'rxjs';
 import { SsoSignUpFormService } from '../../services/auth-sign-up-form.service';
 import { SsoService } from '../../services/auth.service';
 import { SsoSignupInput, SsoUserAndTokens } from '../../services/auth.types';
+import { compare } from '@nestjs-mod/misc';
 
 @UntilDestroy()
 @Component({
@@ -49,6 +50,7 @@ import { SsoSignupInput, SsoUserAndTokens } from '../../services/auth.types';
   selector: 'sso-sign-up-form',
   templateUrl: './auth-sign-up-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class SsoSignUpFormComponent implements OnInit {
   @Input()
@@ -60,6 +62,7 @@ export class SsoSignUpFormComponent implements OnInit {
   form = new UntypedFormGroup({});
   formlyModel$ = new BehaviorSubject<object | null>(null);
   formlyFields$ = new BehaviorSubject<FormlyFieldConfig[] | null>(null);
+  errors?: ValidationErrorMetadataInterface[];
 
   constructor(
     @Optional()
@@ -85,6 +88,18 @@ export class SsoSignUpFormComponent implements OnInit {
       .subscribe();
 
     this.setFieldsAndModel({ password: '', confirmPassword: '' });
+
+    this.form.valueChanges
+      .pipe(
+        distinctUntilChanged((prev, cur) => compare(prev, cur).different.length === 0),
+        tap((data) => {
+          if (this.errors?.length) {
+            this.setFormlyFields({ data, errors: [] });
+          }
+        }),
+        untilDestroyed(this),
+      )
+      .subscribe();
   }
 
   setFieldsAndModel(data: SsoSignupInput = { password: '', confirmPassword: '' }) {
@@ -123,5 +138,6 @@ export class SsoSignUpFormComponent implements OnInit {
 
   private setFormlyFields(options?: { data?: SsoSignupInput; errors?: ValidationErrorMetadataInterface[] }) {
     this.formlyFields$.next(this.authSignUpFormService.getFormlyFields(options));
+    this.errors = options?.errors || [];
   }
 }

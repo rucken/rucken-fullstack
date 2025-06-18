@@ -10,6 +10,11 @@ export type DynamicCrudGridColumn = {
 export type DynamicCrudGridConfiguration = {
   title?: string;
   columns: DynamicCrudGridColumn[];
+  loadManyAfterInit?: boolean;
+  handlers?: {
+    init?: (grid: DynamicCrudGridComponent) => void;
+    selectOne?: (grid: DynamicCrudGridComponent, id: string, data?: unknown) => void;
+  };
   actions: {
     create?: {
       buttonTitle?: string;

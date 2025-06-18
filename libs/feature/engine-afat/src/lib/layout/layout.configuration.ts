@@ -21,6 +21,7 @@ export type LayoutPart = {
   navigation: LayoutPartNavigation;
   route?: Route;
   crud?: CrudConfiguration;
+  relatedCrud?: CrudConfiguration;
   hidden?: boolean;
 };
 

@@ -12,6 +12,7 @@ import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from '../../engine-afat.constant
   templateUrl: './sign-up.component.html',
   imports: [NzBreadCrumbModule, TranslocoDirective, SsoSignUpFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class SignUpComponent {
   constructor(

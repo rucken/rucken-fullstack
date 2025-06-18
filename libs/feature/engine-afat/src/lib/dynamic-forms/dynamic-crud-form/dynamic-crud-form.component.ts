@@ -20,9 +20,10 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
-import { BehaviorSubject, catchError, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, distinctUntilChanged, of, tap, throwError } from 'rxjs';
 import { CrudConfiguration } from '../../dynamic-pages/crud-page/crud-page.configuration';
 import { DynamicCrudFormConfiguration } from './dynamic-crud-form.configuration';
+import { compare } from '@nestjs-mod/misc';
 
 @UntilDestroy()
 @Component({
@@ -39,6 +40,7 @@ import { DynamicCrudFormConfiguration } from './dynamic-crud-form.configuration'
   selector: 'dynamic-crud-form',
   templateUrl: './dynamic-crud-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class DynamicCrudFormComponent<DynamicCrudModel extends { id: string } = { id: string }> implements OnInit {
   @Input()
@@ -65,6 +67,7 @@ export class DynamicCrudFormComponent<DynamicCrudModel extends { id: string } = 
   form = new UntypedFormGroup({});
   formlyModel$ = new BehaviorSubject<object | null>(null);
   formlyFields$ = new BehaviorSubject<FormlyFieldConfig[] | null>(null);
+  errors?: ValidationErrorMetadataInterface[];
 
   constructor(
     @Optional()
@@ -76,7 +79,6 @@ export class DynamicCrudFormComponent<DynamicCrudModel extends { id: string } = 
   ) {}
 
   ngOnInit(): void {
-    console.log(this.nzModalData);
     Object.assign(this, this.nzModalData);
 
     this.translocoService.langChanges$
@@ -85,6 +87,18 @@ export class DynamicCrudFormComponent<DynamicCrudModel extends { id: string } = 
         tap(() => {
           this.formlyFields$.next(this.formlyFields$.value);
         }),
+      )
+      .subscribe();
+
+    this.form.valueChanges
+      .pipe(
+        distinctUntilChanged((prev, cur) => compare(prev, cur).different.length === 0),
+        tap(() => {
+          if (this.errors?.length) {
+            this.setFormlyFields({ errors: [] });
+          }
+        }),
+        untilDestroyed(this),
       )
       .subscribe();
 
@@ -102,6 +116,8 @@ export class DynamicCrudFormComponent<DynamicCrudModel extends { id: string } = 
     } else {
       this.setFieldsAndModel();
     }
+
+    this.configuration.handlers?.init?.(this as unknown as DynamicCrudFormComponent);
   }
 
   setFieldsAndModel(model?: Partial<object>) {
@@ -185,5 +201,6 @@ export class DynamicCrudFormComponent<DynamicCrudModel extends { id: string } = 
     this.formlyFields$.next(
       this.validationService.appendServerErrorsAsValidatorsToFields(this.configuration.inputs, options?.errors || []),
     );
+    this.errors = options?.errors || [];
   }
 }

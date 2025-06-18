@@ -60,10 +60,7 @@
       @if (selectedIds$ | async; as selectedIds) {
         <tbody>
           @for (data of basicTable.data; track $index) {
-            <tr
-              (click)="selectedIds$.next(!data.id || selectedIds[0] === data.id ? [] : [data.id])"
-              [class.selected]="selectedIds[0] === data.id"
-            >
+            <tr (click)="selectItem(data)" [class.selected]="selectedIds[0] === data.id">
               @for (column of columns; track $index) {
                 @if (column.isDate) {
                   <td>

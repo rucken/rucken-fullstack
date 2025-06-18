@@ -16,6 +16,7 @@ import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from '../../engine-afat.constant
   templateUrl: './complete-forgot-password.component.html',
   imports: [NzBreadCrumbModule, TranslocoDirective, SsoCompleteForgotPasswordFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class CompleteForgotPasswordComponent {
   code?: string | null;

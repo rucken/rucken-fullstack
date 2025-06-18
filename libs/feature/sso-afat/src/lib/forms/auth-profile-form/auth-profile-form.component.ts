@@ -12,10 +12,11 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
-import { BehaviorSubject, catchError, mergeMap, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, distinctUntilChanged, mergeMap, of, tap } from 'rxjs';
 import { SsoProfileFormService } from '../../services/auth-profile-form.service';
 import { SsoService } from '../../services/auth.service';
 import { SsoUpdateProfileInput } from '../../services/auth.types';
+import { compare } from '@nestjs-mod/misc';
 
 @UntilDestroy()
 @Component({
@@ -45,6 +46,7 @@ import { SsoUpdateProfileInput } from '../../services/auth.types';
     </form>
   } `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class SsoProfileFormComponent implements OnInit {
   @Input()
@@ -53,6 +55,7 @@ export class SsoProfileFormComponent implements OnInit {
   form = new UntypedFormGroup({});
   formlyModel$ = new BehaviorSubject<object | null>(null);
   formlyFields$ = new BehaviorSubject<FormlyFieldConfig[] | null>(null);
+  errors?: ValidationErrorMetadataInterface[];
 
   constructor(
     @Optional()
@@ -77,6 +80,18 @@ export class SsoProfileFormComponent implements OnInit {
         untilDestroyed(this),
       )
       .subscribe();
+
+    this.form.valueChanges
+      .pipe(
+        distinctUntilChanged((prev, cur) => compare(prev, cur).different.length === 0),
+        tap((data) => {
+          if (this.errors?.length) {
+            this.setFormlyFields({ data, errors: [] });
+          }
+        }),
+        untilDestroyed(this),
+      )
+      .subscribe();
   }
 
   setFieldsAndModel(data: SsoUpdateProfileInput = {}) {
@@ -89,6 +104,7 @@ export class SsoProfileFormComponent implements OnInit {
     errors?: ValidationErrorMetadataInterface[];
   }) {
     this.formlyFields$.next(this.authProfileFormService.getFormlyFields(options));
+    this.errors = options?.errors || [];
   }
 
   submitForm(): void {

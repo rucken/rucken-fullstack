@@ -22,10 +22,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
-import { BehaviorSubject, catchError, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, distinctUntilChanged, of, tap } from 'rxjs';
 import { SsoSignInFormService } from '../../services/auth-sign-in-form.service';
 import { SsoService } from '../../services/auth.service';
 import { OAuthProvider, SsoLoginInput, SsoUserAndTokens } from '../../services/auth.types';
+import { compare } from '@nestjs-mod/misc';
 @UntilDestroy()
 @Component({
   imports: [
@@ -51,6 +52,7 @@ import { OAuthProvider, SsoLoginInput, SsoUserAndTokens } from '../../services/a
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class SsoSignInFormComponent implements OnInit {
   @Input()
@@ -63,6 +65,7 @@ export class SsoSignInFormComponent implements OnInit {
   formlyModel$ = new BehaviorSubject<object | null>(null);
   formlyFields$ = new BehaviorSubject<FormlyFieldConfig[] | null>(null);
   oAuthProviders$ = new BehaviorSubject<OAuthProvider[] | null>(null);
+  errors?: ValidationErrorMetadataInterface[];
 
   constructor(
     @Optional()
@@ -86,6 +89,18 @@ export class SsoSignInFormComponent implements OnInit {
         tap(() => {
           this.formlyFields$.next(this.formlyFields$.value);
         }),
+      )
+      .subscribe();
+
+    this.form.valueChanges
+      .pipe(
+        distinctUntilChanged((prev, cur) => compare(prev, cur).different.length === 0),
+        tap((data) => {
+          if (this.errors?.length) {
+            this.setFormlyFields({ data, errors: [] });
+          }
+        }),
+        untilDestroyed(this),
       )
       .subscribe();
 
@@ -138,5 +153,6 @@ export class SsoSignInFormComponent implements OnInit {
 
   private setFormlyFields(options?: { data?: SsoLoginInput; errors?: ValidationErrorMetadataInterface[] }) {
     this.formlyFields$.next(this.authSignInFormService.getFormlyFields(options));
+    this.errors = options?.errors || [];
   }
 }

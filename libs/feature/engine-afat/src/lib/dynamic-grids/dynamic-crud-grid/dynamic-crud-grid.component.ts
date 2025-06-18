@@ -14,7 +14,16 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableModule, NzTableQueryParams } from 'ng-zorro-antd/table';
-import { BehaviorSubject, Observable, debounceTime, distinctUntilChanged, merge, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  merge,
+  tap,
+  throwError,
+} from 'rxjs';
 
 import { TranslocoDirective, TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { TranslocoDatePipe } from '@jsverse/transloco-locale';
@@ -49,6 +58,7 @@ import { DynamicCrudGridColumn, DynamicCrudGridConfiguration } from './dynamic-c
   selector: 'dynamic-crud-grid',
   templateUrl: './dynamic-crud-grid.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class DynamicCrudGridComponent<DynamicCrudModel extends { id: string } = { id: string }> implements OnInit {
   @Input({ required: true })
@@ -84,7 +94,6 @@ export class DynamicCrudGridComponent<DynamicCrudModel extends { id: string } = 
   }
 
   ngOnInit(): void {
-    console.log(this.configuration.columns);
     this.columns$.next(this.configuration.columns);
 
     merge(
@@ -97,7 +106,29 @@ export class DynamicCrudGridComponent<DynamicCrudModel extends { id: string } = 
       )
       .subscribe();
 
-    this.loadMany({ force: true });
+    if (this.configuration.loadManyAfterInit !== false) {
+      this.loadMany({ force: true });
+    }
+
+    this.configuration.handlers?.init?.(this as unknown as DynamicCrudGridComponent);
+  }
+
+  selectItem(item: DynamicCrudModel) {
+    const selectedIds = !item.id || this.selectedIds$.value[0] === item.id ? [] : [item.id];
+    this.selectedIds$.next(selectedIds);
+    if (selectedIds.length) {
+      this.configuration.handlers?.selectOne?.(this as unknown as DynamicCrudGridComponent, selectedIds[0], item);
+    }
+  }
+
+  clear() {
+    this.items$.next([]);
+    this.meta$.next({
+      curPage: 1,
+      perPage: 5,
+      sort: { id: 'asc' },
+    });
+    this.selectedIds$.next([]);
   }
 
   loadMany(args?: {
@@ -106,7 +137,6 @@ export class DynamicCrudGridComponent<DynamicCrudModel extends { id: string } = 
     queryParams?: NzTableQueryParams;
     force?: boolean;
   }) {
-    console.log({ args });
     let meta = { meta: {}, ...(args || {}) }.meta as RequestMeta;
     const { queryParams, filters } = { filters: {}, ...(args || {}) };
 
@@ -142,6 +172,10 @@ export class DynamicCrudGridComponent<DynamicCrudModel extends { id: string } = 
           this.meta$.next({ ...result.meta, ...meta });
           this.filters = filters;
           this.selectedIds$.next([]);
+        }),
+        catchError((err) => {
+          this.clear();
+          return throwError(() => err);
         }),
         untilDestroyed(this),
       )

@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RequestMeta, TIMEZONE_OFFSET, safeParseJson } from '@nestjs-mod/misc';
-import {
-  RuckenRestSdkAngularService,
-  SsoRefreshSessionDtoInterface,
-  UpdateSsoRefreshSessionDtoInterface,
-} from '@rucken/rucken-rest-sdk-angular';
+import { RuckenRestSdkAngularService, SsoRefreshSessionDtoInterface } from '@rucken/rucken-rest-sdk-angular';
 import { addHours, format } from 'date-fns';
 import { map } from 'rxjs';
 

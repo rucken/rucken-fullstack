@@ -29,6 +29,7 @@ import {
   RuckenRestSdkAngularService,
   SsoEmailTemplateScalarFieldEnumInterface,
   SsoProjectScalarFieldEnumInterface,
+  SsoRefreshSessionScalarFieldEnumInterface,
   SsoRoleInterface,
   SsoUserScalarFieldEnumInterface,
   UpdateSsoEmailTemplateDtoInterface,
@@ -38,6 +39,8 @@ import {
   SsoEmailTemplateService,
   SsoInviteMembersFormComponent,
   SsoProjectService,
+  SsoSessionModel,
+  SsoSessionService,
   SsoUserModel,
   SsoUserService,
 } from '@rucken/sso-afat';
@@ -52,7 +55,6 @@ import { AppErrorHandler } from './app.error-handler';
 import { provideSsoConfiguration } from './integrations/sso.configuration';
 import { TranslocoHttpLoader } from './integrations/transloco-http.loader';
 import { HomeComponent } from './pages/home/home.component';
-import { UsersComponent } from './pages/users/users.component';
 import { WebhooksComponent } from './pages/webhooks/webhooks.component';
 
 export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationConfig => {
@@ -70,8 +72,10 @@ export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationCon
           ssoEmailTemplateService: SsoEmailTemplateService,
           ruckenRestSdkAngularService: RuckenRestSdkAngularService,
           ssoUserService: SsoUserService,
+          ssoSessionService: SsoSessionService,
         ) => {
           let cachedRoles: string[];
+          let userId: string;
           function getRoles() {
             if (cachedRoles) {
               return of(cachedRoles);
@@ -102,9 +106,144 @@ export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationCon
                   },
                 },
                 {
+                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
                   navigation: {
-                    link: '/home1',
-                    title: 'Home1',
+                    link: '/webhooks',
+                    title: marker('Webhooks'),
+                  },
+                  route: {
+                    component: WebhooksComponent,
+                  },
+                },
+                {
+                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+                  navigation: {
+                    link: '/templates',
+                    title: marker('Templates'),
+                  },
+                  crud: {
+                    handlers: () => ({
+                      updateOne: (id, data) => {
+                        return ssoEmailTemplateService.updateOne(id, data as UpdateSsoEmailTemplateDtoInterface);
+                      },
+                      findOne: (id) => {
+                        return ssoEmailTemplateService.findOne(id);
+                      },
+                      findMany({ filters, meta }) {
+                        return ssoEmailTemplateService.findMany({
+                          filters,
+                          meta,
+                        });
+                      },
+                    }),
+                    form: () => ({
+                      inputs: [
+                        {
+                          key: SsoEmailTemplateScalarFieldEnumInterface.operationName,
+                          type: 'input',
+                          validation: {
+                            show: true,
+                          },
+                          props: {
+                            readonly: true,
+                            disabled: true,
+                            label: translocoService.translate(`sso-email-template.form.fields.operation-name`),
+                            placeholder: 'operationName',
+                          },
+                        },
+                        ...translocoService.getAvailableLangs().map((a) => ({
+                          key: a.id === translocoService.getDefaultLang() ? 'subject' : `subject_${a.id}`,
+                          type: 'textarea',
+                          validation: {
+                            show: true,
+                          },
+                          props: {
+                            label: translocoService.translate(
+                              `sso-email-template.form.fields.subject-locale`,
+                              // id, label
+                              {
+                                locale: a.id,
+                                label: translocoService.translate(a.label),
+                              },
+                            ),
+                            placeholder: a.id === translocoService.getDefaultLang() ? 'subject' : `subject ${a.id}`,
+                            required: a.id === translocoService.getDefaultLang(),
+                          },
+                        })),
+                        ...translocoService.getAvailableLangs().map((a) => ({
+                          key: a.id === translocoService.getDefaultLang() ? 'html' : `html_${a.id}`,
+                          type: 'textarea',
+                          validation: {
+                            show: true,
+                          },
+                          props: {
+                            label: translocoService.translate(
+                              `sso-email-template.form.fields.html-locale`,
+                              // id, label
+                              {
+                                locale: a.id,
+                                label: translocoService.translate(a.label),
+                              },
+                            ),
+                            placeholder: a.id === translocoService.getDefaultLang() ? 'html' : `html ${a.id}`,
+                            required: a.id === translocoService.getDefaultLang(),
+                          },
+                        })),
+                        ...translocoService.getAvailableLangs().map((a) => ({
+                          key: a.id === translocoService.getDefaultLang() ? 'text' : `text_${a.id}`,
+                          type: 'textarea',
+                          validation: {
+                            show: true,
+                          },
+                          props: {
+                            label: translocoService.translate(
+                              `sso-email-template.form.fields.text-locale`,
+                              // id, label
+                              {
+                                locale: a.id,
+                                label: translocoService.translate(a.label),
+                              },
+                            ),
+                            placeholder: a.id === translocoService.getDefaultLang() ? 'text' : `text ${a.id}`,
+                            required: a.id === translocoService.getDefaultLang(),
+                          },
+                        })),
+                      ],
+                    }),
+                    grid: () => ({
+                      title: marker('Email templates'),
+                      actions: {
+                        update: {
+                          title: marker('sso-email-template.update-modal.title'),
+                          width: '700px',
+                        },
+                      },
+                      columns: [
+                        {
+                          name: SsoEmailTemplateScalarFieldEnumInterface.id,
+                          title: marker('sso-email-template.grid.columns.id'),
+                        },
+                        {
+                          name: SsoEmailTemplateScalarFieldEnumInterface.operationName,
+                          title: marker('sso-email-template.grid.columns.operation-name'),
+                        },
+                        {
+                          name: SsoEmailTemplateScalarFieldEnumInterface.subject,
+                          title: marker('sso-email-template.grid.columns.subject'),
+                        },
+                        {
+                          name: SsoEmailTemplateScalarFieldEnumInterface.text,
+                          title: marker('sso-email-template.grid.columns.text'),
+                        },
+                      ],
+                    }),
+                  },
+                },
+                {
+                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+                  navigation: {
+                    link: '/users',
+                    title: marker('Users'),
                   },
                   crud: {
                     handlers: () => ({
@@ -301,6 +440,11 @@ export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationCon
                       ],
                     }),
                     grid: () => ({
+                      handlers: {
+                        selectOne(grid, id) {
+                          userId = id;
+                        },
+                      },
                       actions: {
                         create: {
                           buttonTitle: marker('Invite Members'),
@@ -385,34 +529,17 @@ export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationCon
                       ],
                     }),
                   },
-                },
-                {
-                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                  navigation: {
-                    link: '/webhooks',
-                    title: marker('Webhooks'),
-                  },
-                  route: {
-                    component: WebhooksComponent,
-                  },
-                },
-                {
-                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                  navigation: {
-                    link: '/templates',
-                    title: marker('Templates'),
-                  },
-                  crud: {
+                  relatedCrud: {
                     handlers: () => ({
                       updateOne: (id, data) => {
-                        return ssoEmailTemplateService.updateOne(id, data as UpdateSsoEmailTemplateDtoInterface);
+                        return ssoSessionService.updateOne(id, data as SsoSessionModel);
                       },
                       findOne: (id) => {
-                        return ssoEmailTemplateService.findOne(id);
+                        return ssoSessionService.findOne(id);
                       },
                       findMany({ filters, meta }) {
-                        return ssoEmailTemplateService.findMany({
-                          filters,
+                        return ssoSessionService.findMany({
+                          filters: { ...filters, ['userId']: userId },
                           meta,
                         });
                       },
@@ -420,114 +547,120 @@ export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationCon
                     form: () => ({
                       inputs: [
                         {
-                          key: SsoEmailTemplateScalarFieldEnumInterface.operationName,
+                          key: SsoRefreshSessionScalarFieldEnumInterface.enabled,
+                          type: 'checkbox',
+                          validation: {
+                            show: true,
+                          },
+                          props: {
+                            label: translocoService.translate(`sso-session.form.fields.enabled`),
+                            placeholder: 'enabled',
+                            required: true,
+                          },
+                        },
+                        {
+                          key: SsoRefreshSessionScalarFieldEnumInterface.expiresAt,
+                          type: 'date-input',
+                          validation: {
+                            show: true,
+                          },
+                          props: {
+                            type: 'number',
+                            label: translocoService.translate(`sso-session.form.fields.expires-at`),
+                            placeholder: 'expiresAt',
+                            required: false,
+                          },
+                        },
+                        {
+                          key: SsoRefreshSessionScalarFieldEnumInterface.fingerprint,
                           type: 'input',
                           validation: {
                             show: true,
                           },
                           props: {
-                            readonly: true,
-                            disabled: true,
-                            label: translocoService.translate(`sso-email-template.form.fields.operation-name`),
-                            placeholder: 'operationName',
+                            label: translocoService.translate(`sso-session.form.fields.fingerprint`),
+                            placeholder: 'fingerprint',
+                            required: false,
                           },
                         },
-                        ...translocoService.getAvailableLangs().map((a) => ({
-                          key: a.id === translocoService.getDefaultLang() ? 'subject' : `subject_${a.id}`,
+                        {
+                          key: SsoRefreshSessionScalarFieldEnumInterface.userAgent,
                           type: 'textarea',
                           validation: {
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-email-template.form.fields.subject-locale`,
-                              // id, label
-                              {
-                                locale: a.id,
-                                label: translocoService.translate(a.label),
-                              },
-                            ),
-                            placeholder: a.id === translocoService.getDefaultLang() ? 'subject' : `subject ${a.id}`,
-                            required: a.id === translocoService.getDefaultLang(),
+                            label: translocoService.translate(`sso-session.form.fields.user-agent`),
+                            placeholder: 'userAgent',
+                            required: false,
                           },
-                        })),
-                        ...translocoService.getAvailableLangs().map((a) => ({
-                          key: a.id === translocoService.getDefaultLang() ? 'html' : `html_${a.id}`,
+                        },
+                        {
+                          key: SsoRefreshSessionScalarFieldEnumInterface.userData,
                           type: 'textarea',
                           validation: {
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-email-template.form.fields.html-locale`,
-                              // id, label
-                              {
-                                locale: a.id,
-                                label: translocoService.translate(a.label),
-                              },
-                            ),
-                            placeholder: a.id === translocoService.getDefaultLang() ? 'html' : `html ${a.id}`,
-                            required: a.id === translocoService.getDefaultLang(),
+                            label: translocoService.translate(`sso-session.form.fields.user-data`),
+                            placeholder: 'userData',
+                            required: false,
                           },
-                        })),
-                        ...translocoService.getAvailableLangs().map((a) => ({
-                          key: a.id === translocoService.getDefaultLang() ? 'text' : `text_${a.id}`,
-                          type: 'textarea',
+                        },
+                        {
+                          key: SsoRefreshSessionScalarFieldEnumInterface.userIp,
+                          type: 'input',
                           validation: {
                             show: true,
                           },
                           props: {
-                            label: translocoService.translate(
-                              `sso-email-template.form.fields.text-locale`,
-                              // id, label
-                              {
-                                locale: a.id,
-                                label: translocoService.translate(a.label),
-                              },
-                            ),
-                            placeholder: a.id === translocoService.getDefaultLang() ? 'text' : `text ${a.id}`,
-                            required: a.id === translocoService.getDefaultLang(),
+                            label: translocoService.translate(`sso-session.form.fields.user-ip`),
+                            placeholder: 'userIp',
+                            required: false,
                           },
-                        })),
+                        },
                       ],
                     }),
                     grid: () => ({
-                      title: marker('Email templates'),
+                      title: translocoService.translate('Sessions for user #{{userId}}', {
+                        userId,
+                      }),
                       actions: {
                         update: {
-                          title: marker('sso-email-template.update-modal.title'),
-                          width: '700px',
+                          title: marker('sso-session.update-modal.title'),
                         },
                       },
                       columns: [
                         {
-                          name: SsoEmailTemplateScalarFieldEnumInterface.id,
-                          title: marker('sso-email-template.grid.columns.id'),
+                          name: SsoRefreshSessionScalarFieldEnumInterface.id,
+                          title: marker('sso-session.grid.columns.id'),
                         },
                         {
-                          name: SsoEmailTemplateScalarFieldEnumInterface.operationName,
-                          title: marker('sso-email-template.grid.columns.operation-name'),
+                          name: SsoRefreshSessionScalarFieldEnumInterface.userAgent,
+                          title: marker('sso-session.grid.columns.user-agent'),
                         },
                         {
-                          name: SsoEmailTemplateScalarFieldEnumInterface.subject,
-                          title: marker('sso-email-template.grid.columns.subject'),
+                          name: SsoRefreshSessionScalarFieldEnumInterface.fingerprint,
+                          title: marker('sso-session.grid.columns.fingerprint'),
                         },
                         {
-                          name: SsoEmailTemplateScalarFieldEnumInterface.text,
-                          title: marker('sso-email-template.grid.columns.text'),
+                          name: SsoRefreshSessionScalarFieldEnumInterface.userIp,
+                          title: marker('sso-session.grid.columns.user-ip'),
+                        },
+                        {
+                          name: SsoRefreshSessionScalarFieldEnumInterface.expiresAt,
+                          title: marker('sso-session.grid.columns.expires-at'),
+                        },
+                        {
+                          name: SsoRefreshSessionScalarFieldEnumInterface.userData,
+                          title: marker('sso-session.grid.columns.user-data'),
+                        },
+                        {
+                          name: SsoRefreshSessionScalarFieldEnumInterface.enabled,
+                          title: marker('sso-session.grid.columns.enabled'),
                         },
                       ],
                     }),
-                  },
-                },
-                {
-                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
-                  navigation: {
-                    link: '/users',
-                    title: marker('Users'),
-                  },
-                  route: {
-                    component: UsersComponent,
                   },
                 },
                 {
@@ -663,7 +796,14 @@ export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationCon
             },
           };
         },
-        [TranslocoService, SsoProjectService, SsoEmailTemplateService, RuckenRestSdkAngularService, SsoUserService],
+        [
+          TranslocoService,
+          SsoProjectService,
+          SsoEmailTemplateService,
+          RuckenRestSdkAngularService,
+          SsoUserService,
+          SsoSessionService,
+        ],
       ),
       importProvidersFrom(
         BrowserAnimationsModule,

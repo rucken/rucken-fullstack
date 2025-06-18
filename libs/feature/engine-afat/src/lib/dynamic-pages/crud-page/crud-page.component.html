@@ -8,7 +8,17 @@
       [nzSpan]="24"
       [configuration]="crudConfiguration.grid()"
       [crudConfiguration]="crudConfiguration"
+      #main
     >
     </dynamic-crud-grid>
+    @if ((main.selectedIds$ | async)?.length && (relatedCrudConfiguration$ | async); as relatedCrudConfiguration) {
+      <dynamic-crud-grid
+        nz-col
+        [nzSpan]="24"
+        [configuration]="relatedCrudConfiguration.grid()"
+        [crudConfiguration]="relatedCrudConfiguration"
+      >
+      </dynamic-crud-grid>
+    }
   </nz-row>
 }

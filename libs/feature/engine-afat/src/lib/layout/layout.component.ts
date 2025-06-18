@@ -53,6 +53,7 @@ import { LayoutPartNavigation } from './layout.configuration';
   selector: 'layout',
   templateUrl: './layout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class LayoutComponent implements OnInit {
   title!: string;
@@ -114,6 +115,9 @@ export class LayoutComponent implements OnInit {
   }
 
   getFullFilePath(value: string) {
+    if (typeof value !== 'string') {
+      return undefined;
+    }
     return (!value.toLowerCase().startsWith('http') ? this.filesService.getMinioURL() : '') + value;
   }
 
