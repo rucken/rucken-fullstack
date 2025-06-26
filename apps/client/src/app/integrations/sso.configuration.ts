@@ -22,7 +22,7 @@ import {
   SsoUser,
   SsoUserAndTokens,
   TokensService,
-} from '@rucken/sso-afat';
+} from '@rucken/engine-afat';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { catchError, map, mergeMap, Observable, of } from 'rxjs';
 

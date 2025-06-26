@@ -10,14 +10,14 @@ const logger = new Logger('DbTools');
 const appEnvKeys = [
   'RUCKEN_WEBHOOK_DATABASE_URL',
   'RUCKEN_NOTIFICATIONS_DATABASE_URL',
-  'RUCKEN_SSO_DATABASE_URL',
+  'RUCKEN_ENGINE_DATABASE_URL',
   'RUCKEN_TWO_FACTOR_DATABASE_URL',
 ];
-const appKeys = ['webhook', 'notifications', 'sso', 'two-factor'];
+const appKeys = ['webhook', 'notifications', 'engine', 'two-factor'];
 const appHistoryTables = [
   '__migrations_webhook',
   '__migrations_notifications',
-  '__migrations_sso',
+  '__migrations_engine',
   '__migrations_two_factor',
 ];
 const rootEnvKey = 'RUCKEN_ROOT_DATABASE_URL';

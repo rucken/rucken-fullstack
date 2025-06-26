@@ -3,13 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoDirective, TranslocoPipe } from '@jsverse/transloco';
 import { searchIn } from '@nestjs-mod/misc';
 import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
-import {
-  SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY,
-  SsoCompleteForgotPasswordFormComponent,
-  SsoService,
-} from '@rucken/sso-afat';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from '../../engine-afat.constants';
+import { SsoCompleteForgotPasswordFormComponent } from '../../forms/auth-complete-forgot-password-form/auth-complete-forgot-password-form.component';
+import { SsoService } from '../../services/auth.service';
+import { SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY } from '../../services/sso-active-project.service';
 
 @Component({
   selector: 'app-complete-invite',

@@ -1,6 +1,5 @@
 import { NgModule, Provider } from '@angular/core';
 import { provideRouter, Route } from '@angular/router';
-import { OnActivateOptions, SSO_GUARD_DATA_ROUTE_KEY, SsoGuardData, SsoGuardService } from '@rucken/sso-afat';
 import { CrudComponent } from './dynamic-pages/crud-page/crud-page.component';
 import { CrudConfiguration } from './dynamic-pages/crud-page/crud-page.configuration';
 import { RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN, RuckenAfatEngineConfiguration } from './engine-afat.configuration';
@@ -10,7 +9,13 @@ import {
   ROOT_PATH_MARKER,
   SECOND_PATH_MARKER,
 } from './engine-afat.constants';
-import { pagesRoutes } from './pages/pages.routes';
+import { ssoPagesRoutes } from './pages/pages.routes';
+import {
+  OnActivateOptions,
+  SSO_GUARD_DATA_ROUTE_KEY,
+  SsoGuardData,
+  SsoGuardService,
+} from './services/auth-guard.service';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function provideRuckenAfatEngine(useFactory: (...deps: any[]) => RuckenAfatEngineConfiguration, deps?: any[]) {
@@ -41,7 +46,7 @@ export function provideRuckenAfatEngine(useFactory: (...deps: any[]) => RuckenAf
         redirectTo: configuration.layout?.parts.find((p) => p.second)?.navigation?.['link'] || '/home',
         pathMatch: 'full',
       },
-      ...pagesRoutes,
+      ...ssoPagesRoutes,
       ...((configuration.layout?.parts
         .map((part, index) => ({ part, index }))
         .filter(({ part }) => part.route || part.crud)

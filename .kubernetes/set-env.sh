@@ -28,7 +28,7 @@ fi
 
 # node
 if [ -z "${NAMESPACE}" ]; then
-    export NAMESPACE=sso
+    export NAMESPACE=engine
 fi
 
 # common
@@ -52,15 +52,15 @@ if [ -z "${RUCKEN_WEBHOOK_DATABASE_NAME}" ]; then
     export RUCKEN_WEBHOOK_DATABASE_NAME=${NAMESPACE}_webhook
 fi
 
-# server: sso database
-if [ -z "${RUCKEN_SSO_DATABASE_PASSWORD}" ]; then
-    export RUCKEN_SSO_DATABASE_PASSWORD=sso_password
+# server: engine database
+if [ -z "${RUCKEN_ENGINE_DATABASE_PASSWORD}" ]; then
+    export RUCKEN_ENGINE_DATABASE_PASSWORD=engine_password
 fi
-if [ -z "${RUCKEN_SSO_DATABASE_USERNAME}" ]; then
-    export RUCKEN_SSO_DATABASE_USERNAME=${NAMESPACE}_sso
+if [ -z "${RUCKEN_ENGINE_DATABASE_USERNAME}" ]; then
+    export RUCKEN_ENGINE_DATABASE_USERNAME=${NAMESPACE}_engine
 fi
-if [ -z "${RUCKEN_SSO_DATABASE_NAME}" ]; then
-    export RUCKEN_SSO_DATABASE_NAME=${NAMESPACE}_sso
+if [ -z "${RUCKEN_ENGINE_DATABASE_NAME}" ]; then
+    export RUCKEN_ENGINE_DATABASE_NAME=${NAMESPACE}_engine
 fi
 
 # server: notifications database

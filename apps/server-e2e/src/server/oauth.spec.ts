@@ -7,7 +7,7 @@ describe('OAuth (e2e)', () => {
   beforeAll(async () => {
     user = await new RuckenRestClientHelper({
       headers: {
-        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
       },
     }).generateRandomUser();
   });

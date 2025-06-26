@@ -1,5 +1,5 @@
 import { NOTIFICATIONS_FEATURE, NotificationsModule, NotificationsRequest } from '@nestjs-mod/notifications';
-import { CheckSsoRole, SsoGuard, RuckenSsoModule, SsoRequest, SsoRole } from '@rucken/sso';
+import { CheckSsoRole, SsoGuard, RuckenEngineModule, SsoRequest, SsoRole } from '@rucken/engine';
 import { getRequestFromExecutionContext } from '@nestjs-mod/common';
 import { searchIn } from '@nestjs-mod/misc';
 import { ExecutionContext } from '@nestjs/common';
@@ -8,7 +8,7 @@ import { TranslatesModule } from 'nestjs-translates';
 export function notificationsModuleForRootAsyncOptions(): Parameters<typeof NotificationsModule.forRootAsync>[0] {
   return {
     imports: [
-      RuckenSsoModule.forFeature({
+      RuckenEngineModule.forFeature({
         featureModuleName: NOTIFICATIONS_FEATURE,
       }),
       TranslatesModule,

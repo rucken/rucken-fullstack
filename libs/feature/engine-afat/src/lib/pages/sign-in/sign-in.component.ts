@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { searchIn } from '@nestjs-mod/misc';
 import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
-import { SsoService, SsoSignInFormComponent } from '@rucken/sso-afat';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from '../../engine-afat.constants';
+import { SsoService } from '../../services/auth.service';
+import { SsoSignInFormComponent } from '../../forms/auth-sign-in-form/auth-sign-in-form.component';
 
 @Component({
   selector: 'app-sign-in',

@@ -12,12 +12,12 @@ describe('Sso profile (e2e)', () => {
   beforeAll(async () => {
     user = await new RuckenRestClientHelper({
       headers: {
-        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
       },
     }).generateRandomUser();
     project = await new RuckenRestClientHelper({
       headers: {
-        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
       },
     }).generateRandomUser();
   });
@@ -32,7 +32,7 @@ describe('Sso profile (e2e)', () => {
       },
       {
         headers: {
-          'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
+          'x-admin-secret': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
         },
       },
     );
@@ -64,7 +64,7 @@ describe('Sso profile (e2e)', () => {
       .getSsoApi()
       .ssoProjectsControllerFindMany(undefined, undefined, project.randomUser.id, undefined, {
         headers: {
-          'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
+          'x-admin-secret': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
         },
       });
 
@@ -78,7 +78,7 @@ describe('Sso profile (e2e)', () => {
         findManyProjectsResult.ssoProjects[0].id,
         {
           headers: {
-            'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
+            'x-admin-secret': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
           },
         },
       );
@@ -92,7 +92,7 @@ describe('Sso profile (e2e)', () => {
       },
       {
         headers: {
-          'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
+          'x-admin-secret': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
         },
       },
     );

@@ -193,7 +193,7 @@ export class RuckenRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'>
             },
             {
               headers: {
-                'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
+                'x-admin-secret': process.env['RUCKEN_ENGINE_ADMIN_SECRET'],
               },
             },
           );
@@ -221,7 +221,7 @@ export class RuckenRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'>
         .getSsoApi()
         .ssoUsersControllerFindMany(undefined, undefined, this.randomUser.email, undefined, undefined, {
           headers: {
-            'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
+            'x-admin-secret': process.env['RUCKEN_ENGINE_ADMIN_SECRET'],
           },
         });
 
@@ -232,7 +232,7 @@ export class RuckenRestClientHelper<T extends 'strict' | 'no_strict' = 'strict'>
         },
         {
           headers: {
-            'x-admin-secret': process.env['RUCKEN_SSO_ADMIN_SECRET'],
+            'x-admin-secret': process.env['RUCKEN_ENGINE_ADMIN_SECRET'],
           },
         },
       );

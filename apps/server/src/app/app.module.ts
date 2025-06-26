@@ -5,7 +5,7 @@ import { ValidationError, ValidationErrorEnum } from '@nestjs-mod/validation';
 import { APP_FILTER } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { RuckenSsoModule, RUCKEN_SSO_FEATURE, SsoRequest } from '@rucken/sso';
+import { RuckenEngineModule, RUCKEN_ENGINE_FEATURE, SsoRequest } from '@rucken/engine';
 import { TranslatesModule } from 'nestjs-translates';
 import { join } from 'path';
 import { APP_FEATURE } from './app.constants';
@@ -17,14 +17,14 @@ export const { AppModule } = createNestModule({
   moduleCategory: NestModuleCategory.feature,
   imports: [
     PrismaModule.forFeature({
-      contextName: RUCKEN_SSO_FEATURE,
-      featureModuleName: RUCKEN_SSO_FEATURE,
+      contextName: RUCKEN_ENGINE_FEATURE,
+      featureModuleName: RUCKEN_ENGINE_FEATURE,
     }),
-    RuckenSsoModule.forFeature({
+    RuckenEngineModule.forFeature({
       featureModuleName: APP_FEATURE,
     }),
     PrismaModule.forFeature({
-      contextName: RUCKEN_SSO_FEATURE,
+      contextName: RUCKEN_ENGINE_FEATURE,
       featureModuleName: APP_FEATURE,
     }),
     TranslatesModule.forRootDefault({

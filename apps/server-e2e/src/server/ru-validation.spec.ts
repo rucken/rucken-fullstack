@@ -8,13 +8,13 @@ describe('Validation (ru)', () => {
   const user1 = new RuckenRestClientHelper({
     activeLang: 'ru',
     headers: {
-      'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+      'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
     },
   });
   const admin = new RuckenRestClientHelper({
     headers: {
-      'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
-      'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+      'x-admin-secret': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
+      'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
     },
   });
 

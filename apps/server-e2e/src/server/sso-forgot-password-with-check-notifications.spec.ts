@@ -14,19 +14,19 @@ describe('Sso forgot password with check notifications (e2e)', () => {
   beforeAll(async () => {
     project = await new RuckenRestClientHelper({
       headers: {
-        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
       },
     }).generateRandomUser();
     user = await new RuckenRestClientHelper({
       headers: {
         'x-client-id': project.randomUser.id,
-        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
       },
     }).generateRandomUser();
     admin = new RuckenRestClientHelper({
       headers: {
-        'x-admin-secret': process.env.RUCKEN_SSO_ADMIN_SECRET,
-        'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+        'x-admin-secret': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
+        'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
       },
     });
   });

@@ -4,23 +4,13 @@ import { Router, RouterModule } from '@angular/router';
 import { LangDefinition, TranslocoDirective, TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { TranslocoDatePipe } from '@jsverse/transloco-locale';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
+import { SsoPublicProjectDtoInterface, SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import { addHours } from 'date-fns';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 import { Title } from '@angular/platform-browser';
 import { FilesService } from '@nestjs-mod/files-afat';
-import {
-  CheckUserRolesPipe,
-  SsoActiveLangService,
-  SsoActiveProjectService,
-  SsoGuardService,
-  SsoProjectModel,
-  SsoService,
-  TokensService,
-  UserPipe,
-} from '@rucken/sso-afat';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -30,6 +20,13 @@ import { TIMEZONE_OFFSET } from '@nestjs-mod/misc';
 import { RuckenRestSdkAngularService } from '@rucken/rucken-rest-sdk-angular';
 import { RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN, RuckenAfatEngineConfiguration } from '../engine-afat.configuration';
 import { ROOT_PATH_MARKER } from '../engine-afat.constants';
+import { CheckUserRolesPipe } from '../pipes/check-user-roles.pipe';
+import { UserPipe } from '../pipes/user.pipe';
+import { SsoActiveLangService } from '../services/auth-active-lang.service';
+import { SsoGuardService } from '../services/auth-guard.service';
+import { SsoService } from '../services/auth.service';
+import { SsoActiveProjectService } from '../services/sso-active-project.service';
+import { TokensService } from '../services/tokens.service';
 import { LayoutPartNavigation } from './layout.configuration';
 
 @UntilDestroy()
@@ -62,8 +59,8 @@ export class LayoutComponent implements OnInit {
   availableLangs$ = new BehaviorSubject<LangDefinition[]>([]);
   SsoRoleInterface = SsoRoleInterface;
 
-  publicProjects$?: Observable<SsoProjectModel[] | undefined>;
-  activePublicProject$?: Observable<SsoProjectModel | undefined>;
+  publicProjects$?: Observable<SsoPublicProjectDtoInterface[] | undefined>;
+  activePublicProject$?: Observable<SsoPublicProjectDtoInterface | undefined>;
   navigations$ = new BehaviorSubject<LayoutPartNavigation[]>([]);
 
   constructor(
@@ -121,7 +118,7 @@ export class LayoutComponent implements OnInit {
     return (!value.toLowerCase().startsWith('http') ? this.filesService.getMinioURL() : '') + value;
   }
 
-  setActivePublicProject(activePublicProject?: SsoProjectModel) {
+  setActivePublicProject(activePublicProject?: SsoPublicProjectDtoInterface) {
     this.ssoActiveProjectService.setActivePublicProject(activePublicProject);
   }
 

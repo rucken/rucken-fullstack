@@ -2,18 +2,6 @@ import { Route } from '@angular/router';
 import { marker } from '@jsverse/transloco-keys-manager/marker';
 import { searchIn } from '@nestjs-mod/misc';
 import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
-import {
-  CompleteSignUpOptions,
-  OnActivateOptions,
-  SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY,
-  SSO_COMPLETE_GUARD_DATA_ROUTE_KEY,
-  SSO_GUARD_DATA_ROUTE_KEY,
-  SsoCompleteGuardData,
-  SsoCompleteGuardService,
-  SsoGuardData,
-  SsoGuardService,
-} from '@rucken/sso-afat';
-import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from '../engine-afat.constants';
 import { CompleteForgotPasswordComponent } from './complete-forgot-password/complete-forgot-password.component';
 import { CompleteInviteComponent } from './complete-invite/complete-invite.component';
 import { CompleteSignUpComponent } from './complete-sign-up/complete-sign-up.component';
@@ -21,8 +9,22 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ProfileComponent } from './profile/profile.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from '../engine-afat.constants';
+import {
+  SsoCompleteGuardService,
+  SSO_COMPLETE_GUARD_DATA_ROUTE_KEY,
+  SsoCompleteGuardData,
+  CompleteSignUpOptions,
+} from '../services/auth-complete-guard.service';
+import {
+  SsoGuardService,
+  SSO_GUARD_DATA_ROUTE_KEY,
+  SsoGuardData,
+  OnActivateOptions,
+} from '../services/auth-guard.service';
+import { SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY } from '../services/sso-active-project.service';
 
-export const pagesRoutes: Route[] = [
+export const ssoPagesRoutes: Route[] = [
   {
     path: 'profile',
     component: ProfileComponent,

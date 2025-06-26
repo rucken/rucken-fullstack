@@ -9,7 +9,7 @@ describe('Get server time from rest api and ws (timezone)', () => {
   const correctStringDateLength = '0000-00-00T00:00:00.000Z'.length;
   const restClientHelper = new RuckenRestClientHelper({
     headers: {
-      'x-skip-throttle': process.env.RUCKEN_SSO_ADMIN_SECRET,
+      'x-skip-throttle': process.env.RUCKEN_ENGINE_ADMIN_SECRET,
     },
     serverUrl: process.env.IS_DOCKER_COMPOSE ? get('E2E_SERVER_URL').asString() : undefined,
   });

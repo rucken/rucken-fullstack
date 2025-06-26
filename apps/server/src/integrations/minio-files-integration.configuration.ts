@@ -1,5 +1,5 @@
 import { FilesConfiguration, FilesModule } from '@nestjs-mod/files';
-import { RuckenSsoModule } from '@rucken/sso';
+import { RuckenEngineModule } from '@rucken/engine';
 import { MinioFilesService, MinioModule } from '@nestjs-mod/minio';
 import { Injectable } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
@@ -39,7 +39,7 @@ export class MinioFilesIntegrationConfiguration implements FilesConfiguration {
 
 export function filesModuleForRootAsyncOptions(): Parameters<typeof FilesModule.forRootAsync>[0] {
   return {
-    imports: [RuckenSsoModule.forFeature(), MinioModule.forFeature()],
+    imports: [RuckenEngineModule.forFeature(), MinioModule.forFeature()],
     configurationClass: MinioFilesIntegrationConfiguration,
   };
 }
