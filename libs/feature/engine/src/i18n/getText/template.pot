@@ -39,8 +39,8 @@ msgstr "Refresh token not provided"
 msgid "Session expired"
 msgstr "Session expired"
 
-msgid "Sso error"
-msgstr "Sso error"
+msgid "Engine error"
+msgstr "Engine error"
 
 msgid "User is exists"
 msgstr "User is exists"

@@ -3,62 +3,62 @@ import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { catchError, concatMap, from, map, mergeMap, of } from 'rxjs';
-import { SsoService } from './auth.service';
+import { EngineService } from './auth.service';
 
-export const SSO_COMPLETE_GUARD_DATA_ROUTE_KEY = 'ssoGuardCompleteData';
+export const ENGINE_COMPLETE_GUARD_DATA_ROUTE_KEY = 'engineGuardCompleteData';
 
 export type CompleteSignUpOptions = {
   activatedRouteSnapshot: ActivatedRouteSnapshot;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
-  ssoService: SsoService;
+  engineService: EngineService;
   router: Router;
 };
 
-export class SsoCompleteGuardData {
+export class EngineCompleteGuardData {
   type?: 'complete-sign-up' | 'complete-forgot-password' | 'complete-invite' | 'complete-oauth-sign-up';
 
   beforeCompleteSignUp?: (options: CompleteSignUpOptions) => Promise<boolean>;
 
   afterCompleteSignUp?: (options: CompleteSignUpOptions) => Promise<boolean>;
 
-  constructor(options?: SsoCompleteGuardData) {
+  constructor(options?: EngineCompleteGuardData) {
     Object.assign(this, options);
   }
 }
 
 @Injectable({ providedIn: 'root' })
-export class SsoCompleteGuardService implements CanActivate {
+export class EngineCompleteGuardService implements CanActivate {
   constructor(
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
-    private readonly ssoService: SsoService,
+    private readonly engineService: EngineService,
     private readonly router: Router,
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot) {
-    const ssoCompleteGuardData =
-      route.data && route.data[SSO_COMPLETE_GUARD_DATA_ROUTE_KEY] instanceof SsoCompleteGuardData
-        ? route.data[SSO_COMPLETE_GUARD_DATA_ROUTE_KEY]
+    const engineCompleteGuardData =
+      route.data && route.data[ENGINE_COMPLETE_GUARD_DATA_ROUTE_KEY] instanceof EngineCompleteGuardData
+        ? route.data[ENGINE_COMPLETE_GUARD_DATA_ROUTE_KEY]
         : null;
-    if (ssoCompleteGuardData) {
-      if (ssoCompleteGuardData.type === 'complete-oauth-sign-up') {
+    if (engineCompleteGuardData) {
+      if (engineCompleteGuardData.type === 'complete-oauth-sign-up') {
         const verificationCode = route.queryParamMap.get('verification_code');
         const clientId = route.queryParamMap.get('client_id');
         if (verificationCode) {
           return (
-            ssoCompleteGuardData.beforeCompleteSignUp
+            engineCompleteGuardData.beforeCompleteSignUp
               ? from(
-                  ssoCompleteGuardData.beforeCompleteSignUp({
+                  engineCompleteGuardData.beforeCompleteSignUp({
                     activatedRouteSnapshot: route,
-                    ssoService: this.ssoService,
+                    engineService: this.engineService,
                     router: this.router,
                   }),
                 )
               : of(true)
           ).pipe(
             mergeMap(() =>
-              this.ssoService.oAuthVerification({
+              this.engineService.oAuthVerification({
                 verificationCode,
                 clientId: clientId || undefined,
               }),
@@ -69,12 +69,12 @@ export class SsoCompleteGuardService implements CanActivate {
               );
               return true;
             }),
-            mergeMap(() => this.ssoService.refreshToken()),
+            mergeMap(() => this.engineService.refreshToken()),
             concatMap(async () => {
-              if (ssoCompleteGuardData.afterCompleteSignUp) {
-                await ssoCompleteGuardData.afterCompleteSignUp({
+              if (engineCompleteGuardData.afterCompleteSignUp) {
+                await engineCompleteGuardData.afterCompleteSignUp({
                   activatedRouteSnapshot: route,
-                  ssoService: this.ssoService,
+                  engineService: this.engineService,
                   router: this.router,
                 });
               }
@@ -83,11 +83,11 @@ export class SsoCompleteGuardService implements CanActivate {
             catchError((err) => {
               console.error(err);
               this.nzMessageService.error(this.translocoService.translate(err.error?.message || err.message));
-              if (ssoCompleteGuardData.afterCompleteSignUp) {
+              if (engineCompleteGuardData.afterCompleteSignUp) {
                 return from(
-                  ssoCompleteGuardData.afterCompleteSignUp({
+                  engineCompleteGuardData.afterCompleteSignUp({
                     activatedRouteSnapshot: route,
-                    ssoService: this.ssoService,
+                    engineService: this.engineService,
                     router: this.router,
                     error: err,
                   }),
@@ -98,22 +98,22 @@ export class SsoCompleteGuardService implements CanActivate {
           );
         }
       }
-      if (ssoCompleteGuardData.type === 'complete-sign-up') {
+      if (engineCompleteGuardData.type === 'complete-sign-up') {
         const code = route.queryParamMap.get('code');
         if (code) {
           return (
-            ssoCompleteGuardData.beforeCompleteSignUp
+            engineCompleteGuardData.beforeCompleteSignUp
               ? from(
-                  ssoCompleteGuardData.beforeCompleteSignUp({
+                  engineCompleteGuardData.beforeCompleteSignUp({
                     activatedRouteSnapshot: route,
-                    ssoService: this.ssoService,
+                    engineService: this.engineService,
                     router: this.router,
                   }),
                 )
               : of(true)
           ).pipe(
             mergeMap(() =>
-              this.ssoService.completeSignUp({
+              this.engineService.completeSignUp({
                 code,
               }),
             ),
@@ -121,12 +121,12 @@ export class SsoCompleteGuardService implements CanActivate {
               this.nzMessageService.success(this.translocoService.translate('Email address successfully verified'));
               return true;
             }),
-            mergeMap(() => this.ssoService.refreshToken()),
+            mergeMap(() => this.engineService.refreshToken()),
             concatMap(async () => {
-              if (ssoCompleteGuardData.afterCompleteSignUp) {
-                await ssoCompleteGuardData.afterCompleteSignUp({
+              if (engineCompleteGuardData.afterCompleteSignUp) {
+                await engineCompleteGuardData.afterCompleteSignUp({
                   activatedRouteSnapshot: route,
-                  ssoService: this.ssoService,
+                  engineService: this.engineService,
                   router: this.router,
                 });
               }
@@ -135,11 +135,11 @@ export class SsoCompleteGuardService implements CanActivate {
             catchError((err) => {
               console.error(err);
               this.nzMessageService.error(this.translocoService.translate(err.error?.message || err.message));
-              if (ssoCompleteGuardData.afterCompleteSignUp) {
+              if (engineCompleteGuardData.afterCompleteSignUp) {
                 return from(
-                  ssoCompleteGuardData.afterCompleteSignUp({
+                  engineCompleteGuardData.afterCompleteSignUp({
                     activatedRouteSnapshot: route,
-                    ssoService: this.ssoService,
+                    engineService: this.engineService,
                     router: this.router,
                     error: err,
                   }),

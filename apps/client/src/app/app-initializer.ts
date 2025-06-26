@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { SsoActiveLangService, SsoActiveProjectService, SsoService, TokensService } from '@rucken/engine-afat';
+import { EngineActiveLangService, EngineActiveProjectService, EngineService, TokensService } from '@rucken/engine-afat';
 import { FilesRestSdkAngularService } from '@nestjs-mod/files-afat';
 import { RuckenRestSdkAngularService } from '@rucken/rucken-rest-sdk-angular';
 import { WebhookRestSdkAngularService } from '@nestjs-mod/webhook-afat';
@@ -11,11 +11,11 @@ export class AppInitializer {
   private subscribeToTokenUpdatesSubscription?: Subscription;
 
   constructor(
-    private readonly ssoService: SsoService,
+    private readonly engineService: EngineService,
     private readonly translocoService: TranslocoService,
     private readonly tokensService: TokensService,
-    private readonly ssoActiveLangService: SsoActiveLangService,
-    private readonly ssoActiveProjectService: SsoActiveProjectService,
+    private readonly engineActiveLangService: EngineActiveLangService,
+    private readonly engineActiveProjectService: EngineActiveProjectService,
     private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
     private readonly webhookRestSdkAngularService: WebhookRestSdkAngularService,
     private readonly filesRestSdkAngularService: FilesRestSdkAngularService,
@@ -23,8 +23,8 @@ export class AppInitializer {
 
   resolve() {
     this.subscribeToTokenUpdates();
-    return this.ssoService.refreshToken().pipe(
-      mergeMap(() => this.ssoActiveLangService.refreshActiveLang(true)),
+    return this.engineService.refreshToken().pipe(
+      mergeMap(() => this.engineActiveLangService.refreshActiveLang(true)),
       catchError((err) => {
         console.error(err);
         return of(true);
@@ -39,17 +39,17 @@ export class AppInitializer {
     }
     this.updateHeaders();
     this.subscribeToTokenUpdatesSubscription = merge(
-      this.ssoService.updateHeaders$.asObservable(),
+      this.engineService.updateHeaders$.asObservable(),
       this.tokensService.getStream(),
       this.translocoService.langChanges$,
-      this.ssoActiveProjectService.activePublicProject$,
+      this.engineActiveProjectService.activePublicProject$,
     )
       .pipe(tap(() => this.updateHeaders()))
       .subscribe();
   }
 
   private updateHeaders() {
-    const authorizationHeaders = this.ssoService.getAuthorizationHeaders();
+    const authorizationHeaders = this.engineService.getAuthorizationHeaders();
     if (authorizationHeaders) {
       this.ruckenRestSdkAngularService.updateHeaders(authorizationHeaders);
       this.webhookRestSdkAngularService.updateHeaders(authorizationHeaders);

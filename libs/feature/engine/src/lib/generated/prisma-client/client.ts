@@ -23,8 +23,8 @@ export * as $Enums from './enums';
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more SsoProjects
- * const ssoProjects = await prisma.ssoProject.findMany()
+ * // Fetch zero or more EngineProjects
+ * const engineProjects = await prisma.engineProject.findMany()
  * ```
  *
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -38,42 +38,42 @@ export type PrismaClient<
 export { Prisma };
 
 /**
- * Model SsoProject
+ * Model EngineProject
  *
  */
-export type SsoProject = Prisma.SsoProjectModel;
+export type EngineProject = Prisma.EngineProjectModel;
 /**
- * Model SsoUser
+ * Model EngineUser
  *
  */
-export type SsoUser = Prisma.SsoUserModel;
+export type EngineUser = Prisma.EngineUserModel;
 /**
- * Model migrations_sso
+ * Model migrations_engine
  *
  */
-export type migrations_sso = Prisma.migrations_ssoModel;
+export type migrations_engine = Prisma.migrations_engineModel;
 /**
- * Model SsoRefreshSession
+ * Model EngineRefreshSession
  *
  */
-export type SsoRefreshSession = Prisma.SsoRefreshSessionModel;
+export type EngineRefreshSession = Prisma.EngineRefreshSessionModel;
 /**
- * Model SsoEmailTemplate
+ * Model EngineEmailTemplate
  *
  */
-export type SsoEmailTemplate = Prisma.SsoEmailTemplateModel;
+export type EngineEmailTemplate = Prisma.EngineEmailTemplateModel;
 /**
- * Model SsoOAuthProvider
+ * Model EngineOAuthProvider
  *
  */
-export type SsoOAuthProvider = Prisma.SsoOAuthProviderModel;
+export type EngineOAuthProvider = Prisma.EngineOAuthProviderModel;
 /**
- * Model SsoOAuthProviderSettings
+ * Model EngineOAuthProviderSettings
  *
  */
-export type SsoOAuthProviderSettings = Prisma.SsoOAuthProviderSettingsModel;
+export type EngineOAuthProviderSettings = Prisma.EngineOAuthProviderSettingsModel;
 /**
- * Model SsoOAuthToken
+ * Model EngineOAuthToken
  *
  */
-export type SsoOAuthToken = Prisma.SsoOAuthTokenModel;
+export type EngineOAuthToken = Prisma.EngineOAuthTokenModel;

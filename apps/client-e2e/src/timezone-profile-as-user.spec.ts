@@ -48,27 +48,31 @@ test.describe('Work with profile as "User" role (timezone', () => {
       timeout: 7000,
     });
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=email]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=email]').click();
     await page.keyboard.type(user.email.toLowerCase(), {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=email]')).toHaveValue(user.email.toLowerCase());
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=email]')).toHaveValue(
+      user.email.toLowerCase(),
+    );
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=password]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=password]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=password]')).toHaveValue(user.password);
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=password]')).toHaveValue(user.password);
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=confirmPassword]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=confirmPassword]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=confirmPassword]')).toHaveValue(user.password);
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=confirmPassword]')).toHaveValue(
+      user.password,
+    );
 
-    await expect(page.locator('sso-sign-up-form').locator('button[type=submit]')).toHaveText('Sign-up');
+    await expect(page.locator('engine-sign-up-form').locator('button[type=submit]')).toHaveText('Sign-up');
 
-    await page.locator('sso-sign-up-form').locator('button[type=submit]').click();
+    await page.locator('engine-sign-up-form').locator('button[type=submit]').click();
 
     await page.waitForSelector('div.cdk-overlay-container>div.cdk-global-overlay-wrapper');
 
@@ -103,21 +107,23 @@ test.describe('Work with profile as "User" role (timezone', () => {
       timeout: 7000,
     });
 
-    await page.locator('sso-sign-in-form').locator('[placeholder=email]').click();
+    await page.locator('engine-sign-in-form').locator('[placeholder=email]').click();
     await page.keyboard.type(user.email.toLowerCase(), {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-in-form').locator('[placeholder=email]')).toHaveValue(user.email.toLowerCase());
+    await expect(page.locator('engine-sign-in-form').locator('[placeholder=email]')).toHaveValue(
+      user.email.toLowerCase(),
+    );
 
-    await page.locator('sso-sign-in-form').locator('[placeholder=password]').click();
+    await page.locator('engine-sign-in-form').locator('[placeholder=password]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-in-form').locator('[placeholder=password]')).toHaveValue(user.password);
+    await expect(page.locator('engine-sign-in-form').locator('[placeholder=password]')).toHaveValue(user.password);
 
-    await expect(page.locator('sso-sign-in-form').locator('button[type=submit]')).toHaveText('Sign-in');
+    await expect(page.locator('engine-sign-in-form').locator('button[type=submit]')).toHaveText('Sign-in');
 
-    await page.locator('sso-sign-in-form').locator('button[type=submit]').click();
+    await page.locator('engine-sign-in-form').locator('button[type=submit]').click();
 
     await page.waitForSelector('div.cdk-overlay-container>div.cdk-global-overlay-wrapper');
 
@@ -169,20 +175,20 @@ test.describe('Work with profile as "User" role (timezone', () => {
     await setTimeout(4000);
     //
     await page
-      .locator('sso-profile-form')
+      .locator('engine-profile-form')
       .locator('[placeholder=timezone]')
       .click();
     await page.keyboard.press('Enter', { delay: 100 });
     await expect(
-      page.locator('sso-profile-form').locator('[placeholder=timezone]')
+      page.locator('engine-profile-form').locator('[placeholder=timezone]')
     ).toContainText('UTC−12:00: Date Line (west)');
 
     await expect(
-      page.locator('sso-profile-form').locator('button[type=submit]')
+      page.locator('engine-profile-form').locator('button[type=submit]')
     ).toHaveText('Update');
 
     await page
-      .locator('sso-profile-form')
+      .locator('engine-profile-form')
       .locator('button[type=submit]')
       .click();
 

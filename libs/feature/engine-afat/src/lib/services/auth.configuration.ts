@@ -4,51 +4,51 @@ import { Observable, throwError } from 'rxjs';
 import {
   OAuthProvider,
   OAuthVerificationInput,
-  SsoCompleteForgotPasswordInput,
-  SsoCompleteSignUpInput,
-  SsoForgotPasswordInput,
-  SsoLoginInput,
-  SsoSignupInput,
-  SsoUpdateProfileInput,
-  SsoUser,
-  SsoUserAndTokens,
+  EngineCompleteForgotPasswordInput,
+  EngineCompleteSignUpInput,
+  EngineForgotPasswordInput,
+  EngineLoginInput,
+  EngineSignupInput,
+  EngineUpdateProfileInput,
+  EngineUser,
+  EngineUserAndTokens,
 } from './auth.types';
 
 export type AfterUpdateProfileEvent = {
-  old?: SsoUser;
-  new?: SsoUser;
+  old?: EngineUser;
+  new?: EngineUser;
 };
 
-export class SsoConfiguration {
-  constructor(options?: SsoConfiguration) {
+export class EngineConfiguration {
+  constructor(options?: EngineConfiguration) {
     Object.assign(this, options);
   }
   // todo: remove not need options
   logout(): Observable<void | null> {
     return throwError(() => new Error('not implemented'));
   }
-  getProfile(): Observable<SsoUser | undefined> {
+  getProfile(): Observable<EngineUser | undefined> {
     return throwError(() => new Error('not implemented'));
   }
-  refreshToken(): Observable<SsoUserAndTokens | undefined> {
+  refreshToken(): Observable<EngineUserAndTokens | undefined> {
     return throwError(() => new Error('not implemented'));
   }
-  signup(data: SsoSignupInput): Observable<SsoUserAndTokens> {
+  signup(data: EngineSignupInput): Observable<EngineUserAndTokens> {
     return throwError(() => new Error('not implemented'));
   }
-  login(data: SsoLoginInput): Observable<SsoUserAndTokens> {
+  login(data: EngineLoginInput): Observable<EngineUserAndTokens> {
     return throwError(() => new Error('not implemented'));
   }
-  updateProfile(data: SsoUpdateProfileInput): Observable<void | null> {
+  updateProfile(data: EngineUpdateProfileInput): Observable<void | null> {
     return throwError(() => new Error('not implemented'));
   }
-  completeSignUp(data: SsoCompleteSignUpInput): Observable<SsoUserAndTokens> {
+  completeSignUp(data: EngineCompleteSignUpInput): Observable<EngineUserAndTokens> {
     return throwError(() => new Error('not implemented'));
   }
-  forgotPassword(data: SsoForgotPasswordInput): Observable<true> {
+  forgotPassword(data: EngineForgotPasswordInput): Observable<true> {
     return throwError(() => new Error('not implemented'));
   }
-  completeForgotPassword(data: SsoCompleteForgotPasswordInput): Observable<SsoUserAndTokens> {
+  completeForgotPassword(data: EngineCompleteForgotPasswordInput): Observable<EngineUserAndTokens> {
     return throwError(() => new Error('not implemented'));
   }
   getAuthorizationHeaders(): Record<string, string> {
@@ -57,9 +57,9 @@ export class SsoConfiguration {
   oAuthProviders(): Observable<OAuthProvider[]> {
     return throwError(() => new Error('not implemented'));
   }
-  oAuthVerification({ verificationCode, clientId }: OAuthVerificationInput): Observable<SsoUserAndTokens> {
+  oAuthVerification({ verificationCode, clientId }: OAuthVerificationInput): Observable<EngineUserAndTokens> {
     return throwError(() => new Error('not implemented'));
   }
 }
 
-export const SSO_CONFIGURATION_TOKEN = new InjectionToken<string>('SSO_CONFIGURATION_TOKEN');
+export const ENGINE_CONFIGURATION_TOKEN = new InjectionToken<string>('ENGINE_CONFIGURATION_TOKEN');

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SsoGuardService } from '../services/auth-guard.service';
+import { EngineGuardService } from '../services/auth-guard.service';
 
 @Pipe({
   name: 'checkUserRoles',
@@ -7,7 +7,7 @@ import { SsoGuardService } from '../services/auth-guard.service';
   standalone: true,
 })
 export class CheckUserRolesPipe implements PipeTransform {
-  constructor(private readonly authGuardService: SsoGuardService) {}
+  constructor(private readonly authGuardService: EngineGuardService) {}
 
   public transform(authRoles?: string[]) {
     return this.authGuardService.checkUserRoles(authRoles);

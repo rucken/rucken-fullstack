@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EnvModelOptions, EnvModelPropertyOptions, EnvModelPropertyValueTransformer } from '@nestjs-mod/common';
 
-export type SsoProjectType = {
+export type EngineProjectType = {
   name: string;
   nameLocale: {
     [locale: string]: string;
@@ -51,7 +51,7 @@ export class StringToProjectsTransformer implements EnvModelPropertyValueTransfo
             clientId,
             clientSecret,
             nameLocale,
-          } as SsoProjectType;
+          } as EngineProjectType;
         })
     );
   }

@@ -1,17 +1,17 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, finalize } from 'rxjs';
-import { RuckenRestClientConfiguration, SsoRuckenRestService, TimeRuckenRestService } from './generated';
+import { RuckenRestClientConfiguration, EngineRuckenRestService, TimeRuckenRestService } from './generated';
 
 @Injectable({ providedIn: 'root' })
 export class RuckenRestSdkAngularService {
   constructor(
     private readonly ruckenRestClientConfiguration: RuckenRestClientConfiguration,
     private readonly timeRuckenRestService: TimeRuckenRestService,
-    private readonly ssoRuckenRestService: SsoRuckenRestService,
+    private readonly engineRuckenRestService: EngineRuckenRestService,
   ) {
     timeRuckenRestService.configuration.withCredentials = true;
-    ssoRuckenRestService.configuration.withCredentials = true;
+    engineRuckenRestService.configuration.withCredentials = true;
   }
 
   getTimeApi() {
@@ -21,16 +21,16 @@ export class RuckenRestSdkAngularService {
     return this.timeRuckenRestService;
   }
 
-  getSsoApi() {
-    if (!this.ssoRuckenRestService) {
-      throw new Error('ssoApi not set');
+  getEngineApi() {
+    if (!this.engineRuckenRestService) {
+      throw new Error('engineApi not set');
     }
-    return this.ssoRuckenRestService;
+    return this.engineRuckenRestService;
   }
 
   updateHeaders(headers: Record<string, string>) {
     this.timeRuckenRestService.defaultHeaders = new HttpHeaders(headers);
-    this.ssoRuckenRestService.defaultHeaders = new HttpHeaders(headers);
+    this.engineRuckenRestService.defaultHeaders = new HttpHeaders(headers);
   }
 
   webSocket<T>({

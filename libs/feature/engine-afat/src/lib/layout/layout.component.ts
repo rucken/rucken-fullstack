@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { LangDefinition, TranslocoDirective, TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { TranslocoDatePipe } from '@jsverse/transloco-locale';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SsoPublicProjectDtoInterface, SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
+import { EnginePublicProjectDtoInterface, EngineRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import { addHours } from 'date-fns';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -22,10 +22,10 @@ import { RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN, RuckenAfatEngineConfiguration }
 import { ROOT_PATH_MARKER } from '../engine-afat.constants';
 import { CheckUserRolesPipe } from '../pipes/check-user-roles.pipe';
 import { UserPipe } from '../pipes/user.pipe';
-import { SsoActiveLangService } from '../services/auth-active-lang.service';
-import { SsoGuardService } from '../services/auth-guard.service';
-import { SsoService } from '../services/auth.service';
-import { SsoActiveProjectService } from '../services/sso-active-project.service';
+import { EngineActiveLangService } from '../services/auth-active-lang.service';
+import { EngineGuardService } from '../services/auth-guard.service';
+import { EngineService } from '../services/auth.service';
+import { EngineActiveProjectService } from '../services/engine-active-project.service';
 import { TokensService } from '../services/tokens.service';
 import { LayoutPartNavigation } from './layout.configuration';
 
@@ -57,25 +57,25 @@ export class LayoutComponent implements OnInit {
   serverTime$ = new BehaviorSubject<Date>(new Date());
   lang$ = new BehaviorSubject<string>('');
   availableLangs$ = new BehaviorSubject<LangDefinition[]>([]);
-  SsoRoleInterface = SsoRoleInterface;
+  EngineRoleInterface = EngineRoleInterface;
 
-  publicProjects$?: Observable<SsoPublicProjectDtoInterface[] | undefined>;
-  activePublicProject$?: Observable<SsoPublicProjectDtoInterface | undefined>;
+  publicProjects$?: Observable<EnginePublicProjectDtoInterface[] | undefined>;
+  activePublicProject$?: Observable<EnginePublicProjectDtoInterface | undefined>;
   navigations$ = new BehaviorSubject<LayoutPartNavigation[]>([]);
 
   constructor(
     @Inject(RUCKEN_AFAT_ENGINE_CONFIGURATION_TOKEN)
     private readonly ruckenAfatEngineConfiguration: RuckenAfatEngineConfiguration,
     private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
-    private readonly ssoService: SsoService,
+    private readonly engineService: EngineService,
     private readonly router: Router,
     private readonly translocoService: TranslocoService,
     private readonly tokensService: TokensService,
-    private readonly ssoActiveLangService: SsoActiveLangService,
-    private readonly ssoActiveProjectService: SsoActiveProjectService,
+    private readonly engineActiveLangService: EngineActiveLangService,
+    private readonly engineActiveProjectService: EngineActiveProjectService,
     private readonly titleService: Title,
     private readonly filesService: FilesService,
-    private readonly authGuardService: SsoGuardService,
+    private readonly authGuardService: EngineGuardService,
   ) {
     this.title = this.translocoService.translate(ruckenAfatEngineConfiguration.layout.title);
     this.titleService.setTitle(this.title);
@@ -103,7 +103,7 @@ export class LayoutComponent implements OnInit {
 
     this.fillServerTime().pipe(untilDestroyed(this)).subscribe();
 
-    merge(of(true), this.ssoService.profile$)
+    merge(of(true), this.engineService.profile$)
       .pipe(
         mergeMap(() => this.setNavigations()),
         untilDestroyed(this),
@@ -118,26 +118,26 @@ export class LayoutComponent implements OnInit {
     return (!value.toLowerCase().startsWith('http') ? this.filesService.getMinioURL() : '') + value;
   }
 
-  setActivePublicProject(activePublicProject?: SsoPublicProjectDtoInterface) {
-    this.ssoActiveProjectService.setActivePublicProject(activePublicProject);
+  setActivePublicProject(activePublicProject?: EnginePublicProjectDtoInterface) {
+    this.engineActiveProjectService.setActivePublicProject(activePublicProject);
   }
 
   private loadAvailablePublicProjects() {
-    this.publicProjects$ = this.ssoActiveProjectService.publicProjects$.asObservable();
-    this.activePublicProject$ = this.ssoActiveProjectService.activePublicProject$.asObservable();
+    this.publicProjects$ = this.engineActiveProjectService.publicProjects$.asObservable();
+    this.activePublicProject$ = this.engineActiveProjectService.activePublicProject$.asObservable();
 
-    this.ssoActiveProjectService.loadAvailablePublicProjects();
+    this.engineActiveProjectService.loadAvailablePublicProjects();
   }
 
   private subscribeToChangeProfile() {
-    this.ssoService.profile$
+    this.engineService.profile$
       .asObservable()
       .pipe(
         mergeMap((profile) => {
           if (!profile) {
-            this.ssoActiveLangService.clearLocalStorage();
+            this.engineActiveLangService.clearLocalStorage();
           }
-          return this.ssoActiveLangService.refreshActiveLang();
+          return this.engineActiveLangService.refreshActiveLang();
         }),
         untilDestroyed(this),
       )
@@ -145,11 +145,11 @@ export class LayoutComponent implements OnInit {
   }
 
   setActiveLang(lang: string) {
-    this.ssoActiveLangService.setActiveLang(lang).pipe(untilDestroyed(this)).subscribe();
+    this.engineActiveLangService.setActiveLang(lang).pipe(untilDestroyed(this)).subscribe();
   }
 
   signOut() {
-    this.ssoService
+    this.engineService
       .signOut()
       .pipe(
         tap(() => this.router.navigate([ROOT_PATH_MARKER])),
@@ -167,7 +167,7 @@ export class LayoutComponent implements OnInit {
       .pipe(
         tap((lang) => {
           this.lang$.next(lang);
-          this.ssoActiveProjectService.loadAvailablePublicProjects();
+          this.engineActiveProjectService.loadAvailablePublicProjects();
         }),
         untilDestroyed(this),
       )

@@ -22,9 +22,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, catchError, distinctUntilChanged, of, tap } from 'rxjs';
-import { SsoForgotPasswordFormService } from '../../services/auth-forgot-password-form.service';
-import { SsoService } from '../../services/auth.service';
-import { SsoForgotPasswordInput } from '../../services/auth.types';
+import { EngineForgotPasswordFormService } from '../../services/auth-forgot-password-form.service';
+import { EngineService } from '../../services/auth.service';
+import { EngineForgotPasswordInput } from '../../services/auth.types';
 import { compare } from '@nestjs-mod/misc';
 
 @UntilDestroy()
@@ -47,12 +47,12 @@ import { compare } from '@nestjs-mod/misc';
       }
     `,
   ],
-  selector: 'sso-forgot-password-form',
+  selector: 'engine-forgot-password-form',
   templateUrl: './auth-forgot-password-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class SsoForgotPasswordFormComponent implements OnInit {
+export class EngineForgotPasswordFormComponent implements OnInit {
   @Input()
   hideButtons?: boolean;
 
@@ -67,11 +67,11 @@ export class SsoForgotPasswordFormComponent implements OnInit {
   constructor(
     @Optional()
     @Inject(NZ_MODAL_DATA)
-    private readonly nzModalData: SsoForgotPasswordFormComponent,
-    private readonly authService: SsoService,
+    private readonly nzModalData: EngineForgotPasswordFormComponent,
+    private readonly authService: EngineService,
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
-    private readonly authForgotPasswordFormService: SsoForgotPasswordFormService,
+    private readonly authForgotPasswordFormService: EngineForgotPasswordFormService,
     private readonly validationService: ValidationService,
   ) {}
 
@@ -102,7 +102,7 @@ export class SsoForgotPasswordFormComponent implements OnInit {
     this.setFieldsAndModel({ email: '' });
   }
 
-  setFieldsAndModel(data: SsoForgotPasswordInput = { email: '' }) {
+  setFieldsAndModel(data: EngineForgotPasswordInput = { email: '' }) {
     const model = { email: data.email };
     this.setFormlyFields({ data: model });
     this.formlyModel$.next(model);
@@ -142,7 +142,7 @@ export class SsoForgotPasswordFormComponent implements OnInit {
     }
   }
 
-  private setFormlyFields(options?: { data?: SsoForgotPasswordInput; errors?: ValidationErrorMetadataInterface[] }) {
+  private setFormlyFields(options?: { data?: EngineForgotPasswordInput; errors?: ValidationErrorMetadataInterface[] }) {
     this.formlyFields$.next(this.authForgotPasswordFormService.getFormlyFields(options));
     this.errors = options?.errors || [];
   }

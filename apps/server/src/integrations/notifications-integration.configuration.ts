@@ -1,5 +1,5 @@
 import { NOTIFICATIONS_FEATURE, NotificationsModule, NotificationsRequest } from '@nestjs-mod/notifications';
-import { CheckSsoRole, SsoGuard, RuckenEngineModule, SsoRequest, SsoRole } from '@rucken/engine';
+import { CheckEngineRole, EngineGuard, RuckenEngineModule, EngineRequest, EngineRole } from '@rucken/engine';
 import { getRequestFromExecutionContext } from '@nestjs-mod/common';
 import { searchIn } from '@nestjs-mod/misc';
 import { ExecutionContext } from '@nestjs/common';
@@ -14,17 +14,17 @@ export function notificationsModuleForRootAsyncOptions(): Parameters<typeof Noti
       TranslatesModule,
     ],
     staticConfiguration: {
-      guards: [SsoGuard],
+      guards: [EngineGuard],
       mutateController: (ctrl) => {
-        CheckSsoRole([SsoRole.admin])(ctrl);
+        CheckEngineRole([EngineRole.admin])(ctrl);
         return ctrl;
       },
     },
     configuration: {
       checkAccessValidator: async (ctx: ExecutionContext) => {
-        const req = getRequestFromExecutionContext(ctx) as SsoRequest & NotificationsRequest;
-        req.notificationIsAdmin = searchIn(SsoRole.admin, req.ssoUser?.roles);
-        req.externalTenantId = req.ssoProject?.id;
+        const req = getRequestFromExecutionContext(ctx) as EngineRequest & NotificationsRequest;
+        req.notificationIsAdmin = searchIn(EngineRole.admin, req.engineUser?.roles);
+        req.externalTenantId = req.engineProject?.id;
       },
     },
   };

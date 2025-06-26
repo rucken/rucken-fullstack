@@ -30,7 +30,7 @@ import {
 import {
   RuckenRestSdkAngularModule,
   RuckenRestSdkAngularService,
-  SsoRoleInterface,
+  EngineRoleInterface,
 } from '@rucken/rucken-rest-sdk-angular';
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
@@ -39,12 +39,12 @@ import { AppInitializer } from './app-initializer';
 import { AppTitleStrategy } from './app-title.strategy';
 import { APP_TITLE } from './app.constants';
 import { AppErrorHandler } from './app.error-handler';
-import { provideSsoConfiguration } from './integrations/sso.configuration';
+import { provideEngineConfiguration } from './integrations/engine.configuration';
 import { TranslocoHttpLoader } from './integrations/transloco-http.loader';
 import { HomeComponent } from './pages/home/home.component';
 import { WebhooksComponent } from './pages/webhooks/webhooks.component';
 
-export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationConfig => {
+export const engineAppConfig = ({ minioURL }: { minioURL: string }): ApplicationConfig => {
   return {
     providers: [
       provideNzIcons([GithubFill]),
@@ -74,7 +74,7 @@ export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationCon
                   },
                 },
                 {
-                  roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+                  roles: [EngineRoleInterface.manager, EngineRoleInterface.admin],
                   navigation: {
                     link: '/webhooks',
                     title: marker('Webhooks'),
@@ -120,7 +120,7 @@ export const ssoAppConfig = ({ minioURL }: { minioURL: string }): ApplicationCon
         provide: MINIO_URL,
         useValue: minioURL,
       },
-      provideSsoConfiguration(),
+      provideEngineConfiguration(),
       // Transloco Config
       provideTransloco({
         config: {

@@ -2,14 +2,14 @@ import axios, { AxiosInstance } from 'axios';
 import { Observable, finalize } from 'rxjs';
 
 import WebSocket from 'ws';
-import { Configuration, SsoApi, TimeApi } from './generated';
+import { Configuration, EngineApi, TimeApi } from './generated';
 
 export class RuckenRestSdkService {
-  private ssoApi?: SsoApi;
+  private engineApi?: EngineApi;
   private timeApi?: TimeApi;
 
   private timeApiAxios?: AxiosInstance;
-  private ssoApiAxios?: AxiosInstance;
+  private engineApiAxios?: AxiosInstance;
 
   private wsHeaders: Record<string, string> = {};
 
@@ -30,18 +30,18 @@ export class RuckenRestSdkService {
     return this.timeApi;
   }
 
-  getSsoApi() {
-    if (!this.ssoApi) {
-      throw new Error('ssoApi not set');
+  getEngineApi() {
+    if (!this.engineApi) {
+      throw new Error('engineApi not set');
     }
-    return this.ssoApi;
+    return this.engineApi;
   }
 
   updateHeaders(headers: Record<string, string>) {
     Object.assign(this.wsHeaders, headers);
 
-    if (this.ssoApiAxios) {
-      Object.assign(this.ssoApiAxios.defaults.headers.common, headers);
+    if (this.engineApiAxios) {
+      Object.assign(this.engineApiAxios.defaults.headers.common, headers);
     }
     if (this.timeApiAxios) {
       Object.assign(this.timeApiAxios.defaults.headers.common, headers);
@@ -81,13 +81,13 @@ export class RuckenRestSdkService {
   }
 
   private createApiClients() {
-    this.ssoApiAxios = axios.create();
-    this.ssoApi = new SsoApi(
+    this.engineApiAxios = axios.create();
+    this.engineApi = new EngineApi(
       new Configuration({
         basePath: this.options?.serverUrl,
       }),
       undefined,
-      this.ssoApiAxios,
+      this.engineApiAxios,
     );
     //
 

@@ -1,6 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { LayoutComponent } from '@rucken/engine-afat';
 import { minioURL } from './environments/environment';
-import { ssoAppConfig } from './app/app.config';
+import { engineAppConfig } from './app/app.config';
 
-bootstrapApplication(LayoutComponent, ssoAppConfig({ minioURL })).catch((err) => console.error(err));
+bootstrapApplication(LayoutComponent, engineAppConfig({ minioURL })).catch((err) => console.error(err));

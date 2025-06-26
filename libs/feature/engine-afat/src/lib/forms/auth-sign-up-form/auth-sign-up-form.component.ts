@@ -22,9 +22,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, catchError, distinctUntilChanged, of, tap } from 'rxjs';
-import { SsoSignUpFormService } from '../../services/auth-sign-up-form.service';
-import { SsoService } from '../../services/auth.service';
-import { SsoSignupInput, SsoUserAndTokens } from '../../services/auth.types';
+import { EngineSignUpFormService } from '../../services/auth-sign-up-form.service';
+import { EngineService } from '../../services/auth.service';
+import { EngineSignupInput, EngineUserAndTokens } from '../../services/auth.types';
 import { compare } from '@nestjs-mod/misc';
 
 @UntilDestroy()
@@ -47,17 +47,17 @@ import { compare } from '@nestjs-mod/misc';
       }
     `,
   ],
-  selector: 'sso-sign-up-form',
+  selector: 'engine-sign-up-form',
   templateUrl: './auth-sign-up-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class SsoSignUpFormComponent implements OnInit {
+export class EngineSignUpFormComponent implements OnInit {
   @Input()
   hideButtons?: boolean;
 
   @Output()
-  afterSignUp = new EventEmitter<SsoUserAndTokens>();
+  afterSignUp = new EventEmitter<EngineUserAndTokens>();
 
   form = new UntypedFormGroup({});
   formlyModel$ = new BehaviorSubject<object | null>(null);
@@ -67,11 +67,11 @@ export class SsoSignUpFormComponent implements OnInit {
   constructor(
     @Optional()
     @Inject(NZ_MODAL_DATA)
-    private readonly nzModalData: SsoSignUpFormComponent,
-    private readonly authService: SsoService,
+    private readonly nzModalData: EngineSignUpFormComponent,
+    private readonly authService: EngineService,
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
-    private readonly authSignUpFormService: SsoSignUpFormService,
+    private readonly authSignUpFormService: EngineSignUpFormService,
     private readonly validationService: ValidationService,
   ) {}
 
@@ -102,7 +102,7 @@ export class SsoSignUpFormComponent implements OnInit {
       .subscribe();
   }
 
-  setFieldsAndModel(data: SsoSignupInput = { password: '', confirmPassword: '' }) {
+  setFieldsAndModel(data: EngineSignupInput = { password: '', confirmPassword: '' }) {
     this.setFormlyFields({ data });
     this.formlyModel$.next(data);
   }
@@ -136,7 +136,7 @@ export class SsoSignUpFormComponent implements OnInit {
     }
   }
 
-  private setFormlyFields(options?: { data?: SsoSignupInput; errors?: ValidationErrorMetadataInterface[] }) {
+  private setFormlyFields(options?: { data?: EngineSignupInput; errors?: ValidationErrorMetadataInterface[] }) {
     this.formlyFields$.next(this.authSignUpFormService.getFormlyFields(options));
     this.errors = options?.errors || [];
   }

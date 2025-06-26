@@ -3,44 +3,44 @@ import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { catchError, concatMap, first, from, map, of } from 'rxjs';
-import { SsoService } from './auth.service';
+import { EngineService } from './auth.service';
 
-export const SSO_GUARD_DATA_ROUTE_KEY = 'ssoGuardData';
+export const ENGINE_GUARD_DATA_ROUTE_KEY = 'engineGuardData';
 
 export type OnActivateOptions = {
   activatedRouteSnapshot: ActivatedRouteSnapshot;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
-  ssoService: SsoService;
+  engineService: EngineService;
   router: Router;
 };
 
-export class SsoGuardData {
+export class EngineGuardData {
   roles?: string[];
 
   afterActivate?: (options: OnActivateOptions) => Promise<boolean>;
 
-  constructor(options?: SsoGuardData) {
+  constructor(options?: EngineGuardData) {
     Object.assign(this, options);
   }
 }
 
 @Injectable({ providedIn: 'root' })
-export class SsoGuardService implements CanActivate {
+export class EngineGuardService implements CanActivate {
   constructor(
-    private readonly ssoService: SsoService,
+    private readonly engineService: EngineService,
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
     private readonly router: Router,
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot) {
-    const ssoGuardData =
-      route.data && route.data[SSO_GUARD_DATA_ROUTE_KEY] instanceof SsoGuardData
-        ? route.data[SSO_GUARD_DATA_ROUTE_KEY]
+    const engineGuardData =
+      route.data && route.data[ENGINE_GUARD_DATA_ROUTE_KEY] instanceof EngineGuardData
+        ? route.data[ENGINE_GUARD_DATA_ROUTE_KEY]
         : null;
-    if (ssoGuardData) {
-      return this.checkUserRoles(ssoGuardData?.roles).pipe(
+    if (engineGuardData) {
+      return this.checkUserRoles(engineGuardData?.roles).pipe(
         first(),
         concatMap(async (result) => {
           if (!result) {
@@ -49,10 +49,10 @@ export class SsoGuardService implements CanActivate {
           return result;
         }),
         concatMap(async () => {
-          if (ssoGuardData.afterActivate) {
-            await ssoGuardData.afterActivate({
+          if (engineGuardData.afterActivate) {
+            await engineGuardData.afterActivate({
               activatedRouteSnapshot: route,
-              ssoService: this.ssoService,
+              engineService: this.engineService,
               router: this.router,
             });
           }
@@ -61,11 +61,11 @@ export class SsoGuardService implements CanActivate {
         catchError((err) => {
           console.error(err);
           this.nzMessageService.error(this.translocoService.translate(err.error?.message || err.message));
-          if (ssoGuardData.afterActivate) {
+          if (engineGuardData.afterActivate) {
             return from(
-              ssoGuardData.afterActivate({
+              engineGuardData.afterActivate({
                 activatedRouteSnapshot: route,
-                ssoService: this.ssoService,
+                engineService: this.engineService,
                 router: this.router,
                 error: err,
               }),
@@ -78,27 +78,27 @@ export class SsoGuardService implements CanActivate {
     return of(true);
   }
 
-  checkUserRoles(ssoRoles?: string[]) {
-    return this.ssoService.profile$.pipe(
-      map((ssoUser) => {
-        const ssoGuardDataRoles = (ssoRoles || []).map((role) => role.toLowerCase());
+  checkUserRoles(engineRoles?: string[]) {
+    return this.engineService.profile$.pipe(
+      map((engineUser) => {
+        const engineGuardDataRoles = (engineRoles || []).map((role) => role.toLowerCase());
         const result = Boolean(
-          (ssoUser &&
-            ssoGuardDataRoles.length > 0 &&
-            ssoGuardDataRoles.some((r) => ssoUser.roles?.map((r) => r.toLowerCase()).includes(r))) ||
-            (ssoGuardDataRoles.length === 0 && !ssoUser?.roles),
+          (engineUser &&
+            engineGuardDataRoles.length > 0 &&
+            engineGuardDataRoles.some((r) => engineUser.roles?.map((r) => r.toLowerCase()).includes(r))) ||
+            (engineGuardDataRoles.length === 0 && !engineUser?.roles),
         );
         if (!result) {
-          console.log(result, { ssoUser: ssoUser, ssoGuardDataRoles }, [
+          console.log(result, { engineUser: engineUser, engineGuardDataRoles }, [
             [
-              ssoUser,
-              ssoGuardDataRoles.length > 0,
-              ssoUser &&
-                ssoGuardDataRoles
+              engineUser,
+              engineGuardDataRoles.length > 0,
+              engineUser &&
+                engineGuardDataRoles
                   .map((role) => role.toLowerCase())
-                  .some((r) => ssoUser.roles?.map((r) => r.toLowerCase()).includes(r)),
+                  .some((r) => engineUser.roles?.map((r) => r.toLowerCase()).includes(r)),
             ],
-            [ssoGuardDataRoles.length === 0, !ssoUser?.roles],
+            [engineGuardDataRoles.length === 0, !engineUser?.roles],
           ]);
         }
         return result;

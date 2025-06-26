@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { map } from 'rxjs';
-import { SsoService } from '../services/auth.service';
+import { EngineService } from '../services/auth.service';
 
 @Pipe({
   name: 'user',
@@ -8,7 +8,7 @@ import { SsoService } from '../services/auth.service';
   standalone: true,
 })
 export class UserPipe implements PipeTransform {
-  constructor(private readonly authService: SsoService) {}
+  constructor(private readonly authService: EngineService) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public transform(value: any) {

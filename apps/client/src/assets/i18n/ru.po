@@ -301,5 +301,5 @@ msgstr "идентификатор не установлен"
 msgid "Unauthorized"
 msgstr "Неавторизован"
 
-msgid "sso.sign-in-form.fields.timezone"
+msgid "engine.sign-in-form.fields.timezone"
 msgstr "Часовой пояс"

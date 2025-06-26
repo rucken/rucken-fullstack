@@ -25,7 +25,7 @@ describe('Get server time from rest api and ws (timezone)', () => {
     expect(time.data).toHaveLength(correctStringDateLength);
     expect(isDateString(time.data)).toBeTruthy();
 
-    await restClientHelper.getSsoApi().ssoControllerUpdateProfile({ timezone: -3 });
+    await restClientHelper.getEngineApi().engineControllerUpdateProfile({ timezone: -3 });
 
     const time2 = await restClientHelper.getTimeApi().timeControllerTime();
 
@@ -39,7 +39,7 @@ describe('Get server time from rest api and ws (timezone)', () => {
   });
 
   it('should return time from ws in two different time zones (skip in vercel)', async () => {
-    await restClientHelper.getSsoApi().ssoControllerUpdateProfile({ timezone: null });
+    await restClientHelper.getEngineApi().engineControllerUpdateProfile({ timezone: null });
 
     const last3ChangeTimeEvents = await lastValueFrom(
       restClientHelper
@@ -52,7 +52,7 @@ describe('Get server time from rest api and ws (timezone)', () => {
 
     expect(last3ChangeTimeEvents).toHaveLength(3);
 
-    await restClientHelper.getSsoApi().ssoControllerUpdateProfile({ timezone: -3 });
+    await restClientHelper.getEngineApi().engineControllerUpdateProfile({ timezone: -3 });
 
     const newLast3ChangeTimeEvents = await lastValueFrom(
       restClientHelper

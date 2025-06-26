@@ -4,11 +4,11 @@ import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
-import { SsoLoginInput } from './auth.types';
+import { EngineLoginInput } from './auth.types';
 
 @UntilDestroy()
 @Injectable({ providedIn: 'root' })
-export class SsoSignInFormService {
+export class EngineSignInFormService {
   constructor(
     protected readonly translocoService: TranslocoService,
     protected readonly validationService: ValidationService,
@@ -16,7 +16,7 @@ export class SsoSignInFormService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getFormlyFields(options?: {
-    data?: SsoLoginInput;
+    data?: EngineLoginInput;
     errors?: ValidationErrorMetadataInterface[];
   }): FormlyFieldConfig[] {
     return this.validationService.appendServerErrorsAsValidatorsToFields(
@@ -28,7 +28,7 @@ export class SsoSignInFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.sign-in-form.fields.email`),
+            label: this.translocoService.translate(`engine.sign-in-form.fields.email`),
             placeholder: 'email',
             required: true,
           },
@@ -40,7 +40,7 @@ export class SsoSignInFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.sign-in-form.fields.password`),
+            label: this.translocoService.translate(`engine.sign-in-form.fields.password`),
             placeholder: 'password',
             required: true,
             type: 'password',

@@ -4,18 +4,18 @@ import { RequestMeta, TIMEZONE_OFFSET } from '@nestjs-mod/misc';
 import { LayoutPart } from '../layout/layout.configuration';
 import {
   RuckenRestSdkAngularService,
-  SsoEmailTemplateDtoInterface,
-  SsoEmailTemplateScalarFieldEnumInterface,
-  SsoRoleInterface,
-  UpdateSsoEmailTemplateDtoInterface,
+  EngineEmailTemplateDtoInterface,
+  EngineEmailTemplateScalarFieldEnumInterface,
+  EngineRoleInterface,
+  UpdateEngineEmailTemplateDtoInterface,
 } from '@rucken/rucken-rest-sdk-angular';
 import { addHours } from 'date-fns';
 import { map } from 'rxjs';
 
-export interface SsoEmailTemplateModel
+export interface EngineEmailTemplateModel
   extends Partial<
     Omit<
-      SsoEmailTemplateDtoInterface,
+      EngineEmailTemplateDtoInterface,
       'subjectLocale' | 'textLocale' | 'htmlLocale' | 'projectId' | 'createdAt' | 'updatedAt'
     >
   > {
@@ -35,7 +35,7 @@ export function emailTemplatesLayoutPart(
 
   //
 
-  const toModel = (item?: SsoEmailTemplateDtoInterface): SsoEmailTemplateModel => {
+  const toModel = (item?: EngineEmailTemplateDtoInterface): EngineEmailTemplateModel => {
     return {
       ...item,
       createdAt: item?.createdAt ? addHours(new Date(item.createdAt), TIMEZONE_OFFSET) : null,
@@ -58,7 +58,7 @@ export function emailTemplatesLayoutPart(
     };
   };
 
-  const toJson = (data: SsoEmailTemplateModel) => {
+  const toJson = (data: EngineEmailTemplateModel) => {
     return {
       operationName: data.operationName || '',
       subject: data.subject || '',
@@ -83,7 +83,7 @@ export function emailTemplatesLayoutPart(
   };
 
   return {
-    roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+    roles: [EngineRoleInterface.manager, EngineRoleInterface.admin],
     navigation: {
       link: '/templates',
       title: marker('Templates'),
@@ -92,15 +92,15 @@ export function emailTemplatesLayoutPart(
       handlers: () => ({
         findOne: (id: string) => {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoEmailTemplatesControllerFindOne(id)
+            .getEngineApi()
+            .engineEmailTemplatesControllerFindOne(id)
             .pipe(map((t) => toModel(t)));
         },
 
         findMany: ({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) => {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoEmailTemplatesControllerFindMany(
+            .getEngineApi()
+            .engineEmailTemplatesControllerFindMany(
               meta?.curPage,
               meta?.perPage,
               filters['search'],
@@ -111,24 +111,24 @@ export function emailTemplatesLayoutPart(
                 : undefined,
             )
             .pipe(
-              map(({ meta, ssoEmailTemplates }) => ({
+              map(({ meta, engineEmailTemplates }) => ({
                 meta,
-                items: ssoEmailTemplates.map((t) => toModel(t)),
+                items: engineEmailTemplates.map((t) => toModel(t)),
               })),
             );
         },
 
-        updateOne: (id: string, data: UpdateSsoEmailTemplateDtoInterface) => {
+        updateOne: (id: string, data: UpdateEngineEmailTemplateDtoInterface) => {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoEmailTemplatesControllerUpdateOne(id, toJson(data))
+            .getEngineApi()
+            .engineEmailTemplatesControllerUpdateOne(id, toJson(data))
             .pipe(map((t) => toModel(t)));
         },
       }),
       form: () => ({
         inputs: [
           {
-            key: SsoEmailTemplateScalarFieldEnumInterface.operationName,
+            key: EngineEmailTemplateScalarFieldEnumInterface.operationName,
             type: 'input',
             validation: {
               show: true,
@@ -136,7 +136,7 @@ export function emailTemplatesLayoutPart(
             props: {
               readonly: true,
               disabled: true,
-              label: translocoService.translate(`sso-email-template.form.fields.operation-name`),
+              label: translocoService.translate(`engine-email-template.form.fields.operation-name`),
               placeholder: 'operationName',
             },
           },
@@ -148,7 +148,7 @@ export function emailTemplatesLayoutPart(
             },
             props: {
               label: translocoService.translate(
-                `sso-email-template.form.fields.subject-locale`,
+                `engine-email-template.form.fields.subject-locale`,
                 // id, label
                 {
                   locale: a.id,
@@ -167,7 +167,7 @@ export function emailTemplatesLayoutPart(
             },
             props: {
               label: translocoService.translate(
-                `sso-email-template.form.fields.html-locale`,
+                `engine-email-template.form.fields.html-locale`,
                 // id, label
                 {
                   locale: a.id,
@@ -186,7 +186,7 @@ export function emailTemplatesLayoutPart(
             },
             props: {
               label: translocoService.translate(
-                `sso-email-template.form.fields.text-locale`,
+                `engine-email-template.form.fields.text-locale`,
                 // id, label
                 {
                   locale: a.id,
@@ -203,26 +203,26 @@ export function emailTemplatesLayoutPart(
         title: marker('Email templates'),
         actions: {
           update: {
-            title: marker('sso-email-template.update-modal.title'),
+            title: marker('engine-email-template.update-modal.title'),
             width: '700px',
           },
         },
         columns: [
           {
-            name: SsoEmailTemplateScalarFieldEnumInterface.id,
-            title: marker('sso-email-template.grid.columns.id'),
+            name: EngineEmailTemplateScalarFieldEnumInterface.id,
+            title: marker('engine-email-template.grid.columns.id'),
           },
           {
-            name: SsoEmailTemplateScalarFieldEnumInterface.operationName,
-            title: marker('sso-email-template.grid.columns.operation-name'),
+            name: EngineEmailTemplateScalarFieldEnumInterface.operationName,
+            title: marker('engine-email-template.grid.columns.operation-name'),
           },
           {
-            name: SsoEmailTemplateScalarFieldEnumInterface.subject,
-            title: marker('sso-email-template.grid.columns.subject'),
+            name: EngineEmailTemplateScalarFieldEnumInterface.subject,
+            title: marker('engine-email-template.grid.columns.subject'),
           },
           {
-            name: SsoEmailTemplateScalarFieldEnumInterface.text,
-            title: marker('sso-email-template.grid.columns.text'),
+            name: EngineEmailTemplateScalarFieldEnumInterface.text,
+            title: marker('engine-email-template.grid.columns.text'),
           },
         ],
       }),

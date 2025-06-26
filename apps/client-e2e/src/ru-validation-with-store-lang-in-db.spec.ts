@@ -46,27 +46,31 @@ test.describe('Validation with store lang in db (ru)', () => {
       timeout: 7000,
     });
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=email]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=email]').click();
     await page.keyboard.type(user.email.toLowerCase(), {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=email]')).toHaveValue(user.email.toLowerCase());
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=email]')).toHaveValue(
+      user.email.toLowerCase(),
+    );
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=password]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=password]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=password]')).toHaveValue(user.password);
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=password]')).toHaveValue(user.password);
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=confirmPassword]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=confirmPassword]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=confirmPassword]')).toHaveValue(user.password);
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=confirmPassword]')).toHaveValue(
+      user.password,
+    );
 
-    await expect(page.locator('sso-sign-up-form').locator('button[type=submit]')).toHaveText('Sign-up');
+    await expect(page.locator('engine-sign-up-form').locator('button[type=submit]')).toHaveText('Sign-up');
 
-    await page.locator('sso-sign-up-form').locator('button[type=submit]').click();
+    await page.locator('engine-sign-up-form').locator('button[type=submit]').click();
 
     await page.waitForSelector('div.cdk-overlay-container>div.cdk-global-overlay-wrapper');
 

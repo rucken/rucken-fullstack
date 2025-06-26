@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
+import { EngineRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import { CrudConfiguration } from '../dynamic-pages/crud-page/crud-page.configuration';
 
 export type LayoutPartNavigation =
@@ -15,7 +15,7 @@ export type LayoutPartNavigation =
     };
 
 export type LayoutPart = {
-  roles?: SsoRoleInterface[];
+  roles?: EngineRoleInterface[];
   root?: boolean;
   second?: boolean;
   navigation: LayoutPartNavigation;

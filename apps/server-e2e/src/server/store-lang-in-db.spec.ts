@@ -1,4 +1,4 @@
-import { SsoRole } from '@rucken/rucken-rest-sdk';
+import { EngineRole } from '@rucken/rucken-rest-sdk';
 import { RuckenRestClientHelper } from '@rucken/testing';
 import { AxiosError } from 'axios';
 
@@ -20,12 +20,12 @@ describe('Store lang in db', () => {
   beforeAll(async () => {
     await user1.createAndLoginAsUser();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    await admin.setRoles(user1.getSsoProfile()!.id, [SsoRole.Manager]);
+    await admin.setRoles(user1.getEngineProfile()!.id, [EngineRole.Manager]);
   });
 
   it('should catch error on try use not exists language code', async () => {
     try {
-      await user1.getSsoApi().ssoControllerUpdateProfile({ lang: 'tt' });
+      await user1.getEngineApi().engineControllerUpdateProfile({ lang: 'tt' });
     } catch (err) {
       expect((err as AxiosError).response?.data).toEqual({
         code: 'VALIDATION-000',
@@ -46,7 +46,7 @@ describe('Store lang in db', () => {
   });
 
   it('should catch error in Russian language on create new webhook as user1', async () => {
-    await user1.getSsoApi().ssoControllerUpdateProfile({ lang: 'ru' });
+    await user1.getEngineApi().engineControllerUpdateProfile({ lang: 'ru' });
     try {
       await user1.getWebhookApi().webhookControllerCreateOne({
         enabled: false,

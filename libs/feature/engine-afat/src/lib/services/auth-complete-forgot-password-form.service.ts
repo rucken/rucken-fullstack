@@ -4,11 +4,11 @@ import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
-import { SsoCompleteForgotPasswordInput } from './auth.types';
+import { EngineCompleteForgotPasswordInput } from './auth.types';
 
 @UntilDestroy()
 @Injectable({ providedIn: 'root' })
-export class SsoCompleteForgotPasswordFormService {
+export class EngineCompleteForgotPasswordFormService {
   constructor(
     protected readonly translocoService: TranslocoService,
     protected readonly validationService: ValidationService,
@@ -16,7 +16,7 @@ export class SsoCompleteForgotPasswordFormService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getFormlyFields(options?: {
-    data?: SsoCompleteForgotPasswordInput;
+    data?: EngineCompleteForgotPasswordInput;
     errors?: ValidationErrorMetadataInterface[];
   }): FormlyFieldConfig[] {
     return this.validationService.appendServerErrorsAsValidatorsToFields(
@@ -28,7 +28,7 @@ export class SsoCompleteForgotPasswordFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.complete-forgot-password-form.fields.password`),
+            label: this.translocoService.translate(`engine.complete-forgot-password-form.fields.password`),
             placeholder: 'password',
             required: true,
             type: 'password',
@@ -41,7 +41,7 @@ export class SsoCompleteForgotPasswordFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.complete-forgot-password-form.fields.confirm-password`),
+            label: this.translocoService.translate(`engine.complete-forgot-password-form.fields.confirm-password`),
             placeholder: 'confirmPassword',
             required: true,
             type: 'password',

@@ -17,7 +17,9 @@
           </a>
         }
       }
-      @if ([SsoRoleInterface.user, SsoRoleInterface.manager, SsoRoleInterface.admin] | checkUserRoles | async) {
+      @if (
+        [EngineRoleInterface.user, EngineRoleInterface.manager, EngineRoleInterface.admin] | checkUserRoles | async
+      ) {
         <ng-template #iconRef>
           @if ({} | user | async; as user) {
             @if (user.picture) {
@@ -51,7 +53,7 @@
         </ul>
       </li>
       @if (publicProjects$ | async; as publicProjects) {
-        @if (([SsoRoleInterface.admin] | checkUserRoles | async) || ([] | checkUserRoles | async)) {
+        @if (([EngineRoleInterface.admin] | checkUserRoles | async) || ([] | checkUserRoles | async)) {
           <li
             nz-submenu
             [nzTitle]="(activePublicProject$ | async)?.name || ('Select active project' | transloco)"

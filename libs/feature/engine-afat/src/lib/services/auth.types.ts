@@ -1,9 +1,9 @@
-export interface SsoTokens {
+export interface EngineTokens {
   access_token?: string;
   refresh_token?: string;
 }
 
-export interface SsoUser {
+export interface EngineUser {
   id: string;
   email: string;
   preferredUsername: string;
@@ -22,13 +22,13 @@ export interface SsoUser {
   timezone?: number | null;
 }
 
-export interface SsoLoginInput {
+export interface EngineLoginInput {
   email?: string;
   phoneNumber?: string;
   password: string;
 }
 
-export interface SsoSignupInput {
+export interface EngineSignupInput {
   email?: string;
   password: string;
   confirmPassword: string;
@@ -46,12 +46,12 @@ export interface SsoSignupInput {
   appData?: Record<string, any>;
 }
 
-export interface SsoUserAndTokens {
-  tokens?: SsoTokens;
-  user?: SsoUser;
+export interface EngineUserAndTokens {
+  tokens?: EngineTokens;
+  user?: EngineUser;
 }
 
-export interface SsoUpdateProfileInput {
+export interface EngineUpdateProfileInput {
   oldPassword?: string;
   newPassword?: string;
   confirmNewPassword?: string;
@@ -70,16 +70,16 @@ export interface SsoUpdateProfileInput {
   timezone?: number;
 }
 
-export interface SsoCompleteSignUpInput {
+export interface EngineCompleteSignUpInput {
   code: string;
 }
 
-export interface SsoForgotPasswordInput {
+export interface EngineForgotPasswordInput {
   email: string;
   redirectUri?: string;
 }
 
-export interface SsoCompleteForgotPasswordInput {
+export interface EngineCompleteForgotPasswordInput {
   code: string;
   password: string;
   confirmPassword: string;

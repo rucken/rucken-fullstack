@@ -7,32 +7,32 @@ import { LayoutPart } from '../layout/layout.configuration';
 import {
   RuckenRestSdkAngularService,
   SendInvitationLinksArgsInterface,
-  SsoRefreshSessionDtoInterface,
-  SsoRefreshSessionScalarFieldEnumInterface,
-  SsoRoleInterface,
-  SsoUserScalarFieldEnumInterface,
+  EngineRefreshSessionDtoInterface,
+  EngineRefreshSessionScalarFieldEnumInterface,
+  EngineRoleInterface,
+  EngineUserScalarFieldEnumInterface,
 } from '@rucken/rucken-rest-sdk-angular';
 import { map, mergeMap, of, tap } from 'rxjs';
 
 import { TIMEZONE_OFFSET, safeParseJson } from '@nestjs-mod/misc';
-import { SsoUserDtoInterface } from '@rucken/rucken-rest-sdk-angular';
+import { EngineUserDtoInterface } from '@rucken/rucken-rest-sdk-angular';
 
 import { FilesService } from '@nestjs-mod/files-afat';
 import { addHours, format } from 'date-fns';
-import { SsoInviteMembersFormComponent } from '../forms/sso-invite-members-form/sso-invite-members-form.component';
+import { EngineInviteMembersFormComponent } from '../forms/engine-invite-members-form/engine-invite-members-form.component';
 
-export interface SsoSessionModel
-  extends Partial<Omit<SsoRefreshSessionDtoInterface, 'createdAt' | 'updatedAt' | 'userData' | 'expiresAt'>> {
+export interface EngineSessionModel
+  extends Partial<Omit<EngineRefreshSessionDtoInterface, 'createdAt' | 'updatedAt' | 'userData' | 'expiresAt'>> {
   userData?: string | null;
   createdAt?: Date | null;
   updatedAt?: Date | null;
   expiresAt?: Date | null;
 }
 
-export interface SsoUserModel
+export interface EngineUserModel
   extends Partial<
     Omit<
-      SsoUserDtoInterface,
+      EngineUserDtoInterface,
       | 'revokedAt'
       | 'emailVerifiedAt'
       | 'phoneVerifiedAt'
@@ -65,8 +65,8 @@ export function usersLayoutPart(
       return of(cachedRoles);
     }
     return ruckenRestSdkAngularService
-      .getSsoApi()
-      .ssoRolesControllerFindMany()
+      .getEngineApi()
+      .engineRolesControllerFindMany()
       .pipe(
         map((data) => {
           cachedRoles = data.userAvailableRoles;
@@ -77,7 +77,7 @@ export function usersLayoutPart(
 
   //
 
-  const toModel = (item?: SsoUserDtoInterface): SsoUserModel => {
+  const toModel = (item?: EngineUserDtoInterface): EngineUserModel => {
     return {
       ...item,
       roles: item?.roles ? item.roles.split(',') : [],
@@ -91,7 +91,7 @@ export function usersLayoutPart(
     };
   };
 
-  const toForm = (model: SsoUserModel) => {
+  const toForm = (model: EngineUserModel) => {
     return {
       ...model,
       revokedAt: model.revokedAt ? format(model.revokedAt, 'yyyy-MM-dd HH:mm:ss') : null,
@@ -101,7 +101,7 @@ export function usersLayoutPart(
     };
   };
 
-  const toJson = (data: SsoUserModel) => {
+  const toJson = (data: EngineUserModel) => {
     return {
       email: data.email || '',
       phone: data.phone || '',
@@ -120,12 +120,12 @@ export function usersLayoutPart(
   };
 
   const sendInvitationLinks = (data: SendInvitationLinksArgsInterface) => {
-    return ruckenRestSdkAngularService.getSsoApi().ssoUsersControllerSendInvitationLinks(data);
+    return ruckenRestSdkAngularService.getEngineApi().engineUsersControllerSendInvitationLinks(data);
   };
 
   //
 
-  const toSessionModel = (item?: SsoRefreshSessionDtoInterface): SsoSessionModel => {
+  const toSessionModel = (item?: EngineRefreshSessionDtoInterface): EngineSessionModel => {
     return {
       ...item,
       userData: item?.userData ? JSON.stringify(item.userData) : '',
@@ -135,7 +135,7 @@ export function usersLayoutPart(
     };
   };
 
-  const toSessionJson = (data: SsoSessionModel) => {
+  const toSessionJson = (data: EngineSessionModel) => {
     return {
       userData: data.userData ? safeParseJson(data.userData) : null,
       userAgent: data.userAgent || '',
@@ -146,7 +146,7 @@ export function usersLayoutPart(
   };
 
   return {
-    roles: [SsoRoleInterface.manager, SsoRoleInterface.admin],
+    roles: [EngineRoleInterface.manager, EngineRoleInterface.admin],
     navigation: {
       link: '/users',
       title: marker('Users'),
@@ -155,15 +155,15 @@ export function usersLayoutPart(
       handlers: () => ({
         findOne(id: string) {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoUsersControllerFindOne(id)
+            .getEngineApi()
+            .engineUsersControllerFindOne(id)
             .pipe(map((u) => toForm(toModel(u))));
         },
 
         findMany({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoUsersControllerFindMany(
+            .getEngineApi()
+            .engineUsersControllerFindMany(
               meta?.curPage,
               meta?.perPage,
               filters['search'],
@@ -175,18 +175,20 @@ export function usersLayoutPart(
               filters['projectId'],
             )
             .pipe(
-              map(({ meta, ssoUsers }) => ({
+              map(({ meta, engineUsers }) => ({
                 meta,
-                items: ssoUsers.map((p) => toModel(p)),
+                items: engineUsers.map((p) => toModel(p)),
               })),
             );
         },
 
-        updateOne(id: string, data: SsoUserModel) {
+        updateOne(id: string, data: EngineUserModel) {
           const oldData = data;
           return (data.picture ? filesService.getPresignedUrlAndUploadFile(data.picture) : of('')).pipe(
             mergeMap((picture) =>
-              ruckenRestSdkAngularService.getSsoApi().ssoUsersControllerUpdateOne(id, toJson({ ...data, picture })),
+              ruckenRestSdkAngularService
+                .getEngineApi()
+                .engineUsersControllerUpdateOne(id, toJson({ ...data, picture })),
             ),
             mergeMap((newData) => {
               if (oldData.picture && typeof oldData.picture === 'string' && newData.picture !== oldData.picture) {
@@ -201,73 +203,73 @@ export function usersLayoutPart(
       form: () => ({
         inputs: [
           {
-            key: SsoUserScalarFieldEnumInterface.appData,
+            key: EngineUserScalarFieldEnumInterface.appData,
             type: 'textarea',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.app-data`),
+              label: translocoService.translate(`engine-user.form.fields.app-data`),
               placeholder: 'appData',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.birthdate,
+            key: EngineUserScalarFieldEnumInterface.birthdate,
             type: 'date-input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.birthdate`),
+              label: translocoService.translate(`engine-user.form.fields.birthdate`),
               placeholder: 'birthdate',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.email,
+            key: EngineUserScalarFieldEnumInterface.email,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.email`),
+              label: translocoService.translate(`engine-user.form.fields.email`),
               placeholder: 'email',
               required: true,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.emailVerifiedAt,
+            key: EngineUserScalarFieldEnumInterface.emailVerifiedAt,
             type: 'date-input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.email-verified-at`),
+              label: translocoService.translate(`engine-user.form.fields.email-verified-at`),
               placeholder: 'emailVerifiedAt',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.firstname,
+            key: EngineUserScalarFieldEnumInterface.firstname,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.firstname`),
+              label: translocoService.translate(`engine-user.form.fields.firstname`),
               placeholder: 'firstname',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.gender,
+            key: EngineUserScalarFieldEnumInterface.gender,
             type: 'select',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.gender`),
+              label: translocoService.translate(`engine-user.form.fields.gender`),
               placeholder: 'gender',
               required: false,
               options: [
@@ -283,73 +285,73 @@ export function usersLayoutPart(
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.lastname,
+            key: EngineUserScalarFieldEnumInterface.lastname,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.lastname`),
+              label: translocoService.translate(`engine-user.form.fields.lastname`),
               placeholder: 'lastname',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.phone,
+            key: EngineUserScalarFieldEnumInterface.phone,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.phone`),
+              label: translocoService.translate(`engine-user.form.fields.phone`),
               placeholder: 'phone',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.phoneVerifiedAt,
+            key: EngineUserScalarFieldEnumInterface.phoneVerifiedAt,
             type: 'date-input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.phone-verified-at`),
+              label: translocoService.translate(`engine-user.form.fields.phone-verified-at`),
               placeholder: 'phoneVerifiedAt',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.picture,
+            key: EngineUserScalarFieldEnumInterface.picture,
             type: 'image-file',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.picture`),
+              label: translocoService.translate(`engine-user.form.fields.picture`),
               placeholder: 'picture',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.revokedAt,
+            key: EngineUserScalarFieldEnumInterface.revokedAt,
             type: 'date-input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.revoked-at`),
+              label: translocoService.translate(`engine-user.form.fields.revoked-at`),
               placeholder: 'revokedAt',
               required: false,
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.roles,
+            key: EngineUserScalarFieldEnumInterface.roles,
             type: 'select',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.roles`),
+              label: translocoService.translate(`engine-user.form.fields.roles`),
               placeholder: 'roles',
               required: false,
               multiple: true,
@@ -364,13 +366,13 @@ export function usersLayoutPart(
             },
           },
           {
-            key: SsoUserScalarFieldEnumInterface.username,
+            key: EngineUserScalarFieldEnumInterface.username,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-user.form.fields.username`),
+              label: translocoService.translate(`engine-user.form.fields.username`),
               placeholder: 'username',
               required: false,
             },
@@ -386,16 +388,19 @@ export function usersLayoutPart(
         actions: {
           create: {
             buttonTitle: marker('Invite Members'),
-            title: marker('sso-user.invite-members-modal.title'),
+            title: marker('engine-user.invite-members-modal.title'),
             showModal: (grid: DynamicCrudGridComponent) => {
-              const modal = grid.nzModalService.create<SsoInviteMembersFormComponent, SsoInviteMembersFormComponent>({
-                nzTitle: translocoService.translate('sso-user.invite-members-modal.title'),
-                nzContent: SsoInviteMembersFormComponent,
+              const modal = grid.nzModalService.create<
+                EngineInviteMembersFormComponent,
+                EngineInviteMembersFormComponent
+              >({
+                nzTitle: translocoService.translate('engine-user.invite-members-modal.title'),
+                nzContent: EngineInviteMembersFormComponent,
                 nzViewContainerRef: grid.viewContainerRef,
                 nzData: {
                   hideButtons: true,
                   sendInvitationLinks: (emails) => sendInvitationLinks({ emails }),
-                } as SsoInviteMembersFormComponent,
+                } as EngineInviteMembersFormComponent,
                 nzFooter: [
                   {
                     label: translocoService.translate('Cancel'),
@@ -425,42 +430,42 @@ export function usersLayoutPart(
             },
           },
           update: {
-            title: marker('sso-user.update-modal.title'),
+            title: marker('engine-user.update-modal.title'),
           },
         },
         columns: [
           {
-            name: SsoUserScalarFieldEnumInterface.id,
-            title: marker('sso-user.grid.columns.id'),
+            name: EngineUserScalarFieldEnumInterface.id,
+            title: marker('engine-user.grid.columns.id'),
           },
           {
-            name: SsoUserScalarFieldEnumInterface.email,
-            title: marker('sso-user.grid.columns.email'),
+            name: EngineUserScalarFieldEnumInterface.email,
+            title: marker('engine-user.grid.columns.email'),
           },
           {
-            name: SsoUserScalarFieldEnumInterface.firstname,
-            title: marker('sso-user.grid.columns.firstname'),
+            name: EngineUserScalarFieldEnumInterface.firstname,
+            title: marker('engine-user.grid.columns.firstname'),
           },
           {
-            name: SsoUserScalarFieldEnumInterface.gender,
-            title: marker('sso-user.grid.columns.gender'),
+            name: EngineUserScalarFieldEnumInterface.gender,
+            title: marker('engine-user.grid.columns.gender'),
           },
           {
-            name: SsoUserScalarFieldEnumInterface.phone,
-            title: marker('sso-user.grid.columns.phone'),
+            name: EngineUserScalarFieldEnumInterface.phone,
+            title: marker('engine-user.grid.columns.phone'),
           },
           {
-            name: SsoUserScalarFieldEnumInterface.picture,
-            title: marker('sso-user.grid.columns.picture'),
+            name: EngineUserScalarFieldEnumInterface.picture,
+            title: marker('engine-user.grid.columns.picture'),
             isFile: true,
           },
           {
-            name: SsoUserScalarFieldEnumInterface.roles,
-            title: marker('sso-user.grid.columns.roles'),
+            name: EngineUserScalarFieldEnumInterface.roles,
+            title: marker('engine-user.grid.columns.roles'),
           },
           {
-            name: SsoUserScalarFieldEnumInterface.username,
-            title: marker('sso-user.grid.columns.username'),
+            name: EngineUserScalarFieldEnumInterface.username,
+            title: marker('engine-user.grid.columns.username'),
           },
         ],
       }),
@@ -469,15 +474,15 @@ export function usersLayoutPart(
       handlers: () => ({
         findOne(id: string) {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoRefreshSessionsControllerFindOne(id)
+            .getEngineApi()
+            .engineRefreshSessionsControllerFindOne(id)
             .pipe(map((s) => toSessionModel(s)));
         },
 
         findMany({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoRefreshSessionsControllerFindMany(
+            .getEngineApi()
+            .engineRefreshSessionsControllerFindMany(
               filters['userId'],
               meta?.curPage,
               meta?.perPage,
@@ -489,91 +494,91 @@ export function usersLayoutPart(
                 : undefined,
             )
             .pipe(
-              map(({ meta, ssoRefreshSessions }) => ({
+              map(({ meta, engineRefreshSessions }) => ({
                 meta,
-                items: ssoRefreshSessions.map((t) => toSessionModel(t)),
+                items: engineRefreshSessions.map((t) => toSessionModel(t)),
               })),
             );
         },
 
-        updateOne(id: string, data: SsoSessionModel) {
+        updateOne(id: string, data: EngineSessionModel) {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoRefreshSessionsControllerUpdateOne(id, toSessionJson(data))
+            .getEngineApi()
+            .engineRefreshSessionsControllerUpdateOne(id, toSessionJson(data))
             .pipe(map((s) => toSessionModel(s)));
         },
       }),
       form: () => ({
         inputs: [
           {
-            key: SsoRefreshSessionScalarFieldEnumInterface.enabled,
+            key: EngineRefreshSessionScalarFieldEnumInterface.enabled,
             type: 'checkbox',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-session.form.fields.enabled`),
+              label: translocoService.translate(`engine-session.form.fields.enabled`),
               placeholder: 'enabled',
               required: true,
             },
           },
           {
-            key: SsoRefreshSessionScalarFieldEnumInterface.expiresAt,
+            key: EngineRefreshSessionScalarFieldEnumInterface.expiresAt,
             type: 'date-input',
             validation: {
               show: true,
             },
             props: {
               type: 'number',
-              label: translocoService.translate(`sso-session.form.fields.expires-at`),
+              label: translocoService.translate(`engine-session.form.fields.expires-at`),
               placeholder: 'expiresAt',
               required: false,
             },
           },
           {
-            key: SsoRefreshSessionScalarFieldEnumInterface.fingerprint,
+            key: EngineRefreshSessionScalarFieldEnumInterface.fingerprint,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-session.form.fields.fingerprint`),
+              label: translocoService.translate(`engine-session.form.fields.fingerprint`),
               placeholder: 'fingerprint',
               required: false,
             },
           },
           {
-            key: SsoRefreshSessionScalarFieldEnumInterface.userAgent,
+            key: EngineRefreshSessionScalarFieldEnumInterface.userAgent,
             type: 'textarea',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-session.form.fields.user-agent`),
+              label: translocoService.translate(`engine-session.form.fields.user-agent`),
               placeholder: 'userAgent',
               required: false,
             },
           },
           {
-            key: SsoRefreshSessionScalarFieldEnumInterface.userData,
+            key: EngineRefreshSessionScalarFieldEnumInterface.userData,
             type: 'textarea',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-session.form.fields.user-data`),
+              label: translocoService.translate(`engine-session.form.fields.user-data`),
               placeholder: 'userData',
               required: false,
             },
           },
           {
-            key: SsoRefreshSessionScalarFieldEnumInterface.userIp,
+            key: EngineRefreshSessionScalarFieldEnumInterface.userIp,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-session.form.fields.user-ip`),
+              label: translocoService.translate(`engine-session.form.fields.user-ip`),
               placeholder: 'userIp',
               required: false,
             },
@@ -586,37 +591,37 @@ export function usersLayoutPart(
         }),
         actions: {
           update: {
-            title: marker('sso-session.update-modal.title'),
+            title: marker('engine-session.update-modal.title'),
           },
         },
         columns: [
           {
-            name: SsoRefreshSessionScalarFieldEnumInterface.id,
-            title: marker('sso-session.grid.columns.id'),
+            name: EngineRefreshSessionScalarFieldEnumInterface.id,
+            title: marker('engine-session.grid.columns.id'),
           },
           {
-            name: SsoRefreshSessionScalarFieldEnumInterface.userAgent,
-            title: marker('sso-session.grid.columns.user-agent'),
+            name: EngineRefreshSessionScalarFieldEnumInterface.userAgent,
+            title: marker('engine-session.grid.columns.user-agent'),
           },
           {
-            name: SsoRefreshSessionScalarFieldEnumInterface.fingerprint,
-            title: marker('sso-session.grid.columns.fingerprint'),
+            name: EngineRefreshSessionScalarFieldEnumInterface.fingerprint,
+            title: marker('engine-session.grid.columns.fingerprint'),
           },
           {
-            name: SsoRefreshSessionScalarFieldEnumInterface.userIp,
-            title: marker('sso-session.grid.columns.user-ip'),
+            name: EngineRefreshSessionScalarFieldEnumInterface.userIp,
+            title: marker('engine-session.grid.columns.user-ip'),
           },
           {
-            name: SsoRefreshSessionScalarFieldEnumInterface.expiresAt,
-            title: marker('sso-session.grid.columns.expires-at'),
+            name: EngineRefreshSessionScalarFieldEnumInterface.expiresAt,
+            title: marker('engine-session.grid.columns.expires-at'),
           },
           {
-            name: SsoRefreshSessionScalarFieldEnumInterface.userData,
-            title: marker('sso-session.grid.columns.user-data'),
+            name: EngineRefreshSessionScalarFieldEnumInterface.userData,
+            title: marker('engine-session.grid.columns.user-data'),
           },
           {
-            name: SsoRefreshSessionScalarFieldEnumInterface.enabled,
-            title: marker('sso-session.grid.columns.enabled'),
+            name: EngineRefreshSessionScalarFieldEnumInterface.enabled,
+            title: marker('engine-session.grid.columns.enabled'),
           },
         ],
       }),

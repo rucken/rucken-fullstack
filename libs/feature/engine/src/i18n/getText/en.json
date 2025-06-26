@@ -10,7 +10,7 @@
   "ok": "ok",
   "Refresh token not provided": "Refresh token not provided",
   "Session expired": "Session expired",
-  "Sso error": "Sso error",
+  "Engine error": "Engine error",
   "User is exists": "User is exists",
   "User not found": "User not found",
   "Wrong activate email code": "Wrong activate email code",

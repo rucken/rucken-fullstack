@@ -9,12 +9,12 @@ import {
   ROOT_PATH_MARKER,
   SECOND_PATH_MARKER,
 } from './engine-afat.constants';
-import { ssoPagesRoutes } from './pages/pages.routes';
+import { enginePagesRoutes } from './pages/pages.routes';
 import {
   OnActivateOptions,
-  SSO_GUARD_DATA_ROUTE_KEY,
-  SsoGuardData,
-  SsoGuardService,
+  ENGINE_GUARD_DATA_ROUTE_KEY,
+  EngineGuardData,
+  EngineGuardService,
 } from './services/auth-guard.service';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,7 +46,7 @@ export function provideRuckenAfatEngine(useFactory: (...deps: any[]) => RuckenAf
         redirectTo: configuration.layout?.parts.find((p) => p.second)?.navigation?.['link'] || '/home',
         pathMatch: 'full',
       },
-      ...ssoPagesRoutes,
+      ...enginePagesRoutes,
       ...((configuration.layout?.parts
         .map((part, index) => ({ part, index }))
         .filter(({ part }) => part.route || part.crud)
@@ -62,7 +62,7 @@ export function provideRuckenAfatEngine(useFactory: (...deps: any[]) => RuckenAf
             path: part.route?.path ? part.route?.path : part.navigation?.['link']?.slice(1),
             ...(part.roles?.length
               ? {
-                  canActivate: part.route?.canActivate || [SsoGuardService],
+                  canActivate: part.route?.canActivate || [EngineGuardService],
                 }
               : {}),
             data: {
@@ -89,9 +89,9 @@ export function provideRuckenAfatEngine(useFactory: (...deps: any[]) => RuckenAf
                 : {}),
               ...(part.roles?.length
                 ? {
-                    [SSO_GUARD_DATA_ROUTE_KEY]:
-                      part.route?.data?.[SSO_GUARD_DATA_ROUTE_KEY] ||
-                      new SsoGuardData({
+                    [ENGINE_GUARD_DATA_ROUTE_KEY]:
+                      part.route?.data?.[ENGINE_GUARD_DATA_ROUTE_KEY] ||
+                      new EngineGuardData({
                         roles: part.roles,
                         afterActivate: async (options: OnActivateOptions) => {
                           if (options.error) {

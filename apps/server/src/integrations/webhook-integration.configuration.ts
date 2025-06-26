@@ -1,6 +1,6 @@
 import { PrismaModule } from '@nestjs-mod/prisma';
 import { WEBHOOK_FEATURE, WebhookModule } from '@nestjs-mod/webhook';
-import { CheckSsoRole, RUCKEN_ENGINE_FEATURE, SsoGuard, RuckenEngineModule, SsoRole } from '@rucken/engine';
+import { CheckEngineRole, RUCKEN_ENGINE_FEATURE, EngineGuard, RuckenEngineModule, EngineRole } from '@rucken/engine';
 import { TranslatesModule } from 'nestjs-translates';
 
 export function webhookModuleForRootAsyncOptions(): Parameters<typeof WebhookModule.forRootAsync>[0] {
@@ -16,9 +16,9 @@ export function webhookModuleForRootAsyncOptions(): Parameters<typeof WebhookMod
       TranslatesModule,
     ],
     staticConfiguration: {
-      guards: [SsoGuard],
+      guards: [EngineGuard],
       mutateController: (ctrl) => {
-        CheckSsoRole([SsoRole.user, SsoRole.admin, SsoRole.manager])(ctrl);
+        CheckEngineRole([EngineRole.user, EngineRole.admin, EngineRole.manager])(ctrl);
         return ctrl;
       },
     },

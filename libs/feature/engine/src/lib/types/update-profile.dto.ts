@@ -1,9 +1,9 @@
 import { ApiPropertyOptional, PickType } from '@nestjs/swagger';
 import { IsOptional, Validate } from 'class-validator';
-import { SsoUserDto } from '../generated/rest/dto/sso-user.dto';
+import { EngineUserDto } from '../generated/rest/dto/engine-user.dto';
 import { EqualsTo } from '../utils/equals-to';
 
-export class UpdateProfileArgs extends PickType(SsoUserDto, [
+export class UpdateProfileArgs extends PickType(EngineUserDto, [
   'birthdate',
   'firstname',
   'lastname',

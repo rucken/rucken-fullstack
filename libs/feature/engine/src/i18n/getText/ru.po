@@ -40,8 +40,8 @@ msgstr "Обновляющий токен не предоставлен"
 msgid "Session expired"
 msgstr "Сеанс завершен"
 
-msgid "Sso error"
-msgstr "Ошибка SSO"
+msgid "Engine error"
+msgstr "Ошибка ENGINE"
 
 msgid "User is exists"
 msgstr "Пользователь существует"

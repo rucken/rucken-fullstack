@@ -13,9 +13,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, catchError, distinctUntilChanged, mergeMap, of, tap } from 'rxjs';
-import { SsoProfileFormService } from '../../services/auth-profile-form.service';
-import { SsoService } from '../../services/auth.service';
-import { SsoUpdateProfileInput } from '../../services/auth.types';
+import { EngineProfileFormService } from '../../services/auth-profile-form.service';
+import { EngineService } from '../../services/auth.service';
+import { EngineUpdateProfileInput } from '../../services/auth.types';
 import { compare } from '@nestjs-mod/misc';
 
 @UntilDestroy()
@@ -31,7 +31,7 @@ import { compare } from '@nestjs-mod/misc';
     RouterModule,
     TranslocoDirective,
   ],
-  selector: 'sso-profile-form',
+  selector: 'engine-profile-form',
   template: `@if (formlyFields$ | async; as formlyFields) {
     <form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
       <formly-form [model]="formlyModel$ | async" [fields]="formlyFields" [form]="form"> </formly-form>
@@ -48,7 +48,7 @@ import { compare } from '@nestjs-mod/misc';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class SsoProfileFormComponent implements OnInit {
+export class EngineProfileFormComponent implements OnInit {
   @Input()
   hideButtons?: boolean;
 
@@ -60,11 +60,11 @@ export class SsoProfileFormComponent implements OnInit {
   constructor(
     @Optional()
     @Inject(NZ_MODAL_DATA)
-    private readonly nzModalData: SsoProfileFormComponent,
-    private readonly authService: SsoService,
+    private readonly nzModalData: EngineProfileFormComponent,
+    private readonly authService: EngineService,
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
-    private readonly authProfileFormService: SsoProfileFormService,
+    private readonly authProfileFormService: EngineProfileFormService,
     private readonly validationService: ValidationService,
   ) {}
 
@@ -94,13 +94,13 @@ export class SsoProfileFormComponent implements OnInit {
       .subscribe();
   }
 
-  setFieldsAndModel(data: SsoUpdateProfileInput = {}) {
+  setFieldsAndModel(data: EngineUpdateProfileInput = {}) {
     this.setFormlyFields({ data });
     this.formlyModel$.next(data);
   }
 
   private setFormlyFields(options?: {
-    data?: Partial<SsoUpdateProfileInput>;
+    data?: Partial<EngineUpdateProfileInput>;
     errors?: ValidationErrorMetadataInterface[];
   }) {
     this.formlyFields$.next(this.authProfileFormService.getFormlyFields(options));
@@ -136,6 +136,6 @@ export class SsoProfileFormComponent implements OnInit {
 
   private fillFromProfile() {
     this.formlyFields$.next(this.formlyFields$.value);
-    this.setFieldsAndModel(this.authService.profile$.value as SsoUpdateProfileInput);
+    this.setFieldsAndModel(this.authService.profile$.value as EngineUpdateProfileInput);
   }
 }

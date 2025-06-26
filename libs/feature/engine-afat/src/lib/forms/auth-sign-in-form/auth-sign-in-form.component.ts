@@ -23,9 +23,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, catchError, distinctUntilChanged, of, tap } from 'rxjs';
-import { SsoSignInFormService } from '../../services/auth-sign-in-form.service';
-import { SsoService } from '../../services/auth.service';
-import { OAuthProvider, SsoLoginInput, SsoUserAndTokens } from '../../services/auth.types';
+import { EngineSignInFormService } from '../../services/auth-sign-in-form.service';
+import { EngineService } from '../../services/auth.service';
+import { OAuthProvider, EngineLoginInput, EngineUserAndTokens } from '../../services/auth.types';
 import { compare } from '@nestjs-mod/misc';
 @UntilDestroy()
 @Component({
@@ -42,7 +42,7 @@ import { compare } from '@nestjs-mod/misc';
     TranslocoDirective,
     NzIconModule,
   ],
-  selector: 'sso-sign-in-form',
+  selector: 'engine-sign-in-form',
   templateUrl: './auth-sign-in-form.component.html',
   styles: [
     `
@@ -54,12 +54,12 @@ import { compare } from '@nestjs-mod/misc';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class SsoSignInFormComponent implements OnInit {
+export class EngineSignInFormComponent implements OnInit {
   @Input()
   hideButtons?: boolean;
 
   @Output()
-  afterSignIn = new EventEmitter<SsoUserAndTokens>();
+  afterSignIn = new EventEmitter<EngineUserAndTokens>();
 
   form = new UntypedFormGroup({});
   formlyModel$ = new BehaviorSubject<object | null>(null);
@@ -70,11 +70,11 @@ export class SsoSignInFormComponent implements OnInit {
   constructor(
     @Optional()
     @Inject(NZ_MODAL_DATA)
-    private readonly nzModalData: SsoSignInFormComponent,
-    private readonly authService: SsoService,
+    private readonly nzModalData: EngineSignInFormComponent,
+    private readonly authService: EngineService,
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
-    private readonly authSignInFormService: SsoSignInFormService,
+    private readonly authSignInFormService: EngineSignInFormService,
     private readonly validationService: ValidationService,
   ) {}
 
@@ -117,7 +117,7 @@ export class SsoSignInFormComponent implements OnInit {
       .subscribe();
   }
 
-  setFieldsAndModel(data: SsoLoginInput = { password: '' }) {
+  setFieldsAndModel(data: EngineLoginInput = { password: '' }) {
     this.setFormlyFields({ data });
     this.formlyModel$.next(data);
   }
@@ -151,7 +151,7 @@ export class SsoSignInFormComponent implements OnInit {
     }
   }
 
-  private setFormlyFields(options?: { data?: SsoLoginInput; errors?: ValidationErrorMetadataInterface[] }) {
+  private setFormlyFields(options?: { data?: EngineLoginInput; errors?: ValidationErrorMetadataInterface[] }) {
     this.formlyFields$.next(this.authSignInFormService.getFormlyFields(options));
     this.errors = options?.errors || [];
   }

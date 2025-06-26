@@ -1,7 +1,7 @@
 import { TWO_FACTOR_FEATURE, TwoFactorPrismaSdk } from '@nestjs-mod/two-factor';
 
 import { NOTIFICATIONS_FEATURE, NotificationsPrismaSdk } from '@nestjs-mod/notifications';
-import { RUCKEN_ENGINE_FEATURE, SsoPrismaSdk } from '@rucken/engine';
+import { RUCKEN_ENGINE_FEATURE, EnginePrismaSdk } from '@rucken/engine';
 import { WEBHOOK_FEATURE, WebhookPrismaSdk } from '@nestjs-mod/webhook';
 import { InjectPrismaClient, PrismaModule } from '@nestjs-mod/prisma';
 import {
@@ -31,11 +31,11 @@ export class TerminusHealthCheckIntegrationConfiguration implements TerminusHeal
         ),
     },
     {
-      name: `database_${SSO_FEATURE}`,
+      name: `database_${ENGINE_FEATURE}`,
       check: () =>
         this.prismaHealthIndicator.pingCheck(
-          `database_${SSO_FEATURE}`,
-          this.ssoPrismaClient,
+          `database_${ENGINE_FEATURE}`,
+          this.enginePrismaClient,
           { timeout: 60 * 1000 }
         ),
     },
@@ -65,7 +65,7 @@ export class TerminusHealthCheckIntegrationConfiguration implements TerminusHeal
     @InjectPrismaClient(WEBHOOK_FEATURE)
     private readonly webhookPrismaClient: WebhookPrismaSdk.PrismaClient,
     @InjectPrismaClient(RUCKEN_ENGINE_FEATURE)
-    private readonly ssoPrismaClient: SsoPrismaSdk.PrismaClient,
+    private readonly enginePrismaClient: EnginePrismaSdk.PrismaClient,
     @InjectPrismaClient(TWO_FACTOR_FEATURE)
     private readonly twoFactorPrismaClient: TwoFactorPrismaSdk.PrismaClient,
     @InjectPrismaClient(NOTIFICATIONS_FEATURE)

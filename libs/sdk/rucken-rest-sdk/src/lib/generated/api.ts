@@ -76,37 +76,37 @@ export interface CompleteSignUpArgs {
 /**
  * 
  * @export
- * @interface CreateSsoProjectDto
+ * @interface CreateEngineProjectDto
  */
-export interface CreateSsoProjectDto {
+export interface CreateEngineProjectDto {
     /**
      * 
      * @type {string}
-     * @memberof CreateSsoProjectDto
+     * @memberof CreateEngineProjectDto
      */
     'name': string;
     /**
      * 
      * @type {object}
-     * @memberof CreateSsoProjectDto
+     * @memberof CreateEngineProjectDto
      */
     'nameLocale'?: object | null;
     /**
      * 
      * @type {string}
-     * @memberof CreateSsoProjectDto
+     * @memberof CreateEngineProjectDto
      */
     'clientId': string;
     /**
      * 
      * @type {string}
-     * @memberof CreateSsoProjectDto
+     * @memberof CreateEngineProjectDto
      */
     'clientSecret': string;
     /**
      * 
      * @type {boolean}
-     * @memberof CreateSsoProjectDto
+     * @memberof CreateEngineProjectDto
      */
     'public': boolean;
 }
@@ -153,6 +153,1248 @@ export interface CreateWebhookDto {
      */
     'workUntilDate'?: string | null;
 }
+/**
+ * 
+ * @export
+ * @interface EngineControllerSignIn400Response
+ */
+export interface EngineControllerSignIn400Response {
+    /**
+     * Validation error (VALIDATION-000)
+     * @type {string}
+     * @memberof EngineControllerSignIn400Response
+     */
+    'message': string;
+    /**
+     * 
+     * @type {ValidationErrorEnum}
+     * @memberof EngineControllerSignIn400Response
+     */
+    'code': ValidationErrorEnum;
+    /**
+     * 
+     * @type {Array<ValidationErrorMetadata>}
+     * @memberof EngineControllerSignIn400Response
+     */
+    'metadata'?: Array<ValidationErrorMetadata>;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface EngineEmailTemplate
+ */
+export interface EngineEmailTemplate {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplate
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplate
+     */
+    'subject': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineEmailTemplate
+     */
+    'subjectLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplate
+     */
+    'text': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineEmailTemplate
+     */
+    'textLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplate
+     */
+    'html': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineEmailTemplate
+     */
+    'htmlLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplate
+     */
+    'operationName': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplate
+     */
+    'projectId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplate
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplate
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {EngineProject}
+     * @memberof EngineEmailTemplate
+     */
+    'EngineProject'?: EngineProject;
+}
+/**
+ * 
+ * @export
+ * @interface EngineEmailTemplateDto
+ */
+export interface EngineEmailTemplateDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplateDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplateDto
+     */
+    'subject': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineEmailTemplateDto
+     */
+    'subjectLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplateDto
+     */
+    'text': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineEmailTemplateDto
+     */
+    'textLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplateDto
+     */
+    'html': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineEmailTemplateDto
+     */
+    'htmlLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplateDto
+     */
+    'operationName': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplateDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineEmailTemplateDto
+     */
+    'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineEmailTemplateScalarFieldEnum = {
+    Id: 'id',
+    Subject: 'subject',
+    SubjectLocale: 'subjectLocale',
+    Text: 'text',
+    TextLocale: 'textLocale',
+    Html: 'html',
+    HtmlLocale: 'htmlLocale',
+    OperationName: 'operationName',
+    ProjectId: 'projectId',
+    CreatedAt: 'createdAt',
+    UpdatedAt: 'updatedAt'
+} as const;
+
+export type EngineEmailTemplateScalarFieldEnum = typeof EngineEmailTemplateScalarFieldEnum[keyof typeof EngineEmailTemplateScalarFieldEnum];
+
+
+/**
+ * 
+ * @export
+ * @interface EngineEntities
+ */
+export interface EngineEntities {
+    /**
+     * 
+     * @type {EngineProjectScalarFieldEnum}
+     * @memberof EngineEntities
+     */
+    'EngineProject': EngineProjectScalarFieldEnum;
+    /**
+     * 
+     * @type {EngineUserScalarFieldEnum}
+     * @memberof EngineEntities
+     */
+    'EngineUser': EngineUserScalarFieldEnum;
+    /**
+     * 
+     * @type {EngineRefreshSessionScalarFieldEnum}
+     * @memberof EngineEntities
+     */
+    'EngineRefreshSession': EngineRefreshSessionScalarFieldEnum;
+    /**
+     * 
+     * @type {EngineEmailTemplateScalarFieldEnum}
+     * @memberof EngineEntities
+     */
+    'EngineEmailTemplate': EngineEmailTemplateScalarFieldEnum;
+    /**
+     * 
+     * @type {EngineOAuthProviderScalarFieldEnum}
+     * @memberof EngineEntities
+     */
+    'EngineOAuthProvider': EngineOAuthProviderScalarFieldEnum;
+    /**
+     * 
+     * @type {EngineOAuthProviderSettingsScalarFieldEnum}
+     * @memberof EngineEntities
+     */
+    'EngineOAuthProviderSettings': EngineOAuthProviderSettingsScalarFieldEnum;
+    /**
+     * 
+     * @type {EngineOAuthTokenScalarFieldEnum}
+     * @memberof EngineEntities
+     */
+    'EngineOAuthToken': EngineOAuthTokenScalarFieldEnum;
+    /**
+     * 
+     * @type {EngineRole}
+     * @memberof EngineEntities
+     */
+    'role': EngineRole;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface EngineError
+ */
+export interface EngineError {
+    /**
+     * Engine error (ENGINE-000), User not found (ENGINE-001), Wrong password (ENGINE-002), User is exists (ENGINE-003), Wrong activate email code (ENGINE-004), Activate email not processed (ENGINE-005), Activate email processed (ENGINE-006), Refresh token not provided (ENGINE-007), Session expired (ENGINE-008), Invalid refresh session (ENGINE-009), Access token expired (ENGINE-010), User is exists (ENGINE-011), Email not verified (ENGINE-012), Forbidden (ENGINE-013), Wrong old password (ENGINE-014), Non-existent role specified (ENGINE-015), Bad access token (ENGINE-016), Your session has been blocked (ENGINE-017), Verification code not found (ENGINE-018)
+     * @type {string}
+     * @memberof EngineError
+     */
+    'message': string;
+    /**
+     * 
+     * @type {EngineErrorEnum}
+     * @memberof EngineError
+     */
+    'code': EngineErrorEnum;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineError
+     */
+    'metadata'?: object;
+}
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineErrorEnum = {
+    Engine000: 'ENGINE-000',
+    Engine001: 'ENGINE-001',
+    Engine002: 'ENGINE-002',
+    Engine003: 'ENGINE-003',
+    Engine004: 'ENGINE-004',
+    Engine005: 'ENGINE-005',
+    Engine006: 'ENGINE-006',
+    Engine007: 'ENGINE-007',
+    Engine008: 'ENGINE-008',
+    Engine009: 'ENGINE-009',
+    Engine010: 'ENGINE-010',
+    Engine011: 'ENGINE-011',
+    Engine012: 'ENGINE-012',
+    Engine013: 'ENGINE-013',
+    Engine014: 'ENGINE-014',
+    Engine015: 'ENGINE-015',
+    Engine016: 'ENGINE-016',
+    Engine017: 'ENGINE-017',
+    Engine018: 'ENGINE-018'
+} as const;
+
+export type EngineErrorEnum = typeof EngineErrorEnum[keyof typeof EngineErrorEnum];
+
+
+/**
+ * 
+ * @export
+ * @interface EngineOAuthProvider
+ */
+export interface EngineOAuthProvider {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProvider
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProvider
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProvider
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProvider
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {Array<EngineOAuthProviderSettings>}
+     * @memberof EngineOAuthProvider
+     */
+    'EngineOAuthProviderSettings'?: Array<EngineOAuthProviderSettings>;
+    /**
+     * 
+     * @type {Array<EngineOAuthToken>}
+     * @memberof EngineOAuthProvider
+     */
+    'EngineOAuthToken'?: Array<EngineOAuthToken>;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineOAuthProviderScalarFieldEnum = {
+    Id: 'id',
+    Name: 'name',
+    CreatedAt: 'createdAt',
+    UpdatedAt: 'updatedAt'
+} as const;
+
+export type EngineOAuthProviderScalarFieldEnum = typeof EngineOAuthProviderScalarFieldEnum[keyof typeof EngineOAuthProviderScalarFieldEnum];
+
+
+/**
+ * 
+ * @export
+ * @interface EngineOAuthProviderSettings
+ */
+export interface EngineOAuthProviderSettings {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProviderSettings
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProviderSettings
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProviderSettings
+     */
+    'value': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProviderSettings
+     */
+    'providerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProviderSettings
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthProviderSettings
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {EngineOAuthProvider}
+     * @memberof EngineOAuthProviderSettings
+     */
+    'EngineOAuthProvider'?: EngineOAuthProvider;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineOAuthProviderSettingsScalarFieldEnum = {
+    Id: 'id',
+    Name: 'name',
+    Value: 'value',
+    ProviderId: 'providerId',
+    CreatedAt: 'createdAt',
+    UpdatedAt: 'updatedAt'
+} as const;
+
+export type EngineOAuthProviderSettingsScalarFieldEnum = typeof EngineOAuthProviderSettingsScalarFieldEnum[keyof typeof EngineOAuthProviderSettingsScalarFieldEnum];
+
+
+/**
+ * 
+ * @export
+ * @interface EngineOAuthToken
+ */
+export interface EngineOAuthToken {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'grantedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'expiresAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'tokenType': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'scope': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'verificationCode': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'userId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'projectId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'providerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'providerUserId': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineOAuthToken
+     */
+    'providerUserData': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthToken
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {EngineProject}
+     * @memberof EngineOAuthToken
+     */
+    'EngineOAuthProvider_EngineOAuthToken_projectIdToEngineOAuthProvider'?: EngineProject;
+    /**
+     * 
+     * @type {EngineOAuthProvider}
+     * @memberof EngineOAuthToken
+     */
+    'EngineOAuthProvider'?: EngineOAuthProvider;
+    /**
+     * 
+     * @type {EngineUser}
+     * @memberof EngineOAuthToken
+     */
+    'EngineUser'?: EngineUser;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineOAuthTokenScalarFieldEnum = {
+    Id: 'id',
+    GrantedAt: 'grantedAt',
+    AccessToken: 'accessToken',
+    RefreshToken: 'refreshToken',
+    ExpiresAt: 'expiresAt',
+    TokenType: 'tokenType',
+    Scope: 'scope',
+    VerificationCode: 'verificationCode',
+    UserId: 'userId',
+    ProjectId: 'projectId',
+    ProviderId: 'providerId',
+    ProviderUserId: 'providerUserId',
+    ProviderUserData: 'providerUserData',
+    CreatedAt: 'createdAt',
+    UpdatedAt: 'updatedAt'
+} as const;
+
+export type EngineOAuthTokenScalarFieldEnum = typeof EngineOAuthTokenScalarFieldEnum[keyof typeof EngineOAuthTokenScalarFieldEnum];
+
+
+/**
+ * 
+ * @export
+ * @interface EngineOAuthVerificationArgs
+ */
+export interface EngineOAuthVerificationArgs {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthVerificationArgs
+     */
+    'verificationCode': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineOAuthVerificationArgs
+     */
+    'fingerprint': string;
+}
+/**
+ * 
+ * @export
+ * @interface EngineProject
+ */
+export interface EngineProject {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProject
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProject
+     */
+    'name': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineProject
+     */
+    'nameLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProject
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProject
+     */
+    'clientSecret': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EngineProject
+     */
+    'public': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProject
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProject
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {Array<EngineEmailTemplate>}
+     * @memberof EngineProject
+     */
+    'EngineEmailTemplate'?: Array<EngineEmailTemplate>;
+    /**
+     * 
+     * @type {Array<EngineOAuthToken>}
+     * @memberof EngineProject
+     */
+    'EngineOAuthToken_EngineOAuthToken_projectIdToEngineOAuthProvider'?: Array<EngineOAuthToken>;
+    /**
+     * 
+     * @type {Array<EngineRefreshSession>}
+     * @memberof EngineProject
+     */
+    'EngineRefreshSession'?: Array<EngineRefreshSession>;
+    /**
+     * 
+     * @type {Array<EngineUser>}
+     * @memberof EngineProject
+     */
+    'EngineUser'?: Array<EngineUser>;
+}
+/**
+ * 
+ * @export
+ * @interface EngineProjectDto
+ */
+export interface EngineProjectDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProjectDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProjectDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineProjectDto
+     */
+    'nameLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProjectDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProjectDto
+     */
+    'clientSecret': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EngineProjectDto
+     */
+    'public': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProjectDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineProjectDto
+     */
+    'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineProjectScalarFieldEnum = {
+    Id: 'id',
+    Name: 'name',
+    NameLocale: 'nameLocale',
+    ClientId: 'clientId',
+    ClientSecret: 'clientSecret',
+    Public: 'public',
+    CreatedAt: 'createdAt',
+    UpdatedAt: 'updatedAt'
+} as const;
+
+export type EngineProjectScalarFieldEnum = typeof EngineProjectScalarFieldEnum[keyof typeof EngineProjectScalarFieldEnum];
+
+
+/**
+ * 
+ * @export
+ * @interface EnginePublicProjectDto
+ */
+export interface EnginePublicProjectDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof EnginePublicProjectDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnginePublicProjectDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof EnginePublicProjectDto
+     */
+    'nameLocale': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnginePublicProjectDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnginePublicProjectDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnginePublicProjectDto
+     */
+    'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface EngineRefreshSession
+ */
+export interface EngineRefreshSession {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSession
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSession
+     */
+    'userAgent': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSession
+     */
+    'userIp': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSession
+     */
+    'expiresAt': string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineRefreshSession
+     */
+    'userData': object | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EngineRefreshSession
+     */
+    'enabled': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSession
+     */
+    'userId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSession
+     */
+    'projectId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSession
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSession
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {EngineProject}
+     * @memberof EngineRefreshSession
+     */
+    'EngineProject'?: EngineProject;
+    /**
+     * 
+     * @type {EngineUser}
+     * @memberof EngineRefreshSession
+     */
+    'EngineUser'?: EngineUser;
+}
+/**
+ * 
+ * @export
+ * @interface EngineRefreshSessionDto
+ */
+export interface EngineRefreshSessionDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSessionDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSessionDto
+     */
+    'userAgent': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSessionDto
+     */
+    'userIp': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSessionDto
+     */
+    'expiresAt': string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineRefreshSessionDto
+     */
+    'userData': object | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EngineRefreshSessionDto
+     */
+    'enabled': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSessionDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineRefreshSessionDto
+     */
+    'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineRefreshSessionScalarFieldEnum = {
+    Id: 'id',
+    RefreshToken: 'refreshToken',
+    UserAgent: 'userAgent',
+    Fingerprint: 'fingerprint',
+    UserIp: 'userIp',
+    ExpiresAt: 'expiresAt',
+    UserData: 'userData',
+    Enabled: 'enabled',
+    UserId: 'userId',
+    ProjectId: 'projectId',
+    CreatedAt: 'createdAt',
+    UpdatedAt: 'updatedAt'
+} as const;
+
+export type EngineRefreshSessionScalarFieldEnum = typeof EngineRefreshSessionScalarFieldEnum[keyof typeof EngineRefreshSessionScalarFieldEnum];
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineRole = {
+    Admin: 'admin',
+    Manager: 'manager',
+    User: 'user'
+} as const;
+
+export type EngineRole = typeof EngineRole[keyof typeof EngineRole];
+
+
+/**
+ * 
+ * @export
+ * @interface EngineUser
+ */
+export interface EngineUser {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'phone': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'username': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'roles': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'firstname': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'lastname': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'gender': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'birthdate': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'picture': string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineUser
+     */
+    'appData': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'revokedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'emailVerifiedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'phoneVerifiedAt': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EngineUser
+     */
+    'timezone': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'lang': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'projectId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUser
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {Array<EngineOAuthToken>}
+     * @memberof EngineUser
+     */
+    'EngineOAuthToken'?: Array<EngineOAuthToken>;
+    /**
+     * 
+     * @type {Array<EngineRefreshSession>}
+     * @memberof EngineUser
+     */
+    'EngineRefreshSession'?: Array<EngineRefreshSession>;
+    /**
+     * 
+     * @type {EngineProject}
+     * @memberof EngineUser
+     */
+    'EngineProject'?: EngineProject;
+}
+/**
+ * 
+ * @export
+ * @interface EngineUserDto
+ */
+export interface EngineUserDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'phone': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'username': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'roles': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'firstname': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'lastname': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'gender': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'birthdate': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'picture': string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof EngineUserDto
+     */
+    'appData': object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'revokedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'emailVerifiedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'phoneVerifiedAt': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EngineUserDto
+     */
+    'timezone': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'lang': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EngineUserDto
+     */
+    'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EngineUserScalarFieldEnum = {
+    Id: 'id',
+    Email: 'email',
+    Phone: 'phone',
+    Username: 'username',
+    Password: 'password',
+    Roles: 'roles',
+    Firstname: 'firstname',
+    Lastname: 'lastname',
+    Gender: 'gender',
+    Birthdate: 'birthdate',
+    Picture: 'picture',
+    AppData: 'appData',
+    RevokedAt: 'revokedAt',
+    EmailVerifiedAt: 'emailVerifiedAt',
+    PhoneVerifiedAt: 'phoneVerifiedAt',
+    Timezone: 'timezone',
+    Lang: 'lang',
+    ProjectId: 'projectId',
+    CreatedAt: 'createdAt',
+    UpdatedAt: 'updatedAt'
+} as const;
+
+export type EngineUserScalarFieldEnum = typeof EngineUserScalarFieldEnum[keyof typeof EngineUserScalarFieldEnum];
+
+
 /**
  * 
  * @export
@@ -216,6 +1458,126 @@ export interface FilesPresignedUrls {
 /**
  * 
  * @export
+ * @interface FindManyEngineEmailTemplateResponse
+ */
+export interface FindManyEngineEmailTemplateResponse {
+    /**
+     * 
+     * @type {Array<EngineEmailTemplateDto>}
+     * @memberof FindManyEngineEmailTemplateResponse
+     */
+    'engineEmailTemplates': Array<EngineEmailTemplateDto>;
+    /**
+     * 
+     * @type {FindManyResponseMeta}
+     * @memberof FindManyEngineEmailTemplateResponse
+     */
+    'meta': FindManyResponseMeta;
+}
+/**
+ * 
+ * @export
+ * @interface FindManyEngineProjectResponse
+ */
+export interface FindManyEngineProjectResponse {
+    /**
+     * 
+     * @type {Array<EngineProjectDto>}
+     * @memberof FindManyEngineProjectResponse
+     */
+    'engineProjects': Array<EngineProjectDto>;
+    /**
+     * 
+     * @type {FindManyResponseMeta}
+     * @memberof FindManyEngineProjectResponse
+     */
+    'meta': FindManyResponseMeta;
+}
+/**
+ * 
+ * @export
+ * @interface FindManyEnginePublicProjectResponse
+ */
+export interface FindManyEnginePublicProjectResponse {
+    /**
+     * 
+     * @type {Array<EnginePublicProjectDto>}
+     * @memberof FindManyEnginePublicProjectResponse
+     */
+    'enginePublicProjects': Array<EnginePublicProjectDto>;
+    /**
+     * 
+     * @type {FindManyResponseMeta}
+     * @memberof FindManyEnginePublicProjectResponse
+     */
+    'meta': FindManyResponseMeta;
+}
+/**
+ * 
+ * @export
+ * @interface FindManyEngineRefreshSessionResponse
+ */
+export interface FindManyEngineRefreshSessionResponse {
+    /**
+     * 
+     * @type {Array<EngineRefreshSessionDto>}
+     * @memberof FindManyEngineRefreshSessionResponse
+     */
+    'engineRefreshSessions': Array<EngineRefreshSessionDto>;
+    /**
+     * 
+     * @type {FindManyResponseMeta}
+     * @memberof FindManyEngineRefreshSessionResponse
+     */
+    'meta': FindManyResponseMeta;
+}
+/**
+ * 
+ * @export
+ * @interface FindManyEngineRoleResponse
+ */
+export interface FindManyEngineRoleResponse {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FindManyEngineRoleResponse
+     */
+    'userAvailableRoles': Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FindManyEngineRoleResponse
+     */
+    'userDefaultRoles': Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FindManyEngineRoleResponse
+     */
+    'adminDefaultRoles': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface FindManyEngineUserResponse
+ */
+export interface FindManyEngineUserResponse {
+    /**
+     * 
+     * @type {Array<EngineUserDto>}
+     * @memberof FindManyEngineUserResponse
+     */
+    'engineUsers': Array<EngineUserDto>;
+    /**
+     * 
+     * @type {FindManyResponseMeta}
+     * @memberof FindManyEngineUserResponse
+     */
+    'meta': FindManyResponseMeta;
+}
+/**
+ * 
+ * @export
  * @interface FindManyNotificationResponse
  */
 export interface FindManyNotificationResponse {
@@ -256,126 +1618,6 @@ export interface FindManyResponseMeta {
      * @memberof FindManyResponseMeta
      */
     'totalResults': number;
-}
-/**
- * 
- * @export
- * @interface FindManySsoEmailTemplateResponse
- */
-export interface FindManySsoEmailTemplateResponse {
-    /**
-     * 
-     * @type {Array<SsoEmailTemplateDto>}
-     * @memberof FindManySsoEmailTemplateResponse
-     */
-    'ssoEmailTemplates': Array<SsoEmailTemplateDto>;
-    /**
-     * 
-     * @type {FindManyResponseMeta}
-     * @memberof FindManySsoEmailTemplateResponse
-     */
-    'meta': FindManyResponseMeta;
-}
-/**
- * 
- * @export
- * @interface FindManySsoProjectResponse
- */
-export interface FindManySsoProjectResponse {
-    /**
-     * 
-     * @type {Array<SsoProjectDto>}
-     * @memberof FindManySsoProjectResponse
-     */
-    'ssoProjects': Array<SsoProjectDto>;
-    /**
-     * 
-     * @type {FindManyResponseMeta}
-     * @memberof FindManySsoProjectResponse
-     */
-    'meta': FindManyResponseMeta;
-}
-/**
- * 
- * @export
- * @interface FindManySsoPublicProjectResponse
- */
-export interface FindManySsoPublicProjectResponse {
-    /**
-     * 
-     * @type {Array<SsoPublicProjectDto>}
-     * @memberof FindManySsoPublicProjectResponse
-     */
-    'ssoPublicProjects': Array<SsoPublicProjectDto>;
-    /**
-     * 
-     * @type {FindManyResponseMeta}
-     * @memberof FindManySsoPublicProjectResponse
-     */
-    'meta': FindManyResponseMeta;
-}
-/**
- * 
- * @export
- * @interface FindManySsoRefreshSessionResponse
- */
-export interface FindManySsoRefreshSessionResponse {
-    /**
-     * 
-     * @type {Array<SsoRefreshSessionDto>}
-     * @memberof FindManySsoRefreshSessionResponse
-     */
-    'ssoRefreshSessions': Array<SsoRefreshSessionDto>;
-    /**
-     * 
-     * @type {FindManyResponseMeta}
-     * @memberof FindManySsoRefreshSessionResponse
-     */
-    'meta': FindManyResponseMeta;
-}
-/**
- * 
- * @export
- * @interface FindManySsoRoleResponse
- */
-export interface FindManySsoRoleResponse {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FindManySsoRoleResponse
-     */
-    'userAvailableRoles': Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FindManySsoRoleResponse
-     */
-    'userDefaultRoles': Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FindManySsoRoleResponse
-     */
-    'adminDefaultRoles': Array<string>;
-}
-/**
- * 
- * @export
- * @interface FindManySsoUserResponse
- */
-export interface FindManySsoUserResponse {
-    /**
-     * 
-     * @type {Array<SsoUserDto>}
-     * @memberof FindManySsoUserResponse
-     */
-    'ssoUsers': Array<SsoUserDto>;
-    /**
-     * 
-     * @type {FindManyResponseMeta}
-     * @memberof FindManySsoUserResponse
-     */
-    'meta': FindManyResponseMeta;
 }
 /**
  * 
@@ -1035,1248 +2277,6 @@ export interface SignUpArgs {
 /**
  * 
  * @export
- * @interface SsoControllerSignIn400Response
- */
-export interface SsoControllerSignIn400Response {
-    /**
-     * Validation error (VALIDATION-000)
-     * @type {string}
-     * @memberof SsoControllerSignIn400Response
-     */
-    'message': string;
-    /**
-     * 
-     * @type {ValidationErrorEnum}
-     * @memberof SsoControllerSignIn400Response
-     */
-    'code': ValidationErrorEnum;
-    /**
-     * 
-     * @type {Array<ValidationErrorMetadata>}
-     * @memberof SsoControllerSignIn400Response
-     */
-    'metadata'?: Array<ValidationErrorMetadata>;
-}
-
-
-/**
- * 
- * @export
- * @interface SsoEmailTemplate
- */
-export interface SsoEmailTemplate {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplate
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplate
-     */
-    'subject': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoEmailTemplate
-     */
-    'subjectLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplate
-     */
-    'text': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoEmailTemplate
-     */
-    'textLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplate
-     */
-    'html': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoEmailTemplate
-     */
-    'htmlLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplate
-     */
-    'operationName': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplate
-     */
-    'projectId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplate
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplate
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {SsoProject}
-     * @memberof SsoEmailTemplate
-     */
-    'SsoProject'?: SsoProject;
-}
-/**
- * 
- * @export
- * @interface SsoEmailTemplateDto
- */
-export interface SsoEmailTemplateDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplateDto
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplateDto
-     */
-    'subject': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoEmailTemplateDto
-     */
-    'subjectLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplateDto
-     */
-    'text': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoEmailTemplateDto
-     */
-    'textLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplateDto
-     */
-    'html': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoEmailTemplateDto
-     */
-    'htmlLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplateDto
-     */
-    'operationName': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplateDto
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoEmailTemplateDto
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoEmailTemplateScalarFieldEnum = {
-    Id: 'id',
-    Subject: 'subject',
-    SubjectLocale: 'subjectLocale',
-    Text: 'text',
-    TextLocale: 'textLocale',
-    Html: 'html',
-    HtmlLocale: 'htmlLocale',
-    OperationName: 'operationName',
-    ProjectId: 'projectId',
-    CreatedAt: 'createdAt',
-    UpdatedAt: 'updatedAt'
-} as const;
-
-export type SsoEmailTemplateScalarFieldEnum = typeof SsoEmailTemplateScalarFieldEnum[keyof typeof SsoEmailTemplateScalarFieldEnum];
-
-
-/**
- * 
- * @export
- * @interface SsoEntities
- */
-export interface SsoEntities {
-    /**
-     * 
-     * @type {SsoProjectScalarFieldEnum}
-     * @memberof SsoEntities
-     */
-    'SsoProject': SsoProjectScalarFieldEnum;
-    /**
-     * 
-     * @type {SsoUserScalarFieldEnum}
-     * @memberof SsoEntities
-     */
-    'SsoUser': SsoUserScalarFieldEnum;
-    /**
-     * 
-     * @type {SsoRefreshSessionScalarFieldEnum}
-     * @memberof SsoEntities
-     */
-    'SsoRefreshSession': SsoRefreshSessionScalarFieldEnum;
-    /**
-     * 
-     * @type {SsoEmailTemplateScalarFieldEnum}
-     * @memberof SsoEntities
-     */
-    'SsoEmailTemplate': SsoEmailTemplateScalarFieldEnum;
-    /**
-     * 
-     * @type {SsoOAuthProviderScalarFieldEnum}
-     * @memberof SsoEntities
-     */
-    'SsoOAuthProvider': SsoOAuthProviderScalarFieldEnum;
-    /**
-     * 
-     * @type {SsoOAuthProviderSettingsScalarFieldEnum}
-     * @memberof SsoEntities
-     */
-    'SsoOAuthProviderSettings': SsoOAuthProviderSettingsScalarFieldEnum;
-    /**
-     * 
-     * @type {SsoOAuthTokenScalarFieldEnum}
-     * @memberof SsoEntities
-     */
-    'SsoOAuthToken': SsoOAuthTokenScalarFieldEnum;
-    /**
-     * 
-     * @type {SsoRole}
-     * @memberof SsoEntities
-     */
-    'role': SsoRole;
-}
-
-
-/**
- * 
- * @export
- * @interface SsoError
- */
-export interface SsoError {
-    /**
-     * Sso error (SSO-000), User not found (SSO-001), Wrong password (SSO-002), User is exists (SSO-003), Wrong activate email code (SSO-004), Activate email not processed (SSO-005), Activate email processed (SSO-006), Refresh token not provided (SSO-007), Session expired (SSO-008), Invalid refresh session (SSO-009), Access token expired (SSO-010), User is exists (SSO-011), Email not verified (SSO-012), Forbidden (SSO-013), Wrong old password (SSO-014), Non-existent role specified (SSO-015), Bad access token (SSO-016), Your session has been blocked (SSO-017), Verification code not found (SSO-018)
-     * @type {string}
-     * @memberof SsoError
-     */
-    'message': string;
-    /**
-     * 
-     * @type {SsoErrorEnum}
-     * @memberof SsoError
-     */
-    'code': SsoErrorEnum;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoError
-     */
-    'metadata'?: object;
-}
-
-
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoErrorEnum = {
-    Sso000: 'SSO-000',
-    Sso001: 'SSO-001',
-    Sso002: 'SSO-002',
-    Sso003: 'SSO-003',
-    Sso004: 'SSO-004',
-    Sso005: 'SSO-005',
-    Sso006: 'SSO-006',
-    Sso007: 'SSO-007',
-    Sso008: 'SSO-008',
-    Sso009: 'SSO-009',
-    Sso010: 'SSO-010',
-    Sso011: 'SSO-011',
-    Sso012: 'SSO-012',
-    Sso013: 'SSO-013',
-    Sso014: 'SSO-014',
-    Sso015: 'SSO-015',
-    Sso016: 'SSO-016',
-    Sso017: 'SSO-017',
-    Sso018: 'SSO-018'
-} as const;
-
-export type SsoErrorEnum = typeof SsoErrorEnum[keyof typeof SsoErrorEnum];
-
-
-/**
- * 
- * @export
- * @interface SsoOAuthProvider
- */
-export interface SsoOAuthProvider {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProvider
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProvider
-     */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProvider
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProvider
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {Array<SsoOAuthProviderSettings>}
-     * @memberof SsoOAuthProvider
-     */
-    'SsoOAuthProviderSettings'?: Array<SsoOAuthProviderSettings>;
-    /**
-     * 
-     * @type {Array<SsoOAuthToken>}
-     * @memberof SsoOAuthProvider
-     */
-    'SsoOAuthToken'?: Array<SsoOAuthToken>;
-}
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoOAuthProviderScalarFieldEnum = {
-    Id: 'id',
-    Name: 'name',
-    CreatedAt: 'createdAt',
-    UpdatedAt: 'updatedAt'
-} as const;
-
-export type SsoOAuthProviderScalarFieldEnum = typeof SsoOAuthProviderScalarFieldEnum[keyof typeof SsoOAuthProviderScalarFieldEnum];
-
-
-/**
- * 
- * @export
- * @interface SsoOAuthProviderSettings
- */
-export interface SsoOAuthProviderSettings {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProviderSettings
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProviderSettings
-     */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProviderSettings
-     */
-    'value': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProviderSettings
-     */
-    'providerId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProviderSettings
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthProviderSettings
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {SsoOAuthProvider}
-     * @memberof SsoOAuthProviderSettings
-     */
-    'SsoOAuthProvider'?: SsoOAuthProvider;
-}
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoOAuthProviderSettingsScalarFieldEnum = {
-    Id: 'id',
-    Name: 'name',
-    Value: 'value',
-    ProviderId: 'providerId',
-    CreatedAt: 'createdAt',
-    UpdatedAt: 'updatedAt'
-} as const;
-
-export type SsoOAuthProviderSettingsScalarFieldEnum = typeof SsoOAuthProviderSettingsScalarFieldEnum[keyof typeof SsoOAuthProviderSettingsScalarFieldEnum];
-
-
-/**
- * 
- * @export
- * @interface SsoOAuthToken
- */
-export interface SsoOAuthToken {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'grantedAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'expiresAt': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'tokenType': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'scope': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'verificationCode': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'userId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'projectId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'providerId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'providerUserId': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoOAuthToken
-     */
-    'providerUserData': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthToken
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {SsoProject}
-     * @memberof SsoOAuthToken
-     */
-    'SsoOAuthProvider_SsoOAuthToken_projectIdToSsoOAuthProvider'?: SsoProject;
-    /**
-     * 
-     * @type {SsoOAuthProvider}
-     * @memberof SsoOAuthToken
-     */
-    'SsoOAuthProvider'?: SsoOAuthProvider;
-    /**
-     * 
-     * @type {SsoUser}
-     * @memberof SsoOAuthToken
-     */
-    'SsoUser'?: SsoUser;
-}
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoOAuthTokenScalarFieldEnum = {
-    Id: 'id',
-    GrantedAt: 'grantedAt',
-    AccessToken: 'accessToken',
-    RefreshToken: 'refreshToken',
-    ExpiresAt: 'expiresAt',
-    TokenType: 'tokenType',
-    Scope: 'scope',
-    VerificationCode: 'verificationCode',
-    UserId: 'userId',
-    ProjectId: 'projectId',
-    ProviderId: 'providerId',
-    ProviderUserId: 'providerUserId',
-    ProviderUserData: 'providerUserData',
-    CreatedAt: 'createdAt',
-    UpdatedAt: 'updatedAt'
-} as const;
-
-export type SsoOAuthTokenScalarFieldEnum = typeof SsoOAuthTokenScalarFieldEnum[keyof typeof SsoOAuthTokenScalarFieldEnum];
-
-
-/**
- * 
- * @export
- * @interface SsoOAuthVerificationArgs
- */
-export interface SsoOAuthVerificationArgs {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthVerificationArgs
-     */
-    'verificationCode': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoOAuthVerificationArgs
-     */
-    'fingerprint': string;
-}
-/**
- * 
- * @export
- * @interface SsoProject
- */
-export interface SsoProject {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProject
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProject
-     */
-    'name': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoProject
-     */
-    'nameLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProject
-     */
-    'clientId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProject
-     */
-    'clientSecret': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof SsoProject
-     */
-    'public': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProject
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProject
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {Array<SsoEmailTemplate>}
-     * @memberof SsoProject
-     */
-    'SsoEmailTemplate'?: Array<SsoEmailTemplate>;
-    /**
-     * 
-     * @type {Array<SsoOAuthToken>}
-     * @memberof SsoProject
-     */
-    'SsoOAuthToken_SsoOAuthToken_projectIdToSsoOAuthProvider'?: Array<SsoOAuthToken>;
-    /**
-     * 
-     * @type {Array<SsoRefreshSession>}
-     * @memberof SsoProject
-     */
-    'SsoRefreshSession'?: Array<SsoRefreshSession>;
-    /**
-     * 
-     * @type {Array<SsoUser>}
-     * @memberof SsoProject
-     */
-    'SsoUser'?: Array<SsoUser>;
-}
-/**
- * 
- * @export
- * @interface SsoProjectDto
- */
-export interface SsoProjectDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProjectDto
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProjectDto
-     */
-    'name': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoProjectDto
-     */
-    'nameLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProjectDto
-     */
-    'clientId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProjectDto
-     */
-    'clientSecret': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof SsoProjectDto
-     */
-    'public': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProjectDto
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoProjectDto
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoProjectScalarFieldEnum = {
-    Id: 'id',
-    Name: 'name',
-    NameLocale: 'nameLocale',
-    ClientId: 'clientId',
-    ClientSecret: 'clientSecret',
-    Public: 'public',
-    CreatedAt: 'createdAt',
-    UpdatedAt: 'updatedAt'
-} as const;
-
-export type SsoProjectScalarFieldEnum = typeof SsoProjectScalarFieldEnum[keyof typeof SsoProjectScalarFieldEnum];
-
-
-/**
- * 
- * @export
- * @interface SsoPublicProjectDto
- */
-export interface SsoPublicProjectDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoPublicProjectDto
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoPublicProjectDto
-     */
-    'name': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoPublicProjectDto
-     */
-    'nameLocale': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoPublicProjectDto
-     */
-    'clientId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoPublicProjectDto
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoPublicProjectDto
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
- * @interface SsoRefreshSession
- */
-export interface SsoRefreshSession {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSession
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSession
-     */
-    'userAgent': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSession
-     */
-    'userIp': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSession
-     */
-    'expiresAt': string | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoRefreshSession
-     */
-    'userData': object | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof SsoRefreshSession
-     */
-    'enabled': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSession
-     */
-    'userId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSession
-     */
-    'projectId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSession
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSession
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {SsoProject}
-     * @memberof SsoRefreshSession
-     */
-    'SsoProject'?: SsoProject;
-    /**
-     * 
-     * @type {SsoUser}
-     * @memberof SsoRefreshSession
-     */
-    'SsoUser'?: SsoUser;
-}
-/**
- * 
- * @export
- * @interface SsoRefreshSessionDto
- */
-export interface SsoRefreshSessionDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSessionDto
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSessionDto
-     */
-    'userAgent': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSessionDto
-     */
-    'userIp': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSessionDto
-     */
-    'expiresAt': string | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoRefreshSessionDto
-     */
-    'userData': object | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof SsoRefreshSessionDto
-     */
-    'enabled': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSessionDto
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoRefreshSessionDto
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoRefreshSessionScalarFieldEnum = {
-    Id: 'id',
-    RefreshToken: 'refreshToken',
-    UserAgent: 'userAgent',
-    Fingerprint: 'fingerprint',
-    UserIp: 'userIp',
-    ExpiresAt: 'expiresAt',
-    UserData: 'userData',
-    Enabled: 'enabled',
-    UserId: 'userId',
-    ProjectId: 'projectId',
-    CreatedAt: 'createdAt',
-    UpdatedAt: 'updatedAt'
-} as const;
-
-export type SsoRefreshSessionScalarFieldEnum = typeof SsoRefreshSessionScalarFieldEnum[keyof typeof SsoRefreshSessionScalarFieldEnum];
-
-
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoRole = {
-    Admin: 'admin',
-    Manager: 'manager',
-    User: 'user'
-} as const;
-
-export type SsoRole = typeof SsoRole[keyof typeof SsoRole];
-
-
-/**
- * 
- * @export
- * @interface SsoUser
- */
-export interface SsoUser {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'email': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'phone': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'username': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'roles': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'firstname': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'lastname': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'gender': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'birthdate': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'picture': string | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoUser
-     */
-    'appData': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'revokedAt': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'emailVerifiedAt': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'phoneVerifiedAt': string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof SsoUser
-     */
-    'timezone': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'lang': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'projectId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUser
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {Array<SsoOAuthToken>}
-     * @memberof SsoUser
-     */
-    'SsoOAuthToken'?: Array<SsoOAuthToken>;
-    /**
-     * 
-     * @type {Array<SsoRefreshSession>}
-     * @memberof SsoUser
-     */
-    'SsoRefreshSession'?: Array<SsoRefreshSession>;
-    /**
-     * 
-     * @type {SsoProject}
-     * @memberof SsoUser
-     */
-    'SsoProject'?: SsoProject;
-}
-/**
- * 
- * @export
- * @interface SsoUserDto
- */
-export interface SsoUserDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'email': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'phone': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'username': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'roles': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'firstname': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'lastname': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'gender': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'birthdate': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'picture': string | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof SsoUserDto
-     */
-    'appData': object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'revokedAt': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'emailVerifiedAt': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'phoneVerifiedAt': string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof SsoUserDto
-     */
-    'timezone': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'lang': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoUserDto
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const SsoUserScalarFieldEnum = {
-    Id: 'id',
-    Email: 'email',
-    Phone: 'phone',
-    Username: 'username',
-    Password: 'password',
-    Roles: 'roles',
-    Firstname: 'firstname',
-    Lastname: 'lastname',
-    Gender: 'gender',
-    Birthdate: 'birthdate',
-    Picture: 'picture',
-    AppData: 'appData',
-    RevokedAt: 'revokedAt',
-    EmailVerifiedAt: 'emailVerifiedAt',
-    PhoneVerifiedAt: 'phoneVerifiedAt',
-    Timezone: 'timezone',
-    Lang: 'lang',
-    ProjectId: 'projectId',
-    CreatedAt: 'createdAt',
-    UpdatedAt: 'updatedAt'
-} as const;
-
-export type SsoUserScalarFieldEnum = typeof SsoUserScalarFieldEnum[keyof typeof SsoUserScalarFieldEnum];
-
-
-/**
- * 
- * @export
  * @interface StatusResponse
  */
 export interface StatusResponse {
@@ -2384,10 +2384,248 @@ export interface TokensResponse {
     'refreshToken': string;
     /**
      * 
-     * @type {SsoUser}
+     * @type {EngineUser}
      * @memberof TokensResponse
      */
-    'user': SsoUser;
+    'user': EngineUser;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateEngineEmailTemplateDto
+ */
+export interface UpdateEngineEmailTemplateDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineEmailTemplateDto
+     */
+    'subject'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof UpdateEngineEmailTemplateDto
+     */
+    'subjectLocale'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineEmailTemplateDto
+     */
+    'text'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof UpdateEngineEmailTemplateDto
+     */
+    'textLocale'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineEmailTemplateDto
+     */
+    'html'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof UpdateEngineEmailTemplateDto
+     */
+    'htmlLocale'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineEmailTemplateDto
+     */
+    'operationName'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateEngineProjectDto
+ */
+export interface UpdateEngineProjectDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineProjectDto
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof UpdateEngineProjectDto
+     */
+    'nameLocale'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineProjectDto
+     */
+    'clientId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineProjectDto
+     */
+    'clientSecret'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateEngineProjectDto
+     */
+    'public'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateEngineRefreshSessionDto
+ */
+export interface UpdateEngineRefreshSessionDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineRefreshSessionDto
+     */
+    'refreshToken'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineRefreshSessionDto
+     */
+    'userAgent'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineRefreshSessionDto
+     */
+    'fingerprint'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineRefreshSessionDto
+     */
+    'userIp'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineRefreshSessionDto
+     */
+    'expiresAt'?: string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof UpdateEngineRefreshSessionDto
+     */
+    'userData'?: object | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateEngineRefreshSessionDto
+     */
+    'enabled'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateEngineUserDto
+ */
+export interface UpdateEngineUserDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'phone'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'username'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'password'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'roles'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'firstname'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'lastname'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'gender'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'birthdate'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'picture'?: string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof UpdateEngineUserDto
+     */
+    'appData'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'revokedAt'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'emailVerifiedAt'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'phoneVerifiedAt'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateEngineUserDto
+     */
+    'timezone'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateEngineUserDto
+     */
+    'lang'?: string | null;
 }
 /**
  * 
@@ -2534,244 +2772,6 @@ export interface UpdateProfileArgs {
      * @memberof UpdateProfileArgs
      */
     'confirmPassword'?: string;
-}
-/**
- * 
- * @export
- * @interface UpdateSsoEmailTemplateDto
- */
-export interface UpdateSsoEmailTemplateDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoEmailTemplateDto
-     */
-    'subject'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof UpdateSsoEmailTemplateDto
-     */
-    'subjectLocale'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoEmailTemplateDto
-     */
-    'text'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof UpdateSsoEmailTemplateDto
-     */
-    'textLocale'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoEmailTemplateDto
-     */
-    'html'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof UpdateSsoEmailTemplateDto
-     */
-    'htmlLocale'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoEmailTemplateDto
-     */
-    'operationName'?: string | null;
-}
-/**
- * 
- * @export
- * @interface UpdateSsoProjectDto
- */
-export interface UpdateSsoProjectDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoProjectDto
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof UpdateSsoProjectDto
-     */
-    'nameLocale'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoProjectDto
-     */
-    'clientId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoProjectDto
-     */
-    'clientSecret'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateSsoProjectDto
-     */
-    'public'?: boolean;
-}
-/**
- * 
- * @export
- * @interface UpdateSsoRefreshSessionDto
- */
-export interface UpdateSsoRefreshSessionDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoRefreshSessionDto
-     */
-    'refreshToken'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoRefreshSessionDto
-     */
-    'userAgent'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoRefreshSessionDto
-     */
-    'fingerprint'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoRefreshSessionDto
-     */
-    'userIp'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoRefreshSessionDto
-     */
-    'expiresAt'?: string | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof UpdateSsoRefreshSessionDto
-     */
-    'userData'?: object | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateSsoRefreshSessionDto
-     */
-    'enabled'?: boolean;
-}
-/**
- * 
- * @export
- * @interface UpdateSsoUserDto
- */
-export interface UpdateSsoUserDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'email'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'phone'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'username'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'password'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'roles'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'firstname'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'lastname'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'gender'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'birthdate'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'picture'?: string | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof UpdateSsoUserDto
-     */
-    'appData'?: object | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'revokedAt'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'emailVerifiedAt'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'phoneVerifiedAt'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateSsoUserDto
-     */
-    'timezone'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSsoUserDto
-     */
-    'lang'?: string | null;
 }
 /**
  * 
@@ -3376,6 +3376,2201 @@ export type WebhookUserScalarFieldEnum = typeof WebhookUserScalarFieldEnum[keyof
 
 
 /**
+ * EngineApi - axios parameter creator
+ * @export
+ */
+export const EngineApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CompleteForgotPasswordArgs} completeForgotPasswordArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerCompleteForgotPassword: async (completeForgotPasswordArgs: CompleteForgotPasswordArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'completeForgotPasswordArgs' is not null or undefined
+            assertParamExists('engineControllerCompleteForgotPassword', 'completeForgotPasswordArgs', completeForgotPasswordArgs)
+            const localVarPath = `/api/engine/complete-forgot-password`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(completeForgotPasswordArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CompleteSignUpArgs} completeSignUpArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerCompleteSignUp: async (completeSignUpArgs: CompleteSignUpArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'completeSignUpArgs' is not null or undefined
+            assertParamExists('engineControllerCompleteSignUp', 'completeSignUpArgs', completeSignUpArgs)
+            const localVarPath = `/api/engine/complete-sign-up`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(completeSignUpArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ForgotPasswordArgs} forgotPasswordArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerForgotPassword: async (forgotPasswordArgs: ForgotPasswordArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'forgotPasswordArgs' is not null or undefined
+            assertParamExists('engineControllerForgotPassword', 'forgotPasswordArgs', forgotPasswordArgs)
+            const localVarPath = `/api/engine/forgot-password`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(forgotPasswordArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerProfile: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/engine/profile`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {RefreshTokensResponse} refreshTokensResponse 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerRefreshTokens: async (refreshTokensResponse: RefreshTokensResponse, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'refreshTokensResponse' is not null or undefined
+            assertParamExists('engineControllerRefreshTokens', 'refreshTokensResponse', refreshTokensResponse)
+            const localVarPath = `/api/engine/refresh-tokens`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(refreshTokensResponse, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SignInArgs} signInArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerSignIn: async (signInArgs: SignInArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'signInArgs' is not null or undefined
+            assertParamExists('engineControllerSignIn', 'signInArgs', signInArgs)
+            const localVarPath = `/api/engine/sign-in`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(signInArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SignOutArgs} signOutArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerSignOut: async (signOutArgs: SignOutArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'signOutArgs' is not null or undefined
+            assertParamExists('engineControllerSignOut', 'signOutArgs', signOutArgs)
+            const localVarPath = `/api/engine/sign-out`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(signOutArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SignUpArgs} signUpArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerSignUp: async (signUpArgs: SignUpArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'signUpArgs' is not null or undefined
+            assertParamExists('engineControllerSignUp', 'signUpArgs', signUpArgs)
+            const localVarPath = `/api/engine/sign-up`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(signUpArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpdateProfileArgs} updateProfileArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerUpdateProfile: async (updateProfileArgs: UpdateProfileArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateProfileArgs' is not null or undefined
+            assertParamExists('engineControllerUpdateProfile', 'updateProfileArgs', updateProfileArgs)
+            const localVarPath = `/api/engine/profile`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateProfileArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineEmailTemplatesControllerFindMany: async (curPage?: number, perPage?: number, searchText?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/engine/email-templates`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (curPage !== undefined) {
+                localVarQueryParameter['curPage'] = curPage;
+            }
+
+            if (perPage !== undefined) {
+                localVarQueryParameter['perPage'] = perPage;
+            }
+
+            if (searchText !== undefined) {
+                localVarQueryParameter['searchText'] = searchText;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineEmailTemplatesControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineEmailTemplatesControllerFindOne', 'id', id)
+            const localVarPath = `/api/engine/email-templates/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineEmailTemplateDto} updateEngineEmailTemplateDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineEmailTemplatesControllerUpdateOne: async (id: string, updateEngineEmailTemplateDto: UpdateEngineEmailTemplateDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineEmailTemplatesControllerUpdateOne', 'id', id)
+            // verify required parameter 'updateEngineEmailTemplateDto' is not null or undefined
+            assertParamExists('engineEmailTemplatesControllerUpdateOne', 'updateEngineEmailTemplateDto', updateEngineEmailTemplateDto)
+            const localVarPath = `/api/engine/email-templates/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateEngineEmailTemplateDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} redirectUri 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineGoogleOAuthControllerGoogleAuth: async (redirectUri: string, clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'redirectUri' is not null or undefined
+            assertParamExists('engineGoogleOAuthControllerGoogleAuth', 'redirectUri', redirectUri)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('engineGoogleOAuthControllerGoogleAuth', 'clientId', clientId)
+            const localVarPath = `/api/engine/oauth/google`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (redirectUri !== undefined) {
+                localVarQueryParameter['redirect_uri'] = redirectUri;
+            }
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['client_id'] = clientId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} redirectUri 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineGoogleOAuthControllerGoogleAuthRedirect: async (redirectUri: string, clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'redirectUri' is not null or undefined
+            assertParamExists('engineGoogleOAuthControllerGoogleAuthRedirect', 'redirectUri', redirectUri)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('engineGoogleOAuthControllerGoogleAuthRedirect', 'clientId', clientId)
+            const localVarPath = `/api/engine/oauth/google/redirect`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (redirectUri !== undefined) {
+                localVarQueryParameter['redirect_uri'] = redirectUri;
+            }
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['client_id'] = clientId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineOAuthControllerOauthProviders: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/engine/oauth/providers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EngineOAuthVerificationArgs} engineOAuthVerificationArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineOAuthControllerOauthVerification: async (engineOAuthVerificationArgs: EngineOAuthVerificationArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'engineOAuthVerificationArgs' is not null or undefined
+            assertParamExists('engineOAuthControllerOauthVerification', 'engineOAuthVerificationArgs', engineOAuthVerificationArgs)
+            const localVarPath = `/api/engine/oauth/verification`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(engineOAuthVerificationArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateEngineProjectDto} createEngineProjectDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerCreateOne: async (createEngineProjectDto: CreateEngineProjectDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createEngineProjectDto' is not null or undefined
+            assertParamExists('engineProjectsControllerCreateOne', 'createEngineProjectDto', createEngineProjectDto)
+            const localVarPath = `/api/engine/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createEngineProjectDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerDeleteOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineProjectsControllerDeleteOne', 'id', id)
+            const localVarPath = `/api/engine/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerFindMany: async (curPage?: number, perPage?: number, searchText?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/engine/projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (curPage !== undefined) {
+                localVarQueryParameter['curPage'] = curPage;
+            }
+
+            if (perPage !== undefined) {
+                localVarQueryParameter['perPage'] = perPage;
+            }
+
+            if (searchText !== undefined) {
+                localVarQueryParameter['searchText'] = searchText;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineProjectsControllerFindOne', 'id', id)
+            const localVarPath = `/api/engine/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineProjectDto} updateEngineProjectDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerUpdateOne: async (id: string, updateEngineProjectDto: UpdateEngineProjectDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineProjectsControllerUpdateOne', 'id', id)
+            // verify required parameter 'updateEngineProjectDto' is not null or undefined
+            assertParamExists('engineProjectsControllerUpdateOne', 'updateEngineProjectDto', updateEngineProjectDto)
+            const localVarPath = `/api/engine/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateEngineProjectDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        enginePublicProjectsControllerFindMany: async (curPage?: number, perPage?: number, searchText?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/engine/public-projects`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (curPage !== undefined) {
+                localVarQueryParameter['curPage'] = curPage;
+            }
+
+            if (perPage !== undefined) {
+                localVarQueryParameter['perPage'] = perPage;
+            }
+
+            if (searchText !== undefined) {
+                localVarQueryParameter['searchText'] = searchText;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineRefreshSessionsControllerFindMany: async (userId: string, curPage?: number, perPage?: number, searchText?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('engineRefreshSessionsControllerFindMany', 'userId', userId)
+            const localVarPath = `/api/engine/sessions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (curPage !== undefined) {
+                localVarQueryParameter['curPage'] = curPage;
+            }
+
+            if (perPage !== undefined) {
+                localVarQueryParameter['perPage'] = perPage;
+            }
+
+            if (searchText !== undefined) {
+                localVarQueryParameter['searchText'] = searchText;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineRefreshSessionsControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineRefreshSessionsControllerFindOne', 'id', id)
+            const localVarPath = `/api/engine/sessions/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineRefreshSessionDto} updateEngineRefreshSessionDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineRefreshSessionsControllerUpdateOne: async (id: string, updateEngineRefreshSessionDto: UpdateEngineRefreshSessionDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineRefreshSessionsControllerUpdateOne', 'id', id)
+            // verify required parameter 'updateEngineRefreshSessionDto' is not null or undefined
+            assertParamExists('engineRefreshSessionsControllerUpdateOne', 'updateEngineRefreshSessionDto', updateEngineRefreshSessionDto)
+            const localVarPath = `/api/engine/sessions/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateEngineRefreshSessionDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineRolesControllerFindMany: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/engine/roles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {string} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineUsersControllerFindMany: async (curPage?: number, perPage?: number, searchText?: string, sort?: string, projectId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/engine/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (curPage !== undefined) {
+                localVarQueryParameter['curPage'] = curPage;
+            }
+
+            if (perPage !== undefined) {
+                localVarQueryParameter['perPage'] = perPage;
+            }
+
+            if (searchText !== undefined) {
+                localVarQueryParameter['searchText'] = searchText;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (projectId !== undefined) {
+                localVarQueryParameter['projectId'] = projectId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineUsersControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineUsersControllerFindOne', 'id', id)
+            const localVarPath = `/api/engine/users/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SendInvitationLinksArgs} sendInvitationLinksArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineUsersControllerSendInvitationLinks: async (sendInvitationLinksArgs: SendInvitationLinksArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'sendInvitationLinksArgs' is not null or undefined
+            assertParamExists('engineUsersControllerSendInvitationLinks', 'sendInvitationLinksArgs', sendInvitationLinksArgs)
+            const localVarPath = `/api/engine/users/send-invitation-links`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(sendInvitationLinksArgs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineUserDto} updateEngineUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineUsersControllerUpdateOne: async (id: string, updateEngineUserDto: UpdateEngineUserDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('engineUsersControllerUpdateOne', 'id', id)
+            // verify required parameter 'updateEngineUserDto' is not null or undefined
+            assertParamExists('engineUsersControllerUpdateOne', 'updateEngineUserDto', updateEngineUserDto)
+            const localVarPath = `/api/engine/users/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateEngineUserDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EngineApi - functional programming interface
+ * @export
+ */
+export const EngineApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EngineApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CompleteForgotPasswordArgs} completeForgotPasswordArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerCompleteForgotPassword(completeForgotPasswordArgs: CompleteForgotPasswordArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerCompleteForgotPassword(completeForgotPasswordArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerCompleteForgotPassword']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {CompleteSignUpArgs} completeSignUpArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerCompleteSignUp(completeSignUpArgs: CompleteSignUpArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerCompleteSignUp(completeSignUpArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerCompleteSignUp']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {ForgotPasswordArgs} forgotPasswordArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerForgotPassword(forgotPasswordArgs: ForgotPasswordArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatusResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerForgotPassword(forgotPasswordArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerForgotPassword']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerProfile(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineUserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerProfile(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerProfile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {RefreshTokensResponse} refreshTokensResponse 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerRefreshTokens(refreshTokensResponse: RefreshTokensResponse, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerRefreshTokens(refreshTokensResponse, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerRefreshTokens']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SignInArgs} signInArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerSignIn(signInArgs: SignInArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerSignIn(signInArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerSignIn']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SignOutArgs} signOutArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerSignOut(signOutArgs: SignOutArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatusResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerSignOut(signOutArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerSignOut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SignUpArgs} signUpArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerSignUp(signUpArgs: SignUpArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerSignUp(signUpArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerSignUp']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {UpdateProfileArgs} updateProfileArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineControllerUpdateProfile(updateProfileArgs: UpdateProfileArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineUserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineControllerUpdateProfile(updateProfileArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineControllerUpdateProfile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineEmailTemplatesControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManyEngineEmailTemplateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineEmailTemplatesControllerFindMany(curPage, perPage, searchText, sort, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineEmailTemplatesControllerFindMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineEmailTemplatesControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineEmailTemplateDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineEmailTemplatesControllerFindOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineEmailTemplatesControllerFindOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineEmailTemplateDto} updateEngineEmailTemplateDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineEmailTemplatesControllerUpdateOne(id: string, updateEngineEmailTemplateDto: UpdateEngineEmailTemplateDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineEmailTemplateDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineEmailTemplatesControllerUpdateOne(id, updateEngineEmailTemplateDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineEmailTemplatesControllerUpdateOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} redirectUri 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineGoogleOAuthControllerGoogleAuth(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineGoogleOAuthControllerGoogleAuth(redirectUri, clientId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineGoogleOAuthControllerGoogleAuth']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} redirectUri 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineGoogleOAuthControllerGoogleAuthRedirect(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineGoogleOAuthControllerGoogleAuthRedirect(redirectUri, clientId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineGoogleOAuthControllerGoogleAuthRedirect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineOAuthControllerOauthProviders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OAuthProvider>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineOAuthControllerOauthProviders(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineOAuthControllerOauthProviders']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {EngineOAuthVerificationArgs} engineOAuthVerificationArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineOAuthControllerOauthVerification(engineOAuthVerificationArgs: EngineOAuthVerificationArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineOAuthControllerOauthVerification(engineOAuthVerificationArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineOAuthControllerOauthVerification']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {CreateEngineProjectDto} createEngineProjectDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineProjectsControllerCreateOne(createEngineProjectDto: CreateEngineProjectDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineProjectDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineProjectsControllerCreateOne(createEngineProjectDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineProjectsControllerCreateOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineProjectsControllerDeleteOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatusResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineProjectsControllerDeleteOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineProjectsControllerDeleteOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManyEngineProjectResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineProjectsControllerFindMany(curPage, perPage, searchText, sort, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineProjectsControllerFindMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineProjectsControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineProjectDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineProjectsControllerFindOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineProjectsControllerFindOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineProjectDto} updateEngineProjectDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineProjectsControllerUpdateOne(id: string, updateEngineProjectDto: UpdateEngineProjectDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineProjectDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineProjectsControllerUpdateOne(id, updateEngineProjectDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineProjectsControllerUpdateOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async enginePublicProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManyEnginePublicProjectResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.enginePublicProjectsControllerFindMany(curPage, perPage, searchText, sort, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.enginePublicProjectsControllerFindMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineRefreshSessionsControllerFindMany(userId: string, curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManyEngineRefreshSessionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineRefreshSessionsControllerFindMany(userId, curPage, perPage, searchText, sort, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineRefreshSessionsControllerFindMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineRefreshSessionsControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineRefreshSessionDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineRefreshSessionsControllerFindOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineRefreshSessionsControllerFindOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineRefreshSessionDto} updateEngineRefreshSessionDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineRefreshSessionsControllerUpdateOne(id: string, updateEngineRefreshSessionDto: UpdateEngineRefreshSessionDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineRefreshSessionDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineRefreshSessionsControllerUpdateOne(id, updateEngineRefreshSessionDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineRefreshSessionsControllerUpdateOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineRolesControllerFindMany(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManyEngineRoleResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineRolesControllerFindMany(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineRolesControllerFindMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {string} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineUsersControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, projectId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManyEngineUserResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineUsersControllerFindMany(curPage, perPage, searchText, sort, projectId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineUsersControllerFindMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineUsersControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineUserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineUsersControllerFindOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineUsersControllerFindOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SendInvitationLinksArgs} sendInvitationLinksArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineUsersControllerSendInvitationLinks(sendInvitationLinksArgs: SendInvitationLinksArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatusResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineUsersControllerSendInvitationLinks(sendInvitationLinksArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineUsersControllerSendInvitationLinks']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineUserDto} updateEngineUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async engineUsersControllerUpdateOne(id: string, updateEngineUserDto: UpdateEngineUserDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EngineUserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.engineUsersControllerUpdateOne(id, updateEngineUserDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EngineApi.engineUsersControllerUpdateOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * EngineApi - factory interface
+ * @export
+ */
+export const EngineApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EngineApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CompleteForgotPasswordArgs} completeForgotPasswordArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerCompleteForgotPassword(completeForgotPasswordArgs: CompleteForgotPasswordArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
+            return localVarFp.engineControllerCompleteForgotPassword(completeForgotPasswordArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CompleteSignUpArgs} completeSignUpArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerCompleteSignUp(completeSignUpArgs: CompleteSignUpArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
+            return localVarFp.engineControllerCompleteSignUp(completeSignUpArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ForgotPasswordArgs} forgotPasswordArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerForgotPassword(forgotPasswordArgs: ForgotPasswordArgs, options?: RawAxiosRequestConfig): AxiosPromise<StatusResponse> {
+            return localVarFp.engineControllerForgotPassword(forgotPasswordArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerProfile(options?: RawAxiosRequestConfig): AxiosPromise<EngineUserDto> {
+            return localVarFp.engineControllerProfile(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {RefreshTokensResponse} refreshTokensResponse 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerRefreshTokens(refreshTokensResponse: RefreshTokensResponse, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
+            return localVarFp.engineControllerRefreshTokens(refreshTokensResponse, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SignInArgs} signInArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerSignIn(signInArgs: SignInArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
+            return localVarFp.engineControllerSignIn(signInArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SignOutArgs} signOutArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerSignOut(signOutArgs: SignOutArgs, options?: RawAxiosRequestConfig): AxiosPromise<StatusResponse> {
+            return localVarFp.engineControllerSignOut(signOutArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SignUpArgs} signUpArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerSignUp(signUpArgs: SignUpArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
+            return localVarFp.engineControllerSignUp(signUpArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpdateProfileArgs} updateProfileArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineControllerUpdateProfile(updateProfileArgs: UpdateProfileArgs, options?: RawAxiosRequestConfig): AxiosPromise<EngineUserDto> {
+            return localVarFp.engineControllerUpdateProfile(updateProfileArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineEmailTemplatesControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManyEngineEmailTemplateResponse> {
+            return localVarFp.engineEmailTemplatesControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineEmailTemplatesControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<EngineEmailTemplateDto> {
+            return localVarFp.engineEmailTemplatesControllerFindOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineEmailTemplateDto} updateEngineEmailTemplateDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineEmailTemplatesControllerUpdateOne(id: string, updateEngineEmailTemplateDto: UpdateEngineEmailTemplateDto, options?: RawAxiosRequestConfig): AxiosPromise<EngineEmailTemplateDto> {
+            return localVarFp.engineEmailTemplatesControllerUpdateOne(id, updateEngineEmailTemplateDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} redirectUri 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineGoogleOAuthControllerGoogleAuth(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.engineGoogleOAuthControllerGoogleAuth(redirectUri, clientId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} redirectUri 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineGoogleOAuthControllerGoogleAuthRedirect(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.engineGoogleOAuthControllerGoogleAuthRedirect(redirectUri, clientId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineOAuthControllerOauthProviders(options?: RawAxiosRequestConfig): AxiosPromise<Array<OAuthProvider>> {
+            return localVarFp.engineOAuthControllerOauthProviders(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EngineOAuthVerificationArgs} engineOAuthVerificationArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineOAuthControllerOauthVerification(engineOAuthVerificationArgs: EngineOAuthVerificationArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
+            return localVarFp.engineOAuthControllerOauthVerification(engineOAuthVerificationArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateEngineProjectDto} createEngineProjectDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerCreateOne(createEngineProjectDto: CreateEngineProjectDto, options?: RawAxiosRequestConfig): AxiosPromise<EngineProjectDto> {
+            return localVarFp.engineProjectsControllerCreateOne(createEngineProjectDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerDeleteOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<StatusResponse> {
+            return localVarFp.engineProjectsControllerDeleteOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManyEngineProjectResponse> {
+            return localVarFp.engineProjectsControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<EngineProjectDto> {
+            return localVarFp.engineProjectsControllerFindOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineProjectDto} updateEngineProjectDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineProjectsControllerUpdateOne(id: string, updateEngineProjectDto: UpdateEngineProjectDto, options?: RawAxiosRequestConfig): AxiosPromise<EngineProjectDto> {
+            return localVarFp.engineProjectsControllerUpdateOne(id, updateEngineProjectDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        enginePublicProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManyEnginePublicProjectResponse> {
+            return localVarFp.enginePublicProjectsControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineRefreshSessionsControllerFindMany(userId: string, curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManyEngineRefreshSessionResponse> {
+            return localVarFp.engineRefreshSessionsControllerFindMany(userId, curPage, perPage, searchText, sort, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineRefreshSessionsControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<EngineRefreshSessionDto> {
+            return localVarFp.engineRefreshSessionsControllerFindOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineRefreshSessionDto} updateEngineRefreshSessionDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineRefreshSessionsControllerUpdateOne(id: string, updateEngineRefreshSessionDto: UpdateEngineRefreshSessionDto, options?: RawAxiosRequestConfig): AxiosPromise<EngineRefreshSessionDto> {
+            return localVarFp.engineRefreshSessionsControllerUpdateOne(id, updateEngineRefreshSessionDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineRolesControllerFindMany(options?: RawAxiosRequestConfig): AxiosPromise<FindManyEngineRoleResponse> {
+            return localVarFp.engineRolesControllerFindMany(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [curPage] 
+         * @param {number} [perPage] 
+         * @param {string} [searchText] 
+         * @param {string} [sort] 
+         * @param {string} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineUsersControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, projectId?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManyEngineUserResponse> {
+            return localVarFp.engineUsersControllerFindMany(curPage, perPage, searchText, sort, projectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineUsersControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<EngineUserDto> {
+            return localVarFp.engineUsersControllerFindOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SendInvitationLinksArgs} sendInvitationLinksArgs 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineUsersControllerSendInvitationLinks(sendInvitationLinksArgs: SendInvitationLinksArgs, options?: RawAxiosRequestConfig): AxiosPromise<StatusResponse> {
+            return localVarFp.engineUsersControllerSendInvitationLinks(sendInvitationLinksArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateEngineUserDto} updateEngineUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        engineUsersControllerUpdateOne(id: string, updateEngineUserDto: UpdateEngineUserDto, options?: RawAxiosRequestConfig): AxiosPromise<EngineUserDto> {
+            return localVarFp.engineUsersControllerUpdateOne(id, updateEngineUserDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EngineApi - object-oriented interface
+ * @export
+ * @class EngineApi
+ * @extends {BaseAPI}
+ */
+export class EngineApi extends BaseAPI {
+    /**
+     * 
+     * @param {CompleteForgotPasswordArgs} completeForgotPasswordArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerCompleteForgotPassword(completeForgotPasswordArgs: CompleteForgotPasswordArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerCompleteForgotPassword(completeForgotPasswordArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CompleteSignUpArgs} completeSignUpArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerCompleteSignUp(completeSignUpArgs: CompleteSignUpArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerCompleteSignUp(completeSignUpArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ForgotPasswordArgs} forgotPasswordArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerForgotPassword(forgotPasswordArgs: ForgotPasswordArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerForgotPassword(forgotPasswordArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerProfile(options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerProfile(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {RefreshTokensResponse} refreshTokensResponse 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerRefreshTokens(refreshTokensResponse: RefreshTokensResponse, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerRefreshTokens(refreshTokensResponse, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SignInArgs} signInArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerSignIn(signInArgs: SignInArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerSignIn(signInArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SignOutArgs} signOutArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerSignOut(signOutArgs: SignOutArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerSignOut(signOutArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SignUpArgs} signUpArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerSignUp(signUpArgs: SignUpArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerSignUp(signUpArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpdateProfileArgs} updateProfileArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineControllerUpdateProfile(updateProfileArgs: UpdateProfileArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineControllerUpdateProfile(updateProfileArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [curPage] 
+     * @param {number} [perPage] 
+     * @param {string} [searchText] 
+     * @param {string} [sort] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineEmailTemplatesControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineEmailTemplatesControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineEmailTemplatesControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineEmailTemplatesControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateEngineEmailTemplateDto} updateEngineEmailTemplateDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineEmailTemplatesControllerUpdateOne(id: string, updateEngineEmailTemplateDto: UpdateEngineEmailTemplateDto, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineEmailTemplatesControllerUpdateOne(id, updateEngineEmailTemplateDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} redirectUri 
+     * @param {string} clientId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineGoogleOAuthControllerGoogleAuth(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineGoogleOAuthControllerGoogleAuth(redirectUri, clientId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} redirectUri 
+     * @param {string} clientId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineGoogleOAuthControllerGoogleAuthRedirect(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineGoogleOAuthControllerGoogleAuthRedirect(redirectUri, clientId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineOAuthControllerOauthProviders(options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineOAuthControllerOauthProviders(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EngineOAuthVerificationArgs} engineOAuthVerificationArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineOAuthControllerOauthVerification(engineOAuthVerificationArgs: EngineOAuthVerificationArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineOAuthControllerOauthVerification(engineOAuthVerificationArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateEngineProjectDto} createEngineProjectDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineProjectsControllerCreateOne(createEngineProjectDto: CreateEngineProjectDto, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineProjectsControllerCreateOne(createEngineProjectDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineProjectsControllerDeleteOne(id: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineProjectsControllerDeleteOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [curPage] 
+     * @param {number} [perPage] 
+     * @param {string} [searchText] 
+     * @param {string} [sort] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineProjectsControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineProjectsControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineProjectsControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateEngineProjectDto} updateEngineProjectDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineProjectsControllerUpdateOne(id: string, updateEngineProjectDto: UpdateEngineProjectDto, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineProjectsControllerUpdateOne(id, updateEngineProjectDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [curPage] 
+     * @param {number} [perPage] 
+     * @param {string} [searchText] 
+     * @param {string} [sort] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public enginePublicProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).enginePublicProjectsControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} userId 
+     * @param {number} [curPage] 
+     * @param {number} [perPage] 
+     * @param {string} [searchText] 
+     * @param {string} [sort] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineRefreshSessionsControllerFindMany(userId: string, curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineRefreshSessionsControllerFindMany(userId, curPage, perPage, searchText, sort, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineRefreshSessionsControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineRefreshSessionsControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateEngineRefreshSessionDto} updateEngineRefreshSessionDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineRefreshSessionsControllerUpdateOne(id: string, updateEngineRefreshSessionDto: UpdateEngineRefreshSessionDto, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineRefreshSessionsControllerUpdateOne(id, updateEngineRefreshSessionDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineRolesControllerFindMany(options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineRolesControllerFindMany(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [curPage] 
+     * @param {number} [perPage] 
+     * @param {string} [searchText] 
+     * @param {string} [sort] 
+     * @param {string} [projectId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineUsersControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, projectId?: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineUsersControllerFindMany(curPage, perPage, searchText, sort, projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineUsersControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineUsersControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SendInvitationLinksArgs} sendInvitationLinksArgs 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineUsersControllerSendInvitationLinks(sendInvitationLinksArgs: SendInvitationLinksArgs, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineUsersControllerSendInvitationLinks(sendInvitationLinksArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateEngineUserDto} updateEngineUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EngineApi
+     */
+    public engineUsersControllerUpdateOne(id: string, updateEngineUserDto: UpdateEngineUserDto, options?: RawAxiosRequestConfig) {
+        return EngineApiFp(this.configuration).engineUsersControllerUpdateOne(id, updateEngineUserDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * FilesApi - axios parameter creator
  * @export
  */
@@ -3813,2201 +6008,6 @@ export class NotificationsApi extends BaseAPI {
      */
     public notificationsControllerUpdateOne(id: string, updateNotificationsEventDto: UpdateNotificationsEventDto, options?: RawAxiosRequestConfig) {
         return NotificationsApiFp(this.configuration).notificationsControllerUpdateOne(id, updateNotificationsEventDto, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * SsoApi - axios parameter creator
- * @export
- */
-export const SsoApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {CompleteForgotPasswordArgs} completeForgotPasswordArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerCompleteForgotPassword: async (completeForgotPasswordArgs: CompleteForgotPasswordArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'completeForgotPasswordArgs' is not null or undefined
-            assertParamExists('ssoControllerCompleteForgotPassword', 'completeForgotPasswordArgs', completeForgotPasswordArgs)
-            const localVarPath = `/api/sso/complete-forgot-password`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(completeForgotPasswordArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {CompleteSignUpArgs} completeSignUpArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerCompleteSignUp: async (completeSignUpArgs: CompleteSignUpArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'completeSignUpArgs' is not null or undefined
-            assertParamExists('ssoControllerCompleteSignUp', 'completeSignUpArgs', completeSignUpArgs)
-            const localVarPath = `/api/sso/complete-sign-up`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(completeSignUpArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {ForgotPasswordArgs} forgotPasswordArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerForgotPassword: async (forgotPasswordArgs: ForgotPasswordArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'forgotPasswordArgs' is not null or undefined
-            assertParamExists('ssoControllerForgotPassword', 'forgotPasswordArgs', forgotPasswordArgs)
-            const localVarPath = `/api/sso/forgot-password`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(forgotPasswordArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerProfile: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/sso/profile`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {RefreshTokensResponse} refreshTokensResponse 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerRefreshTokens: async (refreshTokensResponse: RefreshTokensResponse, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'refreshTokensResponse' is not null or undefined
-            assertParamExists('ssoControllerRefreshTokens', 'refreshTokensResponse', refreshTokensResponse)
-            const localVarPath = `/api/sso/refresh-tokens`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(refreshTokensResponse, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {SignInArgs} signInArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerSignIn: async (signInArgs: SignInArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'signInArgs' is not null or undefined
-            assertParamExists('ssoControllerSignIn', 'signInArgs', signInArgs)
-            const localVarPath = `/api/sso/sign-in`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(signInArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {SignOutArgs} signOutArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerSignOut: async (signOutArgs: SignOutArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'signOutArgs' is not null or undefined
-            assertParamExists('ssoControllerSignOut', 'signOutArgs', signOutArgs)
-            const localVarPath = `/api/sso/sign-out`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(signOutArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {SignUpArgs} signUpArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerSignUp: async (signUpArgs: SignUpArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'signUpArgs' is not null or undefined
-            assertParamExists('ssoControllerSignUp', 'signUpArgs', signUpArgs)
-            const localVarPath = `/api/sso/sign-up`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(signUpArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {UpdateProfileArgs} updateProfileArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerUpdateProfile: async (updateProfileArgs: UpdateProfileArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'updateProfileArgs' is not null or undefined
-            assertParamExists('ssoControllerUpdateProfile', 'updateProfileArgs', updateProfileArgs)
-            const localVarPath = `/api/sso/profile`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateProfileArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoEmailTemplatesControllerFindMany: async (curPage?: number, perPage?: number, searchText?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/sso/email-templates`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (curPage !== undefined) {
-                localVarQueryParameter['curPage'] = curPage;
-            }
-
-            if (perPage !== undefined) {
-                localVarQueryParameter['perPage'] = perPage;
-            }
-
-            if (searchText !== undefined) {
-                localVarQueryParameter['searchText'] = searchText;
-            }
-
-            if (sort !== undefined) {
-                localVarQueryParameter['sort'] = sort;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoEmailTemplatesControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoEmailTemplatesControllerFindOne', 'id', id)
-            const localVarPath = `/api/sso/email-templates/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoEmailTemplateDto} updateSsoEmailTemplateDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoEmailTemplatesControllerUpdateOne: async (id: string, updateSsoEmailTemplateDto: UpdateSsoEmailTemplateDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoEmailTemplatesControllerUpdateOne', 'id', id)
-            // verify required parameter 'updateSsoEmailTemplateDto' is not null or undefined
-            assertParamExists('ssoEmailTemplatesControllerUpdateOne', 'updateSsoEmailTemplateDto', updateSsoEmailTemplateDto)
-            const localVarPath = `/api/sso/email-templates/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateSsoEmailTemplateDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} redirectUri 
-         * @param {string} clientId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoGoogleOAuthControllerGoogleAuth: async (redirectUri: string, clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'redirectUri' is not null or undefined
-            assertParamExists('ssoGoogleOAuthControllerGoogleAuth', 'redirectUri', redirectUri)
-            // verify required parameter 'clientId' is not null or undefined
-            assertParamExists('ssoGoogleOAuthControllerGoogleAuth', 'clientId', clientId)
-            const localVarPath = `/api/sso/oauth/google`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (redirectUri !== undefined) {
-                localVarQueryParameter['redirect_uri'] = redirectUri;
-            }
-
-            if (clientId !== undefined) {
-                localVarQueryParameter['client_id'] = clientId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} redirectUri 
-         * @param {string} clientId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoGoogleOAuthControllerGoogleAuthRedirect: async (redirectUri: string, clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'redirectUri' is not null or undefined
-            assertParamExists('ssoGoogleOAuthControllerGoogleAuthRedirect', 'redirectUri', redirectUri)
-            // verify required parameter 'clientId' is not null or undefined
-            assertParamExists('ssoGoogleOAuthControllerGoogleAuthRedirect', 'clientId', clientId)
-            const localVarPath = `/api/sso/oauth/google/redirect`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (redirectUri !== undefined) {
-                localVarQueryParameter['redirect_uri'] = redirectUri;
-            }
-
-            if (clientId !== undefined) {
-                localVarQueryParameter['client_id'] = clientId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoOAuthControllerOauthProviders: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/sso/oauth/providers`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {SsoOAuthVerificationArgs} ssoOAuthVerificationArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoOAuthControllerOauthVerification: async (ssoOAuthVerificationArgs: SsoOAuthVerificationArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'ssoOAuthVerificationArgs' is not null or undefined
-            assertParamExists('ssoOAuthControllerOauthVerification', 'ssoOAuthVerificationArgs', ssoOAuthVerificationArgs)
-            const localVarPath = `/api/sso/oauth/verification`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(ssoOAuthVerificationArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {CreateSsoProjectDto} createSsoProjectDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerCreateOne: async (createSsoProjectDto: CreateSsoProjectDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createSsoProjectDto' is not null or undefined
-            assertParamExists('ssoProjectsControllerCreateOne', 'createSsoProjectDto', createSsoProjectDto)
-            const localVarPath = `/api/sso/projects`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createSsoProjectDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerDeleteOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoProjectsControllerDeleteOne', 'id', id)
-            const localVarPath = `/api/sso/projects/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerFindMany: async (curPage?: number, perPage?: number, searchText?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/sso/projects`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (curPage !== undefined) {
-                localVarQueryParameter['curPage'] = curPage;
-            }
-
-            if (perPage !== undefined) {
-                localVarQueryParameter['perPage'] = perPage;
-            }
-
-            if (searchText !== undefined) {
-                localVarQueryParameter['searchText'] = searchText;
-            }
-
-            if (sort !== undefined) {
-                localVarQueryParameter['sort'] = sort;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoProjectsControllerFindOne', 'id', id)
-            const localVarPath = `/api/sso/projects/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoProjectDto} updateSsoProjectDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerUpdateOne: async (id: string, updateSsoProjectDto: UpdateSsoProjectDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoProjectsControllerUpdateOne', 'id', id)
-            // verify required parameter 'updateSsoProjectDto' is not null or undefined
-            assertParamExists('ssoProjectsControllerUpdateOne', 'updateSsoProjectDto', updateSsoProjectDto)
-            const localVarPath = `/api/sso/projects/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateSsoProjectDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoPublicProjectsControllerFindMany: async (curPage?: number, perPage?: number, searchText?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/sso/public-projects`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (curPage !== undefined) {
-                localVarQueryParameter['curPage'] = curPage;
-            }
-
-            if (perPage !== undefined) {
-                localVarQueryParameter['perPage'] = perPage;
-            }
-
-            if (searchText !== undefined) {
-                localVarQueryParameter['searchText'] = searchText;
-            }
-
-            if (sort !== undefined) {
-                localVarQueryParameter['sort'] = sort;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} userId 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoRefreshSessionsControllerFindMany: async (userId: string, curPage?: number, perPage?: number, searchText?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('ssoRefreshSessionsControllerFindMany', 'userId', userId)
-            const localVarPath = `/api/sso/sessions`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (curPage !== undefined) {
-                localVarQueryParameter['curPage'] = curPage;
-            }
-
-            if (perPage !== undefined) {
-                localVarQueryParameter['perPage'] = perPage;
-            }
-
-            if (searchText !== undefined) {
-                localVarQueryParameter['searchText'] = searchText;
-            }
-
-            if (sort !== undefined) {
-                localVarQueryParameter['sort'] = sort;
-            }
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoRefreshSessionsControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoRefreshSessionsControllerFindOne', 'id', id)
-            const localVarPath = `/api/sso/sessions/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoRefreshSessionDto} updateSsoRefreshSessionDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoRefreshSessionsControllerUpdateOne: async (id: string, updateSsoRefreshSessionDto: UpdateSsoRefreshSessionDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoRefreshSessionsControllerUpdateOne', 'id', id)
-            // verify required parameter 'updateSsoRefreshSessionDto' is not null or undefined
-            assertParamExists('ssoRefreshSessionsControllerUpdateOne', 'updateSsoRefreshSessionDto', updateSsoRefreshSessionDto)
-            const localVarPath = `/api/sso/sessions/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateSsoRefreshSessionDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoRolesControllerFindMany: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/sso/roles`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {string} [projectId] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoUsersControllerFindMany: async (curPage?: number, perPage?: number, searchText?: string, sort?: string, projectId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/sso/users`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (curPage !== undefined) {
-                localVarQueryParameter['curPage'] = curPage;
-            }
-
-            if (perPage !== undefined) {
-                localVarQueryParameter['perPage'] = perPage;
-            }
-
-            if (searchText !== undefined) {
-                localVarQueryParameter['searchText'] = searchText;
-            }
-
-            if (sort !== undefined) {
-                localVarQueryParameter['sort'] = sort;
-            }
-
-            if (projectId !== undefined) {
-                localVarQueryParameter['projectId'] = projectId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoUsersControllerFindOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoUsersControllerFindOne', 'id', id)
-            const localVarPath = `/api/sso/users/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {SendInvitationLinksArgs} sendInvitationLinksArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoUsersControllerSendInvitationLinks: async (sendInvitationLinksArgs: SendInvitationLinksArgs, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'sendInvitationLinksArgs' is not null or undefined
-            assertParamExists('ssoUsersControllerSendInvitationLinks', 'sendInvitationLinksArgs', sendInvitationLinksArgs)
-            const localVarPath = `/api/sso/users/send-invitation-links`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(sendInvitationLinksArgs, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoUserDto} updateSsoUserDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoUsersControllerUpdateOne: async (id: string, updateSsoUserDto: UpdateSsoUserDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('ssoUsersControllerUpdateOne', 'id', id)
-            // verify required parameter 'updateSsoUserDto' is not null or undefined
-            assertParamExists('ssoUsersControllerUpdateOne', 'updateSsoUserDto', updateSsoUserDto)
-            const localVarPath = `/api/sso/users/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateSsoUserDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * SsoApi - functional programming interface
- * @export
- */
-export const SsoApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SsoApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {CompleteForgotPasswordArgs} completeForgotPasswordArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerCompleteForgotPassword(completeForgotPasswordArgs: CompleteForgotPasswordArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerCompleteForgotPassword(completeForgotPasswordArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerCompleteForgotPassword']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {CompleteSignUpArgs} completeSignUpArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerCompleteSignUp(completeSignUpArgs: CompleteSignUpArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerCompleteSignUp(completeSignUpArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerCompleteSignUp']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {ForgotPasswordArgs} forgotPasswordArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerForgotPassword(forgotPasswordArgs: ForgotPasswordArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatusResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerForgotPassword(forgotPasswordArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerForgotPassword']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerProfile(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoUserDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerProfile(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerProfile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {RefreshTokensResponse} refreshTokensResponse 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerRefreshTokens(refreshTokensResponse: RefreshTokensResponse, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerRefreshTokens(refreshTokensResponse, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerRefreshTokens']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {SignInArgs} signInArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerSignIn(signInArgs: SignInArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerSignIn(signInArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerSignIn']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {SignOutArgs} signOutArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerSignOut(signOutArgs: SignOutArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatusResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerSignOut(signOutArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerSignOut']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {SignUpArgs} signUpArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerSignUp(signUpArgs: SignUpArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerSignUp(signUpArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerSignUp']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {UpdateProfileArgs} updateProfileArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoControllerUpdateProfile(updateProfileArgs: UpdateProfileArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoUserDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoControllerUpdateProfile(updateProfileArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoControllerUpdateProfile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoEmailTemplatesControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManySsoEmailTemplateResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoEmailTemplatesControllerFindMany(curPage, perPage, searchText, sort, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoEmailTemplatesControllerFindMany']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoEmailTemplatesControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoEmailTemplateDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoEmailTemplatesControllerFindOne(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoEmailTemplatesControllerFindOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoEmailTemplateDto} updateSsoEmailTemplateDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoEmailTemplatesControllerUpdateOne(id: string, updateSsoEmailTemplateDto: UpdateSsoEmailTemplateDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoEmailTemplateDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoEmailTemplatesControllerUpdateOne(id, updateSsoEmailTemplateDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoEmailTemplatesControllerUpdateOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} redirectUri 
-         * @param {string} clientId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoGoogleOAuthControllerGoogleAuth(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoGoogleOAuthControllerGoogleAuth(redirectUri, clientId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoGoogleOAuthControllerGoogleAuth']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} redirectUri 
-         * @param {string} clientId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoGoogleOAuthControllerGoogleAuthRedirect(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoGoogleOAuthControllerGoogleAuthRedirect(redirectUri, clientId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoGoogleOAuthControllerGoogleAuthRedirect']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoOAuthControllerOauthProviders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OAuthProvider>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoOAuthControllerOauthProviders(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoOAuthControllerOauthProviders']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {SsoOAuthVerificationArgs} ssoOAuthVerificationArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoOAuthControllerOauthVerification(ssoOAuthVerificationArgs: SsoOAuthVerificationArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokensResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoOAuthControllerOauthVerification(ssoOAuthVerificationArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoOAuthControllerOauthVerification']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {CreateSsoProjectDto} createSsoProjectDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoProjectsControllerCreateOne(createSsoProjectDto: CreateSsoProjectDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoProjectDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoProjectsControllerCreateOne(createSsoProjectDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoProjectsControllerCreateOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoProjectsControllerDeleteOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatusResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoProjectsControllerDeleteOne(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoProjectsControllerDeleteOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManySsoProjectResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoProjectsControllerFindMany(curPage, perPage, searchText, sort, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoProjectsControllerFindMany']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoProjectsControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoProjectDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoProjectsControllerFindOne(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoProjectsControllerFindOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoProjectDto} updateSsoProjectDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoProjectsControllerUpdateOne(id: string, updateSsoProjectDto: UpdateSsoProjectDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoProjectDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoProjectsControllerUpdateOne(id, updateSsoProjectDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoProjectsControllerUpdateOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoPublicProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManySsoPublicProjectResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoPublicProjectsControllerFindMany(curPage, perPage, searchText, sort, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoPublicProjectsControllerFindMany']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} userId 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoRefreshSessionsControllerFindMany(userId: string, curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManySsoRefreshSessionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoRefreshSessionsControllerFindMany(userId, curPage, perPage, searchText, sort, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoRefreshSessionsControllerFindMany']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoRefreshSessionsControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoRefreshSessionDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoRefreshSessionsControllerFindOne(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoRefreshSessionsControllerFindOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoRefreshSessionDto} updateSsoRefreshSessionDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoRefreshSessionsControllerUpdateOne(id: string, updateSsoRefreshSessionDto: UpdateSsoRefreshSessionDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoRefreshSessionDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoRefreshSessionsControllerUpdateOne(id, updateSsoRefreshSessionDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoRefreshSessionsControllerUpdateOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoRolesControllerFindMany(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManySsoRoleResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoRolesControllerFindMany(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoRolesControllerFindMany']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {string} [projectId] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoUsersControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, projectId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindManySsoUserResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoUsersControllerFindMany(curPage, perPage, searchText, sort, projectId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoUsersControllerFindMany']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoUsersControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoUserDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoUsersControllerFindOne(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoUsersControllerFindOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {SendInvitationLinksArgs} sendInvitationLinksArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoUsersControllerSendInvitationLinks(sendInvitationLinksArgs: SendInvitationLinksArgs, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StatusResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoUsersControllerSendInvitationLinks(sendInvitationLinksArgs, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoUsersControllerSendInvitationLinks']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoUserDto} updateSsoUserDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async ssoUsersControllerUpdateOne(id: string, updateSsoUserDto: UpdateSsoUserDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoUserDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ssoUsersControllerUpdateOne(id, updateSsoUserDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SsoApi.ssoUsersControllerUpdateOne']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * SsoApi - factory interface
- * @export
- */
-export const SsoApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SsoApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {CompleteForgotPasswordArgs} completeForgotPasswordArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerCompleteForgotPassword(completeForgotPasswordArgs: CompleteForgotPasswordArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
-            return localVarFp.ssoControllerCompleteForgotPassword(completeForgotPasswordArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {CompleteSignUpArgs} completeSignUpArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerCompleteSignUp(completeSignUpArgs: CompleteSignUpArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
-            return localVarFp.ssoControllerCompleteSignUp(completeSignUpArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {ForgotPasswordArgs} forgotPasswordArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerForgotPassword(forgotPasswordArgs: ForgotPasswordArgs, options?: RawAxiosRequestConfig): AxiosPromise<StatusResponse> {
-            return localVarFp.ssoControllerForgotPassword(forgotPasswordArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerProfile(options?: RawAxiosRequestConfig): AxiosPromise<SsoUserDto> {
-            return localVarFp.ssoControllerProfile(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {RefreshTokensResponse} refreshTokensResponse 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerRefreshTokens(refreshTokensResponse: RefreshTokensResponse, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
-            return localVarFp.ssoControllerRefreshTokens(refreshTokensResponse, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {SignInArgs} signInArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerSignIn(signInArgs: SignInArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
-            return localVarFp.ssoControllerSignIn(signInArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {SignOutArgs} signOutArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerSignOut(signOutArgs: SignOutArgs, options?: RawAxiosRequestConfig): AxiosPromise<StatusResponse> {
-            return localVarFp.ssoControllerSignOut(signOutArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {SignUpArgs} signUpArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerSignUp(signUpArgs: SignUpArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
-            return localVarFp.ssoControllerSignUp(signUpArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {UpdateProfileArgs} updateProfileArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoControllerUpdateProfile(updateProfileArgs: UpdateProfileArgs, options?: RawAxiosRequestConfig): AxiosPromise<SsoUserDto> {
-            return localVarFp.ssoControllerUpdateProfile(updateProfileArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoEmailTemplatesControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManySsoEmailTemplateResponse> {
-            return localVarFp.ssoEmailTemplatesControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoEmailTemplatesControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<SsoEmailTemplateDto> {
-            return localVarFp.ssoEmailTemplatesControllerFindOne(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoEmailTemplateDto} updateSsoEmailTemplateDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoEmailTemplatesControllerUpdateOne(id: string, updateSsoEmailTemplateDto: UpdateSsoEmailTemplateDto, options?: RawAxiosRequestConfig): AxiosPromise<SsoEmailTemplateDto> {
-            return localVarFp.ssoEmailTemplatesControllerUpdateOne(id, updateSsoEmailTemplateDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} redirectUri 
-         * @param {string} clientId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoGoogleOAuthControllerGoogleAuth(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.ssoGoogleOAuthControllerGoogleAuth(redirectUri, clientId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} redirectUri 
-         * @param {string} clientId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoGoogleOAuthControllerGoogleAuthRedirect(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.ssoGoogleOAuthControllerGoogleAuthRedirect(redirectUri, clientId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoOAuthControllerOauthProviders(options?: RawAxiosRequestConfig): AxiosPromise<Array<OAuthProvider>> {
-            return localVarFp.ssoOAuthControllerOauthProviders(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {SsoOAuthVerificationArgs} ssoOAuthVerificationArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoOAuthControllerOauthVerification(ssoOAuthVerificationArgs: SsoOAuthVerificationArgs, options?: RawAxiosRequestConfig): AxiosPromise<TokensResponse> {
-            return localVarFp.ssoOAuthControllerOauthVerification(ssoOAuthVerificationArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {CreateSsoProjectDto} createSsoProjectDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerCreateOne(createSsoProjectDto: CreateSsoProjectDto, options?: RawAxiosRequestConfig): AxiosPromise<SsoProjectDto> {
-            return localVarFp.ssoProjectsControllerCreateOne(createSsoProjectDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerDeleteOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<StatusResponse> {
-            return localVarFp.ssoProjectsControllerDeleteOne(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManySsoProjectResponse> {
-            return localVarFp.ssoProjectsControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<SsoProjectDto> {
-            return localVarFp.ssoProjectsControllerFindOne(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoProjectDto} updateSsoProjectDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoProjectsControllerUpdateOne(id: string, updateSsoProjectDto: UpdateSsoProjectDto, options?: RawAxiosRequestConfig): AxiosPromise<SsoProjectDto> {
-            return localVarFp.ssoProjectsControllerUpdateOne(id, updateSsoProjectDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoPublicProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManySsoPublicProjectResponse> {
-            return localVarFp.ssoPublicProjectsControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} userId 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoRefreshSessionsControllerFindMany(userId: string, curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManySsoRefreshSessionResponse> {
-            return localVarFp.ssoRefreshSessionsControllerFindMany(userId, curPage, perPage, searchText, sort, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoRefreshSessionsControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<SsoRefreshSessionDto> {
-            return localVarFp.ssoRefreshSessionsControllerFindOne(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoRefreshSessionDto} updateSsoRefreshSessionDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoRefreshSessionsControllerUpdateOne(id: string, updateSsoRefreshSessionDto: UpdateSsoRefreshSessionDto, options?: RawAxiosRequestConfig): AxiosPromise<SsoRefreshSessionDto> {
-            return localVarFp.ssoRefreshSessionsControllerUpdateOne(id, updateSsoRefreshSessionDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoRolesControllerFindMany(options?: RawAxiosRequestConfig): AxiosPromise<FindManySsoRoleResponse> {
-            return localVarFp.ssoRolesControllerFindMany(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} [curPage] 
-         * @param {number} [perPage] 
-         * @param {string} [searchText] 
-         * @param {string} [sort] 
-         * @param {string} [projectId] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoUsersControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, projectId?: string, options?: RawAxiosRequestConfig): AxiosPromise<FindManySsoUserResponse> {
-            return localVarFp.ssoUsersControllerFindMany(curPage, perPage, searchText, sort, projectId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoUsersControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<SsoUserDto> {
-            return localVarFp.ssoUsersControllerFindOne(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {SendInvitationLinksArgs} sendInvitationLinksArgs 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoUsersControllerSendInvitationLinks(sendInvitationLinksArgs: SendInvitationLinksArgs, options?: RawAxiosRequestConfig): AxiosPromise<StatusResponse> {
-            return localVarFp.ssoUsersControllerSendInvitationLinks(sendInvitationLinksArgs, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateSsoUserDto} updateSsoUserDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        ssoUsersControllerUpdateOne(id: string, updateSsoUserDto: UpdateSsoUserDto, options?: RawAxiosRequestConfig): AxiosPromise<SsoUserDto> {
-            return localVarFp.ssoUsersControllerUpdateOne(id, updateSsoUserDto, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * SsoApi - object-oriented interface
- * @export
- * @class SsoApi
- * @extends {BaseAPI}
- */
-export class SsoApi extends BaseAPI {
-    /**
-     * 
-     * @param {CompleteForgotPasswordArgs} completeForgotPasswordArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerCompleteForgotPassword(completeForgotPasswordArgs: CompleteForgotPasswordArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerCompleteForgotPassword(completeForgotPasswordArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {CompleteSignUpArgs} completeSignUpArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerCompleteSignUp(completeSignUpArgs: CompleteSignUpArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerCompleteSignUp(completeSignUpArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {ForgotPasswordArgs} forgotPasswordArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerForgotPassword(forgotPasswordArgs: ForgotPasswordArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerForgotPassword(forgotPasswordArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerProfile(options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerProfile(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {RefreshTokensResponse} refreshTokensResponse 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerRefreshTokens(refreshTokensResponse: RefreshTokensResponse, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerRefreshTokens(refreshTokensResponse, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {SignInArgs} signInArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerSignIn(signInArgs: SignInArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerSignIn(signInArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {SignOutArgs} signOutArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerSignOut(signOutArgs: SignOutArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerSignOut(signOutArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {SignUpArgs} signUpArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerSignUp(signUpArgs: SignUpArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerSignUp(signUpArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {UpdateProfileArgs} updateProfileArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoControllerUpdateProfile(updateProfileArgs: UpdateProfileArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoControllerUpdateProfile(updateProfileArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} [curPage] 
-     * @param {number} [perPage] 
-     * @param {string} [searchText] 
-     * @param {string} [sort] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoEmailTemplatesControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoEmailTemplatesControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoEmailTemplatesControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoEmailTemplatesControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {UpdateSsoEmailTemplateDto} updateSsoEmailTemplateDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoEmailTemplatesControllerUpdateOne(id: string, updateSsoEmailTemplateDto: UpdateSsoEmailTemplateDto, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoEmailTemplatesControllerUpdateOne(id, updateSsoEmailTemplateDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} redirectUri 
-     * @param {string} clientId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoGoogleOAuthControllerGoogleAuth(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoGoogleOAuthControllerGoogleAuth(redirectUri, clientId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} redirectUri 
-     * @param {string} clientId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoGoogleOAuthControllerGoogleAuthRedirect(redirectUri: string, clientId: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoGoogleOAuthControllerGoogleAuthRedirect(redirectUri, clientId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoOAuthControllerOauthProviders(options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoOAuthControllerOauthProviders(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {SsoOAuthVerificationArgs} ssoOAuthVerificationArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoOAuthControllerOauthVerification(ssoOAuthVerificationArgs: SsoOAuthVerificationArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoOAuthControllerOauthVerification(ssoOAuthVerificationArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {CreateSsoProjectDto} createSsoProjectDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoProjectsControllerCreateOne(createSsoProjectDto: CreateSsoProjectDto, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoProjectsControllerCreateOne(createSsoProjectDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoProjectsControllerDeleteOne(id: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoProjectsControllerDeleteOne(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} [curPage] 
-     * @param {number} [perPage] 
-     * @param {string} [searchText] 
-     * @param {string} [sort] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoProjectsControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoProjectsControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoProjectsControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {UpdateSsoProjectDto} updateSsoProjectDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoProjectsControllerUpdateOne(id: string, updateSsoProjectDto: UpdateSsoProjectDto, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoProjectsControllerUpdateOne(id, updateSsoProjectDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} [curPage] 
-     * @param {number} [perPage] 
-     * @param {string} [searchText] 
-     * @param {string} [sort] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoPublicProjectsControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoPublicProjectsControllerFindMany(curPage, perPage, searchText, sort, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} userId 
-     * @param {number} [curPage] 
-     * @param {number} [perPage] 
-     * @param {string} [searchText] 
-     * @param {string} [sort] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoRefreshSessionsControllerFindMany(userId: string, curPage?: number, perPage?: number, searchText?: string, sort?: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoRefreshSessionsControllerFindMany(userId, curPage, perPage, searchText, sort, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoRefreshSessionsControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoRefreshSessionsControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {UpdateSsoRefreshSessionDto} updateSsoRefreshSessionDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoRefreshSessionsControllerUpdateOne(id: string, updateSsoRefreshSessionDto: UpdateSsoRefreshSessionDto, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoRefreshSessionsControllerUpdateOne(id, updateSsoRefreshSessionDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoRolesControllerFindMany(options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoRolesControllerFindMany(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} [curPage] 
-     * @param {number} [perPage] 
-     * @param {string} [searchText] 
-     * @param {string} [sort] 
-     * @param {string} [projectId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoUsersControllerFindMany(curPage?: number, perPage?: number, searchText?: string, sort?: string, projectId?: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoUsersControllerFindMany(curPage, perPage, searchText, sort, projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoUsersControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoUsersControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {SendInvitationLinksArgs} sendInvitationLinksArgs 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoUsersControllerSendInvitationLinks(sendInvitationLinksArgs: SendInvitationLinksArgs, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoUsersControllerSendInvitationLinks(sendInvitationLinksArgs, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {UpdateSsoUserDto} updateSsoUserDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SsoApi
-     */
-    public ssoUsersControllerUpdateOne(id: string, updateSsoUserDto: UpdateSsoUserDto, options?: RawAxiosRequestConfig) {
-        return SsoApiFp(this.configuration).ssoUsersControllerUpdateOne(id, updateSsoUserDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

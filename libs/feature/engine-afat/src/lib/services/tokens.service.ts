@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, merge, of } from 'rxjs';
-import { SsoTokens } from './auth.types';
+import { EngineTokens } from './auth.types';
 
 @Injectable({ providedIn: 'root' })
 export class TokensService {
-  private tokens$ = new BehaviorSubject<SsoTokens | undefined>(undefined);
+  private tokens$ = new BehaviorSubject<EngineTokens | undefined>(undefined);
 
   getRefreshToken() {
     return ''; //this.tokens$.value?.refresh_token || localStorage.getItem('refreshToken')
@@ -14,7 +14,7 @@ export class TokensService {
     return this.tokens$.value?.access_token;
   }
 
-  setTokens(tokens: SsoTokens | undefined) {
+  setTokens(tokens: EngineTokens | undefined) {
     this.tokens$.next(tokens);
     if (tokens?.refresh_token) {
       localStorage.setItem('refreshToken', tokens.refresh_token);

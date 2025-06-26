@@ -3,19 +3,19 @@ import { marker } from '@jsverse/transloco-keys-manager/marker';
 import { RequestMeta, TIMEZONE_OFFSET } from '@nestjs-mod/misc';
 import { LayoutPart } from '../layout/layout.configuration';
 import {
-  CreateSsoProjectDtoInterface,
+  CreateEngineProjectDtoInterface,
   RuckenRestSdkAngularService,
-  SsoProjectDtoInterface,
-  SsoProjectScalarFieldEnumInterface,
-  SsoPublicProjectDtoInterface,
-  SsoRoleInterface,
-  UpdateSsoProjectDtoInterface,
+  EngineProjectDtoInterface,
+  EngineProjectScalarFieldEnumInterface,
+  EnginePublicProjectDtoInterface,
+  EngineRoleInterface,
+  UpdateEngineProjectDtoInterface,
 } from '@rucken/rucken-rest-sdk-angular';
 import { addHours } from 'date-fns';
 import { map } from 'rxjs';
 
-export interface SsoProjectModel
-  extends Partial<Omit<SsoProjectDtoInterface, 'createdAt' | 'updatedAt' | 'nameLocale'>> {
+export interface EngineProjectModel
+  extends Partial<Omit<EngineProjectDtoInterface, 'createdAt' | 'updatedAt' | 'nameLocale'>> {
   createdAt?: Date | null;
   updatedAt?: Date | null;
 }
@@ -26,7 +26,7 @@ export function projectsLayoutPart(
 ): LayoutPart {
   //
 
-  const toModel = (item?: SsoPublicProjectDtoInterface | SsoProjectDtoInterface): SsoProjectModel => {
+  const toModel = (item?: EnginePublicProjectDtoInterface | EngineProjectDtoInterface): EngineProjectModel => {
     return {
       ...item,
       createdAt: item?.createdAt ? addHours(new Date(item.createdAt), TIMEZONE_OFFSET) : null,
@@ -39,7 +39,7 @@ export function projectsLayoutPart(
     };
   };
 
-  const toJson = (data: SsoProjectModel) => {
+  const toJson = (data: EngineProjectModel) => {
     return {
       public: data.public === true,
       name: data.name || '',
@@ -62,7 +62,7 @@ export function projectsLayoutPart(
   };
 
   return {
-    roles: [SsoRoleInterface.admin],
+    roles: [EngineRoleInterface.admin],
     second: true,
     navigation: {
       link: '/projects',
@@ -72,15 +72,15 @@ export function projectsLayoutPart(
       handlers: () => ({
         findOne: (id: string) => {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoProjectsControllerFindOne(id)
+            .getEngineApi()
+            .engineProjectsControllerFindOne(id)
             .pipe(map((p) => toModel(p)));
         },
 
         findMany: ({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) => {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoProjectsControllerFindMany(
+            .getEngineApi()
+            .engineProjectsControllerFindMany(
               meta?.curPage,
               meta?.perPage,
               filters['search'],
@@ -91,28 +91,28 @@ export function projectsLayoutPart(
                 : undefined,
             )
             .pipe(
-              map(({ meta, ssoProjects }) => ({
+              map(({ meta, engineProjects }) => ({
                 meta,
-                items: ssoProjects.map((p) => toModel(p)),
+                items: engineProjects.map((p) => toModel(p)),
               })),
             );
         },
 
-        updateOne: (id: string, data: UpdateSsoProjectDtoInterface) => {
+        updateOne: (id: string, data: UpdateEngineProjectDtoInterface) => {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoProjectsControllerUpdateOne(id, toJson(data))
+            .getEngineApi()
+            .engineProjectsControllerUpdateOne(id, toJson(data))
             .pipe(map((p) => toModel(p)));
         },
 
         deleteOne: (id: string) => {
-          return ruckenRestSdkAngularService.getSsoApi().ssoProjectsControllerDeleteOne(id);
+          return ruckenRestSdkAngularService.getEngineApi().engineProjectsControllerDeleteOne(id);
         },
 
-        createOne: (data: CreateSsoProjectDtoInterface) => {
+        createOne: (data: CreateEngineProjectDtoInterface) => {
           return ruckenRestSdkAngularService
-            .getSsoApi()
-            .ssoProjectsControllerCreateOne(toJson(data))
+            .getEngineApi()
+            .engineProjectsControllerCreateOne(toJson(data))
             .pipe(map((p) => toModel(p)));
         },
       }),
@@ -126,7 +126,7 @@ export function projectsLayoutPart(
             },
             props: {
               label: translocoService.translate(
-                `sso-project.form.fields.name-locale`,
+                `engine-project.form.fields.name-locale`,
                 // id, label
                 {
                   locale: a.id,
@@ -138,38 +138,38 @@ export function projectsLayoutPart(
             },
           })),
           {
-            key: SsoProjectScalarFieldEnumInterface.clientId,
+            key: EngineProjectScalarFieldEnumInterface.clientId,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-project.form.fields.client-id`),
+              label: translocoService.translate(`engine-project.form.fields.client-id`),
               placeholder: 'clientId',
               required: true,
             },
           },
           {
-            key: SsoProjectScalarFieldEnumInterface.clientSecret,
+            key: EngineProjectScalarFieldEnumInterface.clientSecret,
             type: 'input',
             validation: {
               show: true,
             },
             props: {
-              label: translocoService.translate(`sso-project.form.fields.client-secret`),
+              label: translocoService.translate(`engine-project.form.fields.client-secret`),
               placeholder: 'clientSecret',
               required: true,
             },
           },
           {
-            key: SsoProjectScalarFieldEnumInterface.public,
+            key: EngineProjectScalarFieldEnumInterface.public,
             type: 'checkbox',
             validation: {
               show: true,
             },
             defaultValue: false,
             props: {
-              label: translocoService.translate(`sso-project.form.fields.public`),
+              label: translocoService.translate(`engine-project.form.fields.public`),
               placeholder: 'public',
               required: true,
             },
@@ -179,35 +179,35 @@ export function projectsLayoutPart(
       grid: () => ({
         actions: {
           create: {
-            title: marker('sso-project.create-modal.title'),
+            title: marker('engine-project.create-modal.title'),
           },
           delete: {
-            title: marker('sso-project.delete-modal.title'),
+            title: marker('engine-project.delete-modal.title'),
           },
           update: {
-            title: marker('sso-project.update-modal.title'),
+            title: marker('engine-project.update-modal.title'),
           },
         },
         columns: [
           {
-            name: SsoProjectScalarFieldEnumInterface.id,
-            title: marker('sso-project.grid.columns.id'),
+            name: EngineProjectScalarFieldEnumInterface.id,
+            title: marker('engine-project.grid.columns.id'),
           },
           {
-            name: SsoProjectScalarFieldEnumInterface.name,
-            title: marker('sso-project.grid.columns.name'),
+            name: EngineProjectScalarFieldEnumInterface.name,
+            title: marker('engine-project.grid.columns.name'),
           },
           {
-            name: SsoProjectScalarFieldEnumInterface.clientId,
-            title: marker('sso-project.grid.columns.client-id'),
+            name: EngineProjectScalarFieldEnumInterface.clientId,
+            title: marker('engine-project.grid.columns.client-id'),
           },
           {
-            name: SsoProjectScalarFieldEnumInterface.clientSecret,
-            title: marker('sso-project.grid.columns.client-secret'),
+            name: EngineProjectScalarFieldEnumInterface.clientSecret,
+            title: marker('engine-project.grid.columns.client-secret'),
           },
           {
-            name: SsoProjectScalarFieldEnumInterface.public,
-            title: marker('sso-project.grid.columns.public'),
+            name: EngineProjectScalarFieldEnumInterface.public,
+            title: marker('engine-project.grid.columns.public'),
           },
         ],
       }),

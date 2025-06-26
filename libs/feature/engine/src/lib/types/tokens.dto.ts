@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { SsoUser } from '../generated/rest/dto/sso-user.entity';
-import { SsoUserDto } from '../generated/rest/dto/sso-user.dto';
+import { EngineUser } from '../generated/rest/dto/engine-user.entity';
+import { EngineUserDto } from '../generated/rest/dto/engine-user.dto';
 
 export class TokensResponse {
   @ApiProperty({ type: String })
@@ -12,6 +12,6 @@ export class TokensResponse {
   @IsNotEmpty()
   refreshToken!: string;
 
-  @ApiProperty({ type: () => SsoUser })
-  user!: SsoUserDto;
+  @ApiProperty({ type: () => EngineUser })
+  user!: EngineUserDto;
 }

@@ -64,22 +64,22 @@ msgstr "Сбросить пароль"
 msgid "Change password"
 msgstr "Изменить пароль"
 
-msgid "sso-user.form.fields.app-data"
+msgid "engine-user.form.fields.app-data"
 msgstr "Дополнительные данные"
 
-msgid "sso-user.form.fields.birthdate"
+msgid "engine-user.form.fields.birthdate"
 msgstr "День рождения"
 
-msgid "sso-user.form.fields.email"
+msgid "engine-user.form.fields.email"
 msgstr "Почта"
 
-msgid "sso-user.form.fields.email-verified-at"
+msgid "engine-user.form.fields.email-verified-at"
 msgstr "Дата подтверждения почты"
 
-msgid "sso-user.form.fields.firstname"
+msgid "engine-user.form.fields.firstname"
 msgstr "Имя"
 
-msgid "sso-user.form.fields.gender"
+msgid "engine-user.form.fields.gender"
 msgstr "Пол"
 
 msgid "Male"
@@ -88,97 +88,97 @@ msgstr "Мужской"
 msgid "Female"
 msgstr "Женский"
 
-msgid "sso-user.form.fields.lastname"
+msgid "engine-user.form.fields.lastname"
 msgstr "Фамилия"
 
-msgid "sso-user.form.fields.phone"
+msgid "engine-user.form.fields.phone"
 msgstr "Телефон"
 
-msgid "sso-user.form.fields.phone-verified-at"
+msgid "engine-user.form.fields.phone-verified-at"
 msgstr "Дата подтверждения телефона"
 
-msgid "sso-user.form.fields.picture"
+msgid "engine-user.form.fields.picture"
 msgstr "Изображение"
 
-msgid "sso-user.form.fields.revoked-at"
+msgid "engine-user.form.fields.revoked-at"
 msgstr "Дата отключения"
 
-msgid "sso-user.form.fields.roles"
+msgid "engine-user.form.fields.roles"
 msgstr "Роли"
 
-msgid "sso-user.form.fields.username"
+msgid "engine-user.form.fields.username"
 msgstr "Имя пользователя"
 
-msgid "sso-session.form.fields.enabled"
+msgid "engine-session.form.fields.enabled"
 msgstr "Активен"
 
-msgid "sso-session.form.fields.expires-at"
+msgid "engine-session.form.fields.expires-at"
 msgstr "Дата истечения"
 
-msgid "sso-session.form.fields.fingerprint"
+msgid "engine-session.form.fields.fingerprint"
 msgstr "Отпечаток"
 
-msgid "sso-session.form.fields.user-agent"
+msgid "engine-session.form.fields.user-agent"
 msgstr "Юзер агент"
 
-msgid "sso-session.form.fields.user-data"
+msgid "engine-session.form.fields.user-data"
 msgstr "Пользовательские данные"
 
-msgid "sso-session.form.fields.user-ip"
+msgid "engine-session.form.fields.user-ip"
 msgstr "ИП-адрес"
 
-msgid "sso-project.form.fields.name-locale"
+msgid "engine-project.form.fields.name-locale"
 msgstr "Название ({{locale}})"
 
-msgid "sso-project.form.fields.client-id"
+msgid "engine-project.form.fields.client-id"
 msgstr "Идентификатор клиента"
 
-msgid "sso-project.form.fields.client-secret"
+msgid "engine-project.form.fields.client-secret"
 msgstr "Секретный ключ клиента"
 
-msgid "sso-project.form.fields.public"
+msgid "engine-project.form.fields.public"
 msgstr "Публичный"
 
-msgid "sso-email-template.form.fields.operation-name"
+msgid "engine-email-template.form.fields.operation-name"
 msgstr "Название"
 
-msgid "sso-email-template.form.fields.subject-locale"
+msgid "engine-email-template.form.fields.subject-locale"
 msgstr "Тема ({{locale}})"
 
-msgid "sso-email-template.form.fields.html-locale"
+msgid "engine-email-template.form.fields.html-locale"
 msgstr "В виде HTML ({{locale}})"
 
-msgid "sso-email-template.form.fields.text-locale"
+msgid "engine-email-template.form.fields.text-locale"
 msgstr "В виде текста ({{locale}})"
 
-msgid "sso.sign-up-form.fields.email"
+msgid "engine.sign-up-form.fields.email"
 msgstr "Email"
 
-msgid "sso.sign-up-form.fields.password"
+msgid "engine.sign-up-form.fields.password"
 msgstr "Пароль"
 
-msgid "sso.sign-up-form.fields.confirm-password"
+msgid "engine.sign-up-form.fields.confirm-password"
 msgstr "Пароль (еще раз)"
 
-msgid "sso.sign-in-form.fields.email"
+msgid "engine.sign-in-form.fields.email"
 msgstr "Email"
 
-msgid "sso.sign-in-form.fields.password"
+msgid "engine.sign-in-form.fields.password"
 msgstr "Пароль"
 
-msgid "sso.profile-form.fields.picture"
+msgid "engine.profile-form.fields.picture"
 msgstr "Изображение"
 
-msgid "sso.profile-form.fields.old-password"
+msgid "engine.profile-form.fields.old-password"
 msgstr "Старый пароль"
 
-msgid "sso.profile-form.fields.new-password"
+msgid "engine.profile-form.fields.new-password"
 msgstr "Новый пароль"
 
-msgid "sso.profile-form.fields.confirm-new-password"
+msgid "engine.profile-form.fields.confirm-new-password"
 msgstr "Новый пароль (еще раз)"
 
-msgid "sso.sign-in-form.fields.timezone"
+msgid "engine.sign-in-form.fields.timezone"
 msgstr "Часовой пояс"
 
 msgid "UTC−12:00: Date Line (west)"
@@ -298,7 +298,7 @@ msgstr "UTC+13:00: Самоа, Тонга"
 msgid "UTC+14:00: Date Line (east)"
 msgstr "UTC+14:00: Линия перемены дат (восток)"
 
-msgid "sso.forgot-password-form.fields.email"
+msgid "engine.forgot-password-form.fields.email"
 msgstr "Email"
 
 msgid "Successful login using external single sign-on system"
@@ -307,82 +307,82 @@ msgstr "Успешный вход с помощью внешней систем�
 msgid "Email address successfully verified"
 msgstr "Адрес электронной почты успешно подтвержден"
 
-msgid "sso.complete-forgot-password-form.fields.password"
+msgid "engine.complete-forgot-password-form.fields.password"
 msgstr "Пароль"
 
-msgid "sso.complete-forgot-password-form.fields.confirm-password"
+msgid "engine.complete-forgot-password-form.fields.confirm-password"
 msgstr "Пароль (еще раз)"
 
-msgid "sso-user.invite-members-modal.title"
+msgid "engine-user.invite-members-modal.title"
 msgstr "Отправка приглашений"
 
 msgid "Cancel"
 msgstr "Отмена"
 
-msgid "sso-user.update-modal.title"
+msgid "engine-user.update-modal.title"
 msgstr "Изменить пользователя #{{ id }}"
 
-msgid "sso-user.create-modal.title"
+msgid "engine-user.create-modal.title"
 msgstr "Создать пользователя"
 
-msgid "sso-user.grid.columns.id"
+msgid "engine-user.grid.columns.id"
 msgstr "ИД."
 
-msgid "sso-user.grid.columns.email"
+msgid "engine-user.grid.columns.email"
 msgstr "Почта"
 
-msgid "sso-user.grid.columns.firstname"
+msgid "engine-user.grid.columns.firstname"
 msgstr "Имя"
 
-msgid "sso-user.grid.columns.gender"
+msgid "engine-user.grid.columns.gender"
 msgstr "Пол"
 
-msgid "sso-user.grid.columns.phone"
+msgid "engine-user.grid.columns.phone"
 msgstr "Телефон"
 
-msgid "sso-user.grid.columns.picture"
+msgid "engine-user.grid.columns.picture"
 msgstr "Изображение"
 
-msgid "sso-user.grid.columns.roles"
+msgid "engine-user.grid.columns.roles"
 msgstr "Роли"
 
-msgid "sso-user.grid.columns.username"
+msgid "engine-user.grid.columns.username"
 msgstr "Имя пользователя"
 
-msgid "sso-session.update-modal.title"
+msgid "engine-session.update-modal.title"
 msgstr "Изменить сеанс #{{ id }}"
 
-msgid "sso-session.create-modal.title"
+msgid "engine-session.create-modal.title"
 msgstr "Создать сеанс"
 
-msgid "sso-session.grid.columns.id"
+msgid "engine-session.grid.columns.id"
 msgstr "ИД."
 
-msgid "sso-session.grid.columns.user-agent"
+msgid "engine-session.grid.columns.user-agent"
 msgstr "Юзер агент"
 
-msgid "sso-session.grid.columns.fingerprint"
+msgid "engine-session.grid.columns.fingerprint"
 msgstr "Отпечаток"
 
-msgid "sso-session.grid.columns.user-ip"
+msgid "engine-session.grid.columns.user-ip"
 msgstr "ИП-адрес"
 
-msgid "sso-session.grid.columns.expires-at"
+msgid "engine-session.grid.columns.expires-at"
 msgstr "Дата истечения"
 
-msgid "sso-session.grid.columns.user-data"
+msgid "engine-session.grid.columns.user-data"
 msgstr "Пользовательские данные"
 
-msgid "sso-session.grid.columns.enabled"
+msgid "engine-session.grid.columns.enabled"
 msgstr "Активен"
 
-msgid "sso-project.update-modal.title"
+msgid "engine-project.update-modal.title"
 msgstr "Изменить проект #{{ id }}"
 
-msgid "sso-project.create-modal.title"
+msgid "engine-project.create-modal.title"
 msgstr "Создать проект"
 
-msgid "sso-project.delete-modal.title"
+msgid "engine-project.delete-modal.title"
 msgstr "Удалить проект #{{ id }}"
 
 msgid "Yes"
@@ -391,37 +391,37 @@ msgstr "Да"
 msgid "No"
 msgstr "Нет"
 
-msgid "sso-project.grid.columns.id"
+msgid "engine-project.grid.columns.id"
 msgstr "ИД."
 
-msgid "sso-project.grid.columns.name"
+msgid "engine-project.grid.columns.name"
 msgstr "Название"
 
-msgid "sso-project.grid.columns.client-id"
+msgid "engine-project.grid.columns.client-id"
 msgstr "Идентификатор клиента"
 
-msgid "sso-project.grid.columns.client-secret"
+msgid "engine-project.grid.columns.client-secret"
 msgstr "Секретный ключ клиента"
 
-msgid "sso-project.grid.columns.public"
+msgid "engine-project.grid.columns.public"
 msgstr "Публичный"
 
-msgid "sso-email-template.update-modal.title"
+msgid "engine-email-template.update-modal.title"
 msgstr "Изменить шаблон письма #{{ id }}"
 
-msgid "sso-email-template.create-modal.title"
+msgid "engine-email-template.create-modal.title"
 msgstr "Создать шаблон письма"
 
-msgid "sso-email-template.grid.columns.id"
+msgid "engine-email-template.grid.columns.id"
 msgstr "ИД."
 
-msgid "sso-email-template.grid.columns.operation-name"
+msgid "engine-email-template.grid.columns.operation-name"
 msgstr "Событие"
 
-msgid "sso-email-template.grid.columns.subject"
+msgid "engine-email-template.grid.columns.subject"
 msgstr "Тема"
 
-msgid "sso-email-template.grid.columns.text"
+msgid "engine-email-template.grid.columns.text"
 msgstr "Текст"
 
 msgid "Success"
@@ -430,7 +430,7 @@ msgstr "Успешно"
 msgid "id not set"
 msgstr "ИД. не установлен"
 
-msgid "sso-invite-members.form.fields.emails"
+msgid "engine-invite-members.form.fields.emails"
 msgstr "Адреса электронной почты (через запятую)"
 
 msgid "Validation errors"
@@ -456,26 +456,26 @@ msgstr "Ваш пароль успешно изменен!"
 msgid "Project users"
 msgstr "Пользователи проекта"
 
-msgid "sso-project.form.fields.name"
+msgid "engine-project.form.fields.name"
 msgstr "Название"
 
-msgid "sso-user.delete-modal.title"
+msgid "engine-user.delete-modal.title"
 msgstr "Удалить пользователя #{{ id }}"
 
-msgid "sso-user.grid.columns.app-data"
+msgid "engine-user.grid.columns.app-data"
 msgstr "Дополнительные данные"
 
-msgid "sso-user.grid.columns.birthdate"
+msgid "engine-user.grid.columns.birthdate"
 msgstr "День рождения"
 
-msgid "sso-user.grid.columns.email-verified-at"
+msgid "engine-user.grid.columns.email-verified-at"
 msgstr "Дата подтверждения почты"
 
-msgid "sso-user.grid.columns.lastname"
+msgid "engine-user.grid.columns.lastname"
 msgstr "Фамилия"
 
-msgid "sso-user.grid.columns.phone-verified-at"
+msgid "engine-user.grid.columns.phone-verified-at"
 msgstr "Дата подтверждения телефона"
 
-msgid "sso-user.grid.columns.revoked-at"
+msgid "engine-user.grid.columns.revoked-at"
 msgstr "Дата отключения"

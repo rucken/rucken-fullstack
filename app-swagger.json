@@ -527,9 +527,9 @@
         "tags": ["Webhook"]
       }
     },
-    "/api/sso/sign-in": {
+    "/api/engine/sign-in": {
       "post": {
-        "operationId": "SsoController_signIn",
+        "operationId": "EngineController_signIn",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -546,7 +546,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -554,12 +554,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/sign-up": {
+    "/api/engine/sign-up": {
       "post": {
-        "operationId": "SsoController_signUp",
+        "operationId": "EngineController_signUp",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -576,7 +576,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -584,12 +584,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/complete-sign-up": {
+    "/api/engine/complete-sign-up": {
       "post": {
-        "operationId": "SsoController_completeSignUp",
+        "operationId": "EngineController_completeSignUp",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -606,7 +606,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -614,12 +614,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/sign-out": {
+    "/api/engine/sign-out": {
       "post": {
-        "operationId": "SsoController_signOut",
+        "operationId": "EngineController_signOut",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -636,7 +636,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -644,12 +644,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/forgot-password": {
+    "/api/engine/forgot-password": {
       "post": {
-        "operationId": "SsoController_forgotPassword",
+        "operationId": "EngineController_forgotPassword",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -666,7 +666,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -674,12 +674,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/complete-forgot-password": {
+    "/api/engine/complete-forgot-password": {
       "post": {
-        "operationId": "SsoController_completeForgotPassword",
+        "operationId": "EngineController_completeForgotPassword",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -696,7 +696,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -704,12 +704,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/refresh-tokens": {
+    "/api/engine/refresh-tokens": {
       "post": {
-        "operationId": "SsoController_refreshTokens",
+        "operationId": "EngineController_refreshTokens",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -726,7 +726,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -734,17 +734,17 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/profile": {
+    "/api/engine/profile": {
       "get": {
-        "operationId": "SsoController_profile",
+        "operationId": "EngineController_profile",
         "parameters": [],
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoUserDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineUserDto" } } }
           },
           "400": {
             "description": "",
@@ -752,7 +752,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -760,10 +760,10 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       },
       "put": {
-        "operationId": "SsoController_updateProfile",
+        "operationId": "EngineController_updateProfile",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -772,7 +772,7 @@
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoUserDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineUserDto" } } }
           },
           "400": {
             "description": "",
@@ -780,7 +780,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -788,12 +788,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/users": {
+    "/api/engine/users": {
       "get": {
-        "operationId": "SsoUsersController_findMany",
+        "operationId": "EngineUsersController_findMany",
         "parameters": [
           { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
           { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
@@ -804,7 +804,9 @@
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoUserResponse" } } }
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManyEngineUserResponse" } }
+            }
           },
           "400": {
             "description": "",
@@ -812,7 +814,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -820,21 +822,21 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/users/{id}": {
+    "/api/engine/users/{id}": {
       "put": {
-        "operationId": "SsoUsersController_updateOne",
+        "operationId": "EngineUsersController_updateOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateSsoUserDto" } } }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateEngineUserDto" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoUserDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineUserDto" } } }
           },
           "400": {
             "description": "",
@@ -842,7 +844,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -850,15 +852,15 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       },
       "get": {
-        "operationId": "SsoUsersController_findOne",
+        "operationId": "EngineUsersController_findOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoUserDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineUserDto" } } }
           },
           "400": {
             "description": "",
@@ -866,7 +868,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -874,12 +876,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/users/send-invitation-links": {
+    "/api/engine/users/send-invitation-links": {
       "post": {
-        "operationId": "SsoUsersController_sendInvitationLinks",
+        "operationId": "EngineUsersController_sendInvitationLinks",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -896,7 +898,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -904,12 +906,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/projects": {
+    "/api/engine/projects": {
       "get": {
-        "operationId": "SsoProjectsController_findMany",
+        "operationId": "EngineProjectsController_findMany",
         "parameters": [
           { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
           { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
@@ -920,7 +922,7 @@
           "200": {
             "description": "",
             "content": {
-              "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoProjectResponse" } }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManyEngineProjectResponse" } }
             }
           },
           "400": {
@@ -929,7 +931,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -937,19 +939,19 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       },
       "post": {
-        "operationId": "SsoProjectsController_createOne",
+        "operationId": "EngineProjectsController_createOne",
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateSsoProjectDto" } } }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateEngineProjectDto" } } }
         },
         "responses": {
           "201": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoProjectDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineProjectDto" } } }
           },
           "400": {
             "description": "",
@@ -957,7 +959,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -965,21 +967,21 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/projects/{id}": {
+    "/api/engine/projects/{id}": {
       "put": {
-        "operationId": "SsoProjectsController_updateOne",
+        "operationId": "EngineProjectsController_updateOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateSsoProjectDto" } } }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateEngineProjectDto" } } }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoProjectDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineProjectDto" } } }
           },
           "400": {
             "description": "",
@@ -987,7 +989,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -995,10 +997,10 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       },
       "delete": {
-        "operationId": "SsoProjectsController_deleteOne",
+        "operationId": "EngineProjectsController_deleteOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
@@ -1011,7 +1013,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -1019,15 +1021,15 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       },
       "get": {
-        "operationId": "SsoProjectsController_findOne",
+        "operationId": "EngineProjectsController_findOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoProjectDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineProjectDto" } } }
           },
           "400": {
             "description": "",
@@ -1035,7 +1037,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -1043,12 +1045,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/sessions": {
+    "/api/engine/sessions": {
       "get": {
-        "operationId": "SsoRefreshSessionsController_findMany",
+        "operationId": "EngineRefreshSessionsController_findMany",
         "parameters": [
           { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
           { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
@@ -1060,7 +1062,7 @@
           "200": {
             "description": "",
             "content": {
-              "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoRefreshSessionResponse" } }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManyEngineRefreshSessionResponse" } }
             }
           },
           "400": {
@@ -1069,7 +1071,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -1077,21 +1079,23 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/sessions/{id}": {
+    "/api/engine/sessions/{id}": {
       "put": {
-        "operationId": "SsoRefreshSessionsController_updateOne",
+        "operationId": "EngineRefreshSessionsController_updateOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateSsoRefreshSessionDto" } } }
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/UpdateEngineRefreshSessionDto" } }
+          }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoRefreshSessionDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineRefreshSessionDto" } } }
           },
           "400": {
             "description": "",
@@ -1099,7 +1103,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -1107,15 +1111,15 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       },
       "get": {
-        "operationId": "SsoRefreshSessionsController_findOne",
+        "operationId": "EngineRefreshSessionsController_findOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoRefreshSessionDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineRefreshSessionDto" } } }
           },
           "400": {
             "description": "",
@@ -1123,7 +1127,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -1131,45 +1135,27 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/roles": {
+    "/api/engine/roles": {
       "get": {
-        "operationId": "SsoRolesController_findMany",
+        "operationId": "EngineRolesController_findMany",
         "parameters": [],
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoRoleResponse" } } }
-          }
-        },
-        "tags": ["Sso"]
-      }
-    },
-    "/api/sso/public-projects": {
-      "get": {
-        "operationId": "SsoPublicProjectsController_findMany",
-        "parameters": [
-          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
-          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
-          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
-          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
             "content": {
-              "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoPublicProjectResponse" } }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManyEngineRoleResponse" } }
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/email-templates": {
+    "/api/engine/public-projects": {
       "get": {
-        "operationId": "SsoEmailTemplatesController_findMany",
+        "operationId": "EnginePublicProjectsController_findMany",
         "parameters": [
           { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
           { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
@@ -1180,7 +1166,27 @@
           "200": {
             "description": "",
             "content": {
-              "application/json": { "schema": { "$ref": "#/components/schemas/FindManySsoEmailTemplateResponse" } }
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManyEnginePublicProjectResponse" } }
+            }
+          }
+        },
+        "tags": ["Engine"]
+      }
+    },
+    "/api/engine/email-templates": {
+      "get": {
+        "operationId": "EngineEmailTemplatesController_findMany",
+        "parameters": [
+          { "name": "curPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "perPage", "required": false, "in": "query", "schema": { "type": "number" } },
+          { "name": "searchText", "required": false, "in": "query", "schema": { "type": "string" } },
+          { "name": "sort", "required": false, "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/FindManyEngineEmailTemplateResponse" } }
             }
           },
           "400": {
@@ -1189,7 +1195,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -1197,21 +1203,23 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/email-templates/{id}": {
+    "/api/engine/email-templates/{id}": {
       "put": {
-        "operationId": "SsoEmailTemplatesController_updateOne",
+        "operationId": "EngineEmailTemplatesController_updateOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "requestBody": {
           "required": true,
-          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateSsoEmailTemplateDto" } } }
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/UpdateEngineEmailTemplateDto" } }
+          }
         },
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoEmailTemplateDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineEmailTemplateDto" } } }
           },
           "400": {
             "description": "",
@@ -1219,7 +1227,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -1227,15 +1235,15 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       },
       "get": {
-        "operationId": "SsoEmailTemplatesController_findOne",
+        "operationId": "EngineEmailTemplatesController_findOne",
         "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
         "responses": {
           "200": {
             "description": "",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoEmailTemplateDto" } } }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EngineEmailTemplateDto" } } }
           },
           "400": {
             "description": "",
@@ -1243,7 +1251,7 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/SsoError" },
+                    { "$ref": "#/components/schemas/EngineError" },
                     { "$ref": "#/components/schemas/ValidationError" }
                   ]
                 }
@@ -1251,12 +1259,12 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/oauth/providers": {
+    "/api/engine/oauth/providers": {
       "get": {
-        "operationId": "SsoOAuthController_oauthProviders",
+        "operationId": "EngineOAuthController_oauthProviders",
         "parameters": [],
         "responses": {
           "200": {
@@ -1268,16 +1276,18 @@
             }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/oauth/verification": {
+    "/api/engine/oauth/verification": {
       "post": {
-        "operationId": "SsoOAuthController_oauthVerification",
+        "operationId": "EngineOAuthController_oauthVerification",
         "parameters": [],
         "requestBody": {
           "required": true,
-          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SsoOAuthVerificationArgs" } } }
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/EngineOAuthVerificationArgs" } }
+          }
         },
         "responses": {
           "200": {
@@ -1285,29 +1295,29 @@
             "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokensResponse" } } }
           }
         },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/oauth/google": {
+    "/api/engine/oauth/google": {
       "get": {
-        "operationId": "SsoGoogleOAuthController_googleAuth",
+        "operationId": "EngineGoogleOAuthController_googleAuth",
         "parameters": [
           { "name": "redirect_uri", "required": true, "in": "query", "schema": { "type": "string" } },
           { "name": "client_id", "required": true, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": { "200": { "description": "" } },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
-    "/api/sso/oauth/google/redirect": {
+    "/api/engine/oauth/google/redirect": {
       "get": {
-        "operationId": "SsoGoogleOAuthController_googleAuthRedirect",
+        "operationId": "EngineGoogleOAuthController_googleAuthRedirect",
         "parameters": [
           { "name": "redirect_uri", "required": true, "in": "query", "schema": { "type": "string" } },
           { "name": "client_id", "required": true, "in": "query", "schema": { "type": "string" } }
         ],
         "responses": { "200": { "description": "" } },
-        "tags": ["Sso"]
+        "tags": ["Engine"]
       }
     },
     "/api/time": {
@@ -1627,7 +1637,7 @@
         },
         "required": ["email", "password", "fingerprint"]
       },
-      "SsoEmailTemplate": {
+      "EngineEmailTemplate": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -1641,7 +1651,7 @@
           "projectId": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoProject": { "$ref": "#/components/schemas/SsoProject" }
+          "EngineProject": { "$ref": "#/components/schemas/EngineProject" }
         },
         "required": [
           "id",
@@ -1657,7 +1667,7 @@
           "updatedAt"
         ]
       },
-      "SsoRefreshSession": {
+      "EngineRefreshSession": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -1670,8 +1680,8 @@
           "projectId": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoProject": { "$ref": "#/components/schemas/SsoProject" },
-          "SsoUser": { "$ref": "#/components/schemas/SsoUser" }
+          "EngineProject": { "$ref": "#/components/schemas/EngineProject" },
+          "EngineUser": { "$ref": "#/components/schemas/EngineUser" }
         },
         "required": [
           "id",
@@ -1686,7 +1696,7 @@
           "updatedAt"
         ]
       },
-      "SsoProject": {
+      "EngineProject": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -1697,17 +1707,17 @@
           "public": { "type": "boolean" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoEmailTemplate": { "type": "array", "items": { "$ref": "#/components/schemas/SsoEmailTemplate" } },
-          "SsoOAuthToken_SsoOAuthToken_projectIdToSsoOAuthProvider": {
+          "EngineEmailTemplate": { "type": "array", "items": { "$ref": "#/components/schemas/EngineEmailTemplate" } },
+          "EngineOAuthToken_EngineOAuthToken_projectIdToEngineOAuthProvider": {
             "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoOAuthToken" }
+            "items": { "$ref": "#/components/schemas/EngineOAuthToken" }
           },
-          "SsoRefreshSession": { "type": "array", "items": { "$ref": "#/components/schemas/SsoRefreshSession" } },
-          "SsoUser": { "type": "array", "items": { "$ref": "#/components/schemas/SsoUser" } }
+          "EngineRefreshSession": { "type": "array", "items": { "$ref": "#/components/schemas/EngineRefreshSession" } },
+          "EngineUser": { "type": "array", "items": { "$ref": "#/components/schemas/EngineUser" } }
         },
         "required": ["id", "name", "nameLocale", "clientId", "clientSecret", "public", "createdAt", "updatedAt"]
       },
-      "SsoOAuthProviderSettings": {
+      "EngineOAuthProviderSettings": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -1716,26 +1726,26 @@
           "providerId": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoOAuthProvider": { "$ref": "#/components/schemas/SsoOAuthProvider" }
+          "EngineOAuthProvider": { "$ref": "#/components/schemas/EngineOAuthProvider" }
         },
         "required": ["id", "name", "value", "providerId", "createdAt", "updatedAt"]
       },
-      "SsoOAuthProvider": {
+      "EngineOAuthProvider": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
           "name": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoOAuthProviderSettings": {
+          "EngineOAuthProviderSettings": {
             "type": "array",
-            "items": { "$ref": "#/components/schemas/SsoOAuthProviderSettings" }
+            "items": { "$ref": "#/components/schemas/EngineOAuthProviderSettings" }
           },
-          "SsoOAuthToken": { "type": "array", "items": { "$ref": "#/components/schemas/SsoOAuthToken" } }
+          "EngineOAuthToken": { "type": "array", "items": { "$ref": "#/components/schemas/EngineOAuthToken" } }
         },
         "required": ["id", "name", "createdAt", "updatedAt"]
       },
-      "SsoOAuthToken": {
+      "EngineOAuthToken": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -1751,9 +1761,11 @@
           "providerUserData": { "type": "object", "nullable": true },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoOAuthProvider_SsoOAuthToken_projectIdToSsoOAuthProvider": { "$ref": "#/components/schemas/SsoProject" },
-          "SsoOAuthProvider": { "$ref": "#/components/schemas/SsoOAuthProvider" },
-          "SsoUser": { "$ref": "#/components/schemas/SsoUser" }
+          "EngineOAuthProvider_EngineOAuthToken_projectIdToEngineOAuthProvider": {
+            "$ref": "#/components/schemas/EngineProject"
+          },
+          "EngineOAuthProvider": { "$ref": "#/components/schemas/EngineOAuthProvider" },
+          "EngineUser": { "$ref": "#/components/schemas/EngineUser" }
         },
         "required": [
           "id",
@@ -1771,7 +1783,7 @@
           "updatedAt"
         ]
       },
-      "SsoUser": {
+      "EngineUser": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -1793,9 +1805,9 @@
           "projectId": { "type": "string" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" },
-          "SsoOAuthToken": { "type": "array", "items": { "$ref": "#/components/schemas/SsoOAuthToken" } },
-          "SsoRefreshSession": { "type": "array", "items": { "$ref": "#/components/schemas/SsoRefreshSession" } },
-          "SsoProject": { "$ref": "#/components/schemas/SsoProject" }
+          "EngineOAuthToken": { "type": "array", "items": { "$ref": "#/components/schemas/EngineOAuthToken" } },
+          "EngineRefreshSession": { "type": "array", "items": { "$ref": "#/components/schemas/EngineRefreshSession" } },
+          "EngineProject": { "$ref": "#/components/schemas/EngineProject" }
         },
         "required": [
           "id",
@@ -1824,7 +1836,7 @@
         "properties": {
           "accessToken": { "type": "string" },
           "refreshToken": { "type": "string" },
-          "user": { "$ref": "#/components/schemas/SsoUser" }
+          "user": { "$ref": "#/components/schemas/EngineUser" }
         },
         "required": ["accessToken", "refreshToken", "user"]
       },
@@ -1866,7 +1878,7 @@
         "properties": { "fingerprint": { "type": "string" }, "refreshToken": { "type": "string" } },
         "required": ["fingerprint"]
       },
-      "SsoUserDto": {
+      "EngineUserDto": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -1924,15 +1936,15 @@
           "confirmPassword": { "type": "string" }
         }
       },
-      "FindManySsoUserResponse": {
+      "FindManyEngineUserResponse": {
         "type": "object",
         "properties": {
-          "ssoUsers": { "type": "array", "items": { "$ref": "#/components/schemas/SsoUserDto" } },
+          "engineUsers": { "type": "array", "items": { "$ref": "#/components/schemas/EngineUserDto" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
-        "required": ["ssoUsers", "meta"]
+        "required": ["engineUsers", "meta"]
       },
-      "UpdateSsoUserDto": {
+      "UpdateEngineUserDto": {
         "type": "object",
         "properties": {
           "email": { "type": "string" },
@@ -1958,7 +1970,7 @@
         "properties": { "emails": { "type": "string" } },
         "required": ["emails"]
       },
-      "SsoProjectDto": {
+      "EngineProjectDto": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -1972,15 +1984,15 @@
         },
         "required": ["id", "name", "nameLocale", "clientId", "clientSecret", "public", "createdAt", "updatedAt"]
       },
-      "FindManySsoProjectResponse": {
+      "FindManyEngineProjectResponse": {
         "type": "object",
         "properties": {
-          "ssoProjects": { "type": "array", "items": { "$ref": "#/components/schemas/SsoProjectDto" } },
+          "engineProjects": { "type": "array", "items": { "$ref": "#/components/schemas/EngineProjectDto" } },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
-        "required": ["ssoProjects", "meta"]
+        "required": ["engineProjects", "meta"]
       },
-      "CreateSsoProjectDto": {
+      "CreateEngineProjectDto": {
         "type": "object",
         "properties": {
           "name": { "type": "string" },
@@ -1991,7 +2003,7 @@
         },
         "required": ["name", "clientId", "clientSecret", "public"]
       },
-      "UpdateSsoProjectDto": {
+      "UpdateEngineProjectDto": {
         "type": "object",
         "properties": {
           "name": { "type": "string" },
@@ -2001,7 +2013,7 @@
           "public": { "type": "boolean" }
         }
       },
-      "SsoRefreshSessionDto": {
+      "EngineRefreshSessionDto": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -2015,15 +2027,18 @@
         },
         "required": ["id", "userAgent", "userIp", "expiresAt", "userData", "enabled", "createdAt", "updatedAt"]
       },
-      "FindManySsoRefreshSessionResponse": {
+      "FindManyEngineRefreshSessionResponse": {
         "type": "object",
         "properties": {
-          "ssoRefreshSessions": { "type": "array", "items": { "$ref": "#/components/schemas/SsoRefreshSessionDto" } },
+          "engineRefreshSessions": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/EngineRefreshSessionDto" }
+          },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
-        "required": ["ssoRefreshSessions", "meta"]
+        "required": ["engineRefreshSessions", "meta"]
       },
-      "UpdateSsoRefreshSessionDto": {
+      "UpdateEngineRefreshSessionDto": {
         "type": "object",
         "properties": {
           "refreshToken": { "type": "string" },
@@ -2035,7 +2050,7 @@
           "enabled": { "type": "boolean" }
         }
       },
-      "FindManySsoRoleResponse": {
+      "FindManyEngineRoleResponse": {
         "type": "object",
         "properties": {
           "userAvailableRoles": { "type": "array", "items": { "type": "string" } },
@@ -2044,7 +2059,7 @@
         },
         "required": ["userAvailableRoles", "userDefaultRoles", "adminDefaultRoles"]
       },
-      "SsoPublicProjectDto": {
+      "EnginePublicProjectDto": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -2056,15 +2071,18 @@
         },
         "required": ["id", "name", "nameLocale", "clientId", "createdAt", "updatedAt"]
       },
-      "FindManySsoPublicProjectResponse": {
+      "FindManyEnginePublicProjectResponse": {
         "type": "object",
         "properties": {
-          "ssoPublicProjects": { "type": "array", "items": { "$ref": "#/components/schemas/SsoPublicProjectDto" } },
+          "enginePublicProjects": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/EnginePublicProjectDto" }
+          },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
-        "required": ["ssoPublicProjects", "meta"]
+        "required": ["enginePublicProjects", "meta"]
       },
-      "SsoEmailTemplateDto": {
+      "EngineEmailTemplateDto": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
@@ -2091,15 +2109,18 @@
           "updatedAt"
         ]
       },
-      "FindManySsoEmailTemplateResponse": {
+      "FindManyEngineEmailTemplateResponse": {
         "type": "object",
         "properties": {
-          "ssoEmailTemplates": { "type": "array", "items": { "$ref": "#/components/schemas/SsoEmailTemplateDto" } },
+          "engineEmailTemplates": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/EngineEmailTemplateDto" }
+          },
           "meta": { "$ref": "#/components/schemas/FindManyResponseMeta" }
         },
-        "required": ["ssoEmailTemplates", "meta"]
+        "required": ["engineEmailTemplates", "meta"]
       },
-      "UpdateSsoEmailTemplateDto": {
+      "UpdateEngineEmailTemplateDto": {
         "type": "object",
         "properties": {
           "subject": { "type": "string" },
@@ -2122,7 +2143,7 @@
         },
         "required": ["id", "name", "createdAt", "updatedAt", "url"]
       },
-      "SsoOAuthVerificationArgs": {
+      "EngineOAuthVerificationArgs": {
         "type": "object",
         "properties": { "verificationCode": { "type": "string" }, "fingerprint": { "type": "string" } },
         "required": ["verificationCode", "fingerprint"]
@@ -2213,48 +2234,48 @@
         },
         "required": ["NotificationsUser", "NotificationsEvent"]
       },
-      "SsoErrorEnum": {
+      "EngineErrorEnum": {
         "type": "string",
         "enum": [
-          "SSO-000",
-          "SSO-001",
-          "SSO-002",
-          "SSO-003",
-          "SSO-004",
-          "SSO-005",
-          "SSO-006",
-          "SSO-007",
-          "SSO-008",
-          "SSO-009",
-          "SSO-010",
-          "SSO-011",
-          "SSO-012",
-          "SSO-013",
-          "SSO-014",
-          "SSO-015",
-          "SSO-016",
-          "SSO-017",
-          "SSO-018"
+          "ENGINE-000",
+          "ENGINE-001",
+          "ENGINE-002",
+          "ENGINE-003",
+          "ENGINE-004",
+          "ENGINE-005",
+          "ENGINE-006",
+          "ENGINE-007",
+          "ENGINE-008",
+          "ENGINE-009",
+          "ENGINE-010",
+          "ENGINE-011",
+          "ENGINE-012",
+          "ENGINE-013",
+          "ENGINE-014",
+          "ENGINE-015",
+          "ENGINE-016",
+          "ENGINE-017",
+          "ENGINE-018"
         ]
       },
-      "SsoError": {
+      "EngineError": {
         "type": "object",
         "properties": {
           "message": {
             "type": "string",
-            "description": "Sso error (SSO-000), User not found (SSO-001), Wrong password (SSO-002), User is exists (SSO-003), Wrong activate email code (SSO-004), Activate email not processed (SSO-005), Activate email processed (SSO-006), Refresh token not provided (SSO-007), Session expired (SSO-008), Invalid refresh session (SSO-009), Access token expired (SSO-010), User is exists (SSO-011), Email not verified (SSO-012), Forbidden (SSO-013), Wrong old password (SSO-014), Non-existent role specified (SSO-015), Bad access token (SSO-016), Your session has been blocked (SSO-017), Verification code not found (SSO-018)",
-            "example": "Sso error"
+            "description": "Engine error (ENGINE-000), User not found (ENGINE-001), Wrong password (ENGINE-002), User is exists (ENGINE-003), Wrong activate email code (ENGINE-004), Activate email not processed (ENGINE-005), Activate email processed (ENGINE-006), Refresh token not provided (ENGINE-007), Session expired (ENGINE-008), Invalid refresh session (ENGINE-009), Access token expired (ENGINE-010), User is exists (ENGINE-011), Email not verified (ENGINE-012), Forbidden (ENGINE-013), Wrong old password (ENGINE-014), Non-existent role specified (ENGINE-015), Bad access token (ENGINE-016), Your session has been blocked (ENGINE-017), Verification code not found (ENGINE-018)",
+            "example": "Engine error"
           },
-          "code": { "example": "SSO-000", "allOf": [{ "$ref": "#/components/schemas/SsoErrorEnum" }] },
+          "code": { "example": "ENGINE-000", "allOf": [{ "$ref": "#/components/schemas/EngineErrorEnum" }] },
           "metadata": { "type": "object" }
         },
         "required": ["message", "code"]
       },
-      "SsoProjectScalarFieldEnum": {
+      "EngineProjectScalarFieldEnum": {
         "type": "string",
         "enum": ["id", "name", "nameLocale", "clientId", "clientSecret", "public", "createdAt", "updatedAt"]
       },
-      "SsoUserScalarFieldEnum": {
+      "EngineUserScalarFieldEnum": {
         "type": "string",
         "enum": [
           "id",
@@ -2279,7 +2300,7 @@
           "updatedAt"
         ]
       },
-      "SsoRefreshSessionScalarFieldEnum": {
+      "EngineRefreshSessionScalarFieldEnum": {
         "type": "string",
         "enum": [
           "id",
@@ -2296,7 +2317,7 @@
           "updatedAt"
         ]
       },
-      "SsoEmailTemplateScalarFieldEnum": {
+      "EngineEmailTemplateScalarFieldEnum": {
         "type": "string",
         "enum": [
           "id",
@@ -2312,12 +2333,12 @@
           "updatedAt"
         ]
       },
-      "SsoOAuthProviderScalarFieldEnum": { "type": "string", "enum": ["id", "name", "createdAt", "updatedAt"] },
-      "SsoOAuthProviderSettingsScalarFieldEnum": {
+      "EngineOAuthProviderScalarFieldEnum": { "type": "string", "enum": ["id", "name", "createdAt", "updatedAt"] },
+      "EngineOAuthProviderSettingsScalarFieldEnum": {
         "type": "string",
         "enum": ["id", "name", "value", "providerId", "createdAt", "updatedAt"]
       },
-      "SsoOAuthTokenScalarFieldEnum": {
+      "EngineOAuthTokenScalarFieldEnum": {
         "type": "string",
         "enum": [
           "id",
@@ -2337,29 +2358,29 @@
           "updatedAt"
         ]
       },
-      "SsoRole": { "type": "string", "enum": ["admin", "manager", "user"] },
-      "SsoEntities": {
+      "EngineRole": { "type": "string", "enum": ["admin", "manager", "user"] },
+      "EngineEntities": {
         "type": "object",
         "properties": {
-          "SsoProject": { "allOf": [{ "$ref": "#/components/schemas/SsoProjectScalarFieldEnum" }] },
-          "SsoUser": { "allOf": [{ "$ref": "#/components/schemas/SsoUserScalarFieldEnum" }] },
-          "SsoRefreshSession": { "allOf": [{ "$ref": "#/components/schemas/SsoRefreshSessionScalarFieldEnum" }] },
-          "SsoEmailTemplate": { "allOf": [{ "$ref": "#/components/schemas/SsoEmailTemplateScalarFieldEnum" }] },
-          "SsoOAuthProvider": { "allOf": [{ "$ref": "#/components/schemas/SsoOAuthProviderScalarFieldEnum" }] },
-          "SsoOAuthProviderSettings": {
-            "allOf": [{ "$ref": "#/components/schemas/SsoOAuthProviderSettingsScalarFieldEnum" }]
+          "EngineProject": { "allOf": [{ "$ref": "#/components/schemas/EngineProjectScalarFieldEnum" }] },
+          "EngineUser": { "allOf": [{ "$ref": "#/components/schemas/EngineUserScalarFieldEnum" }] },
+          "EngineRefreshSession": { "allOf": [{ "$ref": "#/components/schemas/EngineRefreshSessionScalarFieldEnum" }] },
+          "EngineEmailTemplate": { "allOf": [{ "$ref": "#/components/schemas/EngineEmailTemplateScalarFieldEnum" }] },
+          "EngineOAuthProvider": { "allOf": [{ "$ref": "#/components/schemas/EngineOAuthProviderScalarFieldEnum" }] },
+          "EngineOAuthProviderSettings": {
+            "allOf": [{ "$ref": "#/components/schemas/EngineOAuthProviderSettingsScalarFieldEnum" }]
           },
-          "SsoOAuthToken": { "allOf": [{ "$ref": "#/components/schemas/SsoOAuthTokenScalarFieldEnum" }] },
-          "role": { "allOf": [{ "$ref": "#/components/schemas/SsoRole" }] }
+          "EngineOAuthToken": { "allOf": [{ "$ref": "#/components/schemas/EngineOAuthTokenScalarFieldEnum" }] },
+          "role": { "allOf": [{ "$ref": "#/components/schemas/EngineRole" }] }
         },
         "required": [
-          "SsoProject",
-          "SsoUser",
-          "SsoRefreshSession",
-          "SsoEmailTemplate",
-          "SsoOAuthProvider",
-          "SsoOAuthProviderSettings",
-          "SsoOAuthToken",
+          "EngineProject",
+          "EngineUser",
+          "EngineRefreshSession",
+          "EngineEmailTemplate",
+          "EngineOAuthProvider",
+          "EngineOAuthProviderSettings",
+          "EngineOAuthToken",
           "role"
         ]
       },

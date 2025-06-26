@@ -1,4 +1,4 @@
-import { SsoRole } from '@rucken/rucken-rest-sdk';
+import { EngineRole } from '@rucken/rucken-rest-sdk';
 import { RuckenRestClientHelper } from '@rucken/testing';
 import { AxiosError } from 'axios';
 
@@ -20,7 +20,7 @@ describe('Validation', () => {
   beforeAll(async () => {
     await user1.createAndLoginAsUser();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    await admin.setRoles(user1.getSsoProfile()!.id, [SsoRole.Manager]);
+    await admin.setRoles(user1.getEngineProfile()!.id, [EngineRole.Manager]);
   });
 
   it('should catch error on create new webhook as user1', async () => {

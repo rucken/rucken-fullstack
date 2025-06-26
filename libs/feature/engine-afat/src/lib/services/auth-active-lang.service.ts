@@ -2,7 +2,11 @@ import { Inject, Injectable } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { LangToLocaleMapping, TRANSLOCO_LOCALE_LANG_MAPPING } from '@jsverse/transloco-locale';
 import { ActiveLangService } from '@nestjs-mod/afat';
-import { RuckenRestSdkAngularService, SsoErrorEnumInterface, SsoErrorInterface } from '@rucken/rucken-rest-sdk-angular';
+import {
+  RuckenRestSdkAngularService,
+  EngineErrorEnumInterface,
+  EngineErrorInterface,
+} from '@rucken/rucken-rest-sdk-angular';
 import { catchError, map, mergeMap, of, tap, throwError } from 'rxjs';
 import { TokensService } from './tokens.service';
 
@@ -10,7 +14,7 @@ const AUTH_ACTIVE_USER_LANG_LOCAL_STORAGE_KEY = 'activeUserLang';
 const AUTH_ACTIVE_GUEST_LANG_LOCAL_STORAGE_KEY = 'activeGuestLang';
 
 @Injectable({ providedIn: 'root' })
-export class SsoActiveLangService {
+export class EngineActiveLangService {
   constructor(
     private readonly ruckenRestSdkAngularService: RuckenRestSdkAngularService,
     private readonly translocoService: TranslocoService,
@@ -42,14 +46,14 @@ export class SsoActiveLangService {
     }
 
     return this.ruckenRestSdkAngularService
-      .getSsoApi()
-      .ssoControllerProfile()
+      .getEngineApi()
+      .engineControllerProfile()
       .pipe(
         mergeMap((profile) => {
           return profile.lang ? of(profile.lang) : this.localGetActiveLang();
         }),
         catchError((err) => {
-          if ('error' in err && (err.error as SsoErrorInterface).code === SsoErrorEnumInterface.SSO_013) {
+          if ('error' in err && (err.error as EngineErrorInterface).code === EngineErrorEnumInterface.ENGINE_013) {
             return this.localGetActiveLang();
           }
           return throwError(() => err);
@@ -79,12 +83,12 @@ export class SsoActiveLangService {
     }
 
     return this.ruckenRestSdkAngularService
-      .getSsoApi()
-      .ssoControllerUpdateProfile({ lang })
+      .getEngineApi()
+      .engineControllerUpdateProfile({ lang })
       .pipe(
         mergeMap(() => this.localSetActiveLang(lang, loadDictionaries)),
         catchError((err) => {
-          if ('error' in err && (err.error as SsoErrorInterface).code === SsoErrorEnumInterface.SSO_013) {
+          if ('error' in err && (err.error as EngineErrorInterface).code === EngineErrorEnumInterface.ENGINE_013) {
             return this.localSetActiveLang(lang, loadDictionaries);
           }
           return throwError(() => err);

@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { SsoForgotPasswordFormComponent } from '../../forms/auth-forgot-password-form/auth-forgot-password-form.component';
+import { EngineForgotPasswordFormComponent } from '../../forms/auth-forgot-password-form/auth-forgot-password-form.component';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  imports: [NzBreadCrumbModule, TranslocoDirective, SsoForgotPasswordFormComponent],
+  imports: [NzBreadCrumbModule, TranslocoDirective, EngineForgotPasswordFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })

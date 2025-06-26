@@ -4,11 +4,11 @@ import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
-import { SsoSignupInput } from './auth.types';
+import { EngineSignupInput } from './auth.types';
 
 @UntilDestroy()
 @Injectable({ providedIn: 'root' })
-export class SsoSignUpFormService {
+export class EngineSignUpFormService {
   constructor(
     protected readonly translocoService: TranslocoService,
     protected readonly validationService: ValidationService,
@@ -16,7 +16,7 @@ export class SsoSignUpFormService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getFormlyFields(options?: {
-    data?: SsoSignupInput;
+    data?: EngineSignupInput;
     errors?: ValidationErrorMetadataInterface[];
   }): FormlyFieldConfig[] {
     return this.validationService.appendServerErrorsAsValidatorsToFields(
@@ -28,7 +28,7 @@ export class SsoSignUpFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.sign-up-form.fields.email`),
+            label: this.translocoService.translate(`engine.sign-up-form.fields.email`),
             placeholder: 'email',
             required: true,
           },
@@ -40,7 +40,7 @@ export class SsoSignUpFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.sign-up-form.fields.password`),
+            label: this.translocoService.translate(`engine.sign-up-form.fields.password`),
             placeholder: 'password',
             required: true,
             type: 'password',
@@ -53,7 +53,7 @@ export class SsoSignUpFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.sign-up-form.fields.confirm-password`),
+            label: this.translocoService.translate(`engine.sign-up-form.fields.confirm-password`),
             placeholder: 'confirmPassword',
             required: true,
             type: 'password',

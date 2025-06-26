@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { marker } from '@jsverse/transloco-keys-manager/marker';
 import { searchIn } from '@nestjs-mod/misc';
-import { SsoRoleInterface } from '@rucken/rucken-rest-sdk-angular';
+import { EngineRoleInterface } from '@rucken/rucken-rest-sdk-angular';
 import { CompleteForgotPasswordComponent } from './complete-forgot-password/complete-forgot-password.component';
 import { CompleteInviteComponent } from './complete-invite/complete-invite.component';
 import { CompleteSignUpComponent } from './complete-sign-up/complete-sign-up.component';
@@ -11,28 +11,28 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ROOT_PATH_MARKER, SECOND_PATH_MARKER } from '../engine-afat.constants';
 import {
-  SsoCompleteGuardService,
-  SSO_COMPLETE_GUARD_DATA_ROUTE_KEY,
-  SsoCompleteGuardData,
+  EngineCompleteGuardService,
+  ENGINE_COMPLETE_GUARD_DATA_ROUTE_KEY,
+  EngineCompleteGuardData,
   CompleteSignUpOptions,
 } from '../services/auth-complete-guard.service';
 import {
-  SsoGuardService,
-  SSO_GUARD_DATA_ROUTE_KEY,
-  SsoGuardData,
+  EngineGuardService,
+  ENGINE_GUARD_DATA_ROUTE_KEY,
+  EngineGuardData,
   OnActivateOptions,
 } from '../services/auth-guard.service';
-import { SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY } from '../services/sso-active-project.service';
+import { ENGINE_ACTIVE_USER_CLIENT_ID_STORAGE_KEY } from '../services/engine-active-project.service';
 
-export const ssoPagesRoutes: Route[] = [
+export const enginePagesRoutes: Route[] = [
   {
     path: 'profile',
     component: ProfileComponent,
     title: marker('Profile'),
-    canActivate: [SsoGuardService],
+    canActivate: [EngineGuardService],
     data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
-        roles: [SsoRoleInterface.admin, SsoRoleInterface.manager, SsoRoleInterface.user],
+      [ENGINE_GUARD_DATA_ROUTE_KEY]: new EngineGuardData({
+        roles: [EngineRoleInterface.admin, EngineRoleInterface.manager, EngineRoleInterface.user],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
             options.router.navigate([ROOT_PATH_MARKER]);
@@ -47,9 +47,9 @@ export const ssoPagesRoutes: Route[] = [
     path: 'sign-in',
     component: SignInComponent,
     title: marker('Sign-in'),
-    canActivate: [SsoGuardService],
+    canActivate: [EngineGuardService],
     data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
+      [ENGINE_GUARD_DATA_ROUTE_KEY]: new EngineGuardData({
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
@@ -65,9 +65,9 @@ export const ssoPagesRoutes: Route[] = [
     path: 'sign-up',
     component: SignUpComponent,
     title: marker('Sign-up'),
-    canActivate: [SsoGuardService],
+    canActivate: [EngineGuardService],
     data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
+      [ENGINE_GUARD_DATA_ROUTE_KEY]: new EngineGuardData({
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
@@ -83,16 +83,16 @@ export const ssoPagesRoutes: Route[] = [
     path: 'complete-sign-up',
     component: CompleteSignUpComponent,
     title: marker('Complete sign up'),
-    canActivate: [SsoCompleteGuardService],
+    canActivate: [EngineCompleteGuardService],
     data: {
-      [SSO_COMPLETE_GUARD_DATA_ROUTE_KEY]: new SsoCompleteGuardData({
+      [ENGINE_COMPLETE_GUARD_DATA_ROUTE_KEY]: new EngineCompleteGuardData({
         type: 'complete-sign-up',
 
         beforeCompleteSignUp: async (options: CompleteSignUpOptions) => {
           const clientId = options.activatedRouteSnapshot.queryParamMap.get('client_id');
           if (clientId && clientId !== undefined) {
-            localStorage.setItem(SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY, clientId);
-            options.ssoService.updateHeaders();
+            localStorage.setItem(ENGINE_ACTIVE_USER_CLIENT_ID_STORAGE_KEY, clientId);
+            options.engineService.updateHeaders();
           }
           return true;
         },
@@ -103,8 +103,8 @@ export const ssoPagesRoutes: Route[] = [
 
           const redirectUri = options.activatedRouteSnapshot.queryParamMap.get('redirect_uri');
           if (!redirectUri) {
-            if (options.ssoService && options.router) {
-              if (searchIn(SsoRoleInterface.admin, options.ssoService.profile$.value?.roles)) {
+            if (options.engineService && options.router) {
+              if (searchIn(EngineRoleInterface.admin, options.engineService.profile$.value?.roles)) {
                 options.router.navigate([SECOND_PATH_MARKER]);
               } else {
                 options.router.navigate([ROOT_PATH_MARKER]);
@@ -122,16 +122,16 @@ export const ssoPagesRoutes: Route[] = [
     path: 'complete-oauth-sign-up',
     component: CompleteSignUpComponent,
     title: marker('Complete OAuth sign up'),
-    canActivate: [SsoCompleteGuardService],
+    canActivate: [EngineCompleteGuardService],
     data: {
-      [SSO_COMPLETE_GUARD_DATA_ROUTE_KEY]: new SsoCompleteGuardData({
+      [ENGINE_COMPLETE_GUARD_DATA_ROUTE_KEY]: new EngineCompleteGuardData({
         type: 'complete-oauth-sign-up',
 
         beforeCompleteSignUp: async (options: CompleteSignUpOptions) => {
           const clientId = options.activatedRouteSnapshot.queryParamMap.get('client_id');
           if (clientId && clientId !== undefined) {
-            localStorage.setItem(SSO_ACTIVE_USER_CLIENT_ID_STORAGE_KEY, clientId);
-            options.ssoService.updateHeaders();
+            localStorage.setItem(ENGINE_ACTIVE_USER_CLIENT_ID_STORAGE_KEY, clientId);
+            options.engineService.updateHeaders();
           }
           return true;
         },
@@ -142,8 +142,8 @@ export const ssoPagesRoutes: Route[] = [
 
           const redirectUri = options.activatedRouteSnapshot.queryParamMap.get('redirect_uri');
           if (!redirectUri) {
-            if (options.ssoService && options.router) {
-              if (searchIn(SsoRoleInterface.admin, options.ssoService.profile$.value?.roles)) {
+            if (options.engineService && options.router) {
+              if (searchIn(EngineRoleInterface.admin, options.engineService.profile$.value?.roles)) {
                 options.router.navigate([SECOND_PATH_MARKER]);
               } else {
                 options.router.navigate([ROOT_PATH_MARKER]);
@@ -161,9 +161,9 @@ export const ssoPagesRoutes: Route[] = [
     path: 'forgot-password',
     component: ForgotPasswordComponent,
     title: marker('Password recovery'),
-    canActivate: [SsoGuardService],
+    canActivate: [EngineGuardService],
     data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
+      [ENGINE_GUARD_DATA_ROUTE_KEY]: new EngineGuardData({
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
@@ -179,9 +179,9 @@ export const ssoPagesRoutes: Route[] = [
     path: 'complete-forgot-password',
     component: CompleteForgotPasswordComponent,
     title: marker('Сomplete forgot password'),
-    canActivate: [SsoGuardService, SsoCompleteGuardService],
+    canActivate: [EngineGuardService, EngineCompleteGuardService],
     data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
+      [ENGINE_GUARD_DATA_ROUTE_KEY]: new EngineGuardData({
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
@@ -191,7 +191,7 @@ export const ssoPagesRoutes: Route[] = [
           return true;
         },
       }),
-      [SSO_COMPLETE_GUARD_DATA_ROUTE_KEY]: new SsoCompleteGuardData({
+      [ENGINE_COMPLETE_GUARD_DATA_ROUTE_KEY]: new EngineCompleteGuardData({
         type: 'complete-forgot-password',
       }),
     },
@@ -200,9 +200,9 @@ export const ssoPagesRoutes: Route[] = [
     path: 'complete-invite',
     component: CompleteInviteComponent,
     title: marker('Completing registration'),
-    canActivate: [SsoGuardService, SsoCompleteGuardService],
+    canActivate: [EngineGuardService, EngineCompleteGuardService],
     data: {
-      [SSO_GUARD_DATA_ROUTE_KEY]: new SsoGuardData({
+      [ENGINE_GUARD_DATA_ROUTE_KEY]: new EngineGuardData({
         roles: [],
         afterActivate: async (options: OnActivateOptions) => {
           if (options.error) {
@@ -212,7 +212,7 @@ export const ssoPagesRoutes: Route[] = [
           return true;
         },
       }),
-      [SSO_COMPLETE_GUARD_DATA_ROUTE_KEY]: new SsoCompleteGuardData({
+      [ENGINE_COMPLETE_GUARD_DATA_ROUTE_KEY]: new EngineCompleteGuardData({
         type: 'complete-invite',
       }),
     },

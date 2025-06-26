@@ -1,13 +1,13 @@
 import { TIMEZONE_OFFSET } from '@nestjs-mod/misc';
 import { Injectable, PipeTransform } from '@nestjs/common';
-import { SsoTimezoneService } from '../services/sso-timezone.service';
-import { SsoAsyncLocalStorageContext } from '../types/sso-async-local-storage-data';
+import { EngineTimezoneService } from '../services/engine-timezone.service';
+import { EngineAsyncLocalStorageContext } from '../types/engine-async-local-storage-data';
 
 @Injectable()
-export class SsoTimezonePipe implements PipeTransform {
+export class EngineTimezonePipe implements PipeTransform {
   constructor(
-    private readonly asyncLocalStorage: SsoAsyncLocalStorageContext,
-    private readonly authTimezoneService: SsoTimezoneService,
+    private readonly asyncLocalStorage: EngineAsyncLocalStorageContext,
+    private readonly authTimezoneService: EngineTimezoneService,
   ) {}
 
   transform(value: unknown) {

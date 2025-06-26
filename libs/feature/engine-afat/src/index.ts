@@ -12,7 +12,7 @@ export * from './lib/forms/auth-forgot-password-form/auth-forgot-password-form.c
 export * from './lib/forms/auth-profile-form/auth-profile-form.component';
 export * from './lib/forms/auth-sign-in-form/auth-sign-in-form.component';
 export * from './lib/forms/auth-sign-up-form/auth-sign-up-form.component';
-export * from './lib/forms/sso-invite-members-form/sso-invite-members-form.component';
+export * from './lib/forms/engine-invite-members-form/engine-invite-members-form.component';
 export * from './lib/layout-parts/email-templates.layout-part';
 export * from './lib/layout-parts/projects.layout-part';
 export * from './lib/layout-parts/users.layout-part';
@@ -40,6 +40,6 @@ export * from './lib/services/auth-sign-up-form.service';
 export * from './lib/services/auth.configuration';
 export * from './lib/services/auth.service';
 export * from './lib/services/auth.types';
+export * from './lib/services/engine-active-project.service';
 export * from './lib/services/fingerprint.service';
-export * from './lib/services/sso-active-project.service';
 export * from './lib/services/tokens.service';

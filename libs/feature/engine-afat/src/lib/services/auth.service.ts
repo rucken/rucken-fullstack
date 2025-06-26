@@ -1,37 +1,37 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, mergeMap, Observable, of, Subject } from 'rxjs';
-import { SSO_CONFIGURATION_TOKEN, SsoConfiguration } from './auth.configuration';
+import { ENGINE_CONFIGURATION_TOKEN, EngineConfiguration } from './auth.configuration';
 import {
-  SsoCompleteForgotPasswordInput,
-  SsoCompleteSignUpInput,
-  SsoForgotPasswordInput,
-  SsoLoginInput,
-  SsoSignupInput,
-  SsoUpdateProfileInput,
-  SsoUser,
-  SsoUserAndTokens,
+  EngineCompleteForgotPasswordInput,
+  EngineCompleteSignUpInput,
+  EngineForgotPasswordInput,
+  EngineLoginInput,
+  EngineSignupInput,
+  EngineUpdateProfileInput,
+  EngineUser,
+  EngineUserAndTokens,
   OAuthVerificationInput,
 } from './auth.types';
 import { TokensService } from './tokens.service';
 
 @Injectable({ providedIn: 'root' })
-export class SsoService {
-  profile$ = new BehaviorSubject<SsoUser | undefined>(undefined);
+export class EngineService {
+  profile$ = new BehaviorSubject<EngineUser | undefined>(undefined);
   updateHeaders$ = new Subject<boolean>();
 
   constructor(
     protected readonly tokensService: TokensService,
-    @Inject(SSO_CONFIGURATION_TOKEN)
-    protected readonly ssoConfiguration: SsoConfiguration,
+    @Inject(ENGINE_CONFIGURATION_TOKEN)
+    protected readonly engineConfiguration: EngineConfiguration,
   ) {}
 
   updateHeaders() {
     this.updateHeaders$.next(true);
   }
 
-  completeSignUp(data: SsoCompleteSignUpInput): Observable<SsoUserAndTokens | null> {
-    return this.ssoConfiguration.completeSignUp
-      ? this.ssoConfiguration.completeSignUp(data).pipe(
+  completeSignUp(data: EngineCompleteSignUpInput): Observable<EngineUserAndTokens | null> {
+    return this.engineConfiguration.completeSignUp
+      ? this.engineConfiguration.completeSignUp(data).pipe(
           mergeMap((result) => {
             return this.setProfileAndTokens(result).pipe(
               map((profile) => ({
@@ -44,13 +44,13 @@ export class SsoService {
       : of(null);
   }
 
-  forgotPassword(data: SsoForgotPasswordInput): Observable<true | null> {
-    return this.ssoConfiguration.forgotPassword ? this.ssoConfiguration.forgotPassword(data) : of(null);
+  forgotPassword(data: EngineForgotPasswordInput): Observable<true | null> {
+    return this.engineConfiguration.forgotPassword ? this.engineConfiguration.forgotPassword(data) : of(null);
   }
 
-  completeForgotPassword(data: SsoCompleteForgotPasswordInput): Observable<SsoUserAndTokens | null> {
-    return this.ssoConfiguration.completeForgotPassword
-      ? this.ssoConfiguration.completeForgotPassword(data).pipe(
+  completeForgotPassword(data: EngineCompleteForgotPasswordInput): Observable<EngineUserAndTokens | null> {
+    return this.engineConfiguration.completeForgotPassword
+      ? this.engineConfiguration.completeForgotPassword(data).pipe(
           mergeMap((result) => {
             return this.setProfileAndTokens(result).pipe(
               map((profile) => ({
@@ -64,11 +64,13 @@ export class SsoService {
   }
 
   getAuthorizationHeaders() {
-    return this.ssoConfiguration.getAuthorizationHeaders ? this.ssoConfiguration.getAuthorizationHeaders() : undefined;
+    return this.engineConfiguration.getAuthorizationHeaders
+      ? this.engineConfiguration.getAuthorizationHeaders()
+      : undefined;
   }
 
-  signUp(data: SsoSignupInput) {
-    return this.ssoConfiguration
+  signUp(data: EngineSignupInput) {
+    return this.engineConfiguration
       .signup({
         ...data,
         email: data.email?.toLowerCase(),
@@ -85,15 +87,15 @@ export class SsoService {
       );
   }
 
-  updateProfile(data: SsoUpdateProfileInput) {
-    return this.ssoConfiguration.updateProfile(data).pipe(
-      mergeMap(() => this.ssoConfiguration.getProfile()),
+  updateProfile(data: EngineUpdateProfileInput) {
+    return this.engineConfiguration.updateProfile(data).pipe(
+      mergeMap(() => this.engineConfiguration.getProfile()),
       mergeMap((result) => this.setProfile(result)),
     );
   }
 
-  signIn(data: SsoLoginInput) {
-    return this.ssoConfiguration
+  signIn(data: EngineLoginInput) {
+    return this.engineConfiguration
       .login({
         ...data,
         email: data.email?.toLowerCase(),
@@ -111,7 +113,7 @@ export class SsoService {
   }
 
   signOut() {
-    return this.ssoConfiguration.logout().pipe(
+    return this.engineConfiguration.logout().pipe(
       mergeMap(() => {
         return this.clearProfileAndTokens();
       }),
@@ -123,7 +125,7 @@ export class SsoService {
   }
 
   refreshToken() {
-    return this.ssoConfiguration.refreshToken().pipe(
+    return this.engineConfiguration.refreshToken().pipe(
       mergeMap((result) => {
         return this.setProfileAndTokens(result);
       }),
@@ -135,24 +137,24 @@ export class SsoService {
   }
 
   clearProfileAndTokens() {
-    return this.setProfileAndTokens({} as SsoUserAndTokens);
+    return this.setProfileAndTokens({} as EngineUserAndTokens);
   }
 
-  setProfileAndTokens(result: SsoUserAndTokens | undefined) {
+  setProfileAndTokens(result: EngineUserAndTokens | undefined) {
     this.tokensService.setTokens(result?.tokens);
     return this.setProfile(result?.user);
   }
 
-  setProfile(result: SsoUser | undefined) {
+  setProfile(result: EngineUser | undefined) {
     this.profile$.next(result);
     return of(result);
   }
 
   getOAuthProviders() {
-    return this.ssoConfiguration.oAuthProviders();
+    return this.engineConfiguration.oAuthProviders();
   }
 
   oAuthVerification(oAuthVerificationInput: OAuthVerificationInput) {
-    return this.ssoConfiguration.oAuthVerification(oAuthVerificationInput);
+    return this.engineConfiguration.oAuthVerification(oAuthVerificationInput);
   }
 }

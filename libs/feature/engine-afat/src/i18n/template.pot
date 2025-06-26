@@ -63,22 +63,22 @@ msgstr "Reset password"
 msgid "Change password"
 msgstr "Change password"
 
-msgid "sso-user.form.fields.app-data"
+msgid "engine-user.form.fields.app-data"
 msgstr "Additional data"
 
-msgid "sso-user.form.fields.birthdate"
+msgid "engine-user.form.fields.birthdate"
 msgstr "Birth date"
 
-msgid "sso-user.form.fields.email"
+msgid "engine-user.form.fields.email"
 msgstr "Email"
 
-msgid "sso-user.form.fields.email-verified-at"
+msgid "engine-user.form.fields.email-verified-at"
 msgstr "Email verified at"
 
-msgid "sso-user.form.fields.firstname"
+msgid "engine-user.form.fields.firstname"
 msgstr "First name"
 
-msgid "sso-user.form.fields.gender"
+msgid "engine-user.form.fields.gender"
 msgstr "Gender"
 
 msgid "Male"
@@ -87,97 +87,97 @@ msgstr "Male"
 msgid "Female"
 msgstr "Female"
 
-msgid "sso-user.form.fields.lastname"
+msgid "engine-user.form.fields.lastname"
 msgstr "Last name"
 
-msgid "sso-user.form.fields.phone"
+msgid "engine-user.form.fields.phone"
 msgstr "Phone"
 
-msgid "sso-user.form.fields.phone-verified-at"
+msgid "engine-user.form.fields.phone-verified-at"
 msgstr "Phone verified at"
 
-msgid "sso-user.form.fields.picture"
+msgid "engine-user.form.fields.picture"
 msgstr "Picture"
 
-msgid "sso-user.form.fields.revoked-at"
+msgid "engine-user.form.fields.revoked-at"
 msgstr "Revoked at"
 
-msgid "sso-user.form.fields.roles"
+msgid "engine-user.form.fields.roles"
 msgstr "Roles"
 
-msgid "sso-user.form.fields.username"
+msgid "engine-user.form.fields.username"
 msgstr "Username"
 
-msgid "sso-session.form.fields.enabled"
+msgid "engine-session.form.fields.enabled"
 msgstr "Enabled"
 
-msgid "sso-session.form.fields.expires-at"
+msgid "engine-session.form.fields.expires-at"
 msgstr "Expires at"
 
-msgid "sso-session.form.fields.fingerprint"
+msgid "engine-session.form.fields.fingerprint"
 msgstr "Fingerprint"
 
-msgid "sso-session.form.fields.user-agent"
+msgid "engine-session.form.fields.user-agent"
 msgstr "User agent"
 
-msgid "sso-session.form.fields.user-data"
+msgid "engine-session.form.fields.user-data"
 msgstr "User data"
 
-msgid "sso-session.form.fields.user-ip"
+msgid "engine-session.form.fields.user-ip"
 msgstr "IP address"
 
-msgid "sso-project.form.fields.name-locale"
+msgid "engine-project.form.fields.name-locale"
 msgstr "Name ({{locale}})"
 
-msgid "sso-project.form.fields.client-id"
+msgid "engine-project.form.fields.client-id"
 msgstr "Client id"
 
-msgid "sso-project.form.fields.client-secret"
+msgid "engine-project.form.fields.client-secret"
 msgstr "Client secret"
 
-msgid "sso-project.form.fields.public"
+msgid "engine-project.form.fields.public"
 msgstr "Public"
 
-msgid "sso-email-template.form.fields.operation-name"
+msgid "engine-email-template.form.fields.operation-name"
 msgstr "Operation name"
 
-msgid "sso-email-template.form.fields.subject-locale"
+msgid "engine-email-template.form.fields.subject-locale"
 msgstr "Subject ({{locale}})"
 
-msgid "sso-email-template.form.fields.html-locale"
+msgid "engine-email-template.form.fields.html-locale"
 msgstr "In html format ({{locale}})"
 
-msgid "sso-email-template.form.fields.text-locale"
+msgid "engine-email-template.form.fields.text-locale"
 msgstr "In text format ({{locale}})"
 
-msgid "sso.sign-up-form.fields.email"
+msgid "engine.sign-up-form.fields.email"
 msgstr "Email"
 
-msgid "sso.sign-up-form.fields.password"
+msgid "engine.sign-up-form.fields.password"
 msgstr "Password"
 
-msgid "sso.sign-up-form.fields.confirm-password"
+msgid "engine.sign-up-form.fields.confirm-password"
 msgstr "Confirm password"
 
-msgid "sso.sign-in-form.fields.email"
+msgid "engine.sign-in-form.fields.email"
 msgstr "Email"
 
-msgid "sso.sign-in-form.fields.password"
+msgid "engine.sign-in-form.fields.password"
 msgstr "Password"
 
-msgid "sso.profile-form.fields.picture"
+msgid "engine.profile-form.fields.picture"
 msgstr "Picture"
 
-msgid "sso.profile-form.fields.old-password"
+msgid "engine.profile-form.fields.old-password"
 msgstr "Old password"
 
-msgid "sso.profile-form.fields.new-password"
+msgid "engine.profile-form.fields.new-password"
 msgstr "New password"
 
-msgid "sso.profile-form.fields.confirm-new-password"
+msgid "engine.profile-form.fields.confirm-new-password"
 msgstr "Confirm new password"
 
-msgid "sso.sign-in-form.fields.timezone"
+msgid "engine.sign-in-form.fields.timezone"
 msgstr "Timezone"
 
 msgid "UTC−12:00: Date Line (west)"
@@ -297,7 +297,7 @@ msgstr "UTC+13:00: Samoa, Tonga"
 msgid "UTC+14:00: Date Line (east)"
 msgstr "UTC+14:00: Date Line (east)"
 
-msgid "sso.forgot-password-form.fields.email"
+msgid "engine.forgot-password-form.fields.email"
 msgstr "Email"
 
 msgid "Successful login using external single sign-on system"
@@ -306,82 +306,82 @@ msgstr "Successful login using external single sign-on system"
 msgid "Email address successfully verified"
 msgstr "Email address successfully verified"
 
-msgid "sso.complete-forgot-password-form.fields.password"
+msgid "engine.complete-forgot-password-form.fields.password"
 msgstr "Password"
 
-msgid "sso.complete-forgot-password-form.fields.confirm-password"
+msgid "engine.complete-forgot-password-form.fields.confirm-password"
 msgstr "Confirm password"
 
-msgid "sso-user.invite-members-modal.title"
+msgid "engine-user.invite-members-modal.title"
 msgstr "Sending invitations"
 
 msgid "Cancel"
 msgstr "Cancel"
 
-msgid "sso-user.update-modal.title"
+msgid "engine-user.update-modal.title"
 msgstr "Edit user #{{ id }}"
 
-msgid "sso-user.create-modal.title"
+msgid "engine-user.create-modal.title"
 msgstr "Create user"
 
-msgid "sso-user.grid.columns.id"
+msgid "engine-user.grid.columns.id"
 msgstr "ID"
 
-msgid "sso-user.grid.columns.email"
+msgid "engine-user.grid.columns.email"
 msgstr "Email"
 
-msgid "sso-user.grid.columns.firstname"
+msgid "engine-user.grid.columns.firstname"
 msgstr "First name"
 
-msgid "sso-user.grid.columns.gender"
+msgid "engine-user.grid.columns.gender"
 msgstr "Gender"
 
-msgid "sso-user.grid.columns.phone"
+msgid "engine-user.grid.columns.phone"
 msgstr "Phone"
 
-msgid "sso-user.grid.columns.picture"
+msgid "engine-user.grid.columns.picture"
 msgstr "Picture"
 
-msgid "sso-user.grid.columns.roles"
+msgid "engine-user.grid.columns.roles"
 msgstr "Roles"
 
-msgid "sso-user.grid.columns.username"
+msgid "engine-user.grid.columns.username"
 msgstr "Username"
 
-msgid "sso-session.update-modal.title"
+msgid "engine-session.update-modal.title"
 msgstr "Eedit session #{{ id }}"
 
-msgid "sso-session.create-modal.title"
+msgid "engine-session.create-modal.title"
 msgstr "Create session"
 
-msgid "sso-session.grid.columns.id"
+msgid "engine-session.grid.columns.id"
 msgstr "ID"
 
-msgid "sso-session.grid.columns.user-agent"
+msgid "engine-session.grid.columns.user-agent"
 msgstr "User agent"
 
-msgid "sso-session.grid.columns.fingerprint"
+msgid "engine-session.grid.columns.fingerprint"
 msgstr "Fingerprint"
 
-msgid "sso-session.grid.columns.user-ip"
+msgid "engine-session.grid.columns.user-ip"
 msgstr "IP address"
 
-msgid "sso-session.grid.columns.expires-at"
+msgid "engine-session.grid.columns.expires-at"
 msgstr "Expires at"
 
-msgid "sso-session.grid.columns.user-data"
+msgid "engine-session.grid.columns.user-data"
 msgstr "User data"
 
-msgid "sso-session.grid.columns.enabled"
+msgid "engine-session.grid.columns.enabled"
 msgstr "Enabled"
 
-msgid "sso-project.update-modal.title"
+msgid "engine-project.update-modal.title"
 msgstr "Edit project #{{ id }}"
 
-msgid "sso-project.create-modal.title"
+msgid "engine-project.create-modal.title"
 msgstr "Create project"
 
-msgid "sso-project.delete-modal.title"
+msgid "engine-project.delete-modal.title"
 msgstr "Delete project #{{ id }}"
 
 msgid "Yes"
@@ -390,37 +390,37 @@ msgstr "Yes"
 msgid "No"
 msgstr "No"
 
-msgid "sso-project.grid.columns.id"
+msgid "engine-project.grid.columns.id"
 msgstr "ID"
 
-msgid "sso-project.grid.columns.name"
+msgid "engine-project.grid.columns.name"
 msgstr "Name"
 
-msgid "sso-project.grid.columns.client-id"
+msgid "engine-project.grid.columns.client-id"
 msgstr "Client ID"
 
-msgid "sso-project.grid.columns.client-secret"
+msgid "engine-project.grid.columns.client-secret"
 msgstr "Client secret"
 
-msgid "sso-project.grid.columns.public"
+msgid "engine-project.grid.columns.public"
 msgstr "Public"
 
-msgid "sso-email-template.update-modal.title"
+msgid "engine-email-template.update-modal.title"
 msgstr "Edit email template #{{ id }}"
 
-msgid "sso-email-template.create-modal.title"
+msgid "engine-email-template.create-modal.title"
 msgstr "Create email template"
 
-msgid "sso-email-template.grid.columns.id"
+msgid "engine-email-template.grid.columns.id"
 msgstr "ID"
 
-msgid "sso-email-template.grid.columns.operation-name"
+msgid "engine-email-template.grid.columns.operation-name"
 msgstr "Event"
 
-msgid "sso-email-template.grid.columns.subject"
+msgid "engine-email-template.grid.columns.subject"
 msgstr "Subject"
 
-msgid "sso-email-template.grid.columns.text"
+msgid "engine-email-template.grid.columns.text"
 msgstr "Text"
 
 msgid "Success"
@@ -429,7 +429,7 @@ msgstr "Success"
 msgid "id not set"
 msgstr "ID not set"
 
-msgid "sso-invite-members.form.fields.emails"
+msgid "engine-invite-members.form.fields.emails"
 msgstr "Emails (separated by commas)"
 
 msgid "Validation errors"
@@ -454,26 +454,26 @@ msgstr "Your password has been successfully changed!"
 msgid "Project users"
 msgstr "Project users"
 
-msgid "sso-project.form.fields.name"
+msgid "engine-project.form.fields.name"
 msgstr "Name"
 
-msgid "sso-user.delete-modal.title"
+msgid "engine-user.delete-modal.title"
 msgstr "Delete user #{{ id }}"
 
-msgid "sso-user.grid.columns.app-data"
+msgid "engine-user.grid.columns.app-data"
 msgstr "Additional data"
 
-msgid "sso-user.grid.columns.birthdate"
+msgid "engine-user.grid.columns.birthdate"
 msgstr "Birth date"
 
-msgid "sso-user.grid.columns.email-verified-at"
+msgid "engine-user.grid.columns.email-verified-at"
 msgstr "Email verified at"
 
-msgid "sso-user.grid.columns.lastname"
+msgid "engine-user.grid.columns.lastname"
 msgstr "Last name"
 
-msgid "sso-user.grid.columns.phone-verified-at"
+msgid "engine-user.grid.columns.phone-verified-at"
 msgstr "Phone verified at"
 
-msgid "sso-user.grid.columns.revoked-at"
+msgid "engine-user.grid.columns.revoked-at"
 msgstr "Revoked at"

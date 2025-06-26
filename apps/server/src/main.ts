@@ -25,7 +25,7 @@ import { VALIDATION_EXTRA_MODELS, ValidationModule } from '@nestjs-mod/validatio
 import { WEBHOOK_EXTRA_MODELS, WebhookModule } from '@nestjs-mod/webhook';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { SSO_EXTRA_MODELS, RuckenEngineModule } from '@rucken/engine';
+import { ENGINE_EXTRA_MODELS, RuckenEngineModule } from '@rucken/engine';
 import cookieParser from 'cookie-parser';
 import { writeFileSync } from 'fs';
 import { join } from 'path';
@@ -35,7 +35,7 @@ import { createAndFillDatabases, fillAllNeedDatabaseEnvsFromOneMain } from './cr
 import { appFolder, rootFolder } from './environments/environment';
 import { filesModuleForRootAsyncOptions } from './integrations/minio-files-integration.configuration';
 import { notificationsModuleForRootAsyncOptions } from './integrations/notifications-integration.configuration';
-import { ssoModuleForRootAsyncOptions } from './integrations/sso-integration.configuration';
+import { engineModuleForRootAsyncOptions } from './integrations/engine-integration.configuration';
 import { terminusHealthCheckModuleForRootAsyncOptions } from './integrations/terminus-health-check-integration.configuration';
 import { webhookModuleForRootAsyncOptions } from './integrations/webhook-integration.configuration';
 import { replaceEnvs } from './replace-envs';
@@ -74,7 +74,7 @@ bootstrapNestApplication({
                 extraModels: [
                   ...FILES_EXTRA_MODELS,
                   ...NOTIFICATIONS_EXTRA_MODELS,
-                  ...SSO_EXTRA_MODELS,
+                  ...ENGINE_EXTRA_MODELS,
                   ...VALIDATION_EXTRA_MODELS,
                   ...WEBHOOK_EXTRA_MODELS,
                 ],
@@ -118,7 +118,7 @@ bootstrapNestApplication({
       TwoFactorModule.forRoot(),
       NotificationsModule.forRootAsync(notificationsModuleForRootAsyncOptions()),
       WebhookModule.forRootAsync(webhookModuleForRootAsyncOptions()),
-      RuckenEngineModule.forRootAsync(ssoModuleForRootAsyncOptions()),
+      RuckenEngineModule.forRootAsync(engineModuleForRootAsyncOptions()),
       AppModule.forRoot(),
     ],
   },

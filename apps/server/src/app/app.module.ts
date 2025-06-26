@@ -5,7 +5,7 @@ import { ValidationError, ValidationErrorEnum } from '@nestjs-mod/validation';
 import { APP_FILTER } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { RuckenEngineModule, RUCKEN_ENGINE_FEATURE, SsoRequest } from '@rucken/engine';
+import { RuckenEngineModule, RUCKEN_ENGINE_FEATURE, EngineRequest } from '@rucken/engine';
 import { TranslatesModule } from 'nestjs-translates';
 import { join } from 'path';
 import { APP_FEATURE } from './app.constants';
@@ -58,7 +58,7 @@ export const { AppModule } = createNestModule({
           limit: 60,
           ttl: 24 * 60 * 60 * 1000,
           skipIf: (ctx) => {
-            const req: SsoRequest = getRequestFromExecutionContext(ctx);
+            const req: EngineRequest = getRequestFromExecutionContext(ctx);
             return req.skipThrottle === true;
           },
         },

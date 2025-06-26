@@ -46,27 +46,31 @@ test.describe('Work with profile as "User" role', () => {
       timeout: 7000,
     });
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=email]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=email]').click();
     await page.keyboard.type(user.email.toLowerCase(), {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=email]')).toHaveValue(user.email.toLowerCase());
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=email]')).toHaveValue(
+      user.email.toLowerCase(),
+    );
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=password]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=password]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=password]')).toHaveValue(user.password);
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=password]')).toHaveValue(user.password);
 
-    await page.locator('sso-sign-up-form').locator('[placeholder=confirmPassword]').click();
+    await page.locator('engine-sign-up-form').locator('[placeholder=confirmPassword]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-up-form').locator('[placeholder=confirmPassword]')).toHaveValue(user.password);
+    await expect(page.locator('engine-sign-up-form').locator('[placeholder=confirmPassword]')).toHaveValue(
+      user.password,
+    );
 
-    await expect(page.locator('sso-sign-up-form').locator('button[type=submit]')).toHaveText('Sign-up');
+    await expect(page.locator('engine-sign-up-form').locator('button[type=submit]')).toHaveText('Sign-up');
 
-    await page.locator('sso-sign-up-form').locator('button[type=submit]').click();
+    await page.locator('engine-sign-up-form').locator('button[type=submit]').click();
 
     await page.waitForSelector('div.cdk-overlay-container>div.cdk-global-overlay-wrapper');
 
@@ -101,21 +105,23 @@ test.describe('Work with profile as "User" role', () => {
       timeout: 7000,
     });
 
-    await page.locator('sso-sign-in-form').locator('[placeholder=email]').click();
+    await page.locator('engine-sign-in-form').locator('[placeholder=email]').click();
     await page.keyboard.type(user.email.toLowerCase(), {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-in-form').locator('[placeholder=email]')).toHaveValue(user.email.toLowerCase());
+    await expect(page.locator('engine-sign-in-form').locator('[placeholder=email]')).toHaveValue(
+      user.email.toLowerCase(),
+    );
 
-    await page.locator('sso-sign-in-form').locator('[placeholder=password]').click();
+    await page.locator('engine-sign-in-form').locator('[placeholder=password]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-in-form').locator('[placeholder=password]')).toHaveValue(user.password);
+    await expect(page.locator('engine-sign-in-form').locator('[placeholder=password]')).toHaveValue(user.password);
 
-    await expect(page.locator('sso-sign-in-form').locator('button[type=submit]')).toHaveText('Sign-in');
+    await expect(page.locator('engine-sign-in-form').locator('button[type=submit]')).toHaveText('Sign-in');
 
-    await page.locator('sso-sign-in-form').locator('button[type=submit]').click();
+    await page.locator('engine-sign-in-form').locator('button[type=submit]').click();
 
     await page.waitForSelector('div.cdk-overlay-container>div.cdk-global-overlay-wrapper');
 
@@ -142,25 +148,25 @@ test.describe('Work with profile as "User" role', () => {
 
     await setTimeout(4000);
     //
-    await page.locator('sso-profile-form').locator('[placeholder=oldPassword]').click();
+    await page.locator('engine-profile-form').locator('[placeholder=oldPassword]').click();
     await page.keyboard.type(user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-profile-form').locator('[placeholder=oldPassword]')).toHaveValue(user.password);
+    await expect(page.locator('engine-profile-form').locator('[placeholder=oldPassword]')).toHaveValue(user.password);
 
-    await page.locator('sso-profile-form').locator('[placeholder=newPassword]').click();
+    await page.locator('engine-profile-form').locator('[placeholder=newPassword]').click();
     await page.keyboard.type(user.password + user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-profile-form').locator('[placeholder=newPassword]')).toHaveValue(
+    await expect(page.locator('engine-profile-form').locator('[placeholder=newPassword]')).toHaveValue(
       user.password + user.password,
     );
 
-    await page.locator('sso-profile-form').locator('[placeholder=confirmNewPassword]').click();
+    await page.locator('engine-profile-form').locator('[placeholder=confirmNewPassword]').click();
     await page.keyboard.type(user.password + user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-profile-form').locator('[placeholder=confirmNewPassword]')).toHaveValue(
+    await expect(page.locator('engine-profile-form').locator('[placeholder=confirmNewPassword]')).toHaveValue(
       user.password + user.password,
     );
 
@@ -170,9 +176,9 @@ test.describe('Work with profile as "User" role', () => {
     await fileChooser.setFiles(join(__dirname, 'dep.jpg'));
     await setTimeout(1000);
 
-    await expect(page.locator('sso-profile-form').locator('button[type=submit]')).toHaveText('Update');
+    await expect(page.locator('engine-profile-form').locator('button[type=submit]')).toHaveText('Update');
 
-    await page.locator('sso-profile-form').locator('button[type=submit]').click();
+    await page.locator('engine-profile-form').locator('button[type=submit]').click();
 
     await page.waitForSelector('div.cdk-overlay-container>div.cdk-global-overlay-wrapper');
   });
@@ -201,23 +207,25 @@ test.describe('Work with profile as "User" role', () => {
       timeout: 7000,
     });
 
-    await page.locator('sso-sign-in-form').locator('[placeholder=email]').click();
+    await page.locator('engine-sign-in-form').locator('[placeholder=email]').click();
     await page.keyboard.type(user.email.toLowerCase(), {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-in-form').locator('[placeholder=email]')).toHaveValue(user.email.toLowerCase());
+    await expect(page.locator('engine-sign-in-form').locator('[placeholder=email]')).toHaveValue(
+      user.email.toLowerCase(),
+    );
 
-    await page.locator('sso-sign-in-form').locator('[placeholder=password]').click();
+    await page.locator('engine-sign-in-form').locator('[placeholder=password]').click();
     await page.keyboard.type(user.password + user.password, {
       delay: 50,
     });
-    await expect(page.locator('sso-sign-in-form').locator('[placeholder=password]')).toHaveValue(
+    await expect(page.locator('engine-sign-in-form').locator('[placeholder=password]')).toHaveValue(
       user.password + user.password,
     );
 
-    await expect(page.locator('sso-sign-in-form').locator('button[type=submit]')).toHaveText('Sign-in');
+    await expect(page.locator('engine-sign-in-form').locator('button[type=submit]')).toHaveText('Sign-in');
 
-    await page.locator('sso-sign-in-form').locator('button[type=submit]').click();
+    await page.locator('engine-sign-in-form').locator('button[type=submit]').click();
 
     await page.waitForSelector('div.cdk-overlay-container>div.cdk-global-overlay-wrapper', { timeout: 20000 });
 

@@ -7,12 +7,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { SsoUserInterface } from './sso-user.interface';
+import { EngineUserInterface } from './engine-user.interface';
 
 
 export interface TokensResponseInterface { 
     accessToken: string;
     refreshToken: string;
-    user: SsoUserInterface;
+    user: EngineUserInterface;
 }
 

@@ -5,11 +5,11 @@ import { ValidationService } from '@nestjs-mod/afat';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ValidationErrorMetadataInterface } from '@rucken/rucken-rest-sdk-angular';
-import { SsoUpdateProfileInput } from './auth.types';
+import { EngineUpdateProfileInput } from './auth.types';
 
 @UntilDestroy()
 @Injectable({ providedIn: 'root' })
-export class SsoProfileFormService {
+export class EngineProfileFormService {
   private utcTimeZones = [
     {
       label: marker('UTC−12:00: Date Line (west)'),
@@ -176,7 +176,7 @@ export class SsoProfileFormService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getFormlyFields(options?: {
-    data?: SsoUpdateProfileInput;
+    data?: EngineUpdateProfileInput;
     errors?: ValidationErrorMetadataInterface[];
   }): FormlyFieldConfig[] {
     return this.validationService.appendServerErrorsAsValidatorsToFields(
@@ -188,7 +188,7 @@ export class SsoProfileFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.profile-form.fields.picture`),
+            label: this.translocoService.translate(`engine.profile-form.fields.picture`),
             placeholder: 'picture',
           },
         },
@@ -199,7 +199,7 @@ export class SsoProfileFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.profile-form.fields.old-password`),
+            label: this.translocoService.translate(`engine.profile-form.fields.old-password`),
             placeholder: 'oldPassword',
             type: 'password',
           },
@@ -211,7 +211,7 @@ export class SsoProfileFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.profile-form.fields.new-password`),
+            label: this.translocoService.translate(`engine.profile-form.fields.new-password`),
             placeholder: 'newPassword',
             type: 'password',
           },
@@ -223,7 +223,7 @@ export class SsoProfileFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.profile-form.fields.confirm-new-password`),
+            label: this.translocoService.translate(`engine.profile-form.fields.confirm-new-password`),
             placeholder: 'confirmNewPassword',
             type: 'password',
           },
@@ -235,7 +235,7 @@ export class SsoProfileFormService {
             show: true,
           },
           props: {
-            label: this.translocoService.translate(`sso.sign-in-form.fields.timezone`),
+            label: this.translocoService.translate(`engine.sign-in-form.fields.timezone`),
             placeholder: 'timezone',
             required: false,
             options: this.utcTimeZones.map((z) => ({

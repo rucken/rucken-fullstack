@@ -379,14 +379,14 @@ export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>;
 type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>;
 
 export const ModelName = {
-  SsoProject: 'SsoProject',
-  SsoUser: 'SsoUser',
-  migrations_sso: 'migrations_sso',
-  SsoRefreshSession: 'SsoRefreshSession',
-  SsoEmailTemplate: 'SsoEmailTemplate',
-  SsoOAuthProvider: 'SsoOAuthProvider',
-  SsoOAuthProviderSettings: 'SsoOAuthProviderSettings',
-  SsoOAuthToken: 'SsoOAuthToken',
+  EngineProject: 'EngineProject',
+  EngineUser: 'EngineUser',
+  migrations_engine: 'migrations_engine',
+  EngineRefreshSession: 'EngineRefreshSession',
+  EngineEmailTemplate: 'EngineEmailTemplate',
+  EngineOAuthProvider: 'EngineOAuthProvider',
+  EngineOAuthProviderSettings: 'EngineOAuthProviderSettings',
+  EngineOAuthToken: 'EngineOAuthToken',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -408,606 +408,606 @@ export type TypeMap<
   };
   meta: {
     modelProps:
-      | 'ssoProject'
-      | 'ssoUser'
-      | 'migrations_sso'
-      | 'ssoRefreshSession'
-      | 'ssoEmailTemplate'
-      | 'ssoOAuthProvider'
-      | 'ssoOAuthProviderSettings'
-      | 'ssoOAuthToken';
+      | 'engineProject'
+      | 'engineUser'
+      | 'migrations_engine'
+      | 'engineRefreshSession'
+      | 'engineEmailTemplate'
+      | 'engineOAuthProvider'
+      | 'engineOAuthProviderSettings'
+      | 'engineOAuthToken';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
-    SsoProject: {
-      payload: Prisma.$SsoProjectPayload<ExtArgs>;
-      fields: Prisma.SsoProjectFieldRefs;
+    EngineProject: {
+      payload: Prisma.$EngineProjectPayload<ExtArgs>;
+      fields: Prisma.EngineProjectFieldRefs;
       operations: {
         findUnique: {
-          args: Prisma.SsoProjectFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload> | null;
+          args: Prisma.EngineProjectFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload> | null;
         };
         findUniqueOrThrow: {
-          args: Prisma.SsoProjectFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>;
+          args: Prisma.EngineProjectFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>;
         };
         findFirst: {
-          args: Prisma.SsoProjectFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload> | null;
+          args: Prisma.EngineProjectFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload> | null;
         };
         findFirstOrThrow: {
-          args: Prisma.SsoProjectFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>;
+          args: Prisma.EngineProjectFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>;
         };
         findMany: {
-          args: Prisma.SsoProjectFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>[];
+          args: Prisma.EngineProjectFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>[];
         };
         create: {
-          args: Prisma.SsoProjectCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>;
+          args: Prisma.EngineProjectCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>;
         };
         createMany: {
-          args: Prisma.SsoProjectCreateManyArgs<ExtArgs>;
+          args: Prisma.EngineProjectCreateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         createManyAndReturn: {
-          args: Prisma.SsoProjectCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>[];
+          args: Prisma.EngineProjectCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>[];
         };
         delete: {
-          args: Prisma.SsoProjectDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>;
+          args: Prisma.EngineProjectDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>;
         };
         update: {
-          args: Prisma.SsoProjectUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>;
+          args: Prisma.EngineProjectUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>;
         };
         deleteMany: {
-          args: Prisma.SsoProjectDeleteManyArgs<ExtArgs>;
+          args: Prisma.EngineProjectDeleteManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateMany: {
-          args: Prisma.SsoProjectUpdateManyArgs<ExtArgs>;
+          args: Prisma.EngineProjectUpdateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateManyAndReturn: {
-          args: Prisma.SsoProjectUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>[];
+          args: Prisma.EngineProjectUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>[];
         };
         upsert: {
-          args: Prisma.SsoProjectUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoProjectPayload>;
+          args: Prisma.EngineProjectUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineProjectPayload>;
         };
         aggregate: {
-          args: Prisma.SsoProjectAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSsoProject>;
+          args: Prisma.EngineProjectAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEngineProject>;
         };
         groupBy: {
-          args: Prisma.SsoProjectGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoProjectGroupByOutputType>[];
+          args: Prisma.EngineProjectGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineProjectGroupByOutputType>[];
         };
         count: {
-          args: Prisma.SsoProjectCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoProjectCountAggregateOutputType> | number;
+          args: Prisma.EngineProjectCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineProjectCountAggregateOutputType> | number;
         };
       };
     };
-    SsoUser: {
-      payload: Prisma.$SsoUserPayload<ExtArgs>;
-      fields: Prisma.SsoUserFieldRefs;
+    EngineUser: {
+      payload: Prisma.$EngineUserPayload<ExtArgs>;
+      fields: Prisma.EngineUserFieldRefs;
       operations: {
         findUnique: {
-          args: Prisma.SsoUserFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload> | null;
+          args: Prisma.EngineUserFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload> | null;
         };
         findUniqueOrThrow: {
-          args: Prisma.SsoUserFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>;
+          args: Prisma.EngineUserFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>;
         };
         findFirst: {
-          args: Prisma.SsoUserFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload> | null;
+          args: Prisma.EngineUserFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload> | null;
         };
         findFirstOrThrow: {
-          args: Prisma.SsoUserFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>;
+          args: Prisma.EngineUserFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>;
         };
         findMany: {
-          args: Prisma.SsoUserFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>[];
+          args: Prisma.EngineUserFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>[];
         };
         create: {
-          args: Prisma.SsoUserCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>;
+          args: Prisma.EngineUserCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>;
         };
         createMany: {
-          args: Prisma.SsoUserCreateManyArgs<ExtArgs>;
+          args: Prisma.EngineUserCreateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         createManyAndReturn: {
-          args: Prisma.SsoUserCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>[];
+          args: Prisma.EngineUserCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>[];
         };
         delete: {
-          args: Prisma.SsoUserDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>;
+          args: Prisma.EngineUserDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>;
         };
         update: {
-          args: Prisma.SsoUserUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>;
+          args: Prisma.EngineUserUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>;
         };
         deleteMany: {
-          args: Prisma.SsoUserDeleteManyArgs<ExtArgs>;
+          args: Prisma.EngineUserDeleteManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateMany: {
-          args: Prisma.SsoUserUpdateManyArgs<ExtArgs>;
+          args: Prisma.EngineUserUpdateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateManyAndReturn: {
-          args: Prisma.SsoUserUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>[];
+          args: Prisma.EngineUserUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>[];
         };
         upsert: {
-          args: Prisma.SsoUserUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoUserPayload>;
+          args: Prisma.EngineUserUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineUserPayload>;
         };
         aggregate: {
-          args: Prisma.SsoUserAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSsoUser>;
+          args: Prisma.EngineUserAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEngineUser>;
         };
         groupBy: {
-          args: Prisma.SsoUserGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoUserGroupByOutputType>[];
+          args: Prisma.EngineUserGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineUserGroupByOutputType>[];
         };
         count: {
-          args: Prisma.SsoUserCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoUserCountAggregateOutputType> | number;
+          args: Prisma.EngineUserCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineUserCountAggregateOutputType> | number;
         };
       };
     };
-    migrations_sso: {
-      payload: Prisma.$migrations_ssoPayload<ExtArgs>;
-      fields: Prisma.migrations_ssoFieldRefs;
+    migrations_engine: {
+      payload: Prisma.$migrations_enginePayload<ExtArgs>;
+      fields: Prisma.migrations_engineFieldRefs;
       operations: {
         findUnique: {
-          args: Prisma.migrations_ssoFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload> | null;
+          args: Prisma.migrations_engineFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload> | null;
         };
         findUniqueOrThrow: {
-          args: Prisma.migrations_ssoFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>;
+          args: Prisma.migrations_engineFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>;
         };
         findFirst: {
-          args: Prisma.migrations_ssoFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload> | null;
+          args: Prisma.migrations_engineFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload> | null;
         };
         findFirstOrThrow: {
-          args: Prisma.migrations_ssoFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>;
+          args: Prisma.migrations_engineFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>;
         };
         findMany: {
-          args: Prisma.migrations_ssoFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>[];
+          args: Prisma.migrations_engineFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>[];
         };
         create: {
-          args: Prisma.migrations_ssoCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>;
+          args: Prisma.migrations_engineCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>;
         };
         createMany: {
-          args: Prisma.migrations_ssoCreateManyArgs<ExtArgs>;
+          args: Prisma.migrations_engineCreateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         createManyAndReturn: {
-          args: Prisma.migrations_ssoCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>[];
+          args: Prisma.migrations_engineCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>[];
         };
         delete: {
-          args: Prisma.migrations_ssoDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>;
+          args: Prisma.migrations_engineDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>;
         };
         update: {
-          args: Prisma.migrations_ssoUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>;
+          args: Prisma.migrations_engineUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>;
         };
         deleteMany: {
-          args: Prisma.migrations_ssoDeleteManyArgs<ExtArgs>;
+          args: Prisma.migrations_engineDeleteManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateMany: {
-          args: Prisma.migrations_ssoUpdateManyArgs<ExtArgs>;
+          args: Prisma.migrations_engineUpdateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateManyAndReturn: {
-          args: Prisma.migrations_ssoUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>[];
+          args: Prisma.migrations_engineUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>[];
         };
         upsert: {
-          args: Prisma.migrations_ssoUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_ssoPayload>;
+          args: Prisma.migrations_engineUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$migrations_enginePayload>;
         };
         aggregate: {
-          args: Prisma.Migrations_ssoAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateMigrations_sso>;
+          args: Prisma.Migrations_engineAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMigrations_engine>;
         };
         groupBy: {
-          args: Prisma.migrations_ssoGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.Migrations_ssoGroupByOutputType>[];
+          args: Prisma.migrations_engineGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.Migrations_engineGroupByOutputType>[];
         };
         count: {
-          args: Prisma.migrations_ssoCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.Migrations_ssoCountAggregateOutputType> | number;
+          args: Prisma.migrations_engineCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.Migrations_engineCountAggregateOutputType> | number;
         };
       };
     };
-    SsoRefreshSession: {
-      payload: Prisma.$SsoRefreshSessionPayload<ExtArgs>;
-      fields: Prisma.SsoRefreshSessionFieldRefs;
+    EngineRefreshSession: {
+      payload: Prisma.$EngineRefreshSessionPayload<ExtArgs>;
+      fields: Prisma.EngineRefreshSessionFieldRefs;
       operations: {
         findUnique: {
-          args: Prisma.SsoRefreshSessionFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload> | null;
+          args: Prisma.EngineRefreshSessionFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload> | null;
         };
         findUniqueOrThrow: {
-          args: Prisma.SsoRefreshSessionFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>;
+          args: Prisma.EngineRefreshSessionFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>;
         };
         findFirst: {
-          args: Prisma.SsoRefreshSessionFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload> | null;
+          args: Prisma.EngineRefreshSessionFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload> | null;
         };
         findFirstOrThrow: {
-          args: Prisma.SsoRefreshSessionFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>;
+          args: Prisma.EngineRefreshSessionFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>;
         };
         findMany: {
-          args: Prisma.SsoRefreshSessionFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>[];
+          args: Prisma.EngineRefreshSessionFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>[];
         };
         create: {
-          args: Prisma.SsoRefreshSessionCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>;
+          args: Prisma.EngineRefreshSessionCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>;
         };
         createMany: {
-          args: Prisma.SsoRefreshSessionCreateManyArgs<ExtArgs>;
+          args: Prisma.EngineRefreshSessionCreateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         createManyAndReturn: {
-          args: Prisma.SsoRefreshSessionCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>[];
+          args: Prisma.EngineRefreshSessionCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>[];
         };
         delete: {
-          args: Prisma.SsoRefreshSessionDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>;
+          args: Prisma.EngineRefreshSessionDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>;
         };
         update: {
-          args: Prisma.SsoRefreshSessionUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>;
+          args: Prisma.EngineRefreshSessionUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>;
         };
         deleteMany: {
-          args: Prisma.SsoRefreshSessionDeleteManyArgs<ExtArgs>;
+          args: Prisma.EngineRefreshSessionDeleteManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateMany: {
-          args: Prisma.SsoRefreshSessionUpdateManyArgs<ExtArgs>;
+          args: Prisma.EngineRefreshSessionUpdateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateManyAndReturn: {
-          args: Prisma.SsoRefreshSessionUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>[];
+          args: Prisma.EngineRefreshSessionUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>[];
         };
         upsert: {
-          args: Prisma.SsoRefreshSessionUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoRefreshSessionPayload>;
+          args: Prisma.EngineRefreshSessionUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineRefreshSessionPayload>;
         };
         aggregate: {
-          args: Prisma.SsoRefreshSessionAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSsoRefreshSession>;
+          args: Prisma.EngineRefreshSessionAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEngineRefreshSession>;
         };
         groupBy: {
-          args: Prisma.SsoRefreshSessionGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoRefreshSessionGroupByOutputType>[];
+          args: Prisma.EngineRefreshSessionGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineRefreshSessionGroupByOutputType>[];
         };
         count: {
-          args: Prisma.SsoRefreshSessionCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoRefreshSessionCountAggregateOutputType> | number;
+          args: Prisma.EngineRefreshSessionCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineRefreshSessionCountAggregateOutputType> | number;
         };
       };
     };
-    SsoEmailTemplate: {
-      payload: Prisma.$SsoEmailTemplatePayload<ExtArgs>;
-      fields: Prisma.SsoEmailTemplateFieldRefs;
+    EngineEmailTemplate: {
+      payload: Prisma.$EngineEmailTemplatePayload<ExtArgs>;
+      fields: Prisma.EngineEmailTemplateFieldRefs;
       operations: {
         findUnique: {
-          args: Prisma.SsoEmailTemplateFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload> | null;
+          args: Prisma.EngineEmailTemplateFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload> | null;
         };
         findUniqueOrThrow: {
-          args: Prisma.SsoEmailTemplateFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>;
+          args: Prisma.EngineEmailTemplateFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>;
         };
         findFirst: {
-          args: Prisma.SsoEmailTemplateFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload> | null;
+          args: Prisma.EngineEmailTemplateFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload> | null;
         };
         findFirstOrThrow: {
-          args: Prisma.SsoEmailTemplateFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>;
+          args: Prisma.EngineEmailTemplateFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>;
         };
         findMany: {
-          args: Prisma.SsoEmailTemplateFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>[];
+          args: Prisma.EngineEmailTemplateFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>[];
         };
         create: {
-          args: Prisma.SsoEmailTemplateCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>;
+          args: Prisma.EngineEmailTemplateCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>;
         };
         createMany: {
-          args: Prisma.SsoEmailTemplateCreateManyArgs<ExtArgs>;
+          args: Prisma.EngineEmailTemplateCreateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         createManyAndReturn: {
-          args: Prisma.SsoEmailTemplateCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>[];
+          args: Prisma.EngineEmailTemplateCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>[];
         };
         delete: {
-          args: Prisma.SsoEmailTemplateDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>;
+          args: Prisma.EngineEmailTemplateDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>;
         };
         update: {
-          args: Prisma.SsoEmailTemplateUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>;
+          args: Prisma.EngineEmailTemplateUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>;
         };
         deleteMany: {
-          args: Prisma.SsoEmailTemplateDeleteManyArgs<ExtArgs>;
+          args: Prisma.EngineEmailTemplateDeleteManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateMany: {
-          args: Prisma.SsoEmailTemplateUpdateManyArgs<ExtArgs>;
+          args: Prisma.EngineEmailTemplateUpdateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateManyAndReturn: {
-          args: Prisma.SsoEmailTemplateUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>[];
+          args: Prisma.EngineEmailTemplateUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>[];
         };
         upsert: {
-          args: Prisma.SsoEmailTemplateUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoEmailTemplatePayload>;
+          args: Prisma.EngineEmailTemplateUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineEmailTemplatePayload>;
         };
         aggregate: {
-          args: Prisma.SsoEmailTemplateAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSsoEmailTemplate>;
+          args: Prisma.EngineEmailTemplateAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEngineEmailTemplate>;
         };
         groupBy: {
-          args: Prisma.SsoEmailTemplateGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoEmailTemplateGroupByOutputType>[];
+          args: Prisma.EngineEmailTemplateGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineEmailTemplateGroupByOutputType>[];
         };
         count: {
-          args: Prisma.SsoEmailTemplateCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoEmailTemplateCountAggregateOutputType> | number;
+          args: Prisma.EngineEmailTemplateCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineEmailTemplateCountAggregateOutputType> | number;
         };
       };
     };
-    SsoOAuthProvider: {
-      payload: Prisma.$SsoOAuthProviderPayload<ExtArgs>;
-      fields: Prisma.SsoOAuthProviderFieldRefs;
+    EngineOAuthProvider: {
+      payload: Prisma.$EngineOAuthProviderPayload<ExtArgs>;
+      fields: Prisma.EngineOAuthProviderFieldRefs;
       operations: {
         findUnique: {
-          args: Prisma.SsoOAuthProviderFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload> | null;
+          args: Prisma.EngineOAuthProviderFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload> | null;
         };
         findUniqueOrThrow: {
-          args: Prisma.SsoOAuthProviderFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>;
+          args: Prisma.EngineOAuthProviderFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>;
         };
         findFirst: {
-          args: Prisma.SsoOAuthProviderFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload> | null;
+          args: Prisma.EngineOAuthProviderFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload> | null;
         };
         findFirstOrThrow: {
-          args: Prisma.SsoOAuthProviderFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>;
+          args: Prisma.EngineOAuthProviderFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>;
         };
         findMany: {
-          args: Prisma.SsoOAuthProviderFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>[];
+          args: Prisma.EngineOAuthProviderFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>[];
         };
         create: {
-          args: Prisma.SsoOAuthProviderCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>;
+          args: Prisma.EngineOAuthProviderCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>;
         };
         createMany: {
-          args: Prisma.SsoOAuthProviderCreateManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthProviderCreateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         createManyAndReturn: {
-          args: Prisma.SsoOAuthProviderCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>[];
+          args: Prisma.EngineOAuthProviderCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>[];
         };
         delete: {
-          args: Prisma.SsoOAuthProviderDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>;
+          args: Prisma.EngineOAuthProviderDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>;
         };
         update: {
-          args: Prisma.SsoOAuthProviderUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>;
+          args: Prisma.EngineOAuthProviderUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>;
         };
         deleteMany: {
-          args: Prisma.SsoOAuthProviderDeleteManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthProviderDeleteManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateMany: {
-          args: Prisma.SsoOAuthProviderUpdateManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthProviderUpdateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateManyAndReturn: {
-          args: Prisma.SsoOAuthProviderUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>[];
+          args: Prisma.EngineOAuthProviderUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>[];
         };
         upsert: {
-          args: Prisma.SsoOAuthProviderUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderPayload>;
+          args: Prisma.EngineOAuthProviderUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderPayload>;
         };
         aggregate: {
-          args: Prisma.SsoOAuthProviderAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSsoOAuthProvider>;
+          args: Prisma.EngineOAuthProviderAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEngineOAuthProvider>;
         };
         groupBy: {
-          args: Prisma.SsoOAuthProviderGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoOAuthProviderGroupByOutputType>[];
+          args: Prisma.EngineOAuthProviderGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineOAuthProviderGroupByOutputType>[];
         };
         count: {
-          args: Prisma.SsoOAuthProviderCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoOAuthProviderCountAggregateOutputType> | number;
+          args: Prisma.EngineOAuthProviderCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineOAuthProviderCountAggregateOutputType> | number;
         };
       };
     };
-    SsoOAuthProviderSettings: {
-      payload: Prisma.$SsoOAuthProviderSettingsPayload<ExtArgs>;
-      fields: Prisma.SsoOAuthProviderSettingsFieldRefs;
+    EngineOAuthProviderSettings: {
+      payload: Prisma.$EngineOAuthProviderSettingsPayload<ExtArgs>;
+      fields: Prisma.EngineOAuthProviderSettingsFieldRefs;
       operations: {
         findUnique: {
-          args: Prisma.SsoOAuthProviderSettingsFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload> | null;
+          args: Prisma.EngineOAuthProviderSettingsFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload> | null;
         };
         findUniqueOrThrow: {
-          args: Prisma.SsoOAuthProviderSettingsFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>;
+          args: Prisma.EngineOAuthProviderSettingsFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>;
         };
         findFirst: {
-          args: Prisma.SsoOAuthProviderSettingsFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload> | null;
+          args: Prisma.EngineOAuthProviderSettingsFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload> | null;
         };
         findFirstOrThrow: {
-          args: Prisma.SsoOAuthProviderSettingsFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>;
+          args: Prisma.EngineOAuthProviderSettingsFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>;
         };
         findMany: {
-          args: Prisma.SsoOAuthProviderSettingsFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>[];
+          args: Prisma.EngineOAuthProviderSettingsFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>[];
         };
         create: {
-          args: Prisma.SsoOAuthProviderSettingsCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>;
+          args: Prisma.EngineOAuthProviderSettingsCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>;
         };
         createMany: {
-          args: Prisma.SsoOAuthProviderSettingsCreateManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthProviderSettingsCreateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         createManyAndReturn: {
-          args: Prisma.SsoOAuthProviderSettingsCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>[];
+          args: Prisma.EngineOAuthProviderSettingsCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>[];
         };
         delete: {
-          args: Prisma.SsoOAuthProviderSettingsDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>;
+          args: Prisma.EngineOAuthProviderSettingsDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>;
         };
         update: {
-          args: Prisma.SsoOAuthProviderSettingsUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>;
+          args: Prisma.EngineOAuthProviderSettingsUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>;
         };
         deleteMany: {
-          args: Prisma.SsoOAuthProviderSettingsDeleteManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthProviderSettingsDeleteManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateMany: {
-          args: Prisma.SsoOAuthProviderSettingsUpdateManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthProviderSettingsUpdateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateManyAndReturn: {
-          args: Prisma.SsoOAuthProviderSettingsUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>[];
+          args: Prisma.EngineOAuthProviderSettingsUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>[];
         };
         upsert: {
-          args: Prisma.SsoOAuthProviderSettingsUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthProviderSettingsPayload>;
+          args: Prisma.EngineOAuthProviderSettingsUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthProviderSettingsPayload>;
         };
         aggregate: {
-          args: Prisma.SsoOAuthProviderSettingsAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSsoOAuthProviderSettings>;
+          args: Prisma.EngineOAuthProviderSettingsAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEngineOAuthProviderSettings>;
         };
         groupBy: {
-          args: Prisma.SsoOAuthProviderSettingsGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoOAuthProviderSettingsGroupByOutputType>[];
+          args: Prisma.EngineOAuthProviderSettingsGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineOAuthProviderSettingsGroupByOutputType>[];
         };
         count: {
-          args: Prisma.SsoOAuthProviderSettingsCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoOAuthProviderSettingsCountAggregateOutputType> | number;
+          args: Prisma.EngineOAuthProviderSettingsCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineOAuthProviderSettingsCountAggregateOutputType> | number;
         };
       };
     };
-    SsoOAuthToken: {
-      payload: Prisma.$SsoOAuthTokenPayload<ExtArgs>;
-      fields: Prisma.SsoOAuthTokenFieldRefs;
+    EngineOAuthToken: {
+      payload: Prisma.$EngineOAuthTokenPayload<ExtArgs>;
+      fields: Prisma.EngineOAuthTokenFieldRefs;
       operations: {
         findUnique: {
-          args: Prisma.SsoOAuthTokenFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload> | null;
+          args: Prisma.EngineOAuthTokenFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload> | null;
         };
         findUniqueOrThrow: {
-          args: Prisma.SsoOAuthTokenFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>;
+          args: Prisma.EngineOAuthTokenFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>;
         };
         findFirst: {
-          args: Prisma.SsoOAuthTokenFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload> | null;
+          args: Prisma.EngineOAuthTokenFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload> | null;
         };
         findFirstOrThrow: {
-          args: Prisma.SsoOAuthTokenFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>;
+          args: Prisma.EngineOAuthTokenFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>;
         };
         findMany: {
-          args: Prisma.SsoOAuthTokenFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>[];
+          args: Prisma.EngineOAuthTokenFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>[];
         };
         create: {
-          args: Prisma.SsoOAuthTokenCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>;
+          args: Prisma.EngineOAuthTokenCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>;
         };
         createMany: {
-          args: Prisma.SsoOAuthTokenCreateManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthTokenCreateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         createManyAndReturn: {
-          args: Prisma.SsoOAuthTokenCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>[];
+          args: Prisma.EngineOAuthTokenCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>[];
         };
         delete: {
-          args: Prisma.SsoOAuthTokenDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>;
+          args: Prisma.EngineOAuthTokenDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>;
         };
         update: {
-          args: Prisma.SsoOAuthTokenUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>;
+          args: Prisma.EngineOAuthTokenUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>;
         };
         deleteMany: {
-          args: Prisma.SsoOAuthTokenDeleteManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthTokenDeleteManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateMany: {
-          args: Prisma.SsoOAuthTokenUpdateManyArgs<ExtArgs>;
+          args: Prisma.EngineOAuthTokenUpdateManyArgs<ExtArgs>;
           result: BatchPayload;
         };
         updateManyAndReturn: {
-          args: Prisma.SsoOAuthTokenUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>[];
+          args: Prisma.EngineOAuthTokenUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>[];
         };
         upsert: {
-          args: Prisma.SsoOAuthTokenUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SsoOAuthTokenPayload>;
+          args: Prisma.EngineOAuthTokenUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EngineOAuthTokenPayload>;
         };
         aggregate: {
-          args: Prisma.SsoOAuthTokenAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSsoOAuthToken>;
+          args: Prisma.EngineOAuthTokenAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEngineOAuthToken>;
         };
         groupBy: {
-          args: Prisma.SsoOAuthTokenGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoOAuthTokenGroupByOutputType>[];
+          args: Prisma.EngineOAuthTokenGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineOAuthTokenGroupByOutputType>[];
         };
         count: {
-          args: Prisma.SsoOAuthTokenCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.SsoOAuthTokenCountAggregateOutputType> | number;
+          args: Prisma.EngineOAuthTokenCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.EngineOAuthTokenCountAggregateOutputType> | number;
         };
       };
     };
@@ -1049,7 +1049,7 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
-export const SsoProjectScalarFieldEnum = {
+export const EngineProjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
   nameLocale: 'nameLocale',
@@ -1060,9 +1060,10 @@ export const SsoProjectScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type SsoProjectScalarFieldEnum = (typeof SsoProjectScalarFieldEnum)[keyof typeof SsoProjectScalarFieldEnum];
+export type EngineProjectScalarFieldEnum =
+  (typeof EngineProjectScalarFieldEnum)[keyof typeof EngineProjectScalarFieldEnum];
 
-export const SsoUserScalarFieldEnum = {
+export const EngineUserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   phone: 'phone',
@@ -1085,9 +1086,9 @@ export const SsoUserScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type SsoUserScalarFieldEnum = (typeof SsoUserScalarFieldEnum)[keyof typeof SsoUserScalarFieldEnum];
+export type EngineUserScalarFieldEnum = (typeof EngineUserScalarFieldEnum)[keyof typeof EngineUserScalarFieldEnum];
 
-export const Migrations_ssoScalarFieldEnum = {
+export const Migrations_engineScalarFieldEnum = {
   installed_rank: 'installed_rank',
   version: 'version',
   description: 'description',
@@ -1100,10 +1101,10 @@ export const Migrations_ssoScalarFieldEnum = {
   success: 'success',
 } as const;
 
-export type Migrations_ssoScalarFieldEnum =
-  (typeof Migrations_ssoScalarFieldEnum)[keyof typeof Migrations_ssoScalarFieldEnum];
+export type Migrations_engineScalarFieldEnum =
+  (typeof Migrations_engineScalarFieldEnum)[keyof typeof Migrations_engineScalarFieldEnum];
 
-export const SsoRefreshSessionScalarFieldEnum = {
+export const EngineRefreshSessionScalarFieldEnum = {
   id: 'id',
   refreshToken: 'refreshToken',
   userAgent: 'userAgent',
@@ -1118,10 +1119,10 @@ export const SsoRefreshSessionScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type SsoRefreshSessionScalarFieldEnum =
-  (typeof SsoRefreshSessionScalarFieldEnum)[keyof typeof SsoRefreshSessionScalarFieldEnum];
+export type EngineRefreshSessionScalarFieldEnum =
+  (typeof EngineRefreshSessionScalarFieldEnum)[keyof typeof EngineRefreshSessionScalarFieldEnum];
 
-export const SsoEmailTemplateScalarFieldEnum = {
+export const EngineEmailTemplateScalarFieldEnum = {
   id: 'id',
   subject: 'subject',
   subjectLocale: 'subjectLocale',
@@ -1135,20 +1136,20 @@ export const SsoEmailTemplateScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type SsoEmailTemplateScalarFieldEnum =
-  (typeof SsoEmailTemplateScalarFieldEnum)[keyof typeof SsoEmailTemplateScalarFieldEnum];
+export type EngineEmailTemplateScalarFieldEnum =
+  (typeof EngineEmailTemplateScalarFieldEnum)[keyof typeof EngineEmailTemplateScalarFieldEnum];
 
-export const SsoOAuthProviderScalarFieldEnum = {
+export const EngineOAuthProviderScalarFieldEnum = {
   id: 'id',
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
 
-export type SsoOAuthProviderScalarFieldEnum =
-  (typeof SsoOAuthProviderScalarFieldEnum)[keyof typeof SsoOAuthProviderScalarFieldEnum];
+export type EngineOAuthProviderScalarFieldEnum =
+  (typeof EngineOAuthProviderScalarFieldEnum)[keyof typeof EngineOAuthProviderScalarFieldEnum];
 
-export const SsoOAuthProviderSettingsScalarFieldEnum = {
+export const EngineOAuthProviderSettingsScalarFieldEnum = {
   id: 'id',
   name: 'name',
   value: 'value',
@@ -1157,10 +1158,10 @@ export const SsoOAuthProviderSettingsScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type SsoOAuthProviderSettingsScalarFieldEnum =
-  (typeof SsoOAuthProviderSettingsScalarFieldEnum)[keyof typeof SsoOAuthProviderSettingsScalarFieldEnum];
+export type EngineOAuthProviderSettingsScalarFieldEnum =
+  (typeof EngineOAuthProviderSettingsScalarFieldEnum)[keyof typeof EngineOAuthProviderSettingsScalarFieldEnum];
 
-export const SsoOAuthTokenScalarFieldEnum = {
+export const EngineOAuthTokenScalarFieldEnum = {
   id: 'id',
   grantedAt: 'grantedAt',
   accessToken: 'accessToken',
@@ -1178,8 +1179,8 @@ export const SsoOAuthTokenScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type SsoOAuthTokenScalarFieldEnum =
-  (typeof SsoOAuthTokenScalarFieldEnum)[keyof typeof SsoOAuthTokenScalarFieldEnum];
+export type EngineOAuthTokenScalarFieldEnum =
+  (typeof EngineOAuthTokenScalarFieldEnum)[keyof typeof EngineOAuthTokenScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',
@@ -1358,14 +1359,14 @@ export interface PrismaClientOptions {
   omit?: GlobalOmitConfig;
 }
 export type GlobalOmitConfig = {
-  ssoProject?: Prisma.SsoProjectOmit;
-  ssoUser?: Prisma.SsoUserOmit;
-  migrations_sso?: Prisma.migrations_ssoOmit;
-  ssoRefreshSession?: Prisma.SsoRefreshSessionOmit;
-  ssoEmailTemplate?: Prisma.SsoEmailTemplateOmit;
-  ssoOAuthProvider?: Prisma.SsoOAuthProviderOmit;
-  ssoOAuthProviderSettings?: Prisma.SsoOAuthProviderSettingsOmit;
-  ssoOAuthToken?: Prisma.SsoOAuthTokenOmit;
+  engineProject?: Prisma.EngineProjectOmit;
+  engineUser?: Prisma.EngineUserOmit;
+  migrations_engine?: Prisma.migrations_engineOmit;
+  engineRefreshSession?: Prisma.EngineRefreshSessionOmit;
+  engineEmailTemplate?: Prisma.EngineEmailTemplateOmit;
+  engineOAuthProvider?: Prisma.EngineOAuthProviderOmit;
+  engineOAuthProviderSettings?: Prisma.EngineOAuthProviderSettingsOmit;
+  engineOAuthToken?: Prisma.EngineOAuthTokenOmit;
 };
 
 /* Types for Logging */

@@ -93,5 +93,5 @@
   "Validation errors": "Ошибка при проверке данных",
   "id not set": "идентификатор не установлен",
   "Unauthorized": "Неавторизован",
-  "sso.sign-in-form.fields.timezone": "Часовой пояс"
+  "engine.sign-in-form.fields.timezone": "Часовой пояс"
 }

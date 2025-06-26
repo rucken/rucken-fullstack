@@ -22,9 +22,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, catchError, distinctUntilChanged, of, tap } from 'rxjs';
-import { SsoCompleteForgotPasswordFormService } from '../../services/auth-complete-forgot-password-form.service';
-import { SsoService } from '../../services/auth.service';
-import { SsoCompleteForgotPasswordInput, SsoUserAndTokens } from '../../services/auth.types';
+import { EngineCompleteForgotPasswordFormService } from '../../services/auth-complete-forgot-password-form.service';
+import { EngineService } from '../../services/auth.service';
+import { EngineCompleteForgotPasswordInput, EngineUserAndTokens } from '../../services/auth.types';
 import { compare } from '@nestjs-mod/misc';
 
 @UntilDestroy()
@@ -47,12 +47,12 @@ import { compare } from '@nestjs-mod/misc';
       }
     `,
   ],
-  selector: 'sso-complete-forgot-password-form',
+  selector: 'engine-complete-forgot-password-form',
   templateUrl: './auth-complete-forgot-password-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class SsoCompleteForgotPasswordFormComponent implements OnInit {
+export class EngineCompleteForgotPasswordFormComponent implements OnInit {
   @Input()
   hideButtons?: boolean;
   @Input()
@@ -62,7 +62,7 @@ export class SsoCompleteForgotPasswordFormComponent implements OnInit {
   code!: string;
 
   @Output()
-  afterCompleteForgotPassword = new EventEmitter<SsoUserAndTokens>();
+  afterCompleteForgotPassword = new EventEmitter<EngineUserAndTokens>();
 
   form = new UntypedFormGroup({});
   formlyModel$ = new BehaviorSubject<object | null>(null);
@@ -72,11 +72,11 @@ export class SsoCompleteForgotPasswordFormComponent implements OnInit {
   constructor(
     @Optional()
     @Inject(NZ_MODAL_DATA)
-    private readonly nzModalData: SsoCompleteForgotPasswordFormComponent,
-    private readonly authService: SsoService,
+    private readonly nzModalData: EngineCompleteForgotPasswordFormComponent,
+    private readonly authService: EngineService,
     private readonly nzMessageService: NzMessageService,
     private readonly translocoService: TranslocoService,
-    private readonly authCompleteForgotPasswordFormService: SsoCompleteForgotPasswordFormService,
+    private readonly authCompleteForgotPasswordFormService: EngineCompleteForgotPasswordFormService,
     private readonly validationService: ValidationService,
   ) {}
 
@@ -112,7 +112,7 @@ export class SsoCompleteForgotPasswordFormComponent implements OnInit {
   }
 
   setFieldsAndModel(
-    data: SsoCompleteForgotPasswordInput = {
+    data: EngineCompleteForgotPasswordInput = {
       code: '',
       password: '',
       confirmPassword: '',
@@ -160,7 +160,7 @@ export class SsoCompleteForgotPasswordFormComponent implements OnInit {
   }
 
   private setFormlyFields(options?: {
-    data?: SsoCompleteForgotPasswordInput;
+    data?: EngineCompleteForgotPasswordInput;
     errors?: ValidationErrorMetadataInterface[];
   }) {
     this.formlyFields$.next(this.authCompleteForgotPasswordFormService.getFormlyFields(options));

@@ -13,7 +13,7 @@ describe('OAuth (e2e)', () => {
   });
 
   it('Get providers', async () => {
-    const { data } = await user.getSsoApi().ssoOAuthControllerOauthProviders();
+    const { data } = await user.getEngineApi().engineOAuthControllerOauthProviders();
     expect(data.length).toBeGreaterThan(0);
     expect(data.find((p) => p.name === 'google')?.name).toEqual('google');
   });
