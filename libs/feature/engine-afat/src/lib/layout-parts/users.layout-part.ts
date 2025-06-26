@@ -2,17 +2,17 @@ import { TranslocoService } from '@jsverse/transloco';
 import { marker } from '@jsverse/transloco-keys-manager/marker';
 import { RequestMeta } from '@nestjs-mod/misc';
 import { untilDestroyed } from '@ngneat/until-destroy';
-import { DynamicCrudGridComponent } from '../dynamic-grids/dynamic-crud-grid/dynamic-crud-grid.component';
-import { LayoutPart } from '../layout/layout.configuration';
 import {
-  RuckenRestSdkAngularService,
-  SendInvitationLinksArgsInterface,
   EngineRefreshSessionDtoInterface,
   EngineRefreshSessionScalarFieldEnumInterface,
   EngineRoleInterface,
   EngineUserScalarFieldEnumInterface,
+  RuckenRestSdkAngularService,
+  SendInvitationLinksArgsInterface,
 } from '@rucken/rucken-rest-sdk-angular';
 import { map, mergeMap, of, tap } from 'rxjs';
+import { DynamicCrudGridComponent } from '../dynamic-grids/dynamic-crud-grid/dynamic-crud-grid.component';
+import { LayoutPart } from '../layout/layout.configuration';
 
 import { TIMEZONE_OFFSET, safeParseJson } from '@nestjs-mod/misc';
 import { EngineUserDtoInterface } from '@rucken/rucken-rest-sdk-angular';
@@ -172,7 +172,6 @@ export function usersLayoutPart(
                     .map(([key, value]) => `${key}:${value}`)
                     .join(',')
                 : undefined,
-              filters['projectId'],
             )
             .pipe(
               map(({ meta, engineUsers }) => ({
@@ -480,10 +479,16 @@ export function usersLayoutPart(
         },
 
         findMany({ filters, meta }: { filters: Record<string, string>; meta?: RequestMeta }) {
+          if (!userId) {
+            return of({
+              meta: { curPage: 1, perPage: 5, totalResults: 0, sort: {} },
+              items: [],
+            });
+          }
           return ruckenRestSdkAngularService
             .getEngineApi()
             .engineRefreshSessionsControllerFindMany(
-              filters['userId'],
+              userId,
               meta?.curPage,
               meta?.perPage,
               filters['search'],
